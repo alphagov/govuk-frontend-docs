@@ -3,19 +3,22 @@ host:
 
 # Header-related options
 show_govuk_logo: true
-service_name: GOV.UK Frontend
+service_name: Frontend
 service_link: https://design-system.service.gov.uk/
 phase: Beta
 
 # Links to show on right-hand-side of header
 header_links:
-  About: https://design-system.service.gov.uk/
+footer_links:
+  Accessibility: https://design-system.service.gov.uk/accessibility/
+  GOV.UK Design System: https://design-system.service.gov.uk/
+  GOV.UK Prototype Kit: https://govuk-prototype-kit.herokuapp.com/docs
 
 # Enables search functionality. This indexes pages only and is not recommended for single-page sites.
 enable_search: true
 
 # Tracking ID from Google Analytics (e.g. UA-XXXX-Y)
-ga_tracking_id:
+# ga_tracking_id:
 
 # Enable multipage navigation in the sidebar
 multipage_nav: true
@@ -26,10 +29,10 @@ collapsible_nav: true
 # Table of contents depth – how many levels to include in the table of contents.
 # If your ToC is too long, reduce this number and we'll only show higher-level
 # headings.
-max_toc_heading_level: 6
+max_toc_heading_level: 3
 
 # Prevent robots from indexing (e.g. whilst in development)
 prevent_indexing: false
 
 show_contribution_banner: true
-github_repo: alphagov/YOUR_REPO
+github_repo: alphagov/govuk-frontend-docs

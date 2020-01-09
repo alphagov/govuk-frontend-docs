@@ -2,7 +2,7 @@
 weight: 200
 ---
 
-# Use old frameworks or colours
+# Use our old frameworks or colours
 
 You can configure GOV.UK Frontend to work with the following 'legacy'
 frameworks:
@@ -28,16 +28,13 @@ GOV.UK Frontend will:
 - override some of the CSS in the legacy frameworks
 - no longer use `rem` for font sizes
 
-To turn on compatibility mode for all 3 legacy frameworks, add the following
-variables to your project's Sass file, above `@import "govuk-frontend/govuk/all"`:
+Add one or more of the following lines to your project's Sass file, above `@import "govuk-frontend/govuk/all"`:
 
-```SCSS
-$govuk-compatibility-govukfrontendtoolkit: true;
-$govuk-compatibility-govuktemplate: true;
-$govuk-compatibility-govukelements: true;
-```
+- `$govuk-compatibility-govukfrontendtoolkit: true;` if you're using GOV.UK Frontend toolkit
+- `$govuk-compatibility-govuktemplate: true;` if you're using GOV.UK Template
+- `$govuk-compatibility-govukelements: true;` if you're using GOV.UK Elements
 
-You can leave out a variable to turn off compatibility mode for that framework.
+Set a variable to `false` to turn off compatibility mode for that framework.
 
 ## Use the old colour palette
 
