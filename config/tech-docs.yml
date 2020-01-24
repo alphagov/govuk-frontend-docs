@@ -4,7 +4,7 @@ host:
 # Header-related options
 show_govuk_logo: true
 service_name: Frontend
-service_link: https://test_moving_docs--govuk-design-system-preview.netlify.com/accessibility/
+service_link: https://test_moving_docs--govuk-design-system-preview.netlify.com/
 phase: Beta
 
 # Links to show on right-hand-side of header
