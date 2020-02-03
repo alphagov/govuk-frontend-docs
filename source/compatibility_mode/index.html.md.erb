@@ -13,7 +13,7 @@ frameworks:
 - [GOV.UK Elements]
 
 You cannot use the following features if you installed GOV.UK Frontend from
-`dist`. [Install with node package manager](/installing_with_npm) instead.
+`dist`. [Install with node package manager](installing-from-npm.md) instead.
 
 If you use these features, your service will not meet [level AA of WCAG 2.1](https://www.gov.uk/service-manual/helping-people-to-use-your-service/understanding-wcag) because your users will not be able to change the font size.
 
@@ -29,13 +29,16 @@ GOV.UK Frontend will:
 - override some of the CSS in the legacy frameworks
 - no longer use `rem` for font sizes
 
-Add one or more of the following lines to your project's Sass file, above `@import "govuk-frontend/govuk/all"`:
+To turn on compatibility mode for all 3 legacy frameworks, add the following
+variables to your project's Sass file, above `@import "govuk-frontend/govuk/all"`:
 
-- `$govuk-compatibility-govukfrontendtoolkit: true;` if you're using GOV.UK Frontend toolkit
-- `$govuk-compatibility-govuktemplate: true;` if you're using GOV.UK Template
-- `$govuk-compatibility-govukelements: true;` if you're using GOV.UK Elements
+```SCSS
+$govuk-compatibility-govukfrontendtoolkit: true;
+$govuk-compatibility-govuktemplate: true;
+$govuk-compatibility-govukelements: true;
+```
 
-Set a variable to `false` to turn off compatibility mode for that framework.
+You can leave out a variable to turn off compatibility mode for that framework.
 
 ## Use the old colour palette
 
