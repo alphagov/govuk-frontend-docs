@@ -19,6 +19,9 @@ before_deploy:
   - sudo apt-get update
   - sudo apt-get install -y cf-cli
 
+before_script:
+  - npm install
+
 # We use a script rather than using Travis' built in CloudFoundry provider
 # because it does not support zero downtime deploys
 # (https://github.com/travis-ci/dpl/pull/610)
