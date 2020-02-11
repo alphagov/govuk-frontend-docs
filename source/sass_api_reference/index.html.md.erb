@@ -1,0 +1,73 @@
+---
+title: Sass API Reference
+weight: 65
+---
+
+# Sass API Reference
+
+<% sassdoc.each do |index, group| %>
+
+## <%= index %>
+
+<% group.each do |doc| %>
+
+### <%= doc.heading %>
+
+<%= doc.description %>
+
+<% if doc.parameter %>
+| Name | Description | Type | Default value |
+| ---- | ----------- | ---- | ------------- |
+<% format_parameters_table(doc.parameter).each do |param| %>
+|  <%= param.name %> | <%= param.description %> | <%= param.type %> | <%= param.default_value %> |
+<% end %>
+<% end %>
+
+#### Usage
+
+<% if doc.deprecated %>
+    <% partial(:warning_text) do %>
+        <%= markdown(doc.deprecated) %>
+    <% end %>
+<% end %>
+
+<% if doc.parameter %>
+    <% inline_parameters = "(#{format_inline_parameters(doc.parameter)})" %>
+<% end %>
+
+<% if doc.context.type == 'mixin' %>
+```scss
+@include <%= doc.context.name %><%= inline_parameters %><%= format_mixin_trailing_code(doc.context.code) %>
+```
+<% end %>
+
+<% if doc.context.type == 'function' %>
+```scss
+$result: <%= doc.context.name %><%= inline_parameters %>;
+```
+<% end %>
+
+<% if doc.context.type == 'variable' %>
+```scss
+$<%= doc.type.downcase %>: $<%= doc.context.name %>;
+```
+<% end %>
+
+<% if doc.example %>
+#### Example
+
+<% doc.example.each do |example| %>
+##### <%= example.description %>
+
+```<%= example.type %>
+<%= example.code %>
+```
+<% end %>
+<% end %>
+
+View source code on GitHub: <a href="<%= doc.github_url %>"><%= doc.file.name %></a>
+
+<div class="govuk-!-margin-bottom-9"></div>
+
+<% end %>
+<% end %>
