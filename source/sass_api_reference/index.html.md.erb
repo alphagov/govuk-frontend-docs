@@ -5,17 +5,17 @@ weight: 65
 
 # Sass API Reference
 
+<%# Remove private entries %>
+<% groupedDocs = data.sassdoc.select{ |doc| doc.access == 'public' } %>
+<%# Remove vendored files %>
+<% groupedDocs = groupedDocs.select{ |doc| !doc.file.path.start_with?('vendor') } %>
 <%# Group the docs by their 'group' %>
-<% groupedDocs = data.sassdoc.group_by{ |doc| doc.group.first } %>
+<% groupedDocs = groupedDocs.group_by{ |doc| doc.group.first } %>
 <% groupedDocs.each do |index, group| %>
 
 ## <%= index == 'undefined' ? 'General' : index.gsub('/', ' / ').titlecase %>
 
-    <%# Remove private entries %>
-    <% docs = group.select{ |doc| doc.access == 'public' } %>
-    <%# Remove vendored files %>
-    <% docs = docs.select{ |doc| !doc.file.path.start_with?('vendor') } %>
-    <% docs.each do |doc| %>
+    <% group.each do |doc| %>
 
 ### <%= doc.context.type == 'variable' ? '$' : ''  %><%= doc.context.name %>
 
