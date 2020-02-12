@@ -3,5 +3,5 @@
 | Name | Description | Type | Default value |
 | ---- | ----------- | ---- | ------------- |
 <% doc.parameter.each do |param| %>
-| <%= "`$#{param.name}`" %> | <%= param.description.gsub('|', '&#124;').strip! || no_data %> | <%= param.type ? "`#{param.type}`" : no_data %> | <%= param['default'] ? "`#{param['default']}`" : no_data %> |
+| <%= "`$#{param.name}`" %> | <%= param.description.gsub('|', '&#124;').gsub(/\n/m, '').sub(/\r/m, '') || no_data %> | <%= param.type ? "`#{param.type}`" : no_data %> | <%= param['default'] ? "`#{param['default']}`" : no_data %> |
 <% end %>
