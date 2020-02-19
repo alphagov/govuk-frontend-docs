@@ -11,17 +11,21 @@ You should migrate to GOV.UK Frontend if you're using one of the following old (
 - GOV.UK Template
 - GOV.UK Elements
 
-We're no longer updating our old frameworks, and they do not meet the [Web Content Accessibility Guidelines (WCAG 2.1) accessibility standard](https://www.gov.uk/guidance/accessibility-requirements-for-public-sector-websites-and-apps).
+We're no longer updating our old frameworks, and they do not meet the [Web Content Accessibility Guidelines (WCAG 2.1 level AA) accessibility standard](https://www.gov.uk/guidance/accessibility-requirements-for-public-sector-websites-and-apps).
 
 After you include GOV.UK Frontend in your project, your service should look and behave the same as before. This means you can migrate one component at a time in your live service.
 
-Your service may be slightly slower while you migrate, because your users will need to download more CSS and JavaScript.
+Your service may be slightly slower until you've finished migrating, because your users will need to download CSS and JavaScript from both GOV.UK Frontend and the old frameworks.
+
+Do not migrate if you're using the GOV.UK Prototype Kit. [Install the latest version of the kit](https://govuk-prototype-kit.herokuapp.com/docs/install) instead.
 
 ## Audit your service's components
 
 To help you migrate, you should work with a designer to make a list of the components in your service, and compare it to [the components in GOV.UK Frontend](https://design-system.service.gov.uk/components/).
 
 You can use your list to see where you can replace similar elements in your service with one GOV.UK Frontend component. For example, if you have a range of similar buttons, you may be able to replace them all with the [button](https://design-system.service.gov.uk/components/button/) component.
+
+## Choose a template engine
 
 We recommend using a template engine like [Nunjucks](https://mozilla.github.io/nunjucks/) to abstract each component into a reusable macro (also called a 'partial' or 'template'). You can do this before or during your migration.
 
@@ -31,6 +35,8 @@ If you use macros, your project will be easier to:
 - update when new versions of GOV.UK Frontend are released
 
 If you're using Node.js, you can use [our Nunjucks macros](https://design-system.service.gov.uk/styles/page-template/#nunjucks). You'll need to [install Nunjucks](https://mozilla.github.io/nunjucks/getting-started.html) first.
+
+Each [component page](https://design-system.service.gov.uk/components/) on the GOV.UK Design System website has example Nunjucks macros and a table of macro options.
 
 ## Include GOV.UK Frontend in your project
 
@@ -58,6 +64,8 @@ You must:
 - use GOV.UK Frontend markup for all the [typography](https://design-system.service.gov.uk/styles/typography/) and [layout](https://design-system.service.gov.uk/styles/layout/) in your service
 - include and initialise GOV.UK Frontend's JavaScript for all the components that use it
 
+You should also [reduce risk to your code](https://design-system.service.gov.uk/get-started/extending-and-modifying-components/) if you extend or modify GOV.UK Frontend components.
+
 Read about [how GOV.UK Pay migrated their service one page at a time](https://technology.blog.gov.uk/2018/12/21/the-benefits-of-migrating-gov-uk-pays-codebase-to-the-gov-uk-design-system/).
 
 ### Migrate one component at a time
@@ -74,6 +82,8 @@ You must:
 
 - use the GOV.UK Frontend markup for all the typography and layout in your service
 - include and initialise GOV.UK Frontend's JavaScript for all the components that use it
+
+You should also [reduce risk to your code](https://design-system.service.gov.uk/get-started/extending-and-modifying-components/) if you extend or modify GOV.UK Frontend components.
 
 To keep your design looking the same, you may need to add styles that [temporarily override GOV.UK Frontend styles](https://design-system.service.gov.uk/styles/spacing/#spacing-override-classes). For example, most GOV.UK Frontend components only have a bottom margin, so you may need to add temporary margins to the top, left or right.
 
