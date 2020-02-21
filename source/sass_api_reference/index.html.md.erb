@@ -27,6 +27,12 @@ weight: 65
 
 #### Usage
 
+        <% if doc.deprecated %>
+            <% partial(:warning_text) do %>
+                <%= markdown(doc.deprecated) %>
+            <% end %>
+        <% end %>
+
         <% if doc.parameter %>
             <% inline_parameters = capture do %>
                 <% doc.parameter.each_with_index do |param, index| -%>

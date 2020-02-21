@@ -1,0 +1,8 @@
+<%# todo make warning_text helper accept a &block %>
+<div class="govuk-warning-text govuk-!-padding-0">
+    <span class="govuk-warning-text__icon" aria-hidden="true">!</span>
+    <strong class="govuk-warning-text__text">
+        <span class="govuk-warning-text__assistive">Warning</span>
+        <%= yield %>
+    </strong>
+</div>
