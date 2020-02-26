@@ -129,7 +129,7 @@ GEM
     mini_portile2 (2.4.0)
     minitest (5.14.0)
     multi_json (1.14.1)
-    nokogiri (1.10.7)
+    nokogiri (1.10.8)
       mini_portile2 (~> 2.4.0)
     openapi3_parser (0.5.2)
       commonmarker (~> 0.17)
