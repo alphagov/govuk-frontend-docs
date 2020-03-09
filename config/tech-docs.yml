@@ -4,15 +4,15 @@ host:
 # Header-related options
 show_govuk_logo: true
 service_name: Frontend
-service_link: https://test_moving_docs--govuk-design-system-preview.netlify.com/
+service_link: https://design-system.service.gov.uk/
 phase: Beta
 
 # Links to show on right-hand-side of header
 header_links:
 footer_links:
-  Accessibility: https://test_moving_docs--govuk-design-system-preview.netlify.com/accessibility/
-  GOV.UK Design System: https://test_moving_docs--govuk-design-system-preview.netlify.com/
-  GOV.UK Prototype Kit: https://5e26c8c76425973408fe3240--govuk-prototype-kit-docs.netlify.com/
+  Accessibility: https://design-system.service.gov.uk/accessibility/
+  GOV.UK Design System: https://design-system.service.gov.uk/
+  GOV.UK Prototype Kit: https://govuk-prototype-kit.herokuapp.com/
 
 # Enables search functionality. This indexes pages only and is not recommended for single-page sites.
 enable_search: true
