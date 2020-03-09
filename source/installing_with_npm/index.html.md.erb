@@ -105,7 +105,7 @@ This to avoid the risk of global styles conflicting with any pre-existing global
 
 Hovever, we do include some global styles in the [GOV.UK Prototype Kit](https://github.com/alphagov/govuk-prototype-kit-private-beta) to speed up prototyping.
 
-These [global styles](../../src/govuk/core/_global-styles.scss) are are not included by default in GOV.UK Frontend. To include these global styles in your app, you can set `$govuk-global-styles` variable to `true` before importing GOV.UK Frontend styles into your app:
+These [global styles](https://github.com/alphagov/govuk-frontend/tree/master/src/govuk/core/_global-styles.scss) are are not included by default in GOV.UK Frontend. To include these global styles in your app, you can set `$govuk-global-styles` variable to `true` before importing GOV.UK Frontend styles into your app:
 
 ```SCSS
 // application.scss
@@ -117,7 +117,7 @@ $govuk-global-styles: true;
 
 ### Using GOV.UK Frontend with old frameworks
 
-Find out how to [configure GOV.UK Frontend for compatibility](compatibility.md) with GOV.UK Frontend Toolkit, GOV.UK Template or GOV.UK Elements.
+Find out how to [configure GOV.UK Frontend for compatibility](/compatibility_mode) with GOV.UK Frontend Toolkit, GOV.UK Template or GOV.UK Elements.
 
 ## Using JavaScript
 
@@ -235,15 +235,15 @@ if ($radio) {
 ### Polyfills
 A JavaScript polyfill provides functionality on older browsers or assistive technology that do not natively support it.
 
-The polyfills provided with GOV.UK Frontend aim to fix usability and accessibility issues. If there is a JavaScript included in the component directory, it is important to import and initialise it in your project to ensure that all users can properly use the component (see [Polyfilling](/docs/contributing/polyfilling.md)).
+The polyfills provided with GOV.UK Frontend aim to fix usability and accessibility issues. If there is a JavaScript included in the component directory, it is important to import and initialise it in your project to ensure that all users can properly use the component (see [Polyfilling](https://github.com/alphagov/govuk-frontend/tree/master/docs/contributing/polyfilling.md)).
 
 ### How GOV.UK Frontend is bundled
 The JavaScript included in GOV.UK Frontend components are in [UMD (Universal Module Definition)](https://github.com/umdjs/umd) format which makes it compatible with AMD (Asynchronous module definition) and CommonJS.
 
-See [JavaScript Coding Standards](/docs/contributing/coding-standards/js.md) for more details of how JavaScript is used in the project.
+See [JavaScript Coding Standards](https://github.com/alphagov/govuk-frontend/tree/master/docs/contributing/coding-standards/js.md) for more details of how JavaScript is used in the project.
 
 #### Using GOV.UK Frontend with Webpack 4
-Here's an example of setting up [`webpack.config.js`](examples/webpack/webpack.config.js) in your project
+Here's an example of setting up [`webpack.config.js`](https://github.com/alphagov/govuk-frontend/tree/master/docs/installation/examples/webpack/webpack.config.js) in your project
 
 ## Importing assets
 
@@ -312,4 +312,4 @@ Add the CSS and JavaScript code to your HTML template:
 ```
 
 If your service supports Internet Explorer 8, you will need to [generate and
-include a separate stylesheet](supporting-internet-explorer-8.md) as well.
+include a separate stylesheet](/supporting_ie8#writing-styles-that-target-ie8) as well.
