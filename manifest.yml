@@ -1,0 +1,10 @@
+---
+applications:
+- name: govuk-frontend-docs
+  path: build
+  memory: 64M
+  instances: 2
+  buildpack: staticfile_buildpack
+
+  routes:
+    - route: govuk-frontend-docs.cloudapps.digital
