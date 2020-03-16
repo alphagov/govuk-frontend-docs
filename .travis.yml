@@ -1,3 +1,32 @@
 language: ruby
 cache: bundler
 script: bundle exec middleman build
+
+env:
+  global:
+  # CloudFoundry credentials for deployment
+  - CF_API="https://api.cloud.service.gov.uk"
+  - CF_ORG="govuk-design-system"
+  - CF_SPACE="frontend-docs"
+  - CF_USERNAME="frontend-docs-deploy-production@digital.cabinet-office.gov.uk"
+  # CF_PASSWORD
+  - secure: "JKyv2Y+HIKEj6sKDtSyh05Vx08NCgm5Di6e5nn1HevAyXdyAOwyDJdIg/Sgu3t0XOwXZpe7O6BjUrqpHz12Ba7FZxDGPajyt9PTZOwuIQ8y8JsK9jBVuY89WJVGnz4NwdCCfpbnifW5XPcnQXZfqDWg60D5NRp9HUZv7WZ8HpjOzyhfO2kpdHFztbppsApkvwVmGFAV4gGcQ/h0mwPCkkvvHYJhsYH54Q5whLgy94cV7pVF2I2rB0VCyXjhuakIinHO02JPhnq1lAyOhF8XDkaRO8/3gqoke4N3CqA043JQAsR54L6vIO/Tu5xUdXKNya8VXBOtq9fccy2MhFMwDDPal2xUzY5JQXkBBN0jIA++kf5S1Ofp1G9F+ukMe1YGtsXgfT5UED6iLplzKxCRGbF7xtsiQLhiKTfD9ijnCaR8wOIftHbKWcbu+qzmh+dDQEa15VNh8h4iRNnF+cCxHqeqs1ZpmERA61npVg52cZuA7+9IWB8sRkKVJHGP0FvJ5kzQf0Q1383VudzxWMWIXfDapsmv1qJFbRYGHgYyZjPdBlNedXhM725hdjwBOiwCkNN9TdvhJ8Qk1FKqJKKP1J2WIwSPyxDGLv3igl3q5JeRCXGYtWm9yuCaBBPbghVXJzCdMArsQOsFWKXbkBtFJQEnXuhplZ9+3iLHhBnUFzHY="
+
+# Install CloudFoundry CLI tools
+before_deploy:
+  - wget -q -O - https://packages.cloudfoundry.org/debian/cli.cloudfoundry.org.key | sudo apt-key add -
+  - echo "deb https://packages.cloudfoundry.org/debian stable main" | sudo tee /etc/apt/sources.list.d/cloudfoundry-cli.list
+  - sudo apt-get update
+  - sudo apt-get install -y cf-cli
+
+# We use a script rather than using Travis' built in CloudFoundry provider
+# because it does not support zero downtime deploys
+# (https://github.com/travis-ci/dpl/pull/610)
+deploy:
+  provider: script
+  script: "./bin/deploy-travis"
+  # We build the site as part of the build, so we want to keep it so it can be
+  # deployed!
+  skip_cleanup: true
+  on:
+    branch: master
