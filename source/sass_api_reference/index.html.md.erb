@@ -5,11 +5,11 @@ weight: 65
 
 # Sass API Reference
 
-<%# Remove private entries %>
+<%# Remove private API entries %>
 <% groupedDocs = data.sassdoc.select{ |doc| doc.access == 'public' } %>
-<%# Remove vendored files %>
+<%# Remove vendored files, for example SassMQ %>
 <% groupedDocs = groupedDocs.select{ |doc| !doc.file.path.start_with?('vendor') } %>
-<%# Group the docs by their 'group' %>
+<%# Group the docs by their 'group', for example 'Settings' or 'Helpers' %>
 <% groupedDocs = groupedDocs.group_by{ |doc| doc.group.first } %>
 <% groupedDocs.each do |index, group| %>
 
