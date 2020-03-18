@@ -45,9 +45,7 @@ weight: 65
         <% if doc.context.type == 'mixin' %>
             <% acceptsContent = doc.context.code.include?('@content') %>
             <% trailingCode = capture do %><% if acceptsContent %> {
-    .app-selector {
-        // ...
-    }
+    // ...
 }<% else %>;<% end -%>
             <% end %>
 
