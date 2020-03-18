@@ -5,19 +5,13 @@ weight: 65
 
 # Sass API Reference
 
-<%# Remove private API entries %>
-<% groupedDocs = data.sassdoc.select{ |doc| doc.access == 'public' } %>
-<%# Remove vendored files, for example SassMQ %>
-<% groupedDocs = groupedDocs.select{ |doc| !doc.file.path.start_with?('vendor') } %>
-<%# Group the docs by their 'group', for example 'Settings' or 'Helpers' %>
-<% groupedDocs = groupedDocs.group_by{ |doc| doc.group.first } %>
-<% groupedDocs.each do |index, group| %>
+<% sassdoc.each do |index, group| %>
 
-## <%= index == 'undefined' ? 'General' : index.gsub('/', ' / ').titlecase %>
+## <%= index %>
 
     <% group.each do |doc| %>
 
-### <%= doc.context.type == 'variable' ? '$' : ''  %><%= doc.context.name %>
+### <%= doc.heading %>
 
 <%= doc.description %>
 
@@ -33,30 +27,19 @@ weight: 65
             <% end %>
         <% end %>
 
-        <% if doc.parameter %>
-            <% inline_parameters = capture do %>
-                <% doc.parameter.each_with_index do |param, index| -%>
-<%= partial(:inline_parameters, locals: { doc: doc, param: param, index: index }) -%>
-                <% end %>
-            <% end %>
-            <% inline_parameters = "(#{inline_parameters})" %>
-        <% end %>
-
         <% if doc.context.type == 'mixin' %>
-            <% acceptsContent = doc.context.code.include?('@content') %>
-            <% trailingCode = capture do %><% if acceptsContent %> {
-    // ...
-}<% else %>;<% end -%>
+            <% if doc.parameter %>
+                <% inline_parameters = "(#{format_parameters(doc.parameter)})" %>
             <% end %>
 
 ```scss
-@include <%= doc.context.name %><%= inline_parameters %><%= trailingCode -%>
+@include <%= doc.context.name %><%= inline_parameters %><%= format_mixin_trailing_code(doc.context.code) %>
 ```
         <% end %>
 
         <% if doc.context.type == 'function' %>
 ```scss
-$result: <%= doc.context.name %><%= inline_parameters -%>;
+$result: <%= doc.context.name %><%= inline_parameters %>;
 ```
         <% end %>
 
@@ -79,7 +62,7 @@ $<%= doc.type.downcase %>: $<%= doc.context.name %>;
         <% end %>
 
 View source code on GitHub:
-<a href="https://github.com/alphagov/govuk-frontend/tree/master/src/govuk/<%= doc.file.path %>#L<%= doc.context.line.start %>-L<%= doc.context.line.end %>">
+<a href="<%= doc.github_url %>">
     <%= doc.file.name %>
 </a>
 

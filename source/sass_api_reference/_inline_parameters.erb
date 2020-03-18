@@ -1,1 +1,0 @@
-$<%= param.name %><% if param['default'] %>: <%= '"' if param.type == 'String' %><%= param['default'] %><%= '"' if param.type == 'String' %><% end %><%= ", " if index != doc.parameter.size - 1 -%>
