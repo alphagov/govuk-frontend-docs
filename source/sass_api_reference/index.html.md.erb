@@ -16,7 +16,11 @@ weight: 65
 <%= doc.description %>
 
         <% if doc.parameter %>
-            <%= partial(:parameters_table, locals: { doc: doc }) %>
+| Name | Description | Type | Default value |
+| ---- | ----------- | ---- | ------------- |
+<% format_parameters_table(doc.parameter).each do |param| %>
+|  <%= param.name %> | <%= param.description %> | <%= param.type %> | <%= param.default_value %> |
+<% end %>
         <% end %>
 
 #### Usage
