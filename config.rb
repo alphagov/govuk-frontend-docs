@@ -2,6 +2,11 @@ require 'govuk_tech_docs'
 
 GovukTechDocs.configure(self)
 
+# Get the current version of GOV.UK Frontend from the package.
+package_lock_file = File.read('./package-lock.json')
+package_lock = JSON.parse(package_lock_file)
+GOVUK_FRONTEND_VERSION = package_lock["dependencies"]["govuk-frontend"]["version"]
+
 helpers do
     def format_mixin_trailing_code(code)
         acceptsContent = code.include?('@content')
@@ -70,9 +75,7 @@ helpers do
             }
             .map { |doc|
                 # Construct GitHub link
-                # TODO: dynamically get version number
-                version = '3.5.0'
-                url = "https://github.com/alphagov/govuk-frontend/tree/v#{version}/src/govuk/#{doc.file.path}#L#{doc.context.line.start}-L#{doc.context.line.end}"
+                url = "https://github.com/alphagov/govuk-frontend/tree/v#{GOVUK_FRONTEND_VERSION}/src/govuk/#{doc.file.path}#L#{doc.context.line.start}-L#{doc.context.line.end}"
                 doc.github_url = url
                 doc
             }
