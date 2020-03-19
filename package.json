@@ -7,7 +7,7 @@
     "build:sassdoc": "sassdoc --parse node_modules/govuk-frontend/govuk/ > data/sassdoc.json"
   },
   "devDependencies": {
-    "govuk-frontend": "^3.5.0",
+    "govuk-frontend": "^3.6.0",
     "sassdoc": "^2.7.1"
   }
 }
