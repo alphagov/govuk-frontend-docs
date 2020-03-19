@@ -17,7 +17,8 @@ helpers do
         end
     end
     def format_parameters(parameters)
-        parameters.map.with_index { |param, index|
+        # Clone the parameters so we don't overwrite the original data when we map over it.
+        parameters.deep_dup.map.with_index { |param, index|
             output = "$#{param.name}"
             if param['default']
                 output << ": "
@@ -36,22 +37,23 @@ helpers do
         }.join
     end
     def format_parameters_table(parameters)
-      parameters.map { |param|
-        # If cell contains no data hide dash from assistive technology
-        no_data = "<span aria-hidden='true'>—</span>"
+        # Clone the parameters so we don't overwrite the original data when we map over it.
+        parameters.deep_dup.map { |param|
+            # If cell contains no data hide dash from assistive technology
+            no_data = "<span aria-hidden='true'>—</span>"
 
-        param.name = "`$#{param.name}`"
+            param.name = "`$#{param.name}`"
 
-        # Pipes in Markdown indicate tables, we need to encode them here so they don't render as table syntax
-        encoded_description = param.description.gsub('|', '&#124;')
-        ## Remove unnecessary line breaks
-        description_without_linebreaks = encoded_description.gsub(/\n/m, '').sub(/\r/m, '')
-        param.description = description_without_linebreaks || no_data
+            # Pipes in Markdown indicate tables, we need to encode them here so they don't render as table syntax
+            encoded_description = param.description.gsub('|', '&#124;')
+            ## Remove unnecessary line breaks
+            description_without_linebreaks = encoded_description.gsub(/\n/m, '').sub(/\r/m, '')
+            param.description = description_without_linebreaks || no_data
 
-        param.type = param.type ? "`#{param.type}`" : no_data
-        param.default_value = param['default'] ? "`#{param['default']}`" : no_data
-        param
-      }
+            param.type = param.type ? "`#{param.type}`" : no_data
+            param.default_value = param['default'] ? "`#{param['default']}`" : no_data
+            param
+        }
     end
     def sassdoc
         data.sassdoc
