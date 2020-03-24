@@ -5,15 +5,15 @@ weight: 60
 
 # Use with old frameworks or colours
 
-You can configure GOV.UK Frontend to look like our old ('legacy') frameworks, GOV.UK Elements, GOV.UK Template and GOV.UK Frontend Toolkit.
+You can configure GOV.UK Frontend to look like our old frameworks, GOV.UK Elements, GOV.UK Template and GOV.UK Frontend Toolkit.
+
+If you do this, your service will not meet [level AA of WCAG 2.1](https://www.gov.uk/service-manual/helping-people-to-use-your-service/understanding-wca) because your users will not be able to change the font size.
 
 You cannot use the following features if you installed GOV.UK Frontend from `dist`. [Install with node package manager](/installing_with_npm) instead.
 
-If you use these features, your service will not meet [level AA of WCAG 2.1](https://www.gov.uk/service-manual/helping-people-to-use-your-service/understanding-wca) because your users will not be able to change the font size.
-
 ## 'Compatibility mode'
 
-Turn on 'compatibility mode' if you want to use GOV.UK Frontend components and an old framework together in a service.
+Use 'compatibility mode' if you want to use GOV.UK Frontend components and an old framework together in a service.
 
 GOV.UK Frontend will:
 
@@ -30,8 +30,6 @@ Add one or more of the following lines to your project's Sass file, above `@impo
 - `$govuk-compatibility-govuktemplate: true;` if you're using GOV.UK Template
 - `$govuk-compatibility-govukfrontendtoolkit: true;` if you're using GOV.UK Frontend toolkit
 
-You can leave out a variable to turn off compatibility mode for that framework.
-
 ## Turn off 'compatibility mode'
 
 Remove the following lines from your project's Sass file:
@@ -42,7 +40,7 @@ Remove the following lines from your project's Sass file:
 
 ## Use the old colour palette
 
-If you are not using any of the legacy frameworks, you can still configure GOV.UK Frontend to use the old colour palette.
+If you’re not using any of our old frameworks, you can still configure GOV.UK Frontend to use the old colour palette.
 
 Add the following variable to your project's Sass file, above `@import "govuk-frontend/govuk/all"`:
 
