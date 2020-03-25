@@ -1,4 +1,4 @@
-# Technical Documentation
+# GOV.UK Frontend Documentation
 
 This project uses the [Tech Docs Template][template], which is a [Middleman template][mmt] that you can use to build technical documentation using a GOV.UK style.
 
@@ -61,6 +61,10 @@ Every time you run this command, the `build` folder gets generated from scratch.
 Run `bundle update` to make sure you're using the most recent Ruby gem versions.
 
 Run `bundle exec middleman build --verbose` to get detailed error messages to help with finding the problem.
+
+## Testing
+
+Run `rspec`
 
 ## Licence
 
