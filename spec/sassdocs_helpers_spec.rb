@@ -1,5 +1,6 @@
 require 'json'
 require 'ostruct'
+require 'active_support/all'
 
 require_relative '../sassdocs_helpers.rb'
 
@@ -9,6 +10,23 @@ def dothash(hash)
 end
 
 RSpec.describe SassdocsHelpers do
+  describe '#group_heading' do
+    it "should return General if undefined" do
+      heading = SassdocsHelpers.group_heading('undefined')
+
+      expect(heading).to eq('General')
+    end
+    it "should format heading to titlecase" do
+      heading = SassdocsHelpers.group_heading('helpers')
+
+      expect(heading).to eq('Helpers')
+    end
+    it "should format heading with forwards slashes to titlecase" do
+      heading = SassdocsHelpers.group_heading('settings/colours')
+
+      expect(heading).to eq('Settings / Colours')
+    end
+  end
   describe '#github_url' do
     it "should return a url" do
       fixture = dothash({
