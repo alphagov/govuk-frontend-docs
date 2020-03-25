@@ -109,11 +109,7 @@ helpers do
             }
     end
 
-    def markdown(text=nil, &block)
-        content = text
-        if block_given?
-            content = capture_html(&block)
-        end
+    def markdown(content=nil)
         concat Tilt['markdown'].new(context: @app) { content }.render
     end
 end
