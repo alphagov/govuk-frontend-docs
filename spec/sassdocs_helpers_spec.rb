@@ -10,6 +10,18 @@ def dothash(hash)
 end
 
 RSpec.describe SassdocsHelpers do
+  describe '#mixin_trailing_code' do
+    it "should return trailing semi-colon by default" do
+      trailing = SassdocsHelpers.mixin_trailing_code(".test { color: red; }")
+
+      expect(trailing).to eq(';')
+    end
+    it "should return block syntax if mixin accepts content" do
+      trailing = SassdocsHelpers.mixin_trailing_code("@if true { @content; }")
+
+      expect(trailing).to eq(" {\n  //..\n}")
+    end
+  end
   describe '#inline_parameters' do
     it "should return single name with a dollar prefix" do
       fixture = dothash([
