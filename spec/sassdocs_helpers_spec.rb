@@ -10,6 +10,48 @@ def dothash(hash)
 end
 
 RSpec.describe SassdocsHelpers do
+  describe '#inline_parameters' do
+    it "should return single name with a dollar prefix" do
+      fixture = dothash([
+        {
+          name: "colour"
+        }
+      ])
+      inline_parameters = SassdocsHelpers.inline_parameters(fixture)
+
+      expect(inline_parameters).to eq('$colour')
+    end
+    it "should return multiple names with a comma separator" do
+      fixture = dothash([
+        {
+          name: "colour"
+        },
+        {
+          name: "legacy"
+        }
+      ])
+      inline_parameters = SassdocsHelpers.inline_parameters(fixture)
+
+      expect(inline_parameters).to eq('$colour, $legacy')
+    end
+    it "should return defaults formatted based on their type" do
+      fixture = dothash([
+        {
+          name: "colour",
+          type: "String",
+          default: "red"
+        },
+        {
+          name: "legacy",
+          type: "Boolean",
+          default: "false"
+        }
+      ])
+      inline_parameters = SassdocsHelpers.inline_parameters(fixture)
+
+      expect(inline_parameters).to eq('$colour: "red", $legacy: false')
+    end
+  end
   describe '#parameters_table' do
     it "should return name with a dollar prefix and back ticks surrounding it" do
       fixture = dothash([
