@@ -10,6 +10,91 @@ def dothash(hash)
 end
 
 RSpec.describe SassdocsHelpers do
+  describe '#parameters_table' do
+    it "should return name with a dollar prefix and back ticks surrounding it" do
+      fixture = dothash([
+        {
+          name: "param"
+        }
+      ])
+      parameter = SassdocsHelpers.parameters_table(fixture)
+
+      expect(parameter.first[:name]).to eq('`$param`')
+    end
+    it "should return description with whitespace and pipes encoded" do
+      fixture = dothash([
+        {
+          name: "param",
+          description: "Hello world\n\r Testing | Pipes"
+        }
+      ])
+      parameter = SassdocsHelpers.parameters_table(fixture)
+
+      expect(parameter.first[:description]).to eq('Hello world Testing &#124; Pipes')
+    end
+    it "should return no data if no description" do
+      fixture = dothash([
+        {
+          name: "param"
+        }
+      ])
+      parameter = SassdocsHelpers.parameters_table(fixture)
+
+      expect(parameter.first[:description]).to eq("<span aria-hidden='true'>—</span>")
+    end
+    it "should return single type with back ticks surrounding it" do
+      fixture = dothash([
+        {
+          name: "param",
+          type: "Boolean"
+        }
+      ])
+      parameter = SassdocsHelpers.parameters_table(fixture)
+
+      expect(parameter.first[:type]).to eq('`Boolean`')
+    end
+    it "should return multiple types with or and back ticks surrounding it" do
+      fixture = dothash([
+        {
+          name: "param",
+          type: "Boolean | String"
+        }
+      ])
+      parameter = SassdocsHelpers.parameters_table(fixture)
+
+      expect(parameter.first[:type]).to eq('`Boolean` or `String`')
+    end
+    it "should return no data if no type" do
+      fixture = dothash([
+        {
+          name: "param"
+        }
+      ])
+      parameter = SassdocsHelpers.parameters_table(fixture)
+
+      expect(parameter.first[:type]).to eq("<span aria-hidden='true'>—</span>")
+    end
+    it "should return default value with back ticks surrounding it" do
+      fixture = dothash([
+        {
+          default: "value"
+        }
+      ])
+      parameter = SassdocsHelpers.parameters_table(fixture)
+
+      expect(parameter.first[:default_value]).to eq("`value`")
+    end
+    it "should return no data if no default" do
+      fixture = dothash([
+        {
+          name: "param"
+        }
+      ])
+      parameter = SassdocsHelpers.parameters_table(fixture)
+
+      expect(parameter.first[:default_value]).to eq("<span aria-hidden='true'>—</span>")
+    end
+  end
   describe '#doc_heading' do
     it "should return with a dollar prefix if variable" do
       fixture = dothash({

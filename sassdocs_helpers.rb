@@ -55,10 +55,14 @@ module SassdocsHelpers
             param.name = "`$#{param.name}`"
 
             # Pipes in Markdown indicate tables, we need to encode them here so they don't render as table syntax
-            encoded_description = param.description.gsub('|', '&#124;')
-            ## Remove unnecessary line breaks
-            description_without_linebreaks = encoded_description.gsub(/\n/m, '').sub(/\r/m, '')
-            param.description = description_without_linebreaks || no_data
+            if param.description
+                encoded_description = param.description.gsub('|', '&#124;')
+                ## Remove unnecessary line breaks
+                description_without_linebreaks = encoded_description.gsub(/\n/m, '').sub(/\r/m, '')
+                param.description = description_without_linebreaks
+            else
+                param.description = no_data
+            end
 
             if param.type
                 # Mutliple types can be seperated by pipe characters e.g. "String | Boolean".
