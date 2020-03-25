@@ -1,3 +1,5 @@
+require 'json'
+
 module SassdocsHelpers
     def sassdoc
         data.sassdoc
