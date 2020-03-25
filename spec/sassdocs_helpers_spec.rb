@@ -10,6 +10,30 @@ def dothash(hash)
 end
 
 RSpec.describe SassdocsHelpers do
+  describe '#doc_heading' do
+    it "should return with a dollar prefix if variable" do
+      fixture = dothash({
+        context: {
+          type: 'variable',
+          name: 'govuk-assets-path'
+        }
+      })
+      heading = SassdocsHelpers.doc_heading(fixture)
+
+      expect(heading).to eq('$govuk-assets-path')
+    end
+    it "should heading if not variable" do
+      fixture = dothash({
+        context: {
+          type: 'function',
+          name: 'govuk-colour'
+        }
+      })
+      heading = SassdocsHelpers.doc_heading(fixture)
+
+      expect(heading).to eq('govuk-colour')
+    end
+  end
   describe '#group_heading' do
     it "should return General if undefined" do
       heading = SassdocsHelpers.group_heading('undefined')
