@@ -5,20 +5,20 @@ weight: 65
 
 # Sass API Reference
 
-<% sassdoc.each do |index, group| %>
+<% sassdoc.each do |heading, group| %>
 
-## <%= index %>
+## <%= group_heading(heading) %>
 
 <% group.each do |doc| %>
 
-### <%= doc.heading %>
+### <%= doc_heading(doc) %>
 
 <%= doc.description %>
 
 <% if doc.parameter %>
 | Name | Description | Type | Default value |
 | ---- | ----------- | ---- | ------------- |
-<% format_parameters_table(doc.parameter).each do |param| %>
+<% parameters_table(doc.parameter).each do |param| %>
 |  <%= param.name %> | <%= param.description %> | <%= param.type %> | <%= param.default_value %> |
 <% end %>
 <% end %>
@@ -32,12 +32,12 @@ weight: 65
 <% end %>
 
 <% if doc.parameter %>
-    <% inline_parameters = "(#{format_inline_parameters(doc.parameter)})" %>
+    <% inline_parameters = "(#{inline_parameters(doc.parameter)})" %>
 <% end %>
 
 <% if doc.context.type == 'mixin' %>
 ```scss
-@include <%= doc.context.name %><%= inline_parameters %><%= format_mixin_trailing_code(doc.context.code) %>
+@include <%= doc.context.name %><%= inline_parameters %><%= mixin_trailing_code(doc.context.code) %>
 ```
 <% end %>
 
@@ -65,7 +65,7 @@ $<%= doc.type.downcase %>: $<%= doc.context.name %>;
 <% end %>
 <% end %>
 
-View source code on GitHub: <a href="<%= doc.github_url %>"><%= doc.file.name %></a>
+View source code on GitHub: <a href="<%= github_url(doc) %>"><%= doc.file.name %></a>
 
 <div class="govuk-!-margin-bottom-9"></div>
 
