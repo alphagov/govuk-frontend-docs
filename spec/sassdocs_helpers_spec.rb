@@ -10,14 +10,23 @@ def dothash(hash)
 end
 
 RSpec.describe SassdocsHelpers do
+  before(:each) do
+    allow(File).to receive(:read).and_return('{ "dependencies": { "govuk-frontend": { "version": "1.0.0" } } }')
+    # Include mixin into a test class to allow us to mock File
+    class Test
+      include SassdocsHelpers
+    end
+    @helper = Test.new
+  end
+
   describe '#mixin_trailing_code' do
     it "should return trailing semi-colon by default" do
-      trailing = SassdocsHelpers.mixin_trailing_code(".test { color: red; }")
+      trailing = @helper.mixin_trailing_code(".test { color: red; }")
 
       expect(trailing).to eq(';')
     end
     it "should return block syntax if mixin accepts content" do
-      trailing = SassdocsHelpers.mixin_trailing_code("@if true { @content; }")
+      trailing = @helper.mixin_trailing_code("@if true { @content; }")
 
       expect(trailing).to eq(" {\n  //..\n}")
     end
@@ -29,7 +38,7 @@ RSpec.describe SassdocsHelpers do
           name: "colour"
         }
       ])
-      inline_parameters = SassdocsHelpers.inline_parameters(fixture)
+      inline_parameters = @helper.inline_parameters(fixture)
 
       expect(inline_parameters).to eq('$colour')
     end
@@ -42,7 +51,7 @@ RSpec.describe SassdocsHelpers do
           name: "legacy"
         }
       ])
-      inline_parameters = SassdocsHelpers.inline_parameters(fixture)
+      inline_parameters = @helper.inline_parameters(fixture)
 
       expect(inline_parameters).to eq('$colour, $legacy')
     end
@@ -59,7 +68,7 @@ RSpec.describe SassdocsHelpers do
           default: "false"
         }
       ])
-      inline_parameters = SassdocsHelpers.inline_parameters(fixture)
+      inline_parameters = @helper.inline_parameters(fixture)
 
       expect(inline_parameters).to eq('$colour: "red", $legacy: false')
     end
@@ -71,7 +80,7 @@ RSpec.describe SassdocsHelpers do
           name: "param"
         }
       ])
-      parameter = SassdocsHelpers.parameters_table(fixture)
+      parameter = @helper.parameters_table(fixture)
 
       expect(parameter.first[:name]).to eq('`$param`')
     end
@@ -82,7 +91,7 @@ RSpec.describe SassdocsHelpers do
           description: "Hello world\n\r Testing | Pipes"
         }
       ])
-      parameter = SassdocsHelpers.parameters_table(fixture)
+      parameter = @helper.parameters_table(fixture)
 
       expect(parameter.first[:description]).to eq('Hello world Testing &#124; Pipes')
     end
@@ -92,7 +101,7 @@ RSpec.describe SassdocsHelpers do
           name: "param"
         }
       ])
-      parameter = SassdocsHelpers.parameters_table(fixture)
+      parameter = @helper.parameters_table(fixture)
 
       expect(parameter.first[:description]).to eq("<span aria-hidden='true'>—</span>")
     end
@@ -103,7 +112,7 @@ RSpec.describe SassdocsHelpers do
           type: "Boolean"
         }
       ])
-      parameter = SassdocsHelpers.parameters_table(fixture)
+      parameter = @helper.parameters_table(fixture)
 
       expect(parameter.first[:type]).to eq('`Boolean`')
     end
@@ -114,7 +123,7 @@ RSpec.describe SassdocsHelpers do
           type: "Boolean | String"
         }
       ])
-      parameter = SassdocsHelpers.parameters_table(fixture)
+      parameter = @helper.parameters_table(fixture)
 
       expect(parameter.first[:type]).to eq('`Boolean` or `String`')
     end
@@ -124,7 +133,7 @@ RSpec.describe SassdocsHelpers do
           name: "param"
         }
       ])
-      parameter = SassdocsHelpers.parameters_table(fixture)
+      parameter = @helper.parameters_table(fixture)
 
       expect(parameter.first[:type]).to eq("<span aria-hidden='true'>—</span>")
     end
@@ -134,7 +143,7 @@ RSpec.describe SassdocsHelpers do
           default: "value"
         }
       ])
-      parameter = SassdocsHelpers.parameters_table(fixture)
+      parameter = @helper.parameters_table(fixture)
 
       expect(parameter.first[:default_value]).to eq("`value`")
     end
@@ -144,7 +153,7 @@ RSpec.describe SassdocsHelpers do
           name: "param"
         }
       ])
-      parameter = SassdocsHelpers.parameters_table(fixture)
+      parameter = @helper.parameters_table(fixture)
 
       expect(parameter.first[:default_value]).to eq("<span aria-hidden='true'>—</span>")
     end
@@ -157,7 +166,7 @@ RSpec.describe SassdocsHelpers do
           name: 'govuk-assets-path'
         }
       })
-      heading = SassdocsHelpers.doc_heading(fixture)
+      heading = @helper.doc_heading(fixture)
 
       expect(heading).to eq('$govuk-assets-path')
     end
@@ -168,24 +177,24 @@ RSpec.describe SassdocsHelpers do
           name: 'govuk-colour'
         }
       })
-      heading = SassdocsHelpers.doc_heading(fixture)
+      heading = @helper.doc_heading(fixture)
 
       expect(heading).to eq('govuk-colour')
     end
   end
   describe '#group_heading' do
     it "should return General if undefined" do
-      heading = SassdocsHelpers.group_heading('undefined')
+      heading = @helper.group_heading('undefined')
 
       expect(heading).to eq('General')
     end
     it "should format heading to titlecase" do
-      heading = SassdocsHelpers.group_heading('helpers')
+      heading = @helper.group_heading('helpers')
 
       expect(heading).to eq('Helpers')
     end
     it "should format heading with forwards slashes to titlecase" do
-      heading = SassdocsHelpers.group_heading('settings/colours')
+      heading = @helper.group_heading('settings/colours')
 
       expect(heading).to eq('Settings / Colours')
     end
@@ -203,9 +212,16 @@ RSpec.describe SassdocsHelpers do
           path: "helpers/_clearfix.scss"
         }
       })
-      url = SassdocsHelpers.github_url(fixture)
+      url = @helper.github_url(fixture)
 
-      expect(url).to eq('https://github.com/alphagov/govuk-frontend/tree/v3.6.0/src/govuk/helpers/_clearfix.scss#L9-L15')
+      expect(url).to eq('https://github.com/alphagov/govuk-frontend/tree/v1.0.0/src/govuk/helpers/_clearfix.scss#L9-L15')
+    end
+  end
+  describe '#govuk_frontend_version' do
+    it "should return version" do
+      version = @helper.govuk_frontend_version
+
+      expect(version).to eq('1.0.0')
     end
   end
 end
