@@ -1,7 +1,7 @@
 require 'json'
 
 module SassdocsHelpers
-    def sassdoc
+    def format_sassdoc_data(data)
         raise "No data in data/sassdocs.json, run `npm install` to generate." unless data.respond_to?(:sassdoc)
         data.sassdoc
             .select { |doc|

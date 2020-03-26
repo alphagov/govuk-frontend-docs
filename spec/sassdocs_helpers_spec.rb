@@ -19,6 +19,98 @@ RSpec.describe SassdocsHelpers do
     @helper = Test.new
   end
 
+  describe '#format_sassdoc_data' do
+    it "should raise an error if there is no data" do
+      expect {
+        fixture = dothash({})
+        @helper.format_sassdoc_data(fixture)
+      }.to raise_error("No data in data/sassdocs.json, run `npm install` to generate.")
+    end
+    it "should remove private entries" do
+      fixture = dothash({
+        sassdoc: [
+          {
+            access: "public",
+            group: [ "public" ],
+            file: {
+              path: "public.scss"
+            }
+          },
+          {
+            access: "private",
+            group: [ "private" ],
+            file: {
+              path: "private.scss"
+            }
+          }
+        ]
+      })
+      groups = @helper.format_sassdoc_data(fixture)
+      first_group = groups.first
+      group_heading = first_group.first
+      expect(groups.length).to eq(1)
+      expect(group_heading).to eq("public")
+    end
+    it "should remove vendored entries" do
+      fixture = dothash({
+        sassdoc: [
+          {
+            access: "public",
+            group: [ "public" ],
+            file: {
+              path: "public.scss"
+            }
+          },
+          {
+            access: "public",
+            group: [ "vendored" ],
+            file: {
+              path: "vendored.scss"
+            }
+          }
+        ]
+      })
+      groups = @helper.format_sassdoc_data(fixture)
+      first_group = groups.first
+      group_heading = first_group.first
+      expect(groups.length).to eq(1)
+      expect(group_heading).to eq("public")
+    end
+    it "should group entries by their group" do
+      fixture = dothash({
+        sassdoc: [
+          {
+            access: "public",
+            group: [ "mixins" ],
+            file: {
+              path: "first.scss"
+            }
+          },
+          {
+            access: "public",
+            group: [ "mixins" ],
+            file: {
+              path: "second.scss"
+            }
+          },
+          {
+            access: "public",
+            group: [ "helpers" ],
+            file: {
+              path: "third.scss"
+            }
+          }
+        ]
+      })
+      groups = @helper.format_sassdoc_data(fixture)
+      expect(groups['mixins'].length).to eq(2)
+      expect(groups['mixins'].first.file.path).to eq('first.scss')
+      expect(groups['mixins'].second.file.path).to eq('second.scss')
+
+      expect(groups['helpers'].length).to eq(1)
+      expect(groups['helpers'].first.file.path).to eq('third.scss')
+    end
+  end
   describe '#mixin_trailing_code' do
     it "should return trailing semi-colon by default" do
       trailing = @helper.mixin_trailing_code(".test { color: red; }")
