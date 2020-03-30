@@ -12,9 +12,9 @@ module SassdocsHelpers
                 # Remove vendored files, for example SassMQ
                 !doc.file.path.start_with?('vendor')
             }
-            .group_by {
+            .group_by { |doc|
                 # Group the docs by their 'group', for example 'Settings' or 'Helpers'
-                |doc| doc.group.first
+                doc.group.first
             }
     end
     def mixin_trailing_code(code)
