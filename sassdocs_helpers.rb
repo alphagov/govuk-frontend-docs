@@ -34,7 +34,7 @@ module SassdocsHelpers
         # Generate the possible paramters that could be passed into a function or mixin.
         # For example with the `govuk-colour` function: `$colour, $legacy`
         # If the function / mixin has default values output them too, for example `$important: true`
-        parameters.map.with_index { |param, index|
+        parameters.map { |param|
             output = "$#{param.name}"
             if param['default']
                 output << ": "
