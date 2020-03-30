@@ -124,6 +124,11 @@ RSpec.describe SassdocsHelpers do
     end
   end
   describe '#inline_parameters' do
+    it "returns empty if no parameters" do
+      inline_parameters = @helper.inline_parameters(false)
+
+      expect(inline_parameters).to eq('')
+    end
     it "returns single name with a dollar prefix" do
       fixture = dothash([
         {
@@ -132,7 +137,7 @@ RSpec.describe SassdocsHelpers do
       ])
       inline_parameters = @helper.inline_parameters(fixture)
 
-      expect(inline_parameters).to eq('$colour')
+      expect(inline_parameters).to eq('($colour)')
     end
     it "returns multiple names with a comma separator" do
       fixture = dothash([
@@ -145,7 +150,7 @@ RSpec.describe SassdocsHelpers do
       ])
       inline_parameters = @helper.inline_parameters(fixture)
 
-      expect(inline_parameters).to eq('$colour, $legacy')
+      expect(inline_parameters).to eq('($colour, $legacy)')
     end
     it "returns defaults formatted based on their type" do
       fixture = dothash([
@@ -162,7 +167,7 @@ RSpec.describe SassdocsHelpers do
       ])
       inline_parameters = @helper.inline_parameters(fixture)
 
-      expect(inline_parameters).to eq('$colour: "red", $legacy: false')
+      expect(inline_parameters).to eq('($colour: "red", $legacy: false)')
     end
   end
   describe '#parameters_table' do

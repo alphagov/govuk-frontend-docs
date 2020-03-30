@@ -26,6 +26,7 @@ weight: 65
 <% end %>
 <% end %>
 
+<% if doc.deprecated || doc.context.type == 'mixin' %>
 #### Usage
 
 <% if doc.deprecated %>
@@ -34,26 +35,11 @@ weight: 65
     <% end %>
 <% end %>
 
-<% if doc.parameter %>
-    <% formatted_inline_parameters = "(#{inline_parameters(doc.parameter)})" %>
-<% end %>
-
 <% if doc.context.type == 'mixin' %>
 ```scss
-@include <%= doc.context.name %><%= formatted_inline_parameters %><%= mixin_trailing_code(doc.context.code) %>
+@include <%= "#{doc.context.name}#{inline_parameters(doc.parameter)}#{mixin_trailing_code(doc.context.code)}" %>
 ```
 <% end %>
-
-<% if doc.context.type == 'function' %>
-```scss
-$result: <%= doc.context.name %><%= formatted_inline_parameters %>;
-```
-<% end %>
-
-<% if doc.context.type == 'variable' %>
-```scss
-$<%= doc.type.downcase %>: $<%= doc.context.name %>;
-```
 <% end %>
 
 <% if doc.example %>
