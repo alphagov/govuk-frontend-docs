@@ -20,13 +20,13 @@ RSpec.describe SassdocsHelpers do
   end
 
   describe '#format_sassdoc_data' do
-    it "should raise an error if there is no data" do
+    it "raises an error if there is no data" do
       expect {
         fixture = dothash({})
         @helper.format_sassdoc_data(fixture)
       }.to raise_error("No data in data/sassdocs.json, run `npm install` to generate.")
     end
-    it "should remove private entries" do
+    it "removes private entries" do
       fixture = dothash({
         sassdoc: [
           {
@@ -51,7 +51,7 @@ RSpec.describe SassdocsHelpers do
       expect(groups.length).to eq(1)
       expect(group_heading).to eq("public")
     end
-    it "should remove vendored entries" do
+    it "removes vendored entries" do
       fixture = dothash({
         sassdoc: [
           {
@@ -76,7 +76,7 @@ RSpec.describe SassdocsHelpers do
       expect(groups.length).to eq(1)
       expect(group_heading).to eq("public")
     end
-    it "should group entries by their group" do
+    it "groups entries by their group" do
       fixture = dothash({
         sassdoc: [
           {
@@ -112,19 +112,19 @@ RSpec.describe SassdocsHelpers do
     end
   end
   describe '#mixin_trailing_code' do
-    it "should return trailing semi-colon by default" do
+    it "returns trailing semi-colon by default" do
       trailing = @helper.mixin_trailing_code(".test { color: red; }")
 
       expect(trailing).to eq(';')
     end
-    it "should return block syntax if mixin accepts content" do
+    it "returns block syntax if mixin accepts content" do
       trailing = @helper.mixin_trailing_code("@if true { @content; }")
 
       expect(trailing).to eq(" {\n  //..\n}")
     end
   end
   describe '#inline_parameters' do
-    it "should return single name with a dollar prefix" do
+    it "returns single name with a dollar prefix" do
       fixture = dothash([
         {
           name: "colour"
@@ -134,7 +134,7 @@ RSpec.describe SassdocsHelpers do
 
       expect(inline_parameters).to eq('$colour')
     end
-    it "should return multiple names with a comma separator" do
+    it "returns multiple names with a comma separator" do
       fixture = dothash([
         {
           name: "colour"
@@ -147,7 +147,7 @@ RSpec.describe SassdocsHelpers do
 
       expect(inline_parameters).to eq('$colour, $legacy')
     end
-    it "should return defaults formatted based on their type" do
+    it "returns defaults formatted based on their type" do
       fixture = dothash([
         {
           name: "colour",
@@ -166,7 +166,7 @@ RSpec.describe SassdocsHelpers do
     end
   end
   describe '#parameters_table' do
-    it "should return name with a dollar prefix and back ticks surrounding it" do
+    it "returns name with a dollar prefix and back ticks surrounding it" do
       fixture = dothash([
         {
           name: "param"
@@ -176,7 +176,7 @@ RSpec.describe SassdocsHelpers do
 
       expect(parameter.first[:name]).to eq('`$param`')
     end
-    it "should return description with whitespace and pipes encoded" do
+    it "returns description with whitespace and pipes encoded" do
       fixture = dothash([
         {
           name: "param",
@@ -187,7 +187,7 @@ RSpec.describe SassdocsHelpers do
 
       expect(parameter.first[:description]).to eq('Hello world Testing &#124; Pipes')
     end
-    it "should return no data if no description" do
+    it "returns no data if no description" do
       fixture = dothash([
         {
           name: "param"
@@ -197,7 +197,7 @@ RSpec.describe SassdocsHelpers do
 
       expect(parameter.first[:description]).to eq("<span aria-hidden='true'>—</span>")
     end
-    it "should return single type with back ticks surrounding it" do
+    it "returns single type with back ticks surrounding it" do
       fixture = dothash([
         {
           name: "param",
@@ -208,7 +208,7 @@ RSpec.describe SassdocsHelpers do
 
       expect(parameter.first[:type]).to eq('`Boolean`')
     end
-    it "should return multiple types with or and back ticks surrounding it" do
+    it "returns multiple types with or and back ticks surrounding it" do
       fixture = dothash([
         {
           name: "param",
@@ -219,7 +219,7 @@ RSpec.describe SassdocsHelpers do
 
       expect(parameter.first[:type]).to eq('`Boolean` or `String`')
     end
-    it "should return no data if no type" do
+    it "returns no data if no type" do
       fixture = dothash([
         {
           name: "param"
@@ -229,7 +229,7 @@ RSpec.describe SassdocsHelpers do
 
       expect(parameter.first[:type]).to eq("<span aria-hidden='true'>—</span>")
     end
-    it "should return default value with back ticks surrounding it" do
+    it "returns default value with back ticks surrounding it" do
       fixture = dothash([
         {
           default: "value"
@@ -239,7 +239,7 @@ RSpec.describe SassdocsHelpers do
 
       expect(parameter.first[:default_value]).to eq("`value`")
     end
-    it "should return no data if no default" do
+    it "returns no data if no default" do
       fixture = dothash([
         {
           name: "param"
@@ -251,7 +251,7 @@ RSpec.describe SassdocsHelpers do
     end
   end
   describe '#doc_heading' do
-    it "should return with a dollar prefix if variable" do
+    it "returns with a dollar prefix if a variable" do
       fixture = dothash({
         context: {
           type: 'variable',
@@ -262,7 +262,7 @@ RSpec.describe SassdocsHelpers do
 
       expect(heading).to eq('$govuk-assets-path')
     end
-    it "should heading if not variable" do
+    it "return regular heading if not a variable" do
       fixture = dothash({
         context: {
           type: 'function',
@@ -275,24 +275,24 @@ RSpec.describe SassdocsHelpers do
     end
   end
   describe '#group_heading' do
-    it "should return General if undefined" do
+    it "returns General if undefined" do
       heading = @helper.group_heading('undefined')
 
       expect(heading).to eq('General')
     end
-    it "should format heading to titlecase" do
+    it "formats heading to titlecase" do
       heading = @helper.group_heading('helpers')
 
       expect(heading).to eq('Helpers')
     end
-    it "should format heading with forwards slashes to titlecase" do
+    it "formats heading with forwards slashes to titlecase" do
       heading = @helper.group_heading('settings/colours')
 
       expect(heading).to eq('Settings / Colours')
     end
   end
   describe '#github_url' do
-    it "should return a url" do
+    it "returns a url" do
       fixture = dothash({
         context: {
           line: {
@@ -310,7 +310,7 @@ RSpec.describe SassdocsHelpers do
     end
   end
   describe '#govuk_frontend_version' do
-    it "should return version" do
+    it "returns version" do
       version = @helper.govuk_frontend_version
 
       expect(version).to eq('1.0.0')
