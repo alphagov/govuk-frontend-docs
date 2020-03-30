@@ -54,7 +54,7 @@ $<%= doc.type.downcase %>: $<%= doc.context.name %>;
 <% end %>
 
 <% if doc.example %>
-#### Example
+#### Example<%= "s" if doc.example.length > 1 %>
 
 <% doc.example.each do |example| %>
 ##### <%= example.description %>
