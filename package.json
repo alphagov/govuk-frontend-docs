@@ -1,0 +1,17 @@
+{
+  "private": true,
+  "name": "govuk-frontend-docs",
+  "version": "1.0.0",
+  "scripts": {
+    "postinstall": "npm run build:sassdoc",
+    "build:sassdoc": "sassdoc --parse node_modules/govuk-frontend/govuk/ > data/sassdoc.json",
+    "scripts": {
+      "lint": "standard"
+    }
+  },
+  "devDependencies": {
+    "govuk-frontend": "^3.6.0",
+    "sassdoc": "^2.7.1",
+    "standard": "^14.3.3"
+  }
+}

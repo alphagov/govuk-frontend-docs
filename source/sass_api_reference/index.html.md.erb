@@ -1,0 +1,64 @@
+---
+title: Sass API Reference
+weight: 65
+---
+
+# Sass API Reference
+
+<% format_sassdoc_data(data).each do |heading, group| %>
+
+## <%= group_heading(heading) %>
+
+<% group.each do |doc| %>
+
+### <%= doc_heading(doc) %>
+
+<%= doc.description %>
+
+<% if doc.parameter %>
+
+#### Parameters
+
+| Name | Description | Type | Default value |
+| ---- | ----------- | ---- | ------------- |
+<% parameters_table(doc.parameter).each do |param| %>
+|  <%= param.name %> | <%= param.description %> | <%= param.type %> | <%= param.default_value %> |
+<% end %>
+<% end %>
+
+<% if doc.deprecated || doc.context.type == 'mixin' %>
+#### Usage
+
+<% if doc.deprecated %>
+    <% partial(:warning_text) do %>
+        <%= markdown("Deprecated: " +doc.deprecated) %>
+    <% end %>
+<% end %>
+
+<% if doc.context.type == 'mixin' %>
+```scss
+@include <%= "#{doc.context.name}#{inline_parameters(doc.parameter)}#{mixin_trailing_code(doc.context.code)}" %>
+```
+<% end %>
+<% end %>
+
+<% if doc.example %>
+#### Example<%= "s" if doc.example.length > 1 %>
+
+<% doc.example.each do |example| %>
+##### <%= example.description %>
+
+```<%= example.type %>
+<%= example.code %>
+```
+<% end %>
+<% end %>
+
+<a href="<%= github_url(doc) %>">
+    View source code for <%= doc.file.name %> on GitHub
+</a>
+
+<div class="govuk-!-margin-bottom-9"></div>
+
+<% end %>
+<% end %>

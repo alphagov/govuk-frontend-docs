@@ -1,4 +1,4 @@
-# Technical Documentation
+# GOV.UK Frontend Documentation
 
 This project uses the [Tech Docs Template][template], which is a [Middleman template][mmt] that you can use to build technical documentation using a GOV.UK style.
 
@@ -13,10 +13,11 @@ You’re welcome to use the template even if your service isn’t considered par
 
 ## Before you start
 
-To use the Tech Docs Template you need:
+To run this project you need:
 
 - [Ruby][install-ruby]
 - [Middleman][install-middleman]
+- [Node.js](https://nodejs.org/en/)
 
 ## Making changes
 
@@ -31,6 +32,11 @@ You can add content by editing the `.html.md.erb` files. These files support con
 👉 You can use Markdown and HTML to [generate different content types][example-content] and [Ruby partials to manage content][partials].
 
 👉 Learn more about [producing more complex page structures][multipage] for your website.
+
+## Installing dependencies
+
+- run `bundle install` for Ruby dependencies
+- run `npm install` for JavaScript dependencies
 
 ## Preview your changes locally
 
@@ -61,6 +67,10 @@ Every time you run this command, the `build` folder gets generated from scratch.
 Run `bundle update` to make sure you're using the most recent Ruby gem versions.
 
 Run `bundle exec middleman build --verbose` to get detailed error messages to help with finding the problem.
+
+## Testing
+
+Run `bundle exec rake`
 
 ## Licence
 
