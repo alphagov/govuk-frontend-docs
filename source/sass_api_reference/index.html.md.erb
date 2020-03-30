@@ -16,6 +16,9 @@ weight: 65
 <%= doc.description %>
 
 <% if doc.parameter %>
+
+#### Parameters
+
 | Name | Description | Type | Default value |
 | ---- | ----------- | ---- | ------------- |
 <% parameters_table(doc.parameter).each do |param| %>
