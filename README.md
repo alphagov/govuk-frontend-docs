@@ -70,7 +70,7 @@ Run `bundle exec middleman build --verbose` to get detailed error messages to he
 
 ## Testing
 
-Run `rspec`
+Run `bundle exec rake`
 
 ## Licence
 
