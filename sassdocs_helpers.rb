@@ -31,7 +31,7 @@ module SassdocsHelpers
         end
     end
     def inline_parameters(parameters)
-        # Generate the possible paramters that could be passed into a function or mixin.
+        # Generate the possible parameters that could be passed into a function or mixin.
         # For example with the `govuk-colour` function: `$colour, $legacy`
         # If the function / mixin has default values output them too, for example `$important: true`
         parameters.map { |param|
@@ -66,7 +66,7 @@ module SassdocsHelpers
             end
 
             if param.type
-                # Mutliple types can be seperated by pipe characters e.g. "String | Boolean".
+                # Multiple types can be separated by pipe characters e.g. "String | Boolean".
                 # We can check for them and then rejoin them with 'or' instead.
                 param.type = param.type.split(' | ').map{|char| "`#{char}`" }.join(' or ')
             else
