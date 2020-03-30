@@ -14,6 +14,6 @@ gem "govuk_tech_docs"
 # Development
 gem "json"
 gem "ostruct"
-gem "rake", "~> 10.0"
+gem "rake", "~> 12.3"
 gem "rspec", "~> 3.7.0"
 gem "rubocop-govuk", "~> 3.0.0"
