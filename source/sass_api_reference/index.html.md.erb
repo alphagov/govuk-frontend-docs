@@ -30,7 +30,7 @@ weight: 65
 
 <% if doc.deprecated %>
     <% partial(:warning_text) do %>
-        <%= markdown(doc.deprecated) %>
+        <%= markdown("Deprecated: " +doc.deprecated) %>
     <% end %>
 <% end %>
 
