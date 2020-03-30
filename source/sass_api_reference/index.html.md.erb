@@ -32,18 +32,18 @@ weight: 65
 <% end %>
 
 <% if doc.parameter %>
-    <% inline_parameters = "(#{inline_parameters(doc.parameter)})" %>
+    <% formatted_inline_parameters = "(#{inline_parameters(doc.parameter)})" %>
 <% end %>
 
 <% if doc.context.type == 'mixin' %>
 ```scss
-@include <%= doc.context.name %><%= inline_parameters %><%= mixin_trailing_code(doc.context.code) %>
+@include <%= doc.context.name %><%= formatted_inline_parameters %><%= mixin_trailing_code(doc.context.code) %>
 ```
 <% end %>
 
 <% if doc.context.type == 'function' %>
 ```scss
-$result: <%= doc.context.name %><%= inline_parameters %>;
+$result: <%= doc.context.name %><%= formatted_inline_parameters %>;
 ```
 <% end %>
 
