@@ -1,6 +1,6 @@
 ---
 title: Get started
-weight: 61
+weight: 11
 ---
 
 # Get started
@@ -17,9 +17,9 @@ You will need to do all the following steps to get your component working.
 
 ## 1. Install
 
-[Install GOV.UK Frontend using npm](/docs/installation/installing-with-npm.md).
+[Install GOV.UK Frontend using npm](/installing_with_npm).
 
-If you've installed from `dist`, get started with [a basic page](/docs/installation/installing-from-dist.md#2-include-resources) instead.
+If you've installed from `dist`, get started with [a basic page](/installing_from_dist/#2-include-resources) instead.
 
 ## 2. Add the HTML for a component to your application
 
@@ -48,7 +48,7 @@ Paste the HTML into a page or template in your application.
 
 The accordion will use a generic font until you get the font and images working, and will not be interactive until you get the JavaScript working.
 
-There are also different ways you can [import GOV.UK Frontend's CSS](/docs/installation/importing-css-assets-and-javascript.md#css).
+There are also different ways you can [import GOV.UK Frontend's CSS](/importing-css-assets-and-javascript/#css).
 
 ## 4. Get the font and images working
 
@@ -56,18 +56,18 @@ Your component will not use the right font or images until you've added GOV.UK F
 
 1. Copy the following 2 folders:
 
-    - `/node_modules/govuk-frontend/govuk/assets/images` folder to `<YOUR-APP>/assets/images`
-    - `/node_modules/govuk-frontend/govuk/assets/fonts` folder to `<YOUR-APP>/assets/fonts`
+- `/node_modules/govuk-frontend/govuk/assets/images` folder to `<YOUR-APP>/assets/images`
+- `/node_modules/govuk-frontend/govuk/assets/fonts` folder to `<YOUR-APP>/assets/fonts`
 
 2. Run your application, then use [the Fonts tab in Firefox Page Inspector](https://developer.mozilla.org/en-US/docs/Tools/Page_Inspector/How_to/Edit_fonts#The_Fonts_tab) to check the accordion is using the GDS Transport font.
 
-In your live application, we recommend [using an automated task or your build pipeline](/docs/installation/importing-css-assets-and-javascript.md#font-and-image-assets) instead of copying the files manually.
+In your live application, we recommend [using an automated task or your build pipeline](/importing-css-assets-and-javascript/#font-and-image-assets) instead of copying the files manually.
 
 ## 5. Get the JavaScript working
 
 1. Add the following JavaScript to the top of the `<body>` section of your page template:
 
-    ```JavaScript
+    ```js
     document.body.className = ((document.body.className) ? document.body.className + ' js-enabled' : 'js-enabled');
     ```
 
@@ -90,6 +90,6 @@ In your live application, we recommend [using an automated task or your build pi
 In your live application:
 
 - you must use `initAll` to initialise all components that use GOV.UK Frontend's JavaScript, or some components will not work correctly for disabled users who use assistive technologies
-- we recommend [using an automated task or your build pipeline](/docs/installation/importing-css-assets-and-javascript.md#javascript) instead of copying the files manually
+- we recommend [using an automated task or your build pipeline](/importing-css-assets-and-javascript/#javascript) instead of copying the files manually
 
 You can now get the full code for page layouts and other components from the [Design System website](https://design-system.service.gov.uk/).
