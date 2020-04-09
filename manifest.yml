@@ -8,3 +8,4 @@ applications:
 
   routes:
     - route: govuk-frontend-docs.cloudapps.digital
+    - route: frontend.design-system.service.gov.uk
