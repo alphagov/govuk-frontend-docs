@@ -6,9 +6,9 @@ cf target -o $CF_ORG -s $CF_SPACE
 
 # Parse app name from manifest to ensure it matches up
 APP_NAME=$(ruby -e "require 'yaml'; config = YAML.load_file('manifest.yml'); puts config['applications'][0]['name']")
-PATH=$(ruby -e "require 'yaml'; config = YAML.load_file('manifest.yml'); puts config['applications'][0]['path']")
+APP_PATH=$(ruby -e "require 'yaml'; config = YAML.load_file('manifest.yml'); puts config['applications'][0]['path']")
 
 cf v3-create-app $APP_NAME
 cf v3-apply-manifest -f manifest.yml
 # Deploy using CloudFoundry zero-downtime push
-cf v3-zdt-push $APP_NAME -p $PATH --wait-for-deploy-complete
+cf v3-zdt-push $APP_NAME -p $APP_PATH --wait-for-deploy-complete
