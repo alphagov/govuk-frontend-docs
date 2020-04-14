@@ -1,10 +1,11 @@
 ---
 applications:
 - name: govuk-frontend-docs
-  path: build
+  path: ./deploy
   memory: 64M
   instances: 2
-  buildpack: staticfile_buildpack
+  # https://docs.cloud.service.gov.uk/deploying_apps.html#how-to-use-custom-buildpacks
+  buildpack: https://github.com/cloudfoundry/nginx-buildpack.git#v1.1.7
 
   routes:
     - route: govuk-frontend-docs.cloudapps.digital
