@@ -10,4 +10,4 @@ APP_NAME=$(ruby -e "require 'yaml'; config = YAML.load_file('manifest.yml'); put
 cf v3-create-app $APP_NAME
 cf v3-apply-manifest -f manifest.yml
 # Deploy using CloudFoundry zero-downtime push
-cf v3-zdt-push $APP_NAME -p build --wait-for-deploy-complete
+cf v3-zdt-push $APP_NAME --wait-for-deploy-complete
