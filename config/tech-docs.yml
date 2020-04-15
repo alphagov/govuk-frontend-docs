@@ -4,7 +4,7 @@ host:
 # Header-related options
 show_govuk_logo: true
 service_name: Frontend
-service_link: https://design-system.service.gov.uk/
+service_link: https://frontend.design-system.service.gov.uk/
 phase: Beta
 
 # Links to show on right-hand-side of header
