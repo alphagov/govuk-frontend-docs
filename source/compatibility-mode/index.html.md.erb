@@ -1,26 +1,19 @@
 ---
-title: Use with old frameworks or colours
+title: Use with our old frameworks or colours
 weight: 60
 ---
 
-# Use with old frameworks or colours
+# Use with our old frameworks or colours
 
-You can configure GOV.UK Frontend to work with the following 'legacy'
-frameworks:
+You can configure GOV.UK Frontend to look like our old frameworks, GOV.UK Elements, GOV.UK Template and GOV.UK Frontend Toolkit.
 
-- [GOV.UK Frontend toolkit]
-- [GOV.UK Template]
-- [GOV.UK Elements]
+If you do this, your service will not meet [level AA of WCAG 2.1](https://www.gov.uk/service-manual/helping-people-to-use-your-service/understanding-wca) because your users will not be able to change the font size.
 
-You cannot use the following features if you installed GOV.UK Frontend from
-`dist`. [Install with node package manager](/installing-with-npm/#install-with-node-js-package-manager-npm) instead.
+You cannot use the following features if you installed GOV.UK Frontend from `dist`. [Install with node package manager](/installing_with_npm) instead.
 
-If you use these features, your service will not meet [level AA of WCAG 2.1](https://www.gov.uk/service-manual/helping-people-to-use-your-service/understanding-wcag) because your users will not be able to change the font size.
+## 'Compatibility mode'
 
-## Turn on 'compatibility mode'
-
-You can turn on 'compatibility mode' if you want to use both GOV.UK Frontend
-components and a legacy framework in a service.
+Use 'compatibility mode' if you want to use GOV.UK Frontend components and an old framework together in a service.
 
 GOV.UK Frontend will:
 
@@ -29,24 +22,27 @@ GOV.UK Frontend will:
 - override some of the CSS in the legacy frameworks
 - no longer use `rem` for font sizes
 
-To turn on compatibility mode for all 3 legacy frameworks, add the following
-variables to your project's Sass file, above `@import "govuk-frontend/govuk/all"`:
+## Turn on 'compatibility mode'
 
-```SCSS
-$govuk-compatibility-govukfrontendtoolkit: true;
-$govuk-compatibility-govuktemplate: true;
-$govuk-compatibility-govukelements: true;
-```
+Add one or more of the following lines to your project's Sass file, above `@import "govuk-frontend/govuk/all"`:
 
-You can leave out a variable to turn off compatibility mode for that framework.
+- `$govuk-compatibility-govukelements: true;` if you're using GOV.UK Elements
+- `$govuk-compatibility-govuktemplate: true;` if you're using GOV.UK Template
+- `$govuk-compatibility-govukfrontendtoolkit: true;` if you're using GOV.UK Frontend toolkit
+
+## Turn off 'compatibility mode'
+
+Remove the following lines from your project's Sass file:
+
+- `$govuk-compatibility-govukelements: true;`
+- `$govuk-compatibility-govuktemplate: true;`
+- `$govuk-compatibility-govukfrontendtoolkit: true;`
 
 ## Use the old colour palette
 
-If you are not using any of the legacy frameworks, you can still configure
-GOV.UK Frontend to use the old colour palette.
+If you’re not using any of our old frameworks, you can still configure GOV.UK Frontend to use the old colour palette.
 
-Add the following variable to your project's Sass file, above
-`@import "govuk-frontend/govuk/all"`:
+Add the following variable to your project's Sass file, above `@import "govuk-frontend/govuk/all"`:
 
 ```scss
 $govuk-use-legacy-palette: true;
