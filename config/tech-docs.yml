@@ -32,8 +32,8 @@ collapsible_nav: true
 # headings.
 max_toc_heading_level: 2
 
-# Prevent robots from indexing (e.g. whilst in development)
-prevent_indexing: false
+# Set dynamically in config.rb depending on TRAVIS_BRANCH
+# prevent_indexing: false
 
 show_contribution_banner: true
 github_repo: alphagov/govuk-frontend-docs
