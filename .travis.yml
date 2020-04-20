@@ -1,4 +1,8 @@
 language: ruby
+# Use Ruby 2.6 to avoid requiring the installed bundler version to exactly
+# match the version in Gemfile.lock, as seen in the version of RubyGems that
+# shipped with Ruby 2.5.
+dist: bionic
 cache: bundler
 script: bundle exec middleman build
 
