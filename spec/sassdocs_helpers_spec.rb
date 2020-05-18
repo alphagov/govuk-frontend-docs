@@ -273,7 +273,7 @@ RSpec.describe SassdocsHelpers do
       expect(parameter.first[:default_value]).to eq("<span aria-hidden='true'>—</span>")
     end
   end
-  describe "#doc_heading" do
+  describe "#item_heading" do
     it "returns with a dollar prefix if a variable" do
       fixture = dothash({
         context: {
@@ -281,7 +281,7 @@ RSpec.describe SassdocsHelpers do
           name: "govuk-assets-path",
         },
       })
-      heading = @helper.doc_heading(fixture)
+      heading = @helper.item_heading(fixture)
 
       expect(heading).to eq("$govuk-assets-path")
     end
@@ -292,7 +292,7 @@ RSpec.describe SassdocsHelpers do
           name: "govuk-colour",
         },
       })
-      heading = @helper.doc_heading(fixture)
+      heading = @helper.item_heading(fixture)
 
       expect(heading).to eq("govuk-colour")
     end

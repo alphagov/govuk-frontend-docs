@@ -13,42 +13,42 @@ weight: 65
 
 ### <%= subgroup_heading(subgroup_name) %>
 
-<% subgroup.each do |doc| %>
+<% subgroup.each do |item| %>
 
-#### <%= doc_heading(doc) %>
+#### <%= item_heading(item) %>
 
-<%= doc.description %>
+<%= item.description %>
 
-<% if doc.parameter %>
+<% if item.parameter %>
 
 ##### Parameters
 
 | Name | Description | Type | Default value |
 | ---- | ----------- | ---- | ------------- |
-<% parameters_table(doc.parameter).each do |param| %>
+<% parameters_table(item.parameter).each do |param| %>
 |  <%= param.name %> | <%= param.description %> | <%= param.type %> | <%= param.default_value %> |
 <% end %>
 <% end %>
 
-<% if doc.deprecated || doc.context.type == 'mixin' %>
+<% if item.deprecated || item.context.type == 'mixin' %>
 ##### Usage
 
-<% if doc.deprecated %>
+<% if item.deprecated %>
     <% partial(:warning_text) do %>
-        <%= markdown("Deprecated: " +doc.deprecated) %>
+        <%= markdown("Deprecated: " +item.deprecated) %>
     <% end %>
 <% end %>
 
-<% if doc.context.type == 'mixin' %>
+<% if item.context.type == 'mixin' %>
 ```scss
-@include <%= "#{doc.context.name}#{inline_parameters(doc.parameter)}#{mixin_trailing_code(doc.context.code)}" %>
+@include <%= "#{item.context.name}#{inline_parameters(item.parameter)}#{mixin_trailing_code(item.context.code)}" %>
 ```
 <% end %>
 <% end %>
 
-<% if doc.example %>
+<% if item.example %>
 
-<% doc.example.each do |example| %>
+<% item.example.each do |example| %>
 ##### Example: <%= example.description %>
 
 ```<%= example.type %>
@@ -57,8 +57,8 @@ weight: 65
 <% end %>
 <% end %>
 
-<a href="<%= github_url(doc) %>">
-    View source code for <%= doc.file.name %> on GitHub
+<a href="<%= github_url(item) %>">
+    View source code for <%= item.file.name %> on GitHub
 </a>
 
 <div class="govuk-!-margin-bottom-9"></div>
