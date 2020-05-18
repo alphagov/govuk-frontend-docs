@@ -76,7 +76,7 @@ RSpec.describe SassdocsHelpers do
       expect(groups.length).to eq(1)
       expect(group_heading).to eq("public")
     end
-    it "groups entries by their group" do
+    it "groups entries sorted into groups" do
       fixture = dothash({
         sassdoc: [
           {
@@ -111,8 +111,13 @@ RSpec.describe SassdocsHelpers do
       })
       groups = @helper.format_sassdoc_data(fixture)
 
-      expect(groups).to eq({
-        "helpers" => [
+      expect(groups).to eq([
+        ["tools", [
+          ["tools/foo", [
+            fixture.sassdoc[2],
+          ]],
+        ]],
+        ["helpers", [
           ["helpers/colour", [
             fixture.sassdoc[0],
             fixture.sassdoc[3],
@@ -120,13 +125,8 @@ RSpec.describe SassdocsHelpers do
           ["helpers", [
             fixture.sassdoc[1],
           ]],
-        ],
-        "tools" => [
-          ["tools/foo", [
-            fixture.sassdoc[2],
-          ]],
-        ],
-      })
+        ]],
+    ])
     end
   end
   describe "#mixin_trailing_code" do
