@@ -1,6 +1,8 @@
 require "json"
 
 module SassdocsHelpers
+  ORDER = %w[settings tools helpers].freeze
+
   def format_sassdoc_data(data)
     raise "No data in data/sassdocs.json, run `npm install` to generate." unless data.respond_to?(:sassdoc)
 
@@ -12,6 +14,7 @@ module SassdocsHelpers
     public_entries
       .group_by { |item| item.group.first }
       .group_by { |group_name, _| group_name.split("/").first }
+      .sort_by { |group| ORDER.index(group.first) || Float::INFINITY }
   end
 
   def mixin_trailing_code(code)
