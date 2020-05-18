@@ -5,19 +5,23 @@ weight: 65
 
 # Sass API reference
 
-<% format_sassdoc_data(data).each do |heading, group| %>
+<% format_sassdoc_data(data).each do |group_name, subgroups| %>
 
-## <%= group_heading(heading) %>
+## <%= group_heading(group_name) %>
 
-<% group.each do |doc| %>
+<% subgroups.each do |subgroup_name, subgroup| %>
 
-### <%= doc_heading(doc) %>
+### <%= subgroup_heading(subgroup_name) %>
+
+<% subgroup.each do |doc| %>
+
+#### <%= doc_heading(doc) %>
 
 <%= doc.description %>
 
 <% if doc.parameter %>
 
-#### Parameters
+##### Parameters
 
 | Name | Description | Type | Default value |
 | ---- | ----------- | ---- | ------------- |
@@ -27,7 +31,7 @@ weight: 65
 <% end %>
 
 <% if doc.deprecated || doc.context.type == 'mixin' %>
-#### Usage
+##### Usage
 
 <% if doc.deprecated %>
     <% partial(:warning_text) do %>
@@ -43,10 +47,9 @@ weight: 65
 <% end %>
 
 <% if doc.example %>
-#### Example<%= "s" if doc.example.length > 1 %>
 
 <% doc.example.each do |example| %>
-##### <%= example.description %>
+##### Example: <%= example.description %>
 
 ```<%= example.type %>
 <%= example.code %>
@@ -60,5 +63,6 @@ weight: 65
 
 <div class="govuk-!-margin-bottom-9"></div>
 
+<% end %>
 <% end %>
 <% end %>
