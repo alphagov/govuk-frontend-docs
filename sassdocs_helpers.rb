@@ -9,7 +9,9 @@ module SassdocsHelpers
     # Remove vendored files, for example SassMQ
     public_entries = public_entries.reject { |doc| doc.file.path.start_with?("vendor") }
     # Group the docs by their 'group', for example 'Settings' or 'Helpers'
-    public_entries.group_by { |doc| doc.group.first }
+    public_entries
+      .group_by { |doc| doc.group.first }
+      .group_by { |group_name, _| group_name.split("/").first }
   end
 
   def mixin_trailing_code(code)
@@ -92,6 +94,16 @@ module SassdocsHelpers
       heading.gsub("/", " / ").titlecase
     else
       "General"
+    end
+  end
+
+  def subgroup_heading(heading)
+    if heading == "undefined"
+      "General"
+    elsif heading.include?("/")
+      heading.split("/").last.gsub("-", " ").capitalize
+    else
+      "General #{heading}"
     end
   end
 
