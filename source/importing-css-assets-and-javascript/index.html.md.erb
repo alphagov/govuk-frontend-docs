@@ -11,7 +11,7 @@ weight: 70
 
 To import all the Sass rules from GOV.UK Frontend, add the following to your Sass file:
 
-```Scss
+```scss
 @import "node_modules/govuk-frontend/govuk/all";
 ```
 
@@ -19,7 +19,7 @@ To import all the Sass rules from GOV.UK Frontend, add the following to your Sas
 
 To import the [button](https://design-system.service.gov.uk/components/button/) component for example, add the following to your Sass file:
 
-```SCSS
+```scss
 @import "node_modules/govuk-frontend/govuk/components/button/button";
 ```
 
@@ -32,7 +32,7 @@ If you want to make Sass import paths shorter, add `node_modules/govuk-frontend`
 
 You can then import without using `node_modules/govuk-frontend/` in your import path. For example:
 
-```SCSS
+```scss
 @import "govuk/components/button/button";
 ```
 
@@ -82,13 +82,13 @@ Set one of the following before the `@import` line in your Sass file:
 
 Set the `$govuk-assets-path` variable if your `font` and `image` folders have the same parent folder. For example:
 
-```SCSS
+```scss
 $govuk-assets-path: '/<YOUR-ASSETS-FOLDER>';
 ```
 
 Set the `$govuk-images-path` and `$govuk-fonts-path` variables if your `font` and `image` folders have different parent folders. For example:
 
-```SCSS
+```scss
 $govuk-images-path: "/<YOUR-IMAGES-FOLDER>/";
 $govuk-fonts-path: "/<YOUR-FONTS-FOLDER>/";
 ```
