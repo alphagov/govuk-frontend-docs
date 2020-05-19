@@ -10,7 +10,7 @@
     }
   },
   "devDependencies": {
-    "govuk-frontend": "^3.6.0",
+    "govuk-frontend": "github:alphagov/govuk-frontend#84d90444",
     "sassdoc": "^2.7.1",
     "standard": "^14.3.3"
   }
