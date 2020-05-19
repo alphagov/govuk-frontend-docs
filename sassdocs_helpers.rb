@@ -3,6 +3,10 @@ require "json"
 module SassdocsHelpers
   ORDER = %w[settings tools helpers].freeze
 
+  SPECIAL_CASES = {
+    "internet-explorer-8" => "Internet Explorer 8"
+  }.freeze
+
   def format_sassdoc_data(data)
     raise "No data in data/sassdocs.json, run `npm install` to generate." unless data.respond_to?(:sassdoc)
 
@@ -104,7 +108,9 @@ module SassdocsHelpers
     if heading == "undefined"
       "General"
     elsif heading.include?("/")
-      heading.split("/").last.gsub("-", " ").capitalize
+      slug = heading.split("/").last
+
+      SPECIAL_CASES[slug] || slug.gsub("-", " ").capitalize
     else
       "General #{heading}"
     end
