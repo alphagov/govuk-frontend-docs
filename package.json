@@ -5,11 +5,14 @@
   "scripts": {
     "postinstall": "npm run build:sassdoc",
     "build:sassdoc": "sassdoc --parse node_modules/govuk-frontend/govuk/ > data/sassdoc.json",
-    "lint": "standard"
+    "lint": "standard",
+    "check-links": "hyperlink -ri deploy/public/index.html | tap-spot"
   },
   "devDependencies": {
     "govuk-frontend": "^3.6.0",
+    "hyperlink": "^4.5.0",
     "sassdoc": "^2.7.1",
-    "standard": "^14.3.3"
+    "standard": "^14.3.3",
+    "tap-spot": "^1.1.1"
   }
 }
