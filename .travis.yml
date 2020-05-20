@@ -4,7 +4,9 @@ language: ruby
 # shipped with Ruby 2.5.
 dist: bionic
 cache: bundler
-script: bundle exec middleman build
+script:
+  - bundle exec middleman build
+  - bundle exec rake
 
 env:
   global:
