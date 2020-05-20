@@ -46,6 +46,13 @@ weight: 65
 <% end %>
 <% end %>
 
+<% if item.context.type == 'variable' %>
+##### Default value
+```scss
+$<%= item.context.name %>: <%= item.context.value %>;
+```
+<% end %>
+
 <% if item.example %>
 
 <% item.example.each do |example| %>
