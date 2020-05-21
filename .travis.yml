@@ -7,6 +7,7 @@ cache: bundler
 script:
   - bundle exec middleman build
   - bundle exec rake
+  - npm run check-links
 
 env:
   global:

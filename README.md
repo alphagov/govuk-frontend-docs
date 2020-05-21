@@ -70,7 +70,9 @@ Run `bundle exec middleman build --verbose` to get detailed error messages to he
 
 ## Testing
 
-Run `bundle exec rake`
+To run the linter and Ruby tests, run `bundle exec rake`.
+
+To check for broken links in the guidance, run `npm run check-link`.
 
 ## Licence
 
