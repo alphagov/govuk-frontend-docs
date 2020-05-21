@@ -5,48 +5,51 @@ weight: 65
 
 # Sass API reference
 
-<% format_sassdoc_data(data).each do |heading, group| %>
+<% format_sassdoc_data(data).each do |group_name, subgroups| %>
 
-## <%= group_heading(heading) %>
+## <%= group_heading(group_name) %>
 
-<% group.each do |doc| %>
+<% subgroups.each do |subgroup_name, subgroup| %>
 
-### <%= doc_heading(doc) %>
+### <%= subgroup_heading(subgroup_name) %>
 
-<%= doc.description %>
+<% subgroup.each do |item| %>
 
-<% if doc.parameter %>
+#### <%= item_heading(item) %>
 
-#### Parameters
+<%= item.description %>
+
+<% if item.parameter %>
+
+##### Parameters
 
 | Name | Description | Type | Default value |
 | ---- | ----------- | ---- | ------------- |
-<% parameters_table(doc.parameter).each do |param| %>
+<% parameters_table(item.parameter).each do |param| %>
 |  <%= param.name %> | <%= param.description %> | <%= param.type %> | <%= param.default_value %> |
 <% end %>
 <% end %>
 
-<% if doc.deprecated || doc.context.type == 'mixin' %>
-#### Usage
+<% if item.deprecated || item.context.type == 'mixin' %>
+##### Usage
 
-<% if doc.deprecated %>
+<% if item.deprecated %>
     <% partial(:warning_text) do %>
-        <%= markdown("Deprecated: " +doc.deprecated) %>
+        <%= markdown("Deprecated: " +item.deprecated) %>
     <% end %>
 <% end %>
 
-<% if doc.context.type == 'mixin' %>
+<% if item.context.type == 'mixin' %>
 ```scss
-@include <%= "#{doc.context.name}#{inline_parameters(doc.parameter)}#{mixin_trailing_code(doc.context.code)}" %>
+@include <%= "#{item.context.name}#{inline_parameters(item.parameter)}#{mixin_trailing_code(item.context.code)}" %>
 ```
 <% end %>
 <% end %>
 
-<% if doc.example %>
-#### Example<%= "s" if doc.example.length > 1 %>
+<% if item.example %>
 
-<% doc.example.each do |example| %>
-##### <%= example.description %>
+<% item.example.each do |example| %>
+##### Example: <%= example.description %>
 
 ```<%= example.type %>
 <%= example.code %>
@@ -54,11 +57,12 @@ weight: 65
 <% end %>
 <% end %>
 
-<a href="<%= github_url(doc) %>">
-    View source code for <%= doc.file.name %> on GitHub
+<a href="<%= github_url(item) %>">
+    View source code for <%= item.file.name %> on GitHub
 </a>
 
 <div class="govuk-!-margin-bottom-9"></div>
 
+<% end %>
 <% end %>
 <% end %>

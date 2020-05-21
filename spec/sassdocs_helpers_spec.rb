@@ -76,39 +76,57 @@ RSpec.describe SassdocsHelpers do
       expect(groups.length).to eq(1)
       expect(group_heading).to eq("public")
     end
-    it "groups entries by their group" do
+    it "groups entries sorted into groups" do
       fixture = dothash({
         sassdoc: [
           {
             access: "public",
-            group: %w[mixins],
+            group: %w[helpers/colour],
             file: {
               path: "first.scss",
             },
           },
           {
             access: "public",
-            group: %w[mixins],
+            group: %w[helpers],
             file: {
               path: "second.scss",
             },
           },
           {
             access: "public",
-            group: %w[helpers],
+            group: %w[tools/foo],
             file: {
               path: "third.scss",
+            },
+          },
+          {
+            access: "public",
+            group: %w[helpers/colour],
+            file: {
+              path: "fourth.scss",
             },
           },
         ],
       })
       groups = @helper.format_sassdoc_data(fixture)
-      expect(groups["mixins"].length).to eq(2)
-      expect(groups["mixins"].first.file.path).to eq("first.scss")
-      expect(groups["mixins"].second.file.path).to eq("second.scss")
 
-      expect(groups["helpers"].length).to eq(1)
-      expect(groups["helpers"].first.file.path).to eq("third.scss")
+      expect(groups).to eq([
+        ["tools", [
+          ["tools/foo", [
+            fixture.sassdoc[2],
+          ]],
+        ]],
+        ["helpers", [
+          ["helpers/colour", [
+            fixture.sassdoc[0],
+            fixture.sassdoc[3],
+          ]],
+          ["helpers", [
+            fixture.sassdoc[1],
+          ]],
+        ]],
+    ])
     end
   end
   describe "#mixin_trailing_code" do
@@ -255,7 +273,7 @@ RSpec.describe SassdocsHelpers do
       expect(parameter.first[:default_value]).to eq("<span aria-hidden='true'>—</span>")
     end
   end
-  describe "#doc_heading" do
+  describe "#item_heading" do
     it "returns with a dollar prefix if a variable" do
       fixture = dothash({
         context: {
@@ -263,7 +281,7 @@ RSpec.describe SassdocsHelpers do
           name: "govuk-assets-path",
         },
       })
-      heading = @helper.doc_heading(fixture)
+      heading = @helper.item_heading(fixture)
 
       expect(heading).to eq("$govuk-assets-path")
     end
@@ -274,7 +292,7 @@ RSpec.describe SassdocsHelpers do
           name: "govuk-colour",
         },
       })
-      heading = @helper.doc_heading(fixture)
+      heading = @helper.item_heading(fixture)
 
       expect(heading).to eq("govuk-colour")
     end

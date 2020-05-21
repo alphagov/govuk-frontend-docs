@@ -1,15 +1,24 @@
 require "json"
 
 module SassdocsHelpers
+  ORDER = %w[settings tools helpers].freeze
+
+  SPECIAL_CASES = {
+    "internet-explorer-8" => "Internet Explorer 8",
+  }.freeze
+
   def format_sassdoc_data(data)
     raise "No data in data/sassdocs.json, run `npm install` to generate." unless data.respond_to?(:sassdoc)
 
     # Remove private API entries
-    public_entries = data.sassdoc.select { |doc| doc.access == "public" }
+    public_entries = data.sassdoc.select { |item| item.access == "public" }
     # Remove vendored files, for example SassMQ
-    public_entries = public_entries.reject { |doc| doc.file.path.start_with?("vendor") }
-    # Group the docs by their 'group', for example 'Settings' or 'Helpers'
-    public_entries.group_by { |doc| doc.group.first }
+    public_entries = public_entries.reject { |item| item.file.path.start_with?("vendor") }
+    # Group the items by their 'group', for example 'Settings' or 'Helpers'
+    public_entries
+      .group_by { |item| item.group.first }
+      .group_by { |group_name, _| group_name.split("/").first }
+      .sort_by { |group| ORDER.index(group.first) || Float::INFINITY }
   end
 
   def mixin_trailing_code(code)
@@ -76,12 +85,12 @@ module SassdocsHelpers
     }
   end
 
-  def doc_heading(doc)
+  def item_heading(item)
     # For variables add a dollar to distinguish them from similar mixin/function names
-    if doc.context.type == "variable"
-      "$" + doc.context.name
+    if item.context.type == "variable"
+      "$" + item.context.name
     else
-      doc.context.name
+      item.context.name
     end
   end
 
@@ -95,9 +104,21 @@ module SassdocsHelpers
     end
   end
 
-  def github_url(doc)
+  def subgroup_heading(heading)
+    if heading == "undefined"
+      "General"
+    elsif heading.include?("/")
+      slug = heading.split("/").last
+
+      SPECIAL_CASES[slug] || slug.gsub("-", " ").capitalize
+    else
+      "General #{heading}"
+    end
+  end
+
+  def github_url(item)
     # Construct GitHub link
-    "https://github.com/alphagov/govuk-frontend/tree/v#{govuk_frontend_version}/src/govuk/#{doc.file.path}#L#{doc.context.line.start}-L#{doc.context.line.end}"
+    "https://github.com/alphagov/govuk-frontend/tree/v#{govuk_frontend_version}/src/govuk/#{item.file.path}#L#{item.context.line.start}-L#{item.context.line.end}"
   end
 
   def govuk_frontend_version
