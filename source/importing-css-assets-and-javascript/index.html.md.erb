@@ -15,9 +15,34 @@ To import all the Sass rules from GOV.UK Frontend, add the following to your Sas
 @import "node_modules/govuk-frontend/govuk/all";
 ```
 
+## Import only the parts of GOV.UK Frontend that you need
+
+In your Sass file, import `base` followed by the parts of GOV.UK Frontend that you need. For example:
+
+```scss
+@import "node_modules/govuk-frontend/govuk/base";
+
+// Typography, link styles, etc.
+@import "node_modules/govuk-frontend/core/all";
+
+// Grid and layout
+@import "node_modules/govuk-frontend/objects/all";
+
+// Specific components
+@import "node_modules/govuk-frontend/components/footer/index";
+@import "node_modules/govuk-frontend/components/header/index";
+@import "node_modules/govuk-frontend/components/skip-link/index";
+
+// Clearfix and visually hidden utilities
+@import "node_modules/govuk-frontend/utilities/all";
+
+// Overrides for spacing, typography, etc.
+@import "node_modules/govuk-frontend/overrides/all";
+```
+
 ### Import an individual component's CSS
 
-To import the [button](https://design-system.service.gov.uk/components/button/) component for example, add the following to your Sass file:
+To import the [button](https://design-system.service.gov.uk/components/button/) component with all of its dependencies for example, add the following to your Sass file:
 
 ```scss
 @import "node_modules/govuk-frontend/govuk/components/button/button";
@@ -34,6 +59,15 @@ You can then import without using `node_modules/govuk-frontend/` in your import 
 
 ```scss
 @import "govuk/components/button/button";
+```
+
+If you are using Dart Sass, LibSass 3.6.0 or greater, or Ruby Sass 3.6.0 or greater, you can remove `/index` from the end of any imports:
+
+```
+@import "govuk/base";
+
+@import "govuk/components/button"; 
+@import "govuk/components/details"; 
 ```
 
 ### Override with your own CSS
