@@ -17,7 +17,7 @@ To import all the Sass rules from GOV.UK Frontend, add the following to your Sas
 
 ### Import specific parts of the CSS
 
-If you want to improve how quickly Sass compiles to CSS, you can import only the Sass rules you need.
+If you want to improve how quickly your service's pages load in browsers, you can import only the Sass rules you need.
  
 1. Import `node_modules/govuk-frontend/govuk/base` in your Sass file.
 2. Import the parts of the CSS you need.
@@ -33,8 +33,7 @@ For example, add the following to your Sass file to import the CSS you need for 
 @import "node_modules/govuk-frontend/govuk/components/header/index";
 @import "node_modules/govuk-frontend/govuk/components/skip-link/index";
 @import "node_modules/govuk-frontend/govuk/utilities/all";
-@import 
-"node_modules/govuk-frontend/govuk/overrides/all";
+@import "node_modules/govuk-frontend/govuk/overrides/all";
 ```
 You can remove lines that import parts of the CSS you do not need. Read more about [the different parts of GOV.UK Frontend’s CSS](https://github.com/alphagov/govuk-frontend/tree/master/src/govuk).
 
