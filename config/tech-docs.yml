@@ -37,3 +37,8 @@ max_toc_heading_level: 2
 
 show_contribution_banner: true
 github_repo: alphagov/govuk-frontend-docs
+
+# Redirects
+redirects:
+  /installing-from-dist/index.html: https://frontend.design-system.service.gov.uk/install-using-precompiled-files/
+
