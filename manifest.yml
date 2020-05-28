@@ -7,7 +7,8 @@ applications:
   memory: 64M
   instances: 2
   # https://docs.cloud.service.gov.uk/deploying_apps.html#how-to-use-custom-buildpacks
-  buildpack: https://github.com/cloudfoundry/nginx-buildpack.git#v1.1.9
+  buildpacks:
+    - https://github.com/cloudfoundry/nginx-buildpack.git#v1.1.9
 
   # Send application logs to logit
   # https://docs.cloud.service.gov.uk/monitoring_apps.html#configure-app
