@@ -15,9 +15,37 @@ To import all the Sass rules from GOV.UK Frontend, add the following to your Sas
 @import "node_modules/govuk-frontend/govuk/all";
 ```
 
-### Import an individual component's CSS
+### Import specific parts of the CSS
 
-To import the [button](https://design-system.service.gov.uk/components/button/) component for example, add the following to your Sass file:
+If you want to improve how quickly your service's pages load in browsers, you can import only the Sass rules you need.
+ 
+1. Import `node_modules/govuk-frontend/govuk/base` in your Sass file.
+2. Import the parts of the CSS you need.
+
+For example, add the following to your Sass file to import the CSS you need for a basic GOV.UK page.
+
+```scss
+@import "node_modules/govuk-frontend/govuk/base";
+
+@import "node_modules/govuk-frontend/govuk/core/all";
+@import "node_modules/govuk-frontend/govuk/objects/all";
+@import "node_modules/govuk-frontend/govuk/components/footer/index";
+@import "node_modules/govuk-frontend/govuk/components/header/index";
+@import "node_modules/govuk-frontend/govuk/components/skip-link/index";
+@import "node_modules/govuk-frontend/govuk/utilities/all";
+@import "node_modules/govuk-frontend/govuk/overrides/all";
+```
+You can remove lines that import parts of the CSS you do not need. 
+
+[Read more about the different parts of GOV.UK Frontend’s CSS](https://github.com/alphagov/govuk-frontend/tree/master/src/govuk).
+
+You do not need `/index` at the end of your component imports if you’re using Dart Sass, LibSass 3.6.0 or higher, or Ruby Sass 3.6.0 or higher.
+
+### Import an individual component’s CSS using a single import
+
+You can also import a component and all its dependencies without importing `node_modules/govuk-frontend/govuk/base` first.
+
+To import the button component for example, add the following to your Sass file:
 
 ```scss
 @import "node_modules/govuk-frontend/govuk/components/button/button";
