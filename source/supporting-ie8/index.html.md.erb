@@ -9,17 +9,17 @@ If you are including GOV.UK Frontend as part of your application's stylesheets
 then you will need to do some additional work to support Internet Explorer 8
 (IE8).
 
-1. [Include an HTML5 shiv](#include-an-html5-shiv)
-2. [Generate an IE8-specific stylesheet](#bundling-an-ie8-specific-stylesheet)
-3. [Transform the IE8 stylesheet using oldie](#transforming-the-generated-stylesheet-using-39-oldie-39)
-4. [Include the IE8 stylesheet in your project](#including-the-ie8-stylesheet-in-your-project)
+1. Include an HTML5 shiv.
+2. Generate an IE8-specific stylesheet.
+3. Transform the IE8 stylesheet using oldie.
+4. Include the IE8 stylesheet in your project.
 
 Once you have completed these steps, you will be able to [write CSS that targets
 IE8 in your own application styles](#writing-styles-that-target-ie8).
 
 If you [installed using precompiled files](/install-using-precompiled-files/), you can include the IE8-specific stylesheet in your project, allowing you to skip steps 2 and 3.
 
-## Include an HTML5 shiv
+## 1. Include an HTML5 shiv
 
 You will need to to include an [HTML5 shiv](https://github.com/aFarkas/html5shiv)
 which allows the 'semantic' HTML elements introduced in HTML5 to be used in
@@ -39,7 +39,7 @@ include with conditional comments that target only the browsers that need it:
 
 Note that some libraries such as Modernizr may already include html5shiv.
 
-## Bundling an IE8-specific stylesheet
+## 2. Generate an IE8-specific stylesheet
 
 Setting the `$govuk-is-ie8` variable to `true` when generating the stylesheet
 will create a version that targets IE8. For example, it will:
@@ -55,7 +55,6 @@ set the `$govuk-is-ie8` variable to true and then import your main application
 stylesheet without having to redefine anything else.
 
 ```scss
-
 // application.scss
 
 @import "govuk-frontend/frontend/all";
@@ -71,14 +70,14 @@ $govuk-is-ie8: true;
 @import "application";
 ```
 
-## Transforming the generated stylesheet using 'oldie'
+## 3. Transform the generated stylesheet using 'oldie'
 
-You should use the [oldie](https://github.com/jonathantneal/oldie) plugin for
+You should use the [oldie plugin](https://github.com/jonathantneal/oldie) for
 [postcss](https://github.com/postcss/postcss) to further transform the
 stylesheet:
 
 - replacing opacity properties with compatible filter properties
-- swapping :: selectors with compatible : selectors for pseudo-elements
+- swapping `::` selectors with compatible `:` selectors for pseudo-elements
 - swapping rgba colours with compatible hex colours and filter properties
 
 The oldie plugin is also able to flatten media queries, but this will already
@@ -88,7 +87,7 @@ Doing this as a separate step allows us to keep the source of GOV.UK Frontend
 simple, without having to wrap syntax that would need to be transformed in
 mixins or functions.
 
-## Including the IE8 stylesheet in your project
+## 4. Include the IE8 stylesheet in your project
 
 Now that you have an IE8 compatible stylesheet you should include it using
 [conditional comments](https://www.quirksmode.org/css/condcom.html):
