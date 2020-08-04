@@ -193,3 +193,21 @@ For example:
     })
   </script>
 ```
+
+### If your JavaScript isn’t working properly
+
+If your site has a Content Security Policy (CSP), the CSP may block the inline JavaScript in the page template. You may see a warning similar to the following in the developer tools in your browser:
+
+```
+Refused to execute inline script because it violates the following Content Security Policy directive: "default-src 'self'".
+```
+
+You can unblock the JavaScript by including the following hash in your CSP:
+
+```
+sha256-+6WnXIl4mbFTCARd8N3COQmT3bJJmo32N8q8ZSQAIcU=
+```
+
+You do not need to make any changes to the HTML.
+
+You can read guidance about [editing CSP files](https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP) on the MDN website.
