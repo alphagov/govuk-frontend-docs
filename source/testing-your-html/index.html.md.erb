@@ -25,7 +25,8 @@ For example, you can find the `fixtures.json` file for the button component in t
       "options": {
         "text": "Save and continue"
       },
-      "html": "<button class=\"govuk-button\" data-module=\"govuk-button\">\n  Save and continue\n</button>"
+      "html": "<button class=\"govuk-button\" data-module=\"govuk-button\">\n  Save and continue\n</button>",
+      "hidden": false
     },
     {
       "name": "secondary button",
@@ -33,7 +34,8 @@ For example, you can find the `fixtures.json` file for the button component in t
         "text": "Find address",
         "classes": "govuk-button--secondary"
       },
-      "html": "<button class=\"govuk-button govuk-button--secondary\" data-module=\"govuk-button\">\nFind address\n</button>"
+      "html": "<button class=\"govuk-button govuk-button--secondary\" data-module=\"govuk-button\">\nFind address\n</button>",
+      "hidden": false
     },
     ...
   ]
@@ -45,6 +47,9 @@ Each object in the `fixtures` list is a different example of the component, wher
 - `name` is the name of the example
 - `options` are the options that generate this example's `html`
 - `html` is the HTML that GOV.UK Frontend outputs with these options
+- `hidden` is `true` if the fixture does not look or behave differently to the other fixtures provided
+
+Do not include `hidden` fixtures when you use fixtures for manual or visual regression testing.
 
 For each example, pass `options` into your own macro and check the generated HTML matches `html`.
 
