@@ -45,7 +45,7 @@ GEM
     fast_blank (1.0.0)
     fastimage (2.2.3)
     ffi (1.15.0)
-    govuk_tech_docs (2.2.1)
+    govuk_tech_docs (2.2.2)
       chronic (~> 0.10.2)
       middleman (~> 4.0)
       middleman-autoprefixer (~> 2.10.0)
@@ -68,7 +68,7 @@ GEM
       concurrent-ruby (~> 1.0)
     jaro_winkler (1.5.4)
     json (2.5.1)
-    kramdown (2.3.0)
+    kramdown (2.3.1)
       rexml
     listen (3.0.8)
       rb-fsevent (~> 0.9, >= 0.9.4)
