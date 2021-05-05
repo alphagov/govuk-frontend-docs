@@ -39,4 +39,4 @@ deploy:
   # deployed!
   skip_cleanup: true
   on:
-    branch: master
+    branch: main
