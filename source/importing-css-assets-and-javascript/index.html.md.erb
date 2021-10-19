@@ -72,6 +72,21 @@ If you want to override GOV.UK Frontend's styles with your own styles, `@import`
 
 If your project uses GOV.UK Frontend toolkit, GOV.UK Template or GOV.UK Elements, you can [configure GOV.UK Frontend to work with them](/compatibility-mode/).
 
+### Silence deprecation warnings from dependencies in Dart Sass
+
+If you're using Dart Sass 1.33.0 or greater, you may see deprecation warnings when compiling your Sass. For example:
+
+```
+DEPRECATION WARNING: Using / for division is deprecated and will be removed in Dart Sass 2.0.0.
+```
+
+We're currently unable to fix these deprecation warnings without breaking support for LibSass. However, you can silence the warnings caused by GOV.UK Frontend and other dependencies. Make sure you're using Dart Sass 1.35.0 or greater, and then if you're:
+
+- calling the Sass compiler from the command line, [pass the `--quiet-deps` flag](https://sass-lang.com/documentation/cli/dart-sass#quiet-deps)
+- using the JavaScript API, [include `quietDeps: true`](https://sass-lang.com/documentation/js-api#quietdeps) in the `options` object
+
+You'll still see deprecation warnings if you're using `/` for division in your own Sass code.
+
 ## Font and image assets
 
 To use the font and image assets from GOV.UK Frontend, you can either:
