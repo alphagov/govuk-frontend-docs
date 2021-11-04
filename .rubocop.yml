@@ -2,8 +2,8 @@ inherit_gem:
   rubocop-govuk:
     - config/default.yml
 
-# Exclude `/vendor` because on Travis other gems get installed there
-# Not a problem locally as gems get installed globally outside project 
+# Exclude `/vendor` because on GitHub Actions other gems get installed there
+# Not a problem locally as gems get installed globally outside project
 AllCops:
   Exclude:
     - './vendor/**/*'
