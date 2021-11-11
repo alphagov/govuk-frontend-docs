@@ -1,0 +1,108 @@
+name: CI Workflow
+
+on: [push, pull_request, workflow_dispatch]
+
+# Separate build and deploy jobs so we can build all branches and pull requests
+# but only deploy from main
+jobs:
+  build:
+    name: Build & Test
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - uses: actions/setup-node@v2
+        with:
+          node-version: '14'
+
+      - uses: ruby/setup-ruby@v1
+        with:
+          bundler-cache: true
+          ruby-version: '2.7'
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Build
+        run: bundle exec middleman build
+
+      - name: Test
+        run: bundle exec rake
+
+      - name: Check links
+        run: npm run check-links
+
+  # Deploy Frontend Docs to production when the main branch is changed
+  # Github Actions is not involved in deploying PR or branch previews – these are handled by Netlify
+  # Only runs if the production environment protection rules are fulfilled
+  deploy:
+    environment: production
+    name: Deploy
+    runs-on: ubuntu-latest
+    needs: build
+    if: ${{ github.ref == 'refs/heads/main' }}
+    env:
+      CF_API: "https://api.cloud.service.gov.uk"
+      CF_ORG: "govuk-design-system"
+      CF_SPACE: "frontend-docs"
+
+    steps:
+      - name: Pre-deploy checks
+        uses: actions/github-script@v5
+        with:
+          script: |
+
+            // Check that the code to be deployed is the latest code on the branch on GitHub
+            // If you want to rollback changes to prod, consider using a revert commit to main
+            //
+            const response = await github.rest.repos.getCommit({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              ref: 'refs/heads/main',
+            });
+            const mainBranchCommitSha = response.data.sha
+            if (context.sha !== mainBranchCommitSha) {
+              core.info(`Workflow run GITHUB_SHA ${context.sha} does not match main branch commit sha ${mainBranchCommitSha}`)
+              core.error('Code to deploy does not match code in main branch')
+              core.setFailed('Refusing to deploy, please do not re-run this workflow run')
+            }
+      - uses: actions/checkout@v2
+
+      - name: Download build artifact
+        uses: actions/download-artifact@v2
+        with:
+          name: build
+
+      - name: Install the CF CLI
+        run: |
+          wget https://s3-us-west-1.amazonaws.com/v7-cf-cli-releases/releases/v7.2.0/cf7-cli-installer_7.2.0_x86-64.deb
+          sudo dpkg -i cf7-cli-installer_7.2.0_x86-64.deb
+
+      - name: Authenticate
+        env:
+          # CF_USERNAME and CF_PASSWORD are used by the `cf auth` command to login
+          # We use an environment variable instead of passing the details as options using -u / -p to reduce the risk of them being recorded in logs
+          # https://cli.cloudfoundry.org/en-US/v6/auth.html
+          CF_USERNAME: "design-system-deploy+frontend-docs@digital.cabinet-office.gov.uk"
+          CF_PASSWORD: ${{ secrets.CF_PASSWORD }}
+        run: |
+          echo "Logging into $CF_ORG/$CF_SPACE..."
+          cf api "${CF_API}"
+          cf auth
+          cf target -o "${CF_ORG}" -s "${CF_SPACE}"
+      # Parse app name from manifest to ensure it matches up
+      - name: Fetch app name from manifest
+        run: echo "APP_NAME=$(ruby -e "require 'yaml'; config = YAML.load_file('manifest.yml'); puts config['applications'][0]['name']")" >> $GITHUB_ENV
+
+      - name: Cancel any existing running deploys to avoid conflict
+        run:  |
+          echo "Cancelling any previous deployments in progress"
+          cf cancel-deployment $APP_NAME || true
+
+      - name: Deploy to PaaS
+        # Deploy app and set up app healthcheck https://docs.cloudfoundry.org/devguide/deploy-apps/healthchecks.html
+        run: |
+          echo "Deploying $APP_NAME to $CF_ORG/$CF_SPACE..."
+          cf push $APP_NAME --strategy rolling
+          cf logout
