@@ -33,6 +33,15 @@ jobs:
       - name: Check links
         run: npm run check-links
 
+      # Share data between the build and deploy jobs so we don't need to run `bundle exec middleman build` again on deploy
+      # Upload the deploy folder as an artifact so it can be downloaded and used in the deploy job
+      - name: Upload artifact
+        uses: actions/upload-artifact@v2
+        with:
+            name: build
+            path: deploy/**
+            retention-days: 1
+
   # Deploy Frontend Docs to production when the main branch is changed
   # Github Actions is not involved in deploying PR or branch previews – these are handled by Netlify
   # Only runs if the production environment protection rules are fulfilled
