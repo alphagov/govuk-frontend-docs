@@ -1,0 +1,46 @@
+name: Test
+
+on:
+  pull_request:
+  push:
+    branches-ignore:
+      - main  # pushes to main are handled by deploy.yaml
+  workflow_call:
+
+jobs:
+  build:
+    name: Build & Test
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - uses: actions/setup-node@v2
+        with:
+          node-version: '14'
+
+      - uses: ruby/setup-ruby@v1
+        with:
+          bundler-cache: true
+          ruby-version: '2.7'
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Build
+        run: bundle exec middleman build
+
+      - name: Test
+        run: bundle exec rake
+
+      - name: Check links
+        run: npm run check-links
+
+      # Share data between the build and deploy jobs so we don't need to run `bundle exec middleman build` again on deploy
+      # Upload the deploy folder as an artifact so it can be downloaded and used in the deploy job
+      - name: Upload artifact
+        uses: actions/upload-artifact@v2
+        with:
+            name: build
+            path: deploy/
+            retention-days: 1
