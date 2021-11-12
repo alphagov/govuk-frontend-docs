@@ -8,7 +8,7 @@ on:
 
 jobs:
   build:
-    uses: alphagov/govuk-frontend-docs/.github/workflows/test.yaml
+    uses: alphagov/govuk-frontend-docs/.github/workflows/test.yaml@0d785a0facd18da341b60af9df0c429044b94464
     with:
       upload-artifact: true
 
