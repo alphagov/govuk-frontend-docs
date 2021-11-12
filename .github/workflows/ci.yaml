@@ -39,7 +39,7 @@ jobs:
         uses: actions/upload-artifact@v2
         with:
             name: build
-            path: deploy/**
+            path: deploy/
             retention-days: 1
 
   # Deploy Frontend Docs to production when the main branch is changed
