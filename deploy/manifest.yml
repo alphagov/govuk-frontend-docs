@@ -1,7 +1,6 @@
 ---
 applications:
 - name: govuk-frontend-docs
-  path: ./deploy
   health-check-type: http
   health-check-http-endpoint: /canary.html
   memory: 64M
