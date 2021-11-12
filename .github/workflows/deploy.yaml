@@ -9,6 +9,8 @@ on:
 jobs:
   build:
     uses: alphagov/govuk-frontend-docs/.github/workflows/test.yaml
+    with:
+      upload-artifact: true
 
   # Deploy Frontend Docs to production when the main branch is changed
   # Github Actions is not involved in deploying PR or branch previews – these are handled by Netlify
