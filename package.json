@@ -12,7 +12,7 @@
     "govuk-frontend": "^4.0.0",
     "hyperlink": "^5.0.3",
     "sassdoc": "^2.7.1",
-    "standard": "^14.3.3",
+    "standard": "^16.0.4",
     "tap-spot": "^1.1.1"
   }
 }
