@@ -6,7 +6,6 @@ show_govuk_logo: true
 service_name: Frontend
 full_service_name: GOV.UK Frontend
 service_link: /
-phase: Beta
 
 # Links to show on right-hand-side of header
 header_links:
