@@ -56,7 +56,7 @@ $<%= item.context.name %>: <%= item.context.value %>;
 <% if item.example %>
 
 <% item.example.each do |example| %>
-##### Example: <%= example.description %>
+##### Example<% if example.description %>: <%= example.description %><% end %>
 
 ```<%= example.type %>
 <%= example.code %>
