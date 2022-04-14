@@ -68,6 +68,17 @@ Run `bundle update` to make sure you're using the most recent Ruby gem versions.
 
 Run `bundle exec middleman build --verbose` to get detailed error messages to help with finding the problem.
 
+### OpenSSL issues on newer versions of MacOS
+Because of some quirks with OpenSSL on newer versions of MacOS, you might run into an error with `eventmachine` while running `bundle install`.
+
+To fix this, run:
+
+```
+brew install openssl
+bundle config build.eventmachine --with-cppflags=-I$(brew --prefix openssl)/include
+bundle install
+```
+
 ## Testing
 
 To run the linter and Ruby tests, run `bundle exec rake`.
