@@ -29,9 +29,7 @@ You can add content by editing the `.html.md.erb` files. These files support con
 - HTML
 - Ruby
 
-👉 You can use Markdown and HTML to [generate different content types][example-content] and [Ruby partials to manage content][partials].
-
-👉 Learn more about [producing more complex page structures][multipage] for your website.
+👉 Learn more about [configuring your website][configure].
 
 ## Installing dependencies
 
@@ -86,12 +84,8 @@ The documentation is [© Crown copyright][copyright] and available under the ter
 [ogl]: http://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/
 [mmt]: https://middlemanapp.com/advanced/project_templates/
 [tdt-docs]: https://tdt-documentation.london.cloudapps.digital
-[config]: https://tdt-documentation.london.cloudapps.digital/configuration-options.html#configuration-options
-[frontmatter]: https://tdt-documentation.london.cloudapps.digital/frontmatter.html#frontmatter
-[multipage]: https://tdt-documentation.london.cloudapps.digital/multipage.html#build-a-multipage-site
-[example-content]: https://tdt-documentation.london.cloudapps.digital/content.html#content-examples
-[partials]: https://tdt-documentation.london.cloudapps.digital/single_page.html#add-partial-lines
-[install-ruby]: https://tdt-documentation.london.cloudapps.digital/install_macs.html#install-ruby
-[install-middleman]: https://tdt-documentation.london.cloudapps.digital/install_macs.html#install-middleman
+[configure]: https://tdt-documentation.london.cloudapps.digital/configure_project/
+[install-ruby]: https://tdt-documentation.london.cloudapps.digital/create_project/get_started/#install-ruby
+[install-middleman]: https://tdt-documentation.london.cloudapps.digital/create_project/get_started/#install-middleman
 [gem]: https://github.com/alphagov/tech-docs-gem
 [template]: https://github.com/alphagov/tech-docs-template
