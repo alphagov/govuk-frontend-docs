@@ -169,16 +169,18 @@ Then import the JavaScript file before the closing `</body>` tag of your HTML pa
 If you decide to import using a bundler, we recommend you use `import` to only import the JavaScript for components you're using in your service. For example:
 
 ```javascript
-import { SkipLink, Header } from 'govuk-frontend'
+import { SkipLink, Radios } from 'govuk-frontend'
 
 var $skipLink = document.querySelector('[data-module="govuk-skip-link"]')
 if ($skipLink) {
   new SkipLink($skipLink).init()
 }
 
-var $header = document.querySelector('[data-module="govuk-header"]')
-if ($header) {
-  new Header($header).init()
+var $radios = document.querySelectorAll('[data-module="govuk-radios]')
+if ($radios) {
+  for (var i = 0; i < $radios.length; i++) {
+    new Radios($radios[i]).init()
+  }
 }
 ```
 
