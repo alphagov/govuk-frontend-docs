@@ -164,6 +164,20 @@ Then import the JavaScript file before the closing `</body>` tag of your HTML pa
 </body>
 ```
 
+#### Select and initialise an individual component
+
+You can select and initialise a specific component by using its `data-module` attribute. For example, use `govuk-radios` to initialise the first radio component on a page:
+
+```html
+  <script>
+    var Radios = window.GOVUKFrontend.Radios
+    var $radio = document.querySelector('[data-module="govuk-radios"]')
+    if ($radio) {
+      new Radios($radio).init()
+    }
+  </script>
+```
+
 ### Import JavaScript using a bundler
 
 If you decide to import using a bundler, we recommend you use `import` to only import the JavaScript for components you're using in your service. For example:
@@ -215,20 +229,6 @@ If you're using a bundler that uses CommonJS like [Browserify](http://browserify
 ```javascript
 const GOVUKFrontend = require('govuk-frontend')
 GOVUKFrontend.initAll()
-```
-
-### Select and initialise an individual component
-
-You can select and initialise a specific component by using its `data-module` attribute. For example, initialise the first radio component on a page using `govuk-radios`:
-
-```html
-  <script>
-    var Radios = window.GOVUKFrontend.Radios
-    var $radio = document.querySelector('[data-module="govuk-radios"]')
-    if ($radio) {
-      new Radios($radio).init()
-    }
-  </script>
 ```
 
 ### Select and initialise part of a page
