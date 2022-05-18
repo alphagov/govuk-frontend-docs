@@ -164,25 +164,9 @@ Then import the JavaScript file before the closing `</body>` tag of your HTML pa
 </body>
 ```
 
-### Import JavaScript using a bundler
+#### Select and initialise an individual component
 
-If you decide to import using a bundler, use `import` to import all of GOV.UK Frontend's components, then run the `initAll` function to initialise them:
-
-```javascript
-import { initAll } from 'govuk-frontend'
-initAll()
-```
-
-If you're using a bundler that uses CommonJS like [Browserify](http://browserify.org/), you should use `require`:
-
-```javascript
-const GOVUKFrontend = require('govuk-frontend')
-GOVUKFrontend.initAll()
-```
-
-### Select and initialise an individual component
-
-You can select and initialise a specific component by using its `data-module` attribute. For example, initialise the first radio component on a page using `govuk-radios`:
+You can select and initialise a specific component by using its `data-module` attribute. For example, use `govuk-radios` to initialise the first radio component on a page:
 
 ```html
   <script>
@@ -192,6 +176,59 @@ You can select and initialise a specific component by using its `data-module` at
       new Radios($radio).init()
     }
   </script>
+```
+
+### Import JavaScript using a bundler
+
+If you decide to import using a bundler, we recommend you use `import` to only import the JavaScript for components you're using in your service. For example:
+
+```javascript
+import { SkipLink, Radios } from 'govuk-frontend'
+
+var $skipLink = document.querySelector('[data-module="govuk-skip-link"]')
+if ($skipLink) {
+  new SkipLink($skipLink).init()
+}
+
+var $radios = document.querySelectorAll('[data-module="govuk-radios]')
+if ($radios) {
+  for (var i = 0; i < $radios.length; i++) {
+    new Radios($radios[i]).init()
+  }
+}
+```
+
+If you need to import all of GOV.UK Frontend's components, then run the `initAll` function to initialise them:
+
+```javascript
+import { initAll } from 'govuk-frontend'
+initAll()
+```
+
+If you're using Webpack, you may need to add some or all of the following to your Webpack config file:
+
+```json
+resolve: {
+  extensions: ['.mjs'],
+},
+module: {
+  rules: [
+    {
+      test: /\.mjs$/,
+      type: 'javascript/auto',
+      resolve: {
+        fullySpecified: false
+      }
+    }
+  ]
+}
+```
+
+If you're using a bundler that uses CommonJS like [Browserify](http://browserify.org/), you should use `require`:
+
+```javascript
+const GOVUKFrontend = require('govuk-frontend')
+GOVUKFrontend.initAll()
 ```
 
 ### Select and initialise part of a page
