@@ -205,25 +205,6 @@ import { initAll } from 'govuk-frontend'
 initAll()
 ```
 
-If you're using Webpack, you may need to add some or all of the following to your Webpack config file:
-
-```json
-resolve: {
-  extensions: ['.mjs'],
-},
-module: {
-  rules: [
-    {
-      test: /\.mjs$/,
-      type: 'javascript/auto',
-      resolve: {
-        fullySpecified: false
-      }
-    }
-  ]
-}
-```
-
 If you're using a bundler that uses CommonJS like [Browserify](http://browserify.org/), you should use `require`:
 
 ```javascript
