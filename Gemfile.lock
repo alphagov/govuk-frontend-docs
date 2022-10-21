@@ -131,7 +131,7 @@ GEM
     mini_portile2 (2.8.0)
     minitest (5.14.4)
     multi_json (1.15.0)
-    nokogiri (1.13.6)
+    nokogiri (1.13.9)
       mini_portile2 (~> 2.8.0)
       racc (~> 1.4)
     openapi3_parser (0.9.1)
