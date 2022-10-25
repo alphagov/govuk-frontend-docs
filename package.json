@@ -11,7 +11,7 @@
   "devDependencies": {
     "govuk-frontend": "^4.3.1",
     "hyperlink": "^5.0.3",
-    "sassdoc": "^2.7.1",
+    "sassdoc": "^2.7.4",
     "standard": "^16.0.4",
     "tap-spot": "^1.1.1"
   }
