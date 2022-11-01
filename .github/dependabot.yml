@@ -12,3 +12,13 @@ updates:
     allow:
       - dependency-type: all
 
+  # Update Ruby gems
+  - package-ecosystem: bundler
+    directory: /
+    reviewers:
+      - alphagov/design-system-developers
+    schedule:
+      interval: daily
+    allow:
+      - dependency-type: all
+
