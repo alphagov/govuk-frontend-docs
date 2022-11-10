@@ -49,7 +49,7 @@ JavaScript uses nested objects. For example:
 ```javascript
 {
   i18n: {
-  camelCasedName: /* Text or Object with plural forms */
+    camelCasedName: /* Text or Object with plural forms */
   }
 }
 ```
@@ -98,14 +98,20 @@ With Nunjucks
 
 ```njk
 {{ govukCharacterCount({
+  id: 'details',
+  name: 'details',
+  label: {
+    html: 'Can you provide more details?'
+  },
+  maxlength: 1000,
   charactersUnderLimitText: {
-    other: '%{count} characters to go'
+    other: '%{count} characters to go',
     one: 'One character to go'
   },
   charactersOverLimitText: {
     one: 'One character too many'
   }
-})
+}) }}
 {# The `other` key for `characterOverLimitText` will be our default #}
 ```
 
@@ -125,7 +131,7 @@ With JavaScript
 new CharacterCount($element, {
   i18n: {
     charactersUnderLimit: {
-      other: '%{count} characters to go'
+      other: '%{count} characters to go',
       one: 'One character to go'
     },
     charactersOverLimit: {
