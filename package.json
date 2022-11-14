@@ -9,7 +9,7 @@
     "check-links": "hyperlink -ri deploy/public/index.html --skip 'property=\"og:url\"' | tap-spot"
   },
   "devDependencies": {
-    "govuk-frontend": "^4.3.1",
+    "govuk-frontend": "^4.4.0",
     "hyperlink": "^5.0.3",
     "sassdoc": "^2.7.4",
     "standard": "^16.0.4",
