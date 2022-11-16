@@ -1,5 +1,5 @@
 require "govuk_tech_docs"
-require "sassdocs_helpers"
+require "lib/sassdocs_helpers"
 
 config[:build_dir] = "deploy/public"
 

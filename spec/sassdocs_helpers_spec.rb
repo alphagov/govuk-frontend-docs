@@ -2,7 +2,7 @@ require "json"
 require "ostruct"
 require "active_support/all"
 
-require_relative "../sassdocs_helpers.rb"
+require_relative "../lib/sassdocs_helpers.rb"
 
 # Middleman helpers convert data to allow dot access, so we need to bring in data in a similar way.
 def dothash(hash)
