@@ -1,6 +1,11 @@
 require "govuk_tech_docs"
 require "lib/sassdocs_helpers"
 
+# Patch the GovukTechDocs cleanly
+# https://www.justinweiss.com/articles/3-ways-to-monkey-patch-without-making-a-mess/
+require "lib/ext/govuk_tech_docs/tech_docs_html_renderer/reset_unique_identifier_generator_preprocess"
+GovukTechDocs::TechDocsHTMLRenderer.include Ext::GovukTechDocs::TechDocsHTMLRenderer::ResetUniqueIndentifierGeneratorPreprocess
+
 config[:build_dir] = "deploy/public"
 
 GovukTechDocs.configure(self)
