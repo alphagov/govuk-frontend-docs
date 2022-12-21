@@ -13,10 +13,13 @@ RSpec.describe SassdocsHelpers do
   before(:each) do
     allow(File).to receive(:read).and_return('{ "dependencies": { "govuk-frontend": { "version": "1.0.0" } } }')
     # Include mixin into a test class to allow us to mock File
+    # TODO Move constant definition
+    # rubocop:disable Lint/ConstantDefinitionInBlock
     class Test
       include SassdocsHelpers
     end
     @helper = Test.new
+    # rubocop:enable Lint/ConstantDefinitionInBlock
   end
 
   describe "#format_sassdoc_data" do
