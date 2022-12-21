@@ -24,7 +24,7 @@ updates:
     versioning-strategy: increase
 
     allow:
-      - dependency-type: all
+      - dependency-type: direct
 
   # Update GitHub Actions
   - package-ecosystem: github-actions
