@@ -217,7 +217,7 @@ GEM
       execjs (>= 0.3.0, < 3)
     unicode-display_width (2.3.0)
     webrick (1.7.0)
-    zeitwerk (2.4.2)
+    zeitwerk (2.6.6)
 
 PLATFORMS
   ruby
