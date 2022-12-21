@@ -57,7 +57,7 @@ module SassdocsHelpers
 
   def parameters_table(parameters)
     # Clone the parameters so we don't overwrite the original data when we map over it.
-    parameters.deep_dup.map { |param|
+    parameters.deep_dup.map do |param|
       # If cell contains no data hide dash from assistive technology
       no_data = "<span aria-hidden='true'>—</span>"
 
@@ -82,7 +82,7 @@ module SassdocsHelpers
                    end
       param.default_value = param["default"] ? "`#{param['default']}`" : no_data
       param
-    }
+    end
   end
 
   def item_heading(item)
