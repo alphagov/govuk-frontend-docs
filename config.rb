@@ -10,10 +10,10 @@ config[:build_dir] = "deploy/public"
 
 GovukTechDocs.configure(self)
 
-# Load our own version of GOV.UK Frontend before the one registered by the
+# Load our own version of GOV.UK Frontend before the one registered by the
 # tech_docs_gem otherwise we may be using styles and scripts
 # from an outdated version the time for the tech_docs_gem to catch up
-self.sprockets.prepend_path File.join(__dir__, "./node_modules/govuk-frontend/")
+sprockets.prepend_path File.join(__dir__, "./node_modules/govuk-frontend/")
 
 # Prevent pages from being indexed unless GitHub Actions is building the main branch
 config[:tech_docs][:prevent_indexing] = (ENV["GITHUB_REF"] != "refs/heads/main")

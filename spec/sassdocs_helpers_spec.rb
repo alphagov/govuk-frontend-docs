@@ -2,7 +2,7 @@ require "json"
 require "ostruct"
 require "active_support/all"
 
-require_relative "../lib/sassdocs_helpers.rb"
+require_relative "../lib/sassdocs_helpers"
 
 # Middleman helpers convert data to allow dot access, so we need to bring in data in a similar way.
 def dothash(hash)
@@ -13,10 +13,13 @@ RSpec.describe SassdocsHelpers do
   before(:each) do
     allow(File).to receive(:read).and_return('{ "dependencies": { "govuk-frontend": { "version": "1.0.0" } } }')
     # Include mixin into a test class to allow us to mock File
+    # TODO Move constant definition
+    # rubocop:disable Lint/ConstantDefinitionInBlock
     class Test
       include SassdocsHelpers
     end
     @helper = Test.new
+    # rubocop:enable Lint/ConstantDefinitionInBlock
   end
 
   describe "#format_sassdoc_data" do
@@ -112,21 +115,26 @@ RSpec.describe SassdocsHelpers do
       groups = @helper.format_sassdoc_data(fixture)
 
       expect(groups).to eq([
-        ["tools", [
-          ["tools/foo", [
-            fixture.sassdoc[2],
-          ]],
-        ]],
-        ["helpers", [
-          ["helpers/colour", [
-            fixture.sassdoc[0],
-            fixture.sassdoc[3],
-          ]],
-          ["helpers", [
-            fixture.sassdoc[1],
-          ]],
-        ]],
-    ])
+        ["tools",
+         [
+           ["tools/foo",
+            [
+              fixture.sassdoc[2],
+            ]],
+         ]],
+        ["helpers",
+         [
+           ["helpers/colour",
+            [
+              fixture.sassdoc[0],
+              fixture.sassdoc[3],
+            ]],
+           ["helpers",
+            [
+              fixture.sassdoc[1],
+            ]],
+         ]],
+      ])
     end
   end
   describe "#mixin_trailing_code" do

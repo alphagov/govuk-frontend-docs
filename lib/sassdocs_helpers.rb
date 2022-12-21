@@ -41,6 +41,8 @@ module SassdocsHelpers
     # Generate the possible parameters that could be passed into a function or mixin.
     # For example with the `govuk-colour` function: `$colour, $legacy`
     # If the function / mixin has default values output them too, for example `$important: true`
+    # TODO Replace concatenation with interpolation
+    # rubocop:disable Style/StringConcatenation
     "(" + parameters.map { |param|
       output = "$#{param.name}"
       if param["default"]
@@ -53,11 +55,12 @@ module SassdocsHelpers
       end
       output
     }.join(", ") + ")"
+    # rubocop:enable Style/StringConcatenation
   end
 
   def parameters_table(parameters)
     # Clone the parameters so we don't overwrite the original data when we map over it.
-    parameters.deep_dup.map { |param|
+    parameters.deep_dup.map do |param|
       # If cell contains no data hide dash from assistive technology
       no_data = "<span aria-hidden='true'>—</span>"
 
@@ -82,13 +85,13 @@ module SassdocsHelpers
                    end
       param.default_value = param["default"] ? "`#{param['default']}`" : no_data
       param
-    }
+    end
   end
 
   def item_heading(item)
     # For variables add a dollar to distinguish them from similar mixin/function names
     if item.context.type == "variable"
-      "$" + item.context.name
+      "$#{item.context.name}"
     else
       item.context.name
     end
