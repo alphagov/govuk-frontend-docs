@@ -1,12 +1,11 @@
 GEM
   remote: https://rubygems.org/
   specs:
-    activesupport (6.1.4.1)
+    activesupport (7.0.4)
       concurrent-ruby (~> 1.0, >= 1.0.2)
       i18n (>= 1.6, < 2)
       minitest (>= 5.1)
       tzinfo (~> 2.0)
-      zeitwerk (~> 2.3)
     addressable (2.8.0)
       public_suffix (>= 2.0.2, < 5.0)
     ast (2.4.2)
@@ -128,7 +127,7 @@ GEM
       middleman-core (>= 3.2)
       rouge (~> 3.2)
     mini_portile2 (2.8.0)
-    minitest (5.14.4)
+    minitest (5.16.3)
     multi_json (1.15.0)
     nokogiri (1.13.10)
       mini_portile2 (~> 2.8.0)
@@ -217,7 +216,6 @@ GEM
       execjs (>= 0.3.0, < 3)
     unicode-display_width (2.3.0)
     webrick (1.7.0)
-    zeitwerk (2.4.2)
 
 PLATFORMS
   ruby
