@@ -64,7 +64,7 @@ In your live application, we recommend [using an automated task or your build pi
 
 ## 5. Get the JavaScript working
 
-1. Add the following to the top of the `<body>` section of your page template:
+1. Add the following to the top of the `<body class="govuk-template__body">` section of your page template:
 
     ```html
     <script>document.body.className = ((document.body.className) ? document.body.className + ' js-enabled' : 'js-enabled');</script>
@@ -75,7 +75,7 @@ In your live application, we recommend [using an automated task or your build pi
 3. Import the file before the closing `</body>` tag of your page template, then run the `initAll` function to initialise all the components. For example:
 
     ```html
-    <body>
+    <body class="govuk-template__body">
       ...
       <script src="<YOUR-JAVASCRIPT-FOLDER>/govuk.js"></script>
       <script>
