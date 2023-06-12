@@ -45,9 +45,7 @@ You’ll not be able to:
         <![endif]-->
       </head>
       <body class="govuk-template__body">
-        <script>
-          document.body.className = ((document.body.className) ? document.body.className + ' js-enabled' : 'js-enabled');
-        </script>
+        <script>document.body.className += ' js-enabled' + ('noModule' in HTMLScriptElement.prototype ? ' govuk-frontend-supported' : '');</script>
         <!-- component HTML -->
         <script src="/javascript/govuk-frontend-<VERSION-NUMBER>.min.js"></script>
         <script>
