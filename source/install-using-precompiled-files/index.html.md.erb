@@ -25,7 +25,7 @@ You’ll not be able to:
 2. Unzip the zip file.
 3. Copy the `assets` folder to the root of your project’s public folder, so that for example `<YOUR-SITE-URL>/assets/govuk-logotype-crown.png` shows the `govuk-logotype-crown.png` image in your users’ browsers.
 4. Copy the 2 `.css` files to a stylesheets folder in the root of your project’s public folder, so that for example `<YOUR-SITE-URL>/stylesheets/govuk-frontend-<VERSION-NUMBER>.min.css` shows the CSS file in your users’ browsers.
-5. Copy the `.js` file to a JavaScript folder in the root of your project’s public folder, so that for example `<YOUR-SITE-URL>/javascript/govuk-frontend-<VERSION-NUMBER>.min.js` shows the JavaScript file in your users’ browsers.
+5. Copy the `.js` file to a JavaScript folder in the root of your project’s public folder, so that for example `<YOUR-SITE-URL>/javascripts/govuk-frontend-<VERSION-NUMBER>.min.js` shows the JavaScript file in your users’ browsers.
 
 ## Check an example page
 
@@ -42,7 +42,7 @@ You’ll not be able to:
       <body class="govuk-template__body">
         <script>document.body.className += ' js-enabled' + ('noModule' in HTMLScriptElement.prototype ? ' govuk-frontend-supported' : '');</script>
         <!-- component HTML -->
-        <script src="/javascript/govuk-frontend-<VERSION-NUMBER>.min.js"></script>
+        <script src="/javascripts/govuk-frontend-<VERSION-NUMBER>.min.js"></script>
         <script>
           window.GOVUKFrontend.initAll()
         </script>
