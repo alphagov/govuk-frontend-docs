@@ -1,0 +1,65 @@
+---
+title: What upcoming changes to GOV.UK Frontend mean for your digital teams 
+hide_from_sitemap: true
+hide_in_navigation: true
+prevent_indexing: true
+layout: core
+---
+
+# What upcoming changes to GOV.UK Frontend mean for your digital teams
+
+## Summary
+
+If you’re responsible for a public-facing government service on GOV.UK, it will probably be built using [GOV.UK Frontend](https://frontend.design-system.service.gov.uk/). 
+
+GOV.UK Frontend contains the code that gives a consistent look and feel to government services on GOV.UK. We’re modernising the code and removing support for legacy technologies and older web browsers, which will have an impact on your digital teams. We estimate updating to the latest version could take 1–2 weeks to implement, depending on how your teams currently use GOV.UK Frontend. Based on current estimates, it will be available between October and December 2023.
+
+## What is GOV.UK Frontend?
+
+If you’re responsible for a public-facing government service on GOV.UK, it will likely be built using [GOV.UK Frontend](https://frontend.design-system.service.gov.uk/). 
+
+GOV.UK Frontend contains the code you need to start building a user interface for government platforms and services. It’s part of the GOV.UK Design System which gives a consistent look and feel to government services on GOV.UK.
+
+## What’s changing?
+
+We’re modernising the code to remove support for legacy technologies and older web browsers by:
+
+* dropping support for Internet Explorer 8, 9 and 10
+* reducing support for other browsers, including Internet Explorer 11, in line with [guidance in the Service Manual](https://www.gov.uk/service-manual/technology/designing-for-different-browsers-and-devices#browsers-to-test-in-from-june-2022)
+* removing support for GOV.UK Elements, GOV.UK Template and GOV.UK Frontend Toolkit.
+
+These changes will be introduced in [GOV.UK Frontend v5.0](https://github.com/alphagov/govuk-frontend/milestone/46).
+
+### Benefits
+
+These changes allow us to: 
+
+* take advantage of new improvements to the web platform 
+* simplify our code and remove code that service teams do not need
+* improve service performance for everyone.
+
+Simplifying our code also makes it easier to maintain, easier to add new components and patterns to the Design System, and provides a modern foundation for you to build your service on.
+
+## What it means for your users
+
+Users of older browsers (released before early 2018, and including Internet Explorer 11) will get a reduced experience, but should still be able to use your service as long as it is built [following the principles of progressive enhancement](https://www.gov.uk/service-manual/technology/using-progressive-enhancement).
+
+If you need to fully support the older browsers, you should use GOV.UK Frontend v4.0 which we will continue to support for 1 year after the release of v5.0.
+
+## What it means for your teams
+
+Service teams will need to make changes to the way they import and use GOV.UK Frontend as part of the upgrade to v5.0.
+
+We’re also making some changes to the design of some [components](https://design-system.service.gov.uk/components/).
+
+We will document these changes in our release notes for v5.0. Not all of the changes listed in the release notes will affect every team. We recommend a developer and designer read through the release notes to understand the work involved.
+
+We've tried wherever possible to minimise the impact of the changes service teams need to make, so it might be simpler than first expected. We estimate updating to v5.0 could take 1–2 weeks to implement, depending on how your teams currently use GOV.UK Frontend.
+
+### When it will impact your teams
+
+Based on current estimates, we expect a test version (or pre-release) will be ready for teams to test between July and September 2023. This gives us an opportunity to receive feedback and make necessary changes before a full release. We expect that the full release will be ready between October and December 2023.
+
+## Get more information
+
+If you have further questions get in touch with the GOV.UK Design System team. Use the [#govuk-design-system channel on cross-government Slack](https://ukgovernmentdigital.slack.com/app_redirect?channel=govuk-design-system) or email the GOV.UK Design System team on [govuk-design-system-support@digital.cabinet-office.gov.uk](mailto:govuk-design-system-support@digital.cabinet-office.gov.uk).
