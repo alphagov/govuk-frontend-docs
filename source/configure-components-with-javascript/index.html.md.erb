@@ -83,7 +83,7 @@ Read the [JavaScript API Reference](/javascript-api-reference/) to see what conf
 You can pass configuration for components when initialising GOV.UK Frontend using the `initAll` function. You can do this by including key-value pairs of camel-cased component names and configuration objects. This is the same method you would use to pass them when creating an instance of the component. For example:
 
 ```javascript
-window.GOVUKFrontend.initAll({
+initAll({
   characterCount: {
     maxlength: 500, // Non namespaced
     i18n: { // i18n namespace

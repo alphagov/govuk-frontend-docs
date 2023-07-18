@@ -44,9 +44,10 @@ You’ll not be able to:
       <body class="govuk-template__body">
         <script>document.body.className += ' js-enabled' + ('noModule' in HTMLScriptElement.prototype ? ' govuk-frontend-supported' : '');</script>
         <!-- component HTML -->
-        <script src="/javascripts/govuk-frontend-<VERSION-NUMBER>.min.js"></script>
-        <script>
-          window.GOVUKFrontend.initAll()
+        <script type="module" src="/javascripts/govuk-frontend-<VERSION-NUMBER>.min.js"></script>
+        <script type="module">
+          import { initAll } from '/javascripts/govuk-frontend-<VERSION-NUMBER>.min.js'
+          initAll()
         </script>
       </body>
     </html>
