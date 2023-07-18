@@ -21,7 +21,7 @@ For example, to set the `preventDoubleClick` option of a button:
 import { Button, initAll } from '<YOUR-APP>/govuk-frontend.min.js'
 
 // Creating a single instance
-var button = document.querySelector('[data-module="button"]')
+const button = document.querySelector('[data-module="button"]')
 new Button(button, { preventDoubleClick: true })
 
 // Or when using initAll

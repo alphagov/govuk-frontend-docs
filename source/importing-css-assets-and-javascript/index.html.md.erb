@@ -101,7 +101,7 @@ Set up your routing so that requests for files in `<YOUR-SITE-URL>/assets` are s
 For example if you're using [express.js](https://expressjs.com/), add the following to your `app.js` file:
 
 ```javascript
-var path = require('path');
+const path = require('path');
 app.use('/assets', express.static(path.join(__dirname, '/node_modules/govuk-frontend/dist/govuk/assets')))
 ```
 
@@ -186,17 +186,15 @@ If you decide to import using a bundler, we recommend you use `import` to only i
 ```javascript
 import { SkipLink, Radios } from 'govuk-frontend'
 
-var $skipLink = document.querySelector('[data-module="govuk-skip-link"]')
+const $skipLink = document.querySelector('[data-module="govuk-skip-link"]')
 if ($skipLink) {
   new SkipLink($skipLink).init()
 }
 
-var $radios = document.querySelectorAll('[data-module="govuk-radios]')
-if ($radios) {
-  for (var i = 0; i < $radios.length; i++) {
-    new Radios($radios[i]).init()
-  }
-}
+const $radios = document.querySelectorAll('[data-module="govuk-radios]')
+$radios.forEach(($radio) => {
+  new Radios($radio).init()
+})
 ```
 
 If you need to import all of GOV.UK Frontend's components, then run the `initAll` function to initialise them:
