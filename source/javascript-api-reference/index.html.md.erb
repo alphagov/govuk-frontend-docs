@@ -18,12 +18,14 @@ You can pass these options in an object either as:
 For example, to set the `preventDoubleClick` option of a button:
 
 ```javascript
+import { Button, initAll } from '<YOUR-APP>/govuk-frontend.min.js'
+
 // Creating a single instance
 var button = document.querySelector('[data-module="button"]')
-new GOVUKFrontend.Button(button, {preventDoubleClick: true})
+new Button(button, { preventDoubleClick: true })
 
 // Or when using initAll
-GOVUKFrontend.initAll({
+initAll({
   button: {
     preventDoubleClick: true
   }
@@ -52,7 +54,7 @@ The text content for the 'Hide all sections' button, used when at least one
 section is expanded.
 
 Default:
-  
+
 ```json
 "Hide all sections"
 ```
@@ -180,7 +182,7 @@ number of remaining characters. This is a [pluralised list of
 messages](/localise-govuk-frontend/#understanding-pluralisation-rules).
 
 Default:
-  
+
 ```json
 {
   one: "You have %{count} character remaining",
