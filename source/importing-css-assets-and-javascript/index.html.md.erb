@@ -157,9 +157,10 @@ Then import the JavaScript file before the closing `</body>` tag of your HTML pa
 ```html
 <body class="govuk-template__body">
 ...
-  <script src="<YOUR-JAVASCRIPTS-FOLDER>/govuk-frontend.min.js"></script>
-  <script>
-    window.GOVUKFrontend.initAll()
+  <script type="module" src="<YOUR-JAVASCRIPTS-FOLDER>/govuk-frontend.min.js"></script>
+  <script type="module">
+    import { initAll } from '<YOUR-JAVASCRIPTS-FOLDER>/govuk-frontend.min.js'
+    initAll()
   </script>
 </body>
 ```
@@ -169,9 +170,9 @@ Then import the JavaScript file before the closing `</body>` tag of your HTML pa
 You can select and initialise a specific component by using its `data-module` attribute. For example, use `govuk-radios` to initialise the first radio component on a page:
 
 ```html
-  <script>
-    var Radios = window.GOVUKFrontend.Radios
-    var $radio = document.querySelector('[data-module="govuk-radios"]')
+  <script type="module">
+    import { Radios } from '<YOUR-JAVASCRIPTS-FOLDER>/govuk-frontend.min.js'
+    const $radio = document.querySelector('[data-module="govuk-radios"]')
     if ($radio) {
       new Radios($radio).init()
     }
@@ -208,8 +209,8 @@ initAll()
 If you're using a bundler that uses CommonJS like [Browserify](http://browserify.org/), you should use `require`:
 
 ```javascript
-const GOVUKFrontend = require('govuk-frontend')
-GOVUKFrontend.initAll()
+const { initAll } = require('govuk-frontend')
+initAll()
 ```
 
 ### Select and initialise part of a page
@@ -219,9 +220,10 @@ If you update a page with new markup, for example a modal dialogue box, you can 
 For example:
 
 ```html
-  <script>
-    var $modal = document.querySelector('.modal')
-    window.GOVUKFrontend.initAll({
+  <script type="module">
+    import { initAll } from '<YOUR-JAVASCRIPTS-FOLDER>/govuk-frontend.min.js'
+    const $modal = document.querySelector('.modal')
+    initAll({
       scope: $modal
     })
   </script>
