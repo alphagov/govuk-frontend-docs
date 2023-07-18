@@ -49,9 +49,10 @@ You’ll not be able to:
           document.body.className = ((document.body.className) ? document.body.className + ' js-enabled' : 'js-enabled');
         </script>
         <!-- component HTML -->
-        <script src="/javascripts/govuk-frontend-<VERSION-NUMBER>.min.js"></script>
-        <script>
-          window.GOVUKFrontend.initAll()
+        <script type="module" src="/javascripts/govuk-frontend-<VERSION-NUMBER>.min.js"></script>
+        <script type="module">
+          import { initAll } from '/javascripts/govuk-frontend-<VERSION-NUMBER>.min.js'
+          initAll()
         </script>
       </body>
     </html>
