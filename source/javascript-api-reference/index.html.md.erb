@@ -81,7 +81,7 @@ Default:
 "Hide this section"
 ```
 
-#### i18n.showAllSections
+##### showAllSections
 
 Type: string
 
@@ -301,9 +301,77 @@ Default
 false
 ```
 
+## ExitThisPage
+
+### i18n
+
+Type: object
+
+Messages used by the component for screen reader announcements relating to the
+keyboard shortcut functionality, informing assistive technology users of the
+current state of the shortcut.
+
+All of these strings should be short and in plain text.
+
+Default: see properties
+
+#### Properties
+
+##### activated
+
+Type: string
+
+Text to announce when the Exit This Page keyboard shortcut has been activated
+and the user is being directed away from the current page.
+
+Default:
+
+```json
+"Loading."
+```
+
+##### pressOneMoreTime
+
+Type: string
+
+Text to announce when the user has pressed the activation key (Shift) twice, and
+must press it one more time to activate the functionality.
+
+Default:
+
+```json
+"Shift, press 1 more time to exit."
+```
+
+##### pressTwoMoreTimes
+
+Type: string
+
+Text to announce when the user has pressed the activation key (Shift) once, and
+must press it two more times to activate the functionality.
+
+Default:
+
+```json
+"Shift, press 2 more times to exit."
+```
+
+##### timedOut
+
+Type: string
+
+Text to announce if the user hasn't completed the keyboard shortcut within the
+allowed time, so that the user is aware that they must begin the sequence again.
+
+Default:
+
+```json
+"Exit this page expired."
+```
+
 ## NotificationBanner
 
-### `disableAutoFocus`
+### disableAutoFocus
 
 Type: boolean
 
