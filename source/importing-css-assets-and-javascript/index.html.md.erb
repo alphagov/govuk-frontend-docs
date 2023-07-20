@@ -245,6 +245,10 @@ Make sure you [understand the security implications of using either option](http
 #### Use a hash to unblock inline JavaScript
 
 You can unblock inline JavaScript by including the following hash in your CSP:
+<%#
+  This hash should match the one in `govuk-frontend` tests:
+  https://github.com/alphagov/govuk-frontend/blob/main/packages/govuk-frontend/src/govuk/template.test.js
+%>
 
 ```
 sha256-+6WnXIl4mbFTCARd8N3COQmT3bJJmo32N8q8ZSQAIcU=
