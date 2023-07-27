@@ -24,13 +24,13 @@ You must first:
 
 ## Set up Nunjucks and use the page template
 
-1. Add `node_modules/govuk-frontend/` to your list of Nunjucks paths, so Nunjucks knows where to find the GOV.UK Frontend template and components.
+1. Add `node_modules/govuk-frontend/dist` to your list of Nunjucks paths, so Nunjucks knows where to find the GOV.UK Frontend template and components.
 
     For example:
 
     ```javascript
         nunjucks.configure([
-          "node_modules/govuk-frontend/",
+          "node_modules/govuk-frontend/dist",
           "YOUR-VIEWS-FOLDER"
         ])
     ```
