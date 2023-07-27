@@ -24,7 +24,7 @@ GOV.UK Frontend will:
 
 ## Turn on 'compatibility mode'
 
-Add one or more of the following lines to your project's Sass file, above `@import "govuk-frontend/govuk/all"`:
+Add one or more of the following lines to your project's Sass file, above `@import "govuk-frontend/dist/govuk/all"`:
 
 - `$govuk-compatibility-govukelements: true;` if you're using GOV.UK Elements
 - `$govuk-compatibility-govuktemplate: true;` if you're using GOV.UK Template
@@ -42,7 +42,7 @@ Remove the following lines from your project's Sass file:
 
 If you’re not using any of our old frameworks, you can still configure GOV.UK Frontend to use the old colour palette.
 
-Add the following variable to your project's Sass file, above `@import "govuk-frontend/govuk/all"`:
+Add the following variable to your project's Sass file, above `@import "govuk-frontend/dist/govuk/all"`:
 
 ```scss
 $govuk-use-legacy-palette: true;
