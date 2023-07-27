@@ -32,7 +32,7 @@ Paste the HTML into a page or template in your application.
 1. Add the following to the main Sass file in your project, so your Sass compiler adds all of GOV.UK Frontend's styles to your CSS file.
 
     ```scss
-    @import "node_modules/govuk-frontend/govuk/all";
+    @import "node_modules/govuk-frontend/dist/govuk/all";
     ```
 
 2. Add your CSS file to your page layout if you need to. For example:
@@ -55,8 +55,8 @@ There are also different ways you can [import GOV.UK Frontend's CSS](/importing-
 Your component will not use the right font or images until you've added GOV.UK Frontend's assets to your application.
 
 1. Copy the following 2 folders:
-  - `/node_modules/govuk-frontend/govuk/assets/images` folder to `<YOUR-APP>/assets/images`
-  - `/node_modules/govuk-frontend/govuk/assets/fonts` folder to `<YOUR-APP>/assets/fonts`
+  - `/node_modules/govuk-frontend/dist/govuk/assets/images` folder to `<YOUR-APP>/assets/images`
+  - `/node_modules/govuk-frontend/dist/govuk/assets/fonts` folder to `<YOUR-APP>/assets/fonts`
 
 2. Run your application, then use [the Fonts tab in Firefox Page Inspector](https://developer.mozilla.org/en-US/docs/Tools/Page_Inspector/How_to/Edit_fonts#The_Fonts_tab) to check the accordion is using the GDS Transport font.
 
@@ -70,14 +70,14 @@ In your live application, we recommend [using an automated task or your build pi
     <script>document.body.className = ((document.body.className) ? document.body.className + ' js-enabled' : 'js-enabled');</script>
     ```
 
-2. Copy the `/node-modules/govuk-frontend/govuk/all.js` file to `<YOUR-JAVASCRIPT-FOLDER>/govuk.js`.
+2. Copy the `/node-modules/govuk-frontend/dist/govuk/govuk-frontend.min.js` file into your application.
 
 3. Import the file before the closing `</body>` tag of your page template, then run the `initAll` function to initialise all the components. For example:
 
     ```html
     <body>
       ...
-      <script src="<YOUR-JAVASCRIPT-FOLDER>/govuk.js"></script>
+      <script src="<YOUR-JAVASCRIPT-FOLDER>/govuk-frontend.min.js"></script>
       <script>
         window.GOVUKFrontend.initAll()
       </script>
