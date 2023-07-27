@@ -11,7 +11,7 @@ end
 
 RSpec.describe SassdocsHelpers do
   before(:each) do
-    allow(File).to receive(:read).and_return('{ "packages": { "node_modules/govuk-frontend": { "version": "1.0.0" } } }')
+    allow(File).to receive(:read).and_return('{ "packages": { "node_modules/govuk-frontend": { "version": "5.0.0" } } }')
     # Include mixin into a test class to allow us to mock File
     # TODO Move constant definition
     # rubocop:disable Lint/ConstantDefinitionInBlock
@@ -337,14 +337,14 @@ RSpec.describe SassdocsHelpers do
       })
       url = @helper.github_url(fixture)
 
-      expect(url).to eq("https://github.com/alphagov/govuk-frontend/tree/v1.0.0/src/govuk/helpers/_clearfix.scss#L9-L15")
+      expect(url).to eq("https://github.com/alphagov/govuk-frontend/tree/v5.0.0/packages/govuk-frontend/src/govuk/helpers/_clearfix.scss#L9-L15")
     end
   end
   describe "#govuk_frontend_version" do
     it "returns version" do
       version = @helper.govuk_frontend_version
 
-      expect(version).to eq("1.0.0")
+      expect(version).to eq("5.0.0")
     end
   end
 end
