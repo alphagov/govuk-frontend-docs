@@ -2,9 +2,6 @@ name: Test
 
 on:
   pull_request:
-  push:
-    branches-ignore:
-      - main  # pushes to main are handled by deploy.yaml
 
   workflow_call:
     inputs:
