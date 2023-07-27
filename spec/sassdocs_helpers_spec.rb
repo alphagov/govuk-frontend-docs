@@ -11,7 +11,7 @@ end
 
 RSpec.describe SassdocsHelpers do
   before(:each) do
-    allow(File).to receive(:read).and_return('{ "dependencies": { "govuk-frontend": { "version": "1.0.0" } } }')
+    allow(File).to receive(:read).and_return('{ "packages": { "node_modules/govuk-frontend": { "version": "1.0.0" } } }')
     # Include mixin into a test class to allow us to mock File
     # TODO Move constant definition
     # rubocop:disable Lint/ConstantDefinitionInBlock
