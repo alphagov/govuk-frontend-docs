@@ -3,10 +3,6 @@ require "json"
 module SassdocsHelpers
   ORDER = %w[settings tools helpers].freeze
 
-  SPECIAL_CASES = {
-    "internet-explorer-8" => "Internet Explorer 8",
-  }.freeze
-
   def format_sassdoc_data(data)
     raise "No data in data/sassdocs.json, run `npm install` to generate." unless data.respond_to?(:sassdoc)
 
@@ -23,8 +19,8 @@ module SassdocsHelpers
 
   def mixin_trailing_code(code)
     # Some mixins can have content passed inside.
-    # For example the `govuk-if-ie8` function:
-    # @include govuk-if-ie8 {
+    # For example the `govuk-media-query` function:
+    # @include govuk-media-query($from: tablet) {
     #  //..
     # }
     accepts_content = code.include?("@content")
@@ -112,8 +108,7 @@ module SassdocsHelpers
       "General"
     elsif heading.include?("/")
       slug = heading.split("/").last
-
-      SPECIAL_CASES[slug] || slug.gsub("-", " ").capitalize
+      slug.gsub("-", " ").capitalize
     else
       "General #{heading}"
     end
