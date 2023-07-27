@@ -4,12 +4,12 @@
   "version": "1.0.0",
   "scripts": {
     "postinstall": "npm run build:sassdoc",
-    "build:sassdoc": "sassdoc --parse node_modules/govuk-frontend/govuk/ > data/sassdoc.json",
+    "build:sassdoc": "sassdoc --parse node_modules/govuk-frontend/dist/govuk/ > data/sassdoc.json",
     "lint": "standard",
     "check-links": "hyperlink --canonicalroot https://frontend.design-system.service.gov.uk --internal --recursive deploy/public/index.html --skip 'property=\"og:image\"' | tap-mocha-reporter min"
   },
   "devDependencies": {
-    "govuk-frontend": "^4.7.0",
+    "govuk-frontend": "github:alphagov/govuk-frontend#0f5c7975f",
     "hyperlink": "^5.0.4",
     "sassdoc": "^2.7.4",
     "standard": "^17.1.0",
