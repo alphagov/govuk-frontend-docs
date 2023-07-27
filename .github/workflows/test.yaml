@@ -5,12 +5,15 @@ on:
   push:
     branches-ignore:
       - main  # pushes to main are handled by deploy.yaml
+
   workflow_call:
     inputs:
       upload-artifact:
         default: false
         required: false
         type: boolean
+
+  workflow_dispatch:
 
 jobs:
   build:
