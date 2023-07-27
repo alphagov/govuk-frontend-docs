@@ -115,8 +115,11 @@ module SassdocsHelpers
   end
 
   def github_url(item)
+    # Maintain backwards compatibility with GOV.UK Frontend v4
+    github_package_path = govuk_frontend_version.start_with?("4") ? "/src" : "/packages/govuk-frontend/src"
+
     # Construct GitHub link
-    "https://github.com/alphagov/govuk-frontend/tree/v#{govuk_frontend_version}/src/govuk/#{item.file.path}#L#{item.context.line.start}-L#{item.context.line.end}"
+    "https://github.com/alphagov/govuk-frontend/tree/v#{govuk_frontend_version}#{github_package_path}/govuk/#{item.file.path}#L#{item.context.line.start}-L#{item.context.line.end}"
   end
 
   def govuk_frontend_version
