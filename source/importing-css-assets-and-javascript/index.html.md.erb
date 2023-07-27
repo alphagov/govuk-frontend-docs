@@ -12,53 +12,53 @@ weight: 70
 To import all the Sass rules from GOV.UK Frontend, add the following to your Sass file:
 
 ```scss
-@import "node_modules/govuk-frontend/govuk/all";
+@import "node_modules/govuk-frontend/dist/govuk/all";
 ```
 
 ### Import specific parts of the CSS
 
 If you want to improve how quickly your service's pages load in browsers, you can import only the Sass rules you need.
 
-1. Import `node_modules/govuk-frontend/govuk/base` in your Sass file.
+1. Import `node_modules/govuk-frontend/dist/govuk/base` in your Sass file.
 2. Import the parts of the CSS you need.
 
 For example, add the following to your Sass file to import the CSS you need for a basic GOV.UK page.
 
 ```scss
-@import "node_modules/govuk-frontend/govuk/base";
+@import "node_modules/govuk-frontend/dist/govuk/base";
 
-@import "node_modules/govuk-frontend/govuk/core/all";
-@import "node_modules/govuk-frontend/govuk/objects/all";
-@import "node_modules/govuk-frontend/govuk/components/footer/index";
-@import "node_modules/govuk-frontend/govuk/components/header/index";
-@import "node_modules/govuk-frontend/govuk/components/skip-link/index";
-@import "node_modules/govuk-frontend/govuk/utilities/all";
-@import "node_modules/govuk-frontend/govuk/overrides/all";
+@import "node_modules/govuk-frontend/dist/govuk/core/all";
+@import "node_modules/govuk-frontend/dist/govuk/objects/all";
+@import "node_modules/govuk-frontend/dist/govuk/components/footer/index";
+@import "node_modules/govuk-frontend/dist/govuk/components/header/index";
+@import "node_modules/govuk-frontend/dist/govuk/components/skip-link/index";
+@import "node_modules/govuk-frontend/dist/govuk/utilities/all";
+@import "node_modules/govuk-frontend/dist/govuk/overrides/all";
 ```
 You can remove lines that import parts of the CSS you do not need.
 
-[Read more about the different parts of GOV.UK Frontend’s CSS](https://github.com/alphagov/govuk-frontend/tree/master/src/govuk).
+[Read more about the different parts of GOV.UK Frontend’s CSS](https://github.com/alphagov/govuk-frontend/tree/main/packages/govuk-frontend/src).
 
 You do not need `/index` at the end of your component imports if you’re using Dart Sass, LibSass 3.6.0 or higher, or Ruby Sass 3.6.0 or higher.
 
 ### Import an individual component’s CSS using a single import
 
-You can also import a component and all its dependencies without importing `node_modules/govuk-frontend/govuk/base` first.
+You can also import a component and all its dependencies without importing `node_modules/govuk-frontend/dist/govuk/base` first.
 
 To import the button component for example, add the following to your Sass file:
 
 ```scss
-@import "node_modules/govuk-frontend/govuk/components/button/button";
+@import "node_modules/govuk-frontend/dist/govuk/components/button/button";
 ```
 
 ### Simplify Sass import paths
 
-If you want to make Sass import paths shorter, add `node_modules/govuk-frontend` to either your:
+If you want to make Sass import paths shorter, add `node_modules/govuk-frontend/dist` to either your:
 
 - [Sass load paths](https://sass-lang.com/documentation/at-rules/import#finding-the-file)
 - [assets paths](http://guides.rubyonrails.org/asset_pipeline.html#search-paths) if you use Ruby in your project
 
-You can then import without using `node_modules/govuk-frontend/` in your import path. For example:
+You can then import without using `node_modules/govuk-frontend/dist/` in your import path. For example:
 
 ```scss
 @import "govuk/components/button/button";
@@ -96,21 +96,21 @@ To use the font and image assets from GOV.UK Frontend, you can either:
 
 ### Serve the assets from the GOV.UK Frontend assets folder - recommended
 
-Set up your routing so that requests for files in `<YOUR-SITE-URL>/assets` are served from `/node_modules/govuk-frontend/govuk/assets`.
+Set up your routing so that requests for files in `<YOUR-SITE-URL>/assets` are served from `/node_modules/govuk-frontend/dist/govuk/assets`.
 
 For example if you're using [express.js](https://expressjs.com/), add the following to your `app.js` file:
 
 ```javascript
 var path = require('path');
-app.use('/assets', express.static(path.join(__dirname, '/node_modules/govuk-frontend/govuk/assets')))
+app.use('/assets', express.static(path.join(__dirname, '/node_modules/govuk-frontend/dist/govuk/assets')))
 ```
 
 ### Copy the font and image files into your application
 
 If you decide to copy the assets instead, copy the:
 
-- `/node_modules/govuk-frontend/govuk/assets/images` folder to `<YOUR-APP>/assets/images`
-- `/node_modules/govuk-frontend/govuk/assets/fonts` folder to `<YOUR-APP>/assets/fonts`
+- `/node_modules/govuk-frontend/dist/govuk/assets/images` folder to `<YOUR-APP>/assets/images`
+- `/node_modules/govuk-frontend/dist/govuk/assets/fonts` folder to `<YOUR-APP>/assets/fonts`
 
 You should use an automated task or your build pipeline to copy the files, so your project folder stays up to date when we update GOV.UK Frontend.
 
@@ -149,15 +149,15 @@ To import the JavaScript from GOV.UK Frontend, you can either:
 
 If you decide to add the JavaScript to your HTML, first either:
 
-- set up your routing so that requests for the JavaScript file are served from  `node_modules/govuk-frontend/govuk/all.js`
-- copy the `node_modules/govuk-frontend/govuk/all.js` file into your application
+- set up your routing so that requests for the JavaScript file are served from  `node_modules/govuk-frontend/dist/govuk/govuk-frontend.min.js`
+- copy the `node_modules/govuk-frontend/dist/govuk/govuk-frontend.min.js` file into your application
 
 Then import the JavaScript file before the closing `</body>` tag of your HTML page or page template, and run the `initAll` function to initialise all the components.
 
 ```html
 <body class="govuk-template__body">
 ...
-  <script src="<YOUR-APP>/<YOUR-JS-FILE>.js"></script>
+  <script src="<YOUR-APP>/govuk-frontend.min.js"></script>
   <script>
     window.GOVUKFrontend.initAll()
   </script>
