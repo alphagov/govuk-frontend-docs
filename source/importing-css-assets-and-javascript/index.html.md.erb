@@ -174,7 +174,7 @@ You can select and initialise a specific component by using its `data-module` at
     import { Radios } from '<YOUR-JAVASCRIPTS-FOLDER>/govuk-frontend.min.js'
     const $radio = document.querySelector('[data-module="govuk-radios"]')
     if ($radio) {
-      new Radios($radio).init()
+      new Radios($radio)
     }
   </script>
 ```
@@ -188,12 +188,12 @@ import { SkipLink, Radios } from 'govuk-frontend'
 
 const $skipLink = document.querySelector('[data-module="govuk-skip-link"]')
 if ($skipLink) {
-  new SkipLink($skipLink).init()
+  new SkipLink($skipLink)
 }
 
 const $radios = document.querySelectorAll('[data-module="govuk-radios]')
 $radios.forEach(($radio) => {
-  new Radios($radio).init()
+  new Radios($radio)
 })
 ```
 
