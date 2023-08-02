@@ -10,8 +10,11 @@ def dothash(hash)
 end
 
 RSpec.describe SassdocsHelpers do
+  let(:package_version) { "5.0.0" }
+  let(:package_content) { sprintf('{ "packages": { "node_modules/govuk-frontend": { "version": "%s" } } }', package_version) }
+
   before(:each) do
-    allow(File).to receive(:read).and_return('{ "packages": { "node_modules/govuk-frontend": { "version": "5.0.0" } } }')
+    allow(File).to receive(:read).and_return(package_content)
     # Include mixin into a test class to allow us to mock File
     # TODO Move constant definition
     # rubocop:disable Lint/ConstantDefinitionInBlock
@@ -323,8 +326,8 @@ RSpec.describe SassdocsHelpers do
     end
   end
   describe "#github_url" do
-    it "returns a url" do
-      fixture = dothash({
+    let(:fixture) do
+      dothash({
         context: {
           line: {
             start: 9,
@@ -335,9 +338,20 @@ RSpec.describe SassdocsHelpers do
           path: "helpers/_clearfix.scss",
         },
       })
-      url = @helper.github_url(fixture)
+    end
 
+    it "returns a url" do
+      url = @helper.github_url(fixture)
       expect(url).to eq("https://github.com/alphagov/govuk-frontend/tree/v5.0.0/packages/govuk-frontend/src/govuk/helpers/_clearfix.scss#L9-L15")
+    end
+
+    describe "v4.x backwards compatibility" do
+      let(:package_version) { "4.0.0" }
+
+      it "returns a url" do
+        url = @helper.github_url(fixture)
+        expect(url).to eq("https://github.com/alphagov/govuk-frontend/tree/v4.0.0/src/govuk/helpers/_clearfix.scss#L9-L15")
+      end
     end
   end
   describe "#govuk_frontend_version" do
