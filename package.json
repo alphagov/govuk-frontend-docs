@@ -9,7 +9,7 @@
     "check-links": "hyperlink --canonicalroot https://frontend.design-system.service.gov.uk --internal --recursive deploy/public/index.html --skip 'property=\"og:image\"' | tap-mocha-reporter min"
   },
   "devDependencies": {
-    "govuk-frontend": "github:alphagov/govuk-frontend#0f5c7975f",
+    "govuk-frontend": "github:alphagov/govuk-frontend#6d1a4ef0a",
     "hyperlink": "^5.0.4",
     "sassdoc": "^2.7.4",
     "standard": "^17.1.0",
