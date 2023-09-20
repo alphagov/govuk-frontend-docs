@@ -2,7 +2,7 @@
 title: Install using precompiled files
 weight: 11
 old_paths:
-- /installing-from-dist/index.html
+  - /installing-from-dist/index.html
 ---
 
 # Install using precompiled files
@@ -33,26 +33,25 @@ You’ll not be able to:
 
 1. Create a page in your project using the following HTML (in your live application, you should use the [Design System page template](https://design-system.service.gov.uk/styles/page-template/) instead):
 
-    ```html
-    <!DOCTYPE html>
-    <html lang="en" class="govuk-template">
-      <head>
-        <title>Example - GOV.UK</title>
-        <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-        <link rel="stylesheet" href="/stylesheets/govuk-frontend-<VERSION-NUMBER>.min.css">
-      </head>
-      <body class="govuk-template__body">
-        <script>document.body.className += ' js-enabled' + ('noModule' in HTMLScriptElement.prototype ? ' govuk-frontend-supported' : '');</script>
-        <!-- component HTML -->
-        <script type="module" src="/javascripts/govuk-frontend-<VERSION-NUMBER>.min.js"></script>
-        <script type="module">
-          import { initAll } from '/javascripts/govuk-frontend-<VERSION-NUMBER>.min.js'
-          initAll()
-        </script>
-      </body>
-    </html>
-    ```
-
+   ```html
+   <!DOCTYPE html>
+   <html lang="en" class="govuk-template">
+     <head>
+       <title>Example - GOV.UK</title>
+       <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+       <link rel="stylesheet" href="/stylesheets/govuk-frontend-<VERSION-NUMBER>.min.css">
+     </head>
+     <body class="govuk-template__body">
+       <script>document.body.className += ' js-enabled' + ('noModule' in HTMLScriptElement.prototype ? ' govuk-frontend-supported' : '');</script>
+       <!-- component HTML -->
+       <script type="module" src="/javascripts/govuk-frontend-<VERSION-NUMBER>.min.js"></script>
+       <script type="module">
+         import { initAll } from '/javascripts/govuk-frontend-<VERSION-NUMBER>.min.js'
+         initAll()
+       </script>
+     </body>
+   </html>
+   ```
 
 2. Replace `<VERSION-NUMBER>` so the 3 filenames match the files you [copied from GOV.UK Frontend's GitHub repo](#copy-the-files).
 
