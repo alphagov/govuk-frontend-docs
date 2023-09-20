@@ -35,6 +35,7 @@ For example, add the following to your Sass file to import the CSS you need for 
 @import "node_modules/govuk-frontend/dist/govuk/utilities/all";
 @import "node_modules/govuk-frontend/dist/govuk/overrides/all";
 ```
+
 You can remove lines that import parts of the CSS you do not need.
 
 [Read more about the different parts of GOV.UK Frontend’s CSS](https://github.com/alphagov/govuk-frontend/tree/main/packages/govuk-frontend/src).
@@ -214,13 +215,13 @@ If you update a page with new markup, for example a modal dialogue box, you can 
 For example:
 
 ```html
-  <script type="module">
-    import { initAll } from '<YOUR-JAVASCRIPTS-FOLDER>/govuk-frontend.min.js'
-    const $modal = document.querySelector('.modal')
-    initAll({
-      scope: $modal
-    })
-  </script>
+<script type="module">
+  import { initAll } from '<YOUR-JAVASCRIPTS-FOLDER>/govuk-frontend.min.js'
+  const $modal = document.querySelector('.modal')
+  initAll({
+    scope: $modal
+  })
+</script>
 ```
 
 ### If your JavaScript is not working properly

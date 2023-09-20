@@ -26,20 +26,20 @@ You must first:
 
 1. Add `node_modules/govuk-frontend/dist` to your list of Nunjucks paths, so Nunjucks knows where to find the GOV.UK Frontend template and components.
 
-    For example:
+   For example:
 
-    ```javascript
-        nunjucks.configure([
-          "node_modules/govuk-frontend/dist",
-          "YOUR-VIEWS-FOLDER"
-        ])
-    ```
+   ```javascript
+   nunjucks.configure([
+     "node_modules/govuk-frontend/dist",
+     "YOUR-VIEWS-FOLDER"
+   ]);
+   ```
 
 2. Use the GOV.UK Frontend template by adding the following at the top of your view file:
 
-    ```javascript
-    {% extends "govuk/template.njk" %}
-    ```
+   ```javascript
+   {% extends "govuk/template.njk" %}
+   ```
 
 3. Go to the [default page template example](https://design-system.service.gov.uk/styles/page-template/#default) on the GOV.UK Design System website, then copy the Nunjucks code into your view file.
 
@@ -61,7 +61,7 @@ For example, use the `text` option to change the text on a [button](https://desi
 
 ```javascript
 {{ govukButton({
-    text: "Example button text"
+  text: "Example button text"
 }) }}
 ```
 
