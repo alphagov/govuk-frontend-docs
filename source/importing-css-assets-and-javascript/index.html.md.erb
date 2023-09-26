@@ -162,6 +162,16 @@ Then import the JavaScript file before the closing `</body>` tag of your HTML pa
 </body>
 ```
 
+Errors from components will be logged in the browser's console.
+
+For example, when:
+
+* GOV.UK Frontend is not supported in the current browser
+* Component templates have missing changes from our release notes
+* Component JavaScript configuration does not match our documentation
+
+You should check your application works without errors or some components will not work correctly.
+
 #### Select and initialise an individual component
 
 You can select and initialise a specific component by using its `data-module` attribute. For example, use `govuk-radios` to initialise the first radio component on a page:
@@ -175,6 +185,8 @@ You can select and initialise a specific component by using its `data-module` at
     }
   </script>
 ```
+
+When initialised individually, errors are thrown rather than logged. You must check your application works without errors or some components will not work correctly.
 
 ### Import JavaScript using a bundler
 
