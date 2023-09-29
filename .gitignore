@@ -21,6 +21,7 @@
 node_modules
 
 Staticfile.auth
+*.log
 
 # Sassdocs generated files
 data/sassdoc.json
