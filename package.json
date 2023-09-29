@@ -6,7 +6,7 @@
     "postinstall": "npm run build:sassdoc",
     "build:sassdoc": "sassdoc --parse node_modules/govuk-frontend/govuk/ > data/sassdoc.json",
     "lint": "standard",
-    "check-links": "hyperlink --canonicalroot https://frontend.design-system.service.gov.uk --internal --recursive deploy/public/index.html --skip 'property=\"og:image\"' | tap-mocha-reporter min"
+    "check-links": "hyperlink --canonicalroot https://frontend.design-system.service.gov.uk --internal --recursive deploy/public/index.html --skip 'property=\"og:image\"' | tee check-links.log | tap-mocha-reporter min"
   },
   "devDependencies": {
     "govuk-frontend": "^4.7.0",
