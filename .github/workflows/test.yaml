@@ -2,15 +2,15 @@ name: Test
 
 on:
   pull_request:
-  push:
-    branches-ignore:
-      - main  # pushes to main are handled by deploy.yaml
+
   workflow_call:
     inputs:
       upload-artifact:
         default: false
         required: false
         type: boolean
+
+  workflow_dispatch:
 
 jobs:
   build:
@@ -22,7 +22,8 @@ jobs:
 
       - uses: actions/setup-node@v3
         with:
-          node-version: '14'
+          cache: npm
+          node-version-file: .nvmrc
 
       - uses: ruby/setup-ruby@v1
         with:

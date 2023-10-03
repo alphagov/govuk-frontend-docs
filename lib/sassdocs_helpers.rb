@@ -132,7 +132,7 @@ module SassdocsHelpers
     # Get the current version of GOV.UK Frontend from the package.
     package_lock_file = File.read("./package-lock.json")
     package_lock = JSON.parse(package_lock_file)
-    @govuk_frontend_version = package_lock["dependencies"]["govuk-frontend"]["version"]
+    @govuk_frontend_version = package_lock["packages"]["node_modules/govuk-frontend"]["version"]
     @govuk_frontend_version
   end
 end
