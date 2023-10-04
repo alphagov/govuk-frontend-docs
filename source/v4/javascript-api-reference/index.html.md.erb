@@ -1,0 +1,385 @@
+---
+title: JavaScript API Reference (v4.x)
+weight: 80
+parent: /v4/
+---
+
+# JavaScript API Reference
+
+Some of our components can receive configuration options when you create an
+instance in JavaScript. This page lists the available options for these
+components. You can find further information on how to [configure these options
+in our guidance](/configure-components-with-javascript/).
+
+You can pass these options in an object either as:
+
+- a second argument of the component's constructor
+- the value for the key of the component name in an object passed to `initAll`
+
+For example, to set the `preventDoubleClick` option of a button:
+
+```javascript
+// Creating a single instance
+var button = document.querySelector('[data-module="button"]')
+new GOVUKFrontend.Button(button, {preventDoubleClick: true})
+
+// Or when using initAll
+GOVUKFrontend.initAll({
+  button: {
+    preventDoubleClick: true
+  }
+})
+```
+
+## Accordion
+
+### i18n
+
+Type: object
+
+Messages used by the component for the labels of its buttons. This includes the
+visible text shown on screen, and text to help assistive technology users for
+the buttons toggling each section.
+
+Default: see properties
+
+#### Properties
+
+##### hideAllSections
+
+Type: string
+
+The text content for the 'Hide all sections' button, used when at least one
+section is expanded.
+
+Default:
+  
+```json
+"Hide all sections"
+```
+
+##### hideSection
+
+Type: string
+
+The text content for the 'Hide' button, used when a section is expanded.
+
+Default:
+
+```json
+"Hide"
+```
+
+##### hideSectionAriaLabel
+
+Type: string
+
+The text content appended to the 'Hide' button's accessible name when a section is expanded.
+
+Default:
+
+```json
+"Hide this section"
+```
+
+##### showAllSections
+
+Type: string
+
+The text content for the 'Show all sections' button, used when all sections are collapsed.
+
+Default:
+
+```json
+"Show all sections"
+```
+
+##### showSection
+
+Type: string
+
+The text content for the 'Show' button, used when a section is collapsed.
+
+Default:
+
+```json
+"Show"
+```
+
+##### showSectionAriaLabel
+
+Type: string
+
+The text content appended to the 'Show' button's accessible name when a section is expanded.
+
+Default:
+
+```json
+"Show this section"
+```
+
+## Button
+
+### preventDoubleClick
+
+Type: boolean
+
+Prevent accidental double clicks on submit buttons from submitting forms multiple times.
+
+Default:
+
+```json
+false
+```
+
+## CharacterCount
+
+### maxlength
+
+Type: number
+
+The maximum number of characters. If `maxwords` is provided, the `maxlength` option will be ignored.
+
+### maxwords
+
+Type: number
+
+The maximum number of words. If `maxwords` is provided, the `maxlength` option will be ignored.
+
+### threshold
+
+Type: number
+
+The percentage value of the limit at which point the count message is displayed. If this attribute is set, the count message will be hidden by default.
+
+Default:
+
+```json
+0
+```
+
+### i18n
+
+Type: object
+
+Messages shown to users as they type. It provides feedback on how many words or
+characters they have remaining or if they are over the limit. This also includes
+a message used as an accessible description for the textarea.
+
+Default: see properties
+
+#### Properties
+
+##### charactersUnderLimit
+
+Type: object
+
+Message displayed when the number of characters is under the configured maximum,
+`maxlength`. This message is displayed visually and through assistive
+technologies. The component will replace the `%{count}` placeholder with the
+number of remaining characters. This is a [pluralised list of
+messages](/localise-govuk-frontend/#understanding-pluralisation-rules).
+
+Default:
+  
+```json
+{
+  one: "You have %{count} character remaining",
+  other: "You have %{count} characters remaining"
+}
+```
+
+##### charactersAtLimit
+
+Type: object
+
+Message displayed when the number of characters reaches the configured maximum,
+`maxlength`. This message is displayed visually and through assistive
+technologies.
+
+Default:
+
+```json
+"You have 0 characters remaining"
+```
+
+##### charactersOverLimit
+
+Type: object
+
+Message displayed when the number of characters is over the configured maximum,
+`maxlength`. This message is displayed visually and through assistive
+technologies. The component will replace the `%{count}` placeholder with the
+number of remaining characters. This is a [pluralised list of
+messages](</localise-govuk-frontend/#understanding-pluralisation-rules>).
+
+Default:
+
+```json
+{
+  one: "You have %{count} character too many",
+  other: "You have %{count} characters too many"
+}
+```
+
+##### wordsUnderLimit
+
+Type: object
+
+Message displayed when the number of words is under the configured maximum,
+`maxwords`. This message is displayed visually and through assistive
+technologies. The component will replace the `%{count}` placeholder with the
+number of remaining words. This is a [pluralised list of
+messages](/localise-govuk-frontend/#understanding-pluralisation-rules).
+
+Default:
+
+```json
+{
+  one: "You have %{count} word remaining",
+  other: "You have %{count} words remaining"
+}
+```
+
+##### wordsAtLimit
+
+Type: object
+
+Message displayed when the number of words reaches the configured maximum,
+`maxwords`. This message is displayed visually and through assistive
+technologies.
+
+Default:
+
+```json
+"You have 0 words remaining"
+```
+
+##### wordsOverLimit
+
+Type: object
+
+Message displayed when the number of words is over the configured maximum,
+`maxwords`. This message is displayed visually and through assistive
+technologies. The component will replace the `%{count}` placeholder with the
+number of remaining words. This is a [pluralised list of
+messages](</localise-govuk-frontend/#understanding-pluralisation-rules>).
+
+Default:
+
+```json
+{
+  one: "You have %{count} word too many",
+  other: "You have %{count} words too many"
+}
+```
+
+##### textareaDescription
+
+Type: object
+
+Message made available to assistive technologies, if none is already present in the HTML, to describe that the component accepts only a limited amount of content. The component will replace the `%{count}` placeholder with the value of the `maxlength` or `maxwords` parameter.
+
+Default:
+
+```json
+{
+  other: ""
+}
+```
+
+## ErrorSummary
+
+### disableAutoFocus
+
+If set to `true` the error summary will not be focussed when the page loads.
+
+Type: boolean
+
+Default
+
+```json
+false
+```
+
+## ExitThisPage
+
+### i18n
+
+Type: object
+
+Messages used by the component for screen reader announcements relating to the
+keyboard shortcut functionality, informing assistive technology users of the
+current state of the shortcut.
+
+All of these strings should be short and in plain text.
+
+Default: see properties
+
+#### Properties
+
+##### activated
+
+Type: string
+
+Text to announce when the Exit This Page keyboard shortcut has been activated
+and the user is being directed away from the current page.
+
+Default:
+
+```json
+"Loading."
+```
+
+##### pressOneMoreTime
+
+Type: string
+
+Text to announce when the user has pressed the activation key (Shift) twice, and
+must press it one more time to activate the functionality.
+
+Default:
+
+```json
+"Shift, press 1 more time to exit."
+```
+
+##### pressTwoMoreTimes
+
+Type: string
+
+Text to announce when the user has pressed the activation key (Shift) once, and
+must press it two more times to activate the functionality.
+
+Default:
+
+```json
+"Shift, press 2 more times to exit."
+```
+
+##### timedOut
+
+Type: string
+
+Text to announce if the user hasn't completed the keyboard shortcut within the
+allowed time, so that the user is aware that they must begin the sequence again.
+
+Default:
+
+```json
+"Exit this page expired."
+```
+
+## NotificationBanner
+
+### disableAutoFocus
+
+Type: boolean
+
+If set to `true` the notification banner will not be focussed when the page loads. This only applies if the component has a `role` of `alert` – in other cases the component will not be focused on page load, regardless of this option.
+
+Default:
+
+```json
+false
+```
