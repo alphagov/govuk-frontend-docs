@@ -1,0 +1,17 @@
+<%
+wrap_layout :core do
+  html = yield
+
+  directory_name = current_page.path.split("/").first
+  resources = sitemap.resources.select do |r|
+    r.path.start_with?(directory_name)
+  end
+
+  puts resources.find{ |r| r.path == 'v4/index.html'}.children.inspect
+
+  content_for :sidebar do
+    multi_page_table_of_contents(resources, current_page, config, html)
+  end
+
+  html
+end %>

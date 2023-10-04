@@ -1,0 +1,140 @@
+---
+title: Migrate from our old frameworks (v4.x)
+weight: 62
+parent: /v4/
+---
+
+# Migrate from our old frameworks
+
+You should migrate to GOV.UK Frontend if you're using one of the following old frameworks:
+
+- GOV.UK Elements
+- GOV.UK Template
+- GOV.UK Frontend Toolkit
+
+We're no longer updating our old frameworks, and they do not meet the [Web Content Accessibility Guidelines (WCAG 2.1 level AA)](https://www.gov.uk/guidance/accessibility-requirements-for-public-sector-websites-and-apps).
+
+After you include GOV.UK Frontend in your project, your service should look and behave the same as before. This means you can migrate one component at a time in your live service.
+
+Your service might be slightly slower until you've finished migrating, because your users’ browsers will download CSS and JavaScript from both GOV.UK Frontend and the old frameworks.
+
+You can read about [how the GOV.UK Pay team migrated their service](https://technology.blog.gov.uk/2018/12/21/the-benefits-of-migrating-gov-uk-pays-codebase-to-the-gov-uk-design-system/).
+
+## Audit your service's components
+
+To help you migrate, you should work with a designer to make a list of the components in your service, and compare it to [the components in GOV.UK Frontend](https://design-system.service.gov.uk/components/).
+
+You can use your list to see where you can replace similar elements in your service with one GOV.UK Frontend component. For example, if you have a range of similar buttons, you might be able to replace them all with the [button component](https://design-system.service.gov.uk/components/button/).
+
+## Choose a template engine
+
+We recommend using [a template engine like Nunjucks](https://mozilla.github.io/nunjucks/) to abstract each component into a reusable macro (also called a 'partial' or 'template'). You can do this before or during your migration.
+
+Macros will help make your project easier to:
+
+- migrate, because your project will be organised the same way we organise the GOV.UK Design System
+- update when new versions of GOV.UK Frontend are released
+
+If you're using Node.js, you can [use our Nunjucks macros](/use-nunjucks/).
+
+Each [component page](https://design-system.service.gov.uk/components/) on the GOV.UK Design System website has example Nunjucks macros and a table of macro options.
+
+## Add GOV.UK Frontend to your project
+
+1. [Install GOV.UK Frontend using node package manager (npm)](/installing-with-npm/).
+
+    Do not install using precompiled files, or you will not be able to turn on 'compatibility mode'.
+
+2. [Turn on GOV.UK Frontend's 'compatibility mode'](/compatibility-mode/#turn-on-39-compatibility-mode-39) so your service continues using the old colours and font until you finish migrating.
+
+3. Test your application to make sure it looks the same and behaves correctly.
+
+## Migrate your pages and components
+
+After you install GOV.UK Frontend, you can either migrate:
+
+- one page at a time - if your service is small, for example a single service with 10 pages
+- one component at a time - if your service is big or complicated
+
+### Migrate one page at a time
+
+We recommend creating a separate page layout based on our [page template](https://design-system.service.gov.uk/styles/page-template/), so that you can make changes without affecting the pages you have not migrated yet.
+
+You must:
+
+- include GOV.UK Frontend JavaScript and CSS files below our old frameworks' JavaScript and CSS files
+- use GOV.UK Frontend markup for all the [typography](https://design-system.service.gov.uk/styles/typography/) and [layout](https://design-system.service.gov.uk/styles/layout/) in your service
+- include and initialise GOV.UK Frontend's JavaScript for all the components that use it
+
+You should also follow our [guidance if you extend or modify GOV.UK Frontend components](https://design-system.service.gov.uk/get-started/extending-and-modifying-components/).
+
+### Migrate one component at a time
+
+We recommend migrating in the following order:
+
+- [components](https://design-system.service.gov.uk/components/)
+- [typography](https://design-system.service.gov.uk/styles/typography/)
+- [header](https://design-system.service.gov.uk/components/header/)
+- [footer](https://design-system.service.gov.uk/components/footer/)
+- [page template](https://design-system.service.gov.uk/styles/page-template/)
+
+We do not recommend the reverse order, because if you migrate the page template too early it might:
+
+- break CSS or JavaScript that relies on your old page template
+- apply layout features that are better applied at the end
+- make it harder to identify and cleanly remove old CSS and JavaScript
+
+You must:
+
+- include GOV.UK Frontend JavaScript and CSS files below our old frameworks' JavaScript and CSS files
+- use GOV.UK Frontend markup for all the [typography](https://design-system.service.gov.uk/styles/typography/) and [layout](https://design-system.service.gov.uk/styles/layout/) in your service
+- include and initialise GOV.UK Frontend's JavaScript for all the components that use it
+
+You should also follow our [guidance if you extend or modify GOV.UK Frontend components](https://design-system.service.gov.uk/get-started/extending-and-modifying-components/).
+
+To keep your design looking the same as it is now, you might need to add styles that [temporarily override GOV.UK Frontend styles](https://design-system.service.gov.uk/styles/spacing/#spacing-override-classes). For example, most GOV.UK Frontend components only have a bottom margin, so you might need to add temporary margins to the top, left or right.
+
+## Update your custom code
+
+If you've created custom code that uses code from either GOV.UK Elements or GOV.UK Frontend Toolkit, you'll need to:
+
+- use [GOV.UK Frontend variables, functions and mixins](https://design-system.service.gov.uk/get-started/updating-your-code/) instead
+- update your components' focus states so they're consistent with the [Design System's focus styles](https://design-system.service.gov.uk/get-started/focus-states/).
+
+## Remove our old frameworks
+
+Once you've completely migrated your service to GOV.UK Frontend, you can remove our old frameworks.
+
+### 1. Uninstall
+
+Uninstall GOV.UK Frontend Toolkit, GOV.UK Element and GOV.UK Template.
+
+### 2. Turn off compatibility mode
+
+[Turn off 'compatibility mode'](/compatibility-mode/#turn-off-39-compatibility-mode-39) so your service stops using the old colours and font.
+
+Replace the following old colour variables if you're using Sass.
+
+Old colour|Suggested replacement
+| --- | --- |
+# `bright-red`|`red`
+# `grey-1`|`dark-grey`
+# `grey-2`|`mid-grey`
+# `grey-3`|`light-grey`
+# `grey-4`|`light-grey`
+
+You should also remove any temporary overrides you added earlier.
+
+### 3. Test your updated service
+
+You should check your application looks the same and works correctly, and that it's using:
+
+- `rem` for font sizes
+- the [GOV.UK colour palette](https://design-system.service.gov.uk/styles/colour/)
+- the [GOV.UK font](https://design-system.service.gov.uk/styles/typography/#font)
+
+You should also use the developer tools in your browser to check that your project:
+
+- is no longer using files from our old frameworks
+- is downloading only one version of the font
+- does not contain any unused stylesheets or JavaScript
