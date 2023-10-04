@@ -24,3 +24,5 @@ helpers do
     concat Tilt["markdown"].new(context: @app) { content }.render
   end
 end
+
+page "v4/*", layout: :v4, parent: /v4/
