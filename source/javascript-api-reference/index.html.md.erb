@@ -55,8 +55,8 @@ section is expanded.
 
 Default:
 
-```json
-"Hide all sections"
+```javascript
+'Hide all sections'
 ```
 
 ##### hideSection
@@ -67,8 +67,8 @@ The text content for the 'Hide' button, used when a section is expanded.
 
 Default:
 
-```json
-"Hide"
+```javascript
+'Hide'
 ```
 
 ##### hideSectionAriaLabel
@@ -79,8 +79,8 @@ The text content appended to the 'Hide' button's accessible name when a section 
 
 Default:
 
-```json
-"Hide this section"
+```javascript
+'Hide this section'
 ```
 
 ##### showAllSections
@@ -91,8 +91,8 @@ The text content for the 'Show all sections' button, used when all sections are 
 
 Default:
 
-```json
-"Show all sections"
+```javascript
+'Show all sections'
 ```
 
 ##### showSection
@@ -103,8 +103,8 @@ The text content for the 'Show' button, used when a section is collapsed.
 
 Default:
 
-```json
-"Show"
+```javascript
+'Show'
 ```
 
 ##### showSectionAriaLabel
@@ -115,8 +115,8 @@ The text content appended to the 'Show' button's accessible name when a section 
 
 Default:
 
-```json
-"Show this section"
+```javascript
+'Show this section'
 ```
 
 ## Button
@@ -129,7 +129,7 @@ Prevent accidental double clicks on submit buttons from submitting forms multipl
 
 Default:
 
-```json
+```javascript
 false
 ```
 
@@ -155,7 +155,7 @@ The percentage value of the limit at which point the count message is displayed.
 
 Default:
 
-```json
+```javascript
 0
 ```
 
@@ -183,10 +183,10 @@ messages](/localise-govuk-frontend/#understanding-pluralisation-rules).
 
 Default:
 
-```json
+```javascript
 {
-  one: "You have %{count} character remaining",
-  other: "You have %{count} characters remaining"
+  one: 'You have %{count} character remaining',
+  other: 'You have %{count} characters remaining'
 }
 ```
 
@@ -200,8 +200,8 @@ technologies.
 
 Default:
 
-```json
-"You have 0 characters remaining"
+```javascript
+'You have 0 characters remaining'
 ```
 
 ##### charactersOverLimit
@@ -212,14 +212,14 @@ Message displayed when the number of characters is over the configured maximum,
 `maxlength`. This message is displayed visually and through assistive
 technologies. The component will replace the `%{count}` placeholder with the
 number of remaining characters. This is a [pluralised list of
-messages](</localise-govuk-frontend/#understanding-pluralisation-rules>).
+messages](/localise-govuk-frontend/#understanding-pluralisation-rules).
 
 Default:
 
-```json
+```javascript
 {
-  one: "You have %{count} character too many",
-  other: "You have %{count} characters too many"
+  one: 'You have %{count} character too many',
+  other: 'You have %{count} characters too many'
 }
 ```
 
@@ -235,10 +235,10 @@ messages](/localise-govuk-frontend/#understanding-pluralisation-rules).
 
 Default:
 
-```json
+```javascript
 {
-  one: "You have %{count} word remaining",
-  other: "You have %{count} words remaining"
+  one: 'You have %{count} word remaining',
+  other: 'You have %{count} words remaining'
 }
 ```
 
@@ -252,8 +252,8 @@ technologies.
 
 Default:
 
-```json
-"You have 0 words remaining"
+```javascript
+'You have 0 words remaining'
 ```
 
 ##### wordsOverLimit
@@ -264,14 +264,14 @@ Message displayed when the number of words is over the configured maximum,
 `maxwords`. This message is displayed visually and through assistive
 technologies. The component will replace the `%{count}` placeholder with the
 number of remaining words. This is a [pluralised list of
-messages](</localise-govuk-frontend/#understanding-pluralisation-rules>).
+messages](/localise-govuk-frontend/#understanding-pluralisation-rules).
 
 Default:
 
-```json
+```javascript
 {
-  one: "You have %{count} word too many",
-  other: "You have %{count} words too many"
+  one: 'You have %{count} word too many',
+  other: 'You have %{count} words too many'
 }
 ```
 
@@ -283,9 +283,9 @@ Message made available to assistive technologies, if none is already present in 
 
 Default:
 
-```json
+```javascript
 {
-  other: ""
+  other: ''
 }
 ```
 
@@ -299,7 +299,7 @@ Type: boolean
 
 Default
 
-```json
+```javascript
 false
 ```
 
@@ -328,8 +328,8 @@ and the user is being directed away from the current page.
 
 Default:
 
-```json
-"Loading."
+```javascript
+'Loading.'
 ```
 
 ##### pressOneMoreTime
@@ -341,8 +341,8 @@ must press it one more time to activate the functionality.
 
 Default:
 
-```json
-"Shift, press 1 more time to exit."
+```javascript
+'Shift, press 1 more time to exit.'
 ```
 
 ##### pressTwoMoreTimes
@@ -354,8 +354,8 @@ must press it two more times to activate the functionality.
 
 Default:
 
-```json
-"Shift, press 2 more times to exit."
+```javascript
+'Shift, press 2 more times to exit.'
 ```
 
 ##### timedOut
@@ -367,8 +367,8 @@ allowed time, so that the user is aware that they must begin the sequence again.
 
 Default:
 
-```json
-"Exit this page expired."
+```javascript
+'Exit this page expired.'
 ```
 
 ## NotificationBanner
@@ -381,6 +381,6 @@ If set to `true` the notification banner will not be focussed when the page load
 
 Default:
 
-```json
+```javascript
 false
 ```
