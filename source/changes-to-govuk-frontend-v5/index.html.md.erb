@@ -1,0 +1,59 @@
+---
+title: Changes to GOV.UK Frontend v5.0.0
+weight: 41
+---
+
+# Changes to GOV.UK Frontend v5.0.0
+
+What you need to know about the changes to v5.0.0.
+
+## Migrating from v4 to v5
+
+Follow the guidance about [staying up to date with GOV.UK Frontend](https://frontend.design-system.service.gov.uk/staying-up-to-date/).
+
+When making the decision to migrate, consider your service’s current requirements. If you currently need to continue CSS support for legacy browsers like IE8, IE9, IE10, or need JavaScript support for IE11, you should not migrate to V5 at this time.
+
+You should also consider whether you will need to include extra time in your plan to split any of the service or 3rd party code. For example, in analytics some code might need to remain in `<script>` tags alongside GOV.UK Frontend running in `<script type="module">`.
+
+## Main changes to v5
+
+Read the details about the changes to v5 in [the release notes](https://github.com/alphagov/govuk-frontend/releases/tag/v5.0.0-beta.0).
+
+The new features include:
+
+- a new task list component
+- changes to the tag component
+- added focus styles for links with non-text content
+- the new link styles introduced in v3.12.0 are now enabled by default
+- customise button colours for dark backgrounds
+- precompiled CSS and JavaScript are now also available on [NPMJS.com](https://www.npmjs.com/package/govuk-frontend)
+
+There are actions you must make when migrating to v5.0.0. These consist of items to update, check or remove.
+
+Items you need to update:
+
+- the HTML for warning text if you’re not using Nunjucks - we've removed the `.govuk-warning-text__assistive` class and its styles from GOV.UK Frontend
+- package file paths - we've moved our package files into a directory called `dist` and have provided instructions for Node.js, bundlers, direct JavaScript includes, Sass imports and Nunjucks search paths
+
+Check whether these items still work as expected. They include your:
+
+- browser console - check for errors as the components now throw initialisation errors
+- Details component - this no longer uses JavaScript, and is no longer polyfilled in older browsers
+- Disabled buttons - the `disabled` attribute created using our Nunjucks macros no longer includes a value
+- mobile menu button in the Header component - we've removed some styles from the `.govuk-header__menu-button` class
+- Selects - The `govukSelect` macro will no longer include an empty value attribute for options that do not have a value set
+- inverse buttons - these components now use the `$govuk-brand-colour` setting
+- JavaScript polyfills, or code that relied on polyfills, for Internet Explorer (8-11) - we're no longer using polyfills for these browsers as JavaScript will not be loaded when its included using `<script type="module">`
+
+These are items you need to remove. These include:
+
+- the `.init()` function from individually instantiated components - components are now initialised automatically
+- Internet Explorer 8 stylesheets, settings and mixins - we no longer support Internet Explorer 8 (IE8) in GOV.UK Frontend or provide dedicated stylesheets for the browser
+- the fallback GOV.UK crown logo from your HTML - Frontend no longer supports IE8 so the fallback version is not needed
+- some font family Sass variables - we’ve removed `$govuk-font-family-gds-transport`, `$govuk-font-family-nta`, `$govuk-font-family-nta-tabular`
+- deprecated `.govuk-button--disabled` class
+- deprecated `.govuk-!-margin-static` and `.govuk-!-padding-static` classes
+- deprecated `.govuk-header__link--service-name` class
+- deprecated `.govuk-header__navigation--no-service-name` class
+
+There are also some changes that are recommendations only and some fixes.
