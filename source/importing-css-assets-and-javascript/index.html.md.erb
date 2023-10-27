@@ -93,7 +93,7 @@ To use the font and image assets from GOV.UK Frontend, you can either:
 
 ### Serve the assets from the GOV.UK Frontend assets folder - recommended
 
-Set up your routing so that requests for files in `<YOUR-SITE-URL>/assets` are served from `/node_modules/govuk-frontend/dist/govuk/assets`.
+Set up your routing so requests for files in `<YOUR-SITE-URL>/assets` are served from `/node_modules/govuk-frontend/dist/govuk/assets`.
 
 For example if you're using [express.js](https://expressjs.com/), add the following to your `app.js` file:
 
@@ -150,9 +150,9 @@ To import the JavaScript from GOV.UK Frontend, you can either:
 
 ### Add the JavaScript file to your HTML
 
-If you decide to add the JavaScript to your HTML, first either:
+If you decide to add the JavaScript to your HTML, you can do one of the following:
 
-- set up your routing so that requests for the JavaScript file are served from `node_modules/govuk-frontend/dist/govuk/govuk-frontend.min.js`
+- set up your routing so requests for the JavaScript file are served from `node_modules/govuk-frontend/dist/govuk/govuk-frontend.min.js`
 - copy the `node_modules/govuk-frontend/dist/govuk/govuk-frontend.min.js` file into your application
 
 Then import the JavaScript file before the closing `</body>` tag of your HTML page or page template, and run the `initAll` function to initialise all the components.
