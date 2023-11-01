@@ -23,6 +23,7 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           cache: npm
+          check-latest: true
           node-version-file: .nvmrc
 
       - uses: ruby/setup-ruby@v1
