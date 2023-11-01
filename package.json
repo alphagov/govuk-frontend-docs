@@ -14,5 +14,9 @@
     "sassdoc": "^2.7.4",
     "standard": "^17.1.0",
     "tap-mocha-reporter": "^5.0.4"
+  },
+  "engines": {
+    "node": "^20.9.0",
+    "npm": "^10.1.0"
   }
 }
