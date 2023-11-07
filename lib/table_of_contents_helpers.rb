@@ -36,4 +36,25 @@ module TableOfContentsHelpers
       @parent_page = nil
     end
   end
+
+  ##
+  # Forces a page configured hidden from the navigation with
+  # `hide_in_navigation: true` to be rendered in the navigation when
+  # `render_page_tree` runs in the block this method receives
+  #
+  # @example
+  #
+  #  with_page_in_navigation(a_page) do
+  #    render_page_tree(some_pages_including_a_page,...)
+  #  end
+  def with_page_in_navigation(page)
+    begin
+      original = page.data.hide_in_navigation
+      page.data.hide_in_navigation = false
+
+      yield
+    ensure
+      page.data.hide_in_navigation = original
+    end
+  end
 end
