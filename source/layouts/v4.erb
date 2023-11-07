@@ -13,8 +13,10 @@ wrap_layout :core do
     # so we exclude the rendering of child pages for the v4 index page
     v4_index = resources.find{ |r| r.path == 'v4/index.html' }
 
-    without_child_pages_for(v4_index) do
-      render_page_tree(resources, current_page, config, html)
+    with_page_in_navigation(v4_index) do
+      without_child_pages_for(v4_index) do
+        render_page_tree(resources, current_page, config, html)
+      end
     end
   end
 
