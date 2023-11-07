@@ -2,15 +2,20 @@
 wrap_layout :core do
   html = yield
 
-  directory_name = current_page.path.split("/").first
+  # For v4 pages, we only want the pages under the `v4` folder
   resources = sitemap.resources.select do |r|
-    r.path.start_with?(directory_name)
+    r.path.start_with?('v4/')
   end
 
-  puts resources.find{ |r| r.path == 'v4/index.html'}.children.inspect
-
   content_for :sidebar do
-    multi_page_table_of_contents(resources, current_page, config, html)
+    # Because all the pages for `v4` are children of `v4/index.html`,
+    # they'd appear as items under the v4 index in the sidebar, which we don't want
+    # so we exclude the rendering of child pages for the v4 index page
+    v4_index = resources.find{ |r| r.path == 'v4/index.html' }
+
+    without_child_pages_for(v4_index) do
+      render_page_tree(resources, current_page, config, html)
+    end
   end
 
   html
