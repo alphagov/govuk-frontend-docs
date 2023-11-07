@@ -1,5 +1,6 @@
 require "govuk_tech_docs"
 require "lib/sassdocs_helpers"
+require "lib/table_of_contents_helpers"
 
 # Patch the GovukTechDocs cleanly
 # https://www.justinweiss.com/articles/3-ways-to-monkey-patch-without-making-a-mess/
@@ -20,6 +21,8 @@ config[:tech_docs][:prevent_indexing] = (ENV["GITHUB_REF"] != "refs/heads/main")
 
 helpers do
   include SassdocsHelpers
+  include TableOfContentsHelpers
+  
   def markdown(content = nil)
     concat Tilt["markdown"].new(context: @app) { content }.render
   end
