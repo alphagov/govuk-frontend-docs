@@ -5,7 +5,7 @@ weight: 76
 
 # Configure components with JavaScript
 
-You can configure some of the components in GOV.UK Frontend to customise their behaviour or to [localise their JavaScript to use a language other than English](/localise-govuk-frontend/).
+You can configure some of the components in GOV.UK Frontend to customise their behaviour or to [localise their JavaScript to use a language other than English](../localise-govuk-frontend/).
 
 You can configure a component by:
 
@@ -24,7 +24,7 @@ You can find the Nunjucks macro options by selecting the Nunjucks tab in the exa
 
 If you're using HTML, you can pass configuration by adding data attributes to the component's outermost element (the element that has the `data-module` attribute). This is how our Nunjucks macros forward the configuration to the JavaScript components in the browser. Data attributes use kebab-case.
 
-Some configuration options are grouped under a namespace to keep related options together. For example, [the localisation options](/localise-govuk-frontend/) are grouped under the `i18n` namespace. When using these options, include the namespace as a prefix followed by a period as part of the attribute name.
+Some configuration options are grouped under a namespace to keep related options together. For example, [the localisation options](../localise-govuk-frontend/) are grouped under the `i18n` namespace. When using these options, include the namespace as a prefix followed by a period as part of the attribute name.
 
 For options accepting object values, you'll need to set one attribute for each key of that object. Suffix the attribute name (including any namespace) with a period and the name of the key in the object.
 
@@ -48,7 +48,7 @@ If your configuration contains [quotes or other reserved HTML characters](https:
 
 Configuration is read from data attributes when the component is initialised. Changes to the data attributes made after the component has been initialised will have no effect on the behaviour of the component.
 
-Read the [JavaScript API Reference](/javascript-api-reference/) for the configuration accepted by each component. You'll need to convert the configuration names into kebab-case.
+Read the [JavaScript API Reference](../javascript-api-reference/) for the configuration accepted by each component. You'll need to convert the configuration names into kebab-case.
 
 ## Passing configuration to a new instance of a component in JavaScript
 
@@ -63,7 +63,7 @@ The object should include key-value pairs. The keys should be written in camelCa
 
 Components will merge the configuration provided at initialisation with those provided as data-attributes. If the same option is defined in both, the one provided by data-attributes will take precedence.
 
-Some configuration options might accept object values or be grouped under a namespace to keep related things together. For example, [the localisation options](/localise-govuk-frontend/) are grouped under the `i18n` namespace. When using these options, use nested objects. For example:
+Some configuration options might accept object values or be grouped under a namespace to keep related things together. For example, [the localisation options](../localise-govuk-frontend/) are grouped under the `i18n` namespace. When using these options, use nested objects. For example:
 
 ```javascript
 new CharacterCount($element, {
@@ -83,7 +83,7 @@ new CharacterCount($element, {
 })
 ```
 
-Read the [JavaScript API Reference](/javascript-api-reference/) to see what configuration each component accepts.
+Read the [JavaScript API Reference](../javascript-api-reference/) to see what configuration each component accepts.
 
 ## Passing configuration using the initAll function
 
