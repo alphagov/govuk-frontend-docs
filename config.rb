@@ -22,10 +22,11 @@ config[:tech_docs][:prevent_indexing] = (ENV["GITHUB_REF"] != "refs/heads/main")
 helpers do
   include SassdocsHelpers
   include TableOfContentsHelpers
-  
+
   def markdown(content = nil)
     concat Tilt["markdown"].new(context: @app) { content }.render
   end
 end
 
-page "v4/*", layout: :v4, parent: /v4/
+page "v4/*", layout: :v4, data: { parent: "/v4/" }
+page "*", data: { parent: "/" }
