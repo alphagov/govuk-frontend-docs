@@ -1,4 +1,5 @@
 require "govuk_tech_docs"
+require "lib/header_menu_fix_extension"
 require "lib/sassdocs_helpers"
 require "lib/table_of_contents_helpers"
 
@@ -11,10 +12,13 @@ config[:build_dir] = "deploy/public"
 
 GovukTechDocs.configure(self)
 
+::Middleman::Extensions.register(:header_menu_fix, HeaderMenuFixExtension)
+activate :header_menu_fix
+
 # Load our own version of GOV.UK Frontend before the one registered by the
 # tech_docs_gem otherwise we may be using styles and scripts
 # from an outdated version the time for the tech_docs_gem to catch up
-sprockets.prepend_path File.join(__dir__, "./node_modules/govuk-frontend/")
+# sprockets.prepend_path File.join(__dir__, "./node_modules/govuk-frontend/")
 
 # Prevent pages from being indexed unless GitHub Actions is building the main branch
 config[:tech_docs][:prevent_indexing] = (ENV["GITHUB_REF"] != "refs/heads/main")
