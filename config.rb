@@ -1,4 +1,5 @@
 require "govuk_tech_docs"
+require "lib/header_menu_fix_extension"
 require "lib/sassdocs_helpers"
 require "lib/table_of_contents_helpers"
 
@@ -10,6 +11,9 @@ GovukTechDocs::TechDocsHTMLRenderer.include Ext::GovukTechDocs::TechDocsHTMLRend
 config[:build_dir] = "deploy/public"
 
 GovukTechDocs.configure(self)
+
+::Middleman::Extensions.register(:header_menu_fix, HeaderMenuFixExtension)
+activate :header_menu_fix
 
 # Load our own version of GOV.UK Frontend before the one registered by the
 # tech_docs_gem otherwise we may be using styles and scripts
