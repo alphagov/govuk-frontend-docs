@@ -2,6 +2,8 @@
 wrap_layout :core do
   html = yield
 
+  content_for(:toc_module, "in-page-navigation")
+
   # For v4 pages, we only want the pages under the `v4` folder
   resources = sitemap.resources.select do |r|
     r.path.start_with?('v4/')
