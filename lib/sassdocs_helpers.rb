@@ -4,10 +4,10 @@ module SassdocsHelpers
   ORDER = %w[settings tools helpers].freeze
 
   def format_sassdoc_data(data)
-    raise "No data in data/sassdocs.json, run `npm install` to generate." unless data.respond_to?(:sassdoc)
+    raise "No data in data/sassdocs.json, run `npm install` to generate." if data.nil?
 
     # Remove private API entries
-    public_entries = data.sassdoc.select { |item| item.access == "public" }
+    public_entries = data.select { |item| item.access == "public" }
     # Remove vendored files, for example SassMQ
     public_entries = public_entries.reject { |item| item.file.path.start_with?("vendor") }
     # Group the items by their 'group', for example 'Settings' or 'Helpers'

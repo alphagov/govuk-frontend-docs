@@ -28,29 +28,27 @@ RSpec.describe SassdocsHelpers do
   describe "#format_sassdoc_data" do
     it "raises an error if there is no data" do
       expect {
-        fixture = dothash({})
+        fixture = dothash(nil)
         @helper.format_sassdoc_data(fixture)
       }.to raise_error("No data in data/sassdocs.json, run `npm install` to generate.")
     end
     it "removes private entries" do
-      fixture = dothash({
-        sassdoc: [
-          {
-            access: "public",
-            group: %w[public],
-            file: {
-              path: "public.scss",
-            },
+      fixture = dothash([
+        {
+          access: "public",
+          group: %w[public],
+          file: {
+            path: "public.scss",
           },
-          {
-            access: "private",
-            group: %w[private],
-            file: {
-              path: "private.scss",
-            },
+        },
+        {
+          access: "private",
+          group: %w[private],
+          file: {
+            path: "private.scss",
           },
-        ],
-      })
+        },
+      ])
       groups = @helper.format_sassdoc_data(fixture)
       first_group = groups.first
       group_heading = first_group.first
@@ -58,24 +56,22 @@ RSpec.describe SassdocsHelpers do
       expect(group_heading).to eq("public")
     end
     it "removes vendored entries" do
-      fixture = dothash({
-        sassdoc: [
-          {
-            access: "public",
-            group: %w[public],
-            file: {
-              path: "public.scss",
-            },
+      fixture = dothash([
+        {
+          access: "public",
+          group: %w[public],
+          file: {
+            path: "public.scss",
           },
-          {
-            access: "public",
-            group: %w[vendored],
-            file: {
-              path: "vendored.scss",
-            },
+        },
+        {
+          access: "public",
+          group: %w[vendored],
+          file: {
+            path: "vendored.scss",
           },
-        ],
-      })
+        },
+      ])
       groups = @helper.format_sassdoc_data(fixture)
       first_group = groups.first
       group_heading = first_group.first
@@ -83,38 +79,36 @@ RSpec.describe SassdocsHelpers do
       expect(group_heading).to eq("public")
     end
     it "groups entries sorted into groups" do
-      fixture = dothash({
-        sassdoc: [
-          {
-            access: "public",
-            group: %w[helpers/colour],
-            file: {
-              path: "first.scss",
-            },
+      fixture = dothash([
+        {
+          access: "public",
+          group: %w[helpers/colour],
+          file: {
+            path: "first.scss",
           },
-          {
-            access: "public",
-            group: %w[helpers],
-            file: {
-              path: "second.scss",
-            },
+        },
+        {
+          access: "public",
+          group: %w[helpers],
+          file: {
+            path: "second.scss",
           },
-          {
-            access: "public",
-            group: %w[tools/foo],
-            file: {
-              path: "third.scss",
-            },
+        },
+        {
+          access: "public",
+          group: %w[tools/foo],
+          file: {
+            path: "third.scss",
           },
-          {
-            access: "public",
-            group: %w[helpers/colour],
-            file: {
-              path: "fourth.scss",
-            },
+        },
+        {
+          access: "public",
+          group: %w[helpers/colour],
+          file: {
+            path: "fourth.scss",
           },
-        ],
-      })
+        },
+      ])
       groups = @helper.format_sassdoc_data(fixture)
 
       expect(groups).to eq([
@@ -122,19 +116,19 @@ RSpec.describe SassdocsHelpers do
          [
            ["tools/foo",
             [
-              fixture.sassdoc[2],
+              fixture[2],
             ]],
          ]],
         ["helpers",
          [
            ["helpers/colour",
             [
-              fixture.sassdoc[0],
-              fixture.sassdoc[3],
+              fixture[0],
+              fixture[3],
             ]],
            ["helpers",
             [
-              fixture.sassdoc[1],
+              fixture[1],
             ]],
          ]],
       ])

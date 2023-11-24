@@ -1,0 +1,26 @@
+<%
+wrap_layout :core do
+  html = yield
+
+  content_for(:toc_module, "in-page-navigation")
+
+  # For v4 pages, we only want the pages under the `v4` folder
+  resources = sitemap.resources.select do |r|
+    r.path.start_with?('v4/')
+  end
+
+  content_for :sidebar do
+    # Because all the pages for `v4` are children of `v4/index.html`,
+    # they'd appear as items under the v4 index in the sidebar, which we don't want
+    # so we exclude the rendering of child pages for the v4 index page
+    v4_index = resources.find{ |r| r.path == 'v4/index.html' }
+
+    with_page_in_navigation(v4_index) do
+      without_child_pages_for(v4_index) do
+        render_page_tree(resources, current_page, config, html)
+      end
+    end
+  end
+
+  html
+end %>
