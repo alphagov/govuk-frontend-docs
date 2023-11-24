@@ -1,5 +1,5 @@
 ---
-title: Localise GOV.UK Frontend
+title: Localise GOV.UK Frontend (v4.x)
 weight: 47
 ---
 
@@ -118,12 +118,10 @@ With Nunjucks
 With data attributes
 
 ```html
-<div
-  data-module="character-count"
+<div data-module="character-count" 
   data-i18n.characters-under-limit.other="%{count} characters to go"
   data-i18n.characters-under-limit.one="One character to go"
-  data-i18n.characters-over-limit.one="One character too many"
->
+  data-i18n.characters-over-limit.one="One character too many">
   <!-- The `other` key for `characters-over-limit` will be our default -->
 ```
 
@@ -141,5 +139,5 @@ new CharacterCount($element, {
       // The `other` key for `characterOverLimit` will be our default
     }
   }
-})
+}).init()
 ```

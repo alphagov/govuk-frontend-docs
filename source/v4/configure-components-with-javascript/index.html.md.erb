@@ -1,5 +1,5 @@
 ---
-title: Configure components with JavaScript
+title: Configure components with JavaScript (v4.x)
 weight: 76
 ---
 
@@ -35,13 +35,11 @@ This example shows the opening tag of a character count component with some conf
 - two plural forms for when users are under the specified limit of characters (namespaced configuration + object value)
 
 ```html
-<div
-  data-module="govuk-character-count"
+<div data-module="govuk-character-count"
   data-maxlength="500"
   data-i18n.characters-at-limit="No characters left"
   data-i18n.characters-under-limit.other="%{count} characters to go"
-  data-i18n.characters-under-limit.one="%{count} character to go"
->
+  data-i18n.characters-under-limit.one="%{count} character to go">
 ```
 
 If your configuration contains [quotes or other reserved HTML characters](https://developer.mozilla.org/en-US/docs/Glossary/Entity#reserved_characters), you'll need to escape those characters.
@@ -67,20 +65,15 @@ Some configuration options might accept object values or be grouped under a name
 
 ```javascript
 new CharacterCount($element, {
-  // Non namespaced
-  maxlength: 500,
-
-  // i18n namespace
-  i18n: {
-    charactersAtLimit: 'No characters left',
-
-    // Object value
-    charactersUnderLimit: {
-      other: '%{count} characters to go',
-      one: '%{count} character to go'
+  maxlength: 500, // Non namespaced
+  i18n: { // i18n namespace
+    charactersAtLimit: "No characters left",
+    charactersUnderLimit: { // Object value
+      other: "%{count} characters to go",
+      one: "%{count} character to go"
     }
   }
-})
+}).init()
 ```
 
 Read the [JavaScript API Reference](../javascript-api-reference/) to see what configuration each component accepts.
@@ -90,15 +83,12 @@ Read the [JavaScript API Reference](../javascript-api-reference/) to see what co
 You can pass configuration for components when initialising GOV.UK Frontend using the `initAll` function. You can do this by including key-value pairs of camel-cased component names and configuration objects. This is the same method you would use to pass them when creating an instance of the component. For example:
 
 ```javascript
-initAll({
+window.GOVUKFrontend.initAll({
   characterCount: {
-    // Non namespaced
-    maxlength: 500,
-
-    // i18n namespace
-    i18n: {
-      charactersAtLimit: 'No characters left'
+    maxlength: 500, // Non namespaced
+    i18n: { // i18n namespace
+      charactersAtLimit: "No characters left"
     }
-  }
+  },
 })
 ```

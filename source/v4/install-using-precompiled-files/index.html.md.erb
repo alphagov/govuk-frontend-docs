@@ -1,8 +1,6 @@
 ---
-title: Install using precompiled files
+title: Install using precompiled files (v4.x)
 weight: 11
-old_paths:
-  - /installing-from-dist/index.html
 ---
 
 # Install using precompiled files
@@ -25,9 +23,9 @@ You’ll not be able to:
 
 1. Download the `release-<VERSION-NUMBER>.zip` file at the bottom of the [latest GOV.UK Frontend release note](https://github.com/alphagov/govuk-frontend/releases/latest).
 2. Unzip the zip file.
-3. Copy the `assets` folder to the root of your project’s public folder. This is so, for example, `<YOUR-SITE-URL>/assets/govuk-crest.png` shows the `govuk-crest.png` image in your users’ browsers.
-4. Copy the `.css` and `.css.map` files to a stylesheets folder in the root of your project’s public folder. This is so, for example, `<YOUR-SITE-URL>/stylesheets/govuk-frontend-<VERSION-NUMBER>.min.css` shows the CSS file in your users’ browsers.
-5. Copy the `.js` and `.js.map` files to a JavaScripts folder in the root of your project’s public folder. This is so, for example, `<YOUR-SITE-URL>/javascripts/govuk-frontend-<VERSION-NUMBER>.min.js` shows the JavaScript file in your users’ browsers.
+3. Copy the `assets` folder to the root of your project’s public folder, so that for example `<YOUR-SITE-URL>/assets/govuk-logotype-crown.png` shows the `govuk-logotype-crown.png` image in your users’ browsers.
+4. Copy the 2 `.css` files to a stylesheets folder in the root of your project’s public folder, so that for example `<YOUR-SITE-URL>/stylesheets/govuk-frontend-<VERSION-NUMBER>.min.css` shows the CSS file in your users’ browsers.
+5. Copy the `.js` file to a JavaScript folder in the root of your project’s public folder, so that for example `<YOUR-SITE-URL>/javascript/govuk-frontend-<VERSION-NUMBER>.min.js` shows the JavaScript file in your users’ browsers.
 
 ## Check an example page
 
@@ -35,23 +33,30 @@ You’ll not be able to:
 
     ```html
     <!DOCTYPE html>
-    <html lang="en" class="govuk-template">
+    <html lang="en" class="govuk-template ">
       <head>
         <title>Example - GOV.UK</title>
         <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-        <link rel="stylesheet" href="/stylesheets/govuk-frontend-<VERSION-NUMBER>.min.css">
+        <!--[if !IE 8]><!-->
+          <link rel="stylesheet" href="/stylesheets/govuk-frontend-<VERSION-NUMBER>.min.css">
+        <!--<![endif]-->
+        <!--[if IE 8]>
+          <link rel="stylesheet" href="/stylesheets/govuk-frontend-ie8-<VERSION-NUMBER>.min.css">
+        <![endif]-->
       </head>
-      <body class="govuk-template__body">
-        <script>document.body.className += ' js-enabled' + ('noModule' in HTMLScriptElement.prototype ? ' govuk-frontend-supported' : '');</script>
+      <body class="govuk-template__body ">
+        <script>
+          document.body.className = ((document.body.className) ? document.body.className + ' js-enabled' : 'js-enabled');
+        </script>
         <!-- component HTML -->
-        <script type="module" src="/javascripts/govuk-frontend-<VERSION-NUMBER>.min.js"></script>
-        <script type="module">
-          import { initAll } from '/javascripts/govuk-frontend-<VERSION-NUMBER>.min.js'
-          initAll()
+        <script src="/javascript/govuk-frontend-<VERSION-NUMBER>.min.js"></script>
+        <script>
+          window.GOVUKFrontend.initAll()
         </script>
       </body>
     </html>
     ```
+
 
 2. Replace `<VERSION-NUMBER>` so the 3 filenames match the files you [copied from GOV.UK Frontend's GitHub repo](#copy-the-files).
 
@@ -64,3 +69,7 @@ You’ll not be able to:
 You can now get the full code for page layouts and other components from the [Design System website](https://design-system.service.gov.uk/).
 
 If the accordion does not work, you can [find out more about how to import GOV.UK Frontend's CSS and JavaScript](../importing-css-assets-and-javascript/#import-css-assets-and-javascript).
+
+
+
+

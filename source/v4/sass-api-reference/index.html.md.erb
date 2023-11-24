@@ -1,11 +1,11 @@
 ---
-title: Sass API reference
+title: Sass API reference (v4.x)
 weight: 90
 ---
 
 # Sass API reference
 
-<% format_sassdoc_data(data[:sassdoc]).each do |group_name, subgroups| %>
+<% format_sassdoc_data(data['sassdoc-v4']).each do |group_name, subgroups| %>
 
 ## <%= group_heading(group_name) %>
 
@@ -27,49 +27,40 @@ weight: 90
 | ---- | ----------- | ---- | ------------- |
 <% parameters_table(item.parameter).each do |param| %>
 | # <%= param.name %> | <%= param.description %> | <%= param.type %> | <%= param.default_value %> |
-
 <% end %>
 <% end %>
 
 <% if item.deprecated || item.context.type == 'mixin' %>
-
 ##### Usage
 
 <% if item.deprecated %>
-  <% partial(:warning_text) do %>
-    <%= markdown("Deprecated: " +item.deprecated) %>
-  <% end %>
+    <% partial(:warning_text) do %>
+        <%= markdown("Deprecated: " +item.deprecated) %>
+    <% end %>
 <% end %>
 
 <% if item.context.type == 'mixin' %>
-
 ```scss
 @include <%= "#{item.context.name}#{inline_parameters(item.parameter)}#{mixin_trailing_code(item.context.code)}" %>
 ```
-
 <% end %>
 <% end %>
 
 <% if item.context.type == 'variable' %>
-
 ##### Default value
-
 ```scss
 $<%= item.context.name %>: <%= item.context.value %>;
 ```
-
 <% end %>
 
 <% if item.example %>
 
 <% item.example.each do |example| %>
-
 ##### Example<% if example.description %>: <%= example.description %><% end %>
 
 ```<%= example.type %>
 <%= example.code %>
 ```
-
 <% end %>
 <% end %>
 
