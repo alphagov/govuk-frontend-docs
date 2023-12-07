@@ -25,7 +25,7 @@ You’ll not be able to:
 
 1. Download the `release-<VERSION-NUMBER>.zip` file at the bottom of the [latest GOV.UK Frontend release note](https://github.com/alphagov/govuk-frontend/releases/latest).
 2. Unzip the zip file.
-3. Copy the `assets` folder to the root of your project’s public folder. This is so, for example, `<YOUR-SITE-URL>/assets/govuk-crest.png` shows the `govuk-crest.png` image in your users’ browsers.
+3. Copy the `assets` folder to the root of your project’s public folder. This is so, for example, `<YOUR-SITE-URL>/assets/images/govuk-crest.png` shows the `govuk-crest.png` image in your users’ browsers.
 4. Copy the `.css` and `.css.map` files to a stylesheets folder in the root of your project’s public folder. This is so, for example, `<YOUR-SITE-URL>/stylesheets/govuk-frontend-<VERSION-NUMBER>.min.css` shows the CSS file in your users’ browsers.
 5. Copy the `.js` and `.js.map` files to a JavaScripts folder in the root of your project’s public folder. This is so, for example, `<YOUR-SITE-URL>/javascripts/govuk-frontend-<VERSION-NUMBER>.min.js` shows the JavaScript file in your users’ browsers.
 
@@ -39,6 +39,7 @@ You’ll not be able to:
       <head>
         <title>Example - GOV.UK</title>
         <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+        <link rel="manifest" href="/assets/manifest.json">
         <link rel="stylesheet" href="/stylesheets/govuk-frontend-<VERSION-NUMBER>.min.css">
       </head>
       <body class="govuk-template__body">
@@ -59,7 +60,7 @@ You’ll not be able to:
 
 4. Replace `<!-- component HTML -->` with the accordion HTML you copied.
 
-5. Run your application - you can check it works the same way as the [Design System accordion example](https://design-system.service.gov.uk/components/accordion/default/index.html) by selecting the buttons and checking the accordion ‘shows’ and ‘hides’ sections.
+5. Run your application and check for errors in the browser's console - it should work the same way as the [Design System accordion example](https://design-system.service.gov.uk/components/accordion/default/index.html) by selecting the buttons and checking the accordion ‘shows’ and ‘hides’ sections.
 
 You can now get the full code for page layouts and other components from the [Design System website](https://design-system.service.gov.uk/).
 
