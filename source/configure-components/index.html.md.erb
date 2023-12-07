@@ -25,6 +25,7 @@ The examples below follow our recommended [Import JavaScript using a bundler](..
 
 - [configure individual component instances](#configure-individual-component-instances)
 - [configure all components using the initAll function](#configure-all-components-using-the-initall-function)
+- [check for JavaScript errors in the browser console](#javascript-errors-in-the-browser-console)
 
 ### Configure individual component instances
 
@@ -84,6 +85,18 @@ initAll({
 ```
 
 Read the [JavaScript API Reference](../javascript-api-reference/) for the configuration accepted by `initAll`.
+
+### JavaScript errors in the browser console
+
+Errors from components will be logged in the browser's console.
+
+For example, when:
+
+* GOV.UK Frontend is not supported in the current browser
+* Component templates have missing changes from our release notes
+* Component JavaScript configuration does not match our documentation
+
+You should check your application works without errors or some components will not work correctly.
 
 ## Adding HTML data attributes
 
