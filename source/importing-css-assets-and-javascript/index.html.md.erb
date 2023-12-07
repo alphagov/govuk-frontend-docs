@@ -204,22 +204,6 @@ Then import the JavaScript file before the closing `</body>` tag of your HTML pa
 
 Read about how we log [JavaScript errors in the browser console](../configure-components/#javascript-errors-in-the-browser-console) to check GOV.UK Frontend has been set up correctly.
 
-#### Select and initialise an individual component
-
-You can select and initialise a specific component by using its `data-module` attribute. For example, use `govuk-radios` to initialise the first radio component on a page:
-
-```html
-  <script type="module">
-    import { Radios } from '<YOUR-JAVASCRIPTS-FOLDER>/govuk-frontend.min.js'
-    const $radio = document.querySelector('[data-module="govuk-radios"]')
-    if ($radio) {
-      new Radios($radio)
-    }
-  </script>
-```
-
-When initialised individually, errors are thrown rather than logged. You must check your application works without errors or some components will not work correctly.
-
 ### Import JavaScript using a bundler
 
 If you decide to import using a bundler, we recommend you use `import` to only import the JavaScript for components you're using in your service. For example:

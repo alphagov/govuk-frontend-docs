@@ -38,6 +38,24 @@ Although component configuration objects are optional, configuration can still b
 
 To learn more about how configuration is passed from Nunjucks macros to HTML data attributes, see advanced examples in [the localisation options](../localise-govuk-frontend/).
 
+#### Without configuration object
+
+You can select and initialise a component using its `data-module` attribute. For example, use `govuk-character-count` to initialise the first character count component on a page:
+
+```javascript
+import { CharacterCount } from 'govuk-frontend'
+
+const $element = document.querySelector('[data-module="govuk-character-count"]')
+
+if ($element) {
+  new CharacterCount($element)
+}
+```
+
+When initialised individually, errors are thrown rather than logged. You must check your application works without errors or some components will not work correctly.
+
+#### With configuration object
+
 You can pass a configuration object into the constructor's second argument when creating an instance of a component in JavaScript:
 
 ```javascript
