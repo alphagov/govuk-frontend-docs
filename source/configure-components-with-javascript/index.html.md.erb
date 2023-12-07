@@ -14,6 +14,8 @@ You can configure a component by:
 - passing a JavaScript object when creating an instance of a component
 - using the `initAll` function
 
+The examples below follow our recommended [Import JavaScript using a bundler](../importing-css-assets-and-javascript/#import-javascript-using-a-bundler) approach.
+
 ## Setting Nunjucks macro options
 
 If you're using the Nunjucks macros, you will find all of the configuration options for a component published on the GOV.UK Design System website.
@@ -66,6 +68,8 @@ Components will merge the configuration provided at initialisation with those pr
 Some configuration options might accept object values or be grouped under a namespace to keep related things together. For example, [the localisation options](../localise-govuk-frontend/) are grouped under the `i18n` namespace. When using these options, use nested objects. For example:
 
 ```javascript
+import { CharacterCount } from 'govuk-frontend'
+
 new CharacterCount($element, {
   // Non namespaced
   maxlength: 500,
@@ -90,6 +94,8 @@ Read the [JavaScript API Reference](../javascript-api-reference/) to see what co
 You can pass configuration for components when initialising GOV.UK Frontend using the `initAll` function. You can do this by including key-value pairs of camel-cased component names and configuration objects. This is the same method you would use to pass them when creating an instance of the component. For example:
 
 ```javascript
+import { initAll } from 'govuk-frontend'
+
 initAll({
   characterCount: {
     // Non namespaced
