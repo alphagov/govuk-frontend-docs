@@ -160,6 +160,10 @@ You can also use your own function to generate paths, for example if you're usin
 
 ## JavaScript
 
+GOV.UK Frontend JavaScript must be run with `<script type="module">`.
+
+This protects older browsers, including all versions of Internet Explorer, from running modern JavaScript that it does not support. Read about our [browser support](../browser-support/) for more information.
+
 ### Before you start
 
 You'll need to add the following to the top of the `<body class="govuk-template__body">` section of your page template if you're not [using our Nunjucks macros](/use-nunjucks/).
