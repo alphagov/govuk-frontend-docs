@@ -96,6 +96,12 @@ For example, when:
 * Component templates have missing changes from our release notes
 * Component JavaScript configuration does not match our documentation
 
+If the HTML snippet from [Import CSS, assets and JavaScript](../importing-css-assets-and-javascript/#before-you-start) was not added to the top of the `<body class="govuk-template__body">` section you'll see this error:
+
+```
+SupportError: GOV.UK Frontend initialised without `<body class="govuk-frontend-supported">` from template `<script>` snippet
+```
+
 You should check your application works without errors or some components will not work correctly.
 
 ## Adding HTML data attributes
