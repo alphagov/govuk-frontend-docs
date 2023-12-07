@@ -14,6 +14,8 @@ You can configure a component by:
 - passing a JavaScript object when creating an instance of a component
 - using the `initAll` function
 
+Read the [JavaScript API Reference](../javascript-api-reference/) for the configuration accepted by each component and any errors that might be thrown during initialisation.
+
 The examples below follow our recommended [Import JavaScript using a bundler](../importing-css-assets-and-javascript/#import-javascript-using-a-bundler) approach.
 
 ## Setting Nunjucks macro options
@@ -50,7 +52,7 @@ If your configuration contains [quotes or other reserved HTML characters](https:
 
 Configuration is read from data attributes when the component is initialised. Changes to the data attributes made after the component has been initialised will have no effect on the behaviour of the component.
 
-Read the [JavaScript API Reference](../javascript-api-reference/) for the configuration accepted by each component. You'll need to convert the configuration names into kebab-case.
+You'll need to convert the [JavaScript API Reference](../javascript-api-reference/) configuration options into kebab-case when using data attributes in HTML.
 
 ## Passing configuration to a new instance of a component in JavaScript
 
@@ -87,7 +89,7 @@ new CharacterCount($element, {
 })
 ```
 
-Read the [JavaScript API Reference](../javascript-api-reference/) to see what configuration each component accepts.
+Read the [JavaScript API Reference](../javascript-api-reference/) for the configuration accepted by each component.
 
 ## Passing configuration using the initAll function
 
@@ -108,3 +110,5 @@ initAll({
   }
 })
 ```
+
+Read the [JavaScript API Reference](../javascript-api-reference/) for the configuration accepted by `initAll`.
