@@ -208,7 +208,9 @@ Read about how we log [JavaScript errors in the browser console](../configure-co
 
 ### Import JavaScript using a bundler
 
-If you decide to import using a bundler, we recommend you use `import` to only import the JavaScript for components you're using in your service. For example:
+If you decide to import using a bundler like [Rollup](https://rollupjs.org/) or [webpack](https://webpack.js.org/), we recommend you use `import` to only import the JavaScript for components you're using in your service.
+
+#### Import individual components
 
 ```javascript
 import { SkipLink, Radios } from 'govuk-frontend'
@@ -221,6 +223,8 @@ $radios.forEach(($radio) => {
   new Radios($radio)
 })
 ```
+
+#### Import and initialise all components using the initAll function
 
 If you need to import all of GOV.UK Frontend's components, then run the `initAll` function to initialise them:
 
