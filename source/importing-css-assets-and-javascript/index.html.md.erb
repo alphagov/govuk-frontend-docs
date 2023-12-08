@@ -265,10 +265,10 @@ Bundlers like [Browserify](http://browserify.org/) can use `require()` to import
 const { Accordion } = require('govuk-frontend')
 ```
 
-Sprockets (Ruby library) can use `require` directives to import UMD bundles:
+Rails Assets Pipeline or Sprockets can use `require` directives to import UMD bundles:
 
 ```javascript
-// = require govuk-frontend/dist/govuk/components/accordion/accordion.bundle.js
+// = require govuk/components/accordion/accordion.bundle.js
 const { Accordion } = window.GOVUKFrontend;
 ```
 
