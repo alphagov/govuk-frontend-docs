@@ -46,10 +46,7 @@ You can select and initialise a component using its `data-module` attribute. For
 import { CharacterCount } from 'govuk-frontend'
 
 const $element = document.querySelector('[data-module="govuk-character-count"]')
-
-if ($element) {
-  new CharacterCount($element)
-}
+new CharacterCount($element)
 ```
 
 When initialised individually, errors are thrown rather than logged. You must check your application works without errors or some components will not work correctly.
@@ -63,20 +60,18 @@ import { CharacterCount } from 'govuk-frontend'
 
 const $element = document.querySelector('[data-module="govuk-character-count"]')
 
-if ($element) {
-  new CharacterCount($element, {
-    maxlength: 500,
-    i18n: {
-      charactersAtLimit: 'No characters left',
+new CharacterCount($element, {
+  maxlength: 500,
+  i18n: {
+    charactersAtLimit: 'No characters left',
 
-      // Object value
-      charactersUnderLimit: {
-        other: '%{count} characters to go',
-        one: '%{count} character to go'
-      }
+    // Object value
+    charactersUnderLimit: {
+      other: '%{count} characters to go',
+      one: '%{count} character to go'
     }
-  })
-}
+  }
+})
 ```
 
 Read the [JavaScript API Reference](../javascript-api-reference/) for the configuration accepted by each component.

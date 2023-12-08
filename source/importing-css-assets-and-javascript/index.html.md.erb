@@ -212,9 +212,7 @@ If you decide to import using a bundler, we recommend you use `import` to only i
 import { SkipLink, Radios } from 'govuk-frontend'
 
 const $skipLink = document.querySelector('[data-module="govuk-skip-link"]')
-if ($skipLink) {
-  new SkipLink($skipLink)
-}
+new SkipLink($skipLink)
 
 const $radios = document.querySelectorAll('[data-module="govuk-radios]')
 $radios.forEach(($radio) => {
