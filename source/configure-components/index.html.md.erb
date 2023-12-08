@@ -19,7 +19,7 @@ If you're using the Nunjucks macros, you can read about [configuring a component
 
 ## Passing JavaScript configuration
 
-Read the [JavaScript API Reference](../javascript-api-reference/) for the configuration accepted by each component.
+Read the [JavaScript API Reference](../javascript-api-reference/) for the list of options in each component configuration.
 
 The examples below follow our recommended [Import JavaScript using a bundler](../importing-css-assets-and-javascript/#import-javascript-using-a-bundler) approach and demonstrate how to:
 
@@ -34,7 +34,7 @@ Component constructors accept two arguments:
 1. The HTML element that represents the component.
 2. An optional configuration object.
 
-Although component configuration objects are optional, configuration can still be provided or overridden by [HTML data attributes](#adding-html-data-attributes).
+Although JavaScript configuration objects are optional, configuration can still be provided or overridden by [HTML data attributes](#adding-html-data-attributes).
 
 To learn more about how configuration is passed from Nunjucks macros to HTML data attributes, see advanced examples in [the localisation options](../localise-govuk-frontend/).
 
@@ -74,13 +74,13 @@ new CharacterCount($element, {
 })
 ```
 
-Read the [JavaScript API Reference](../javascript-api-reference/) for the configuration accepted by each component.
+Read the [JavaScript API Reference](../javascript-api-reference/) for the list of options in each component configuration.
 
 ### Configure all components using the initAll function
 
 You can pass configuration for components when initialising GOV.UK Frontend using the `initAll` function.
 
-You can do this by including key-value pairs of camel-cased component names with their configuration object values:
+You can do this by including key-value pairs of camel-cased component names with their configuration options:
 
 ```javascript
 import { initAll } from 'govuk-frontend'
@@ -109,7 +109,7 @@ if ($element) {
 }
 ```
 
-Read the [JavaScript API Reference](../javascript-api-reference/) for the configuration accepted by `initAll`.
+Read the [JavaScript API Reference](../javascript-api-reference/) for the list of components in the `initAll` configuration.
 
 ### JavaScript errors in the browser console
 
