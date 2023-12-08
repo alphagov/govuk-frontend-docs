@@ -7,3 +7,8 @@
   from = "/security.txt"
   to = "https://vdp.cabinetoffice.gov.uk/.well-known/security.txt"
   status = 200 # Proxy rather than redirect
+
+[[redirects]]
+  from = "/configure-components-with-javascript/"
+  to = "/configure-components/"
+  status = 301
