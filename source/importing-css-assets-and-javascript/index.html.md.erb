@@ -240,22 +240,6 @@ initAll()
 
 We encourage the use of ECMAScript (ES) modules. For projects that cannot use them and require UMD or `window` globals, our package contains `.bundle.js` files.
 
-### Select and initialise part of a page
-
-If you update a page with new markup, for example a modal dialogue box, you can run `initAll` with a `scope` parameter to initialise the components on part of a page.
-
-For example:
-
-```html
-<script type="module">
-  import { initAll } from '<YOUR-JAVASCRIPTS-FOLDER>/govuk-frontend.min.js'
-  const $modal = document.querySelector('.modal')
-  initAll({
-    scope: $modal
-  })
-</script>
-```
-
 ### If your JavaScript is not working properly
 
 If your site has a Content Security Policy (CSP), the CSP may block the inline JavaScript in the page template. You may see a warning like the following in your browser's developer tools:

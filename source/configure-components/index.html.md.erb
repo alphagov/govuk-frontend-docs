@@ -100,6 +100,17 @@ initAll({
 })
 ```
 
+#### Initialise only part of a page
+
+If you update a page with new markup, for example a modal dialogue box, you can run `initAll` with a `scope` parameter to initialise the components on part of a page:
+
+```javascript
+import { initAll } from 'govuk-frontend'
+
+const $element = document.querySelector('.app-modal')
+initAll({ scope: $element })
+```
+
 Read the [JavaScript API Reference](../javascript-api-reference/) for the configuration accepted by `initAll`.
 
 ### JavaScript errors in the browser console
