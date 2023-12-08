@@ -9,20 +9,21 @@ You can configure some of the components in GOV.UK Frontend to customise their b
 
 You can configure a component by:
 
-- setting Nunjucks macro options
-- passing a JavaScript object when creating an instance of a component
-- using the `initAll` function
-- using data attributes in the HTML
-
-Read the [JavaScript API Reference](../javascript-api-reference/) for the configuration accepted by each component and any errors that might be thrown during initialisation.
-
-The examples below follow our recommended [Import JavaScript using a bundler](../importing-css-assets-and-javascript/#import-javascript-using-a-bundler) approach.
+- [setting Nunjucks macro options](#setting-nunjucks-macro-options)
+- [passing JavaScript configuration](#passing-javascript-configuration)
+- [adding HTML data attributes](#adding-html-data-attributes)
 
 ## Setting Nunjucks macro options
 
 If you're using the Nunjucks macros, you can read about [configuring a component](../use-nunjucks/#configuring-a-component) or find all of the configuration options published on the [GOV.UK Design System website](https://design-system.service.gov.uk/).
 
-## Passing configuration to a new instance of a component in JavaScript
+## Passing JavaScript configuration
+
+Read the [JavaScript API Reference](../javascript-api-reference/) for the configuration accepted by each component.
+
+The examples below follow our recommended [Import JavaScript using a bundler](../importing-css-assets-and-javascript/#import-javascript-using-a-bundler) approach.
+
+### Configure individual component instances
 
 You can pass a configuration object to the constructor when creating an instance of a component in JavaScript.
 
@@ -59,7 +60,7 @@ new CharacterCount($element, {
 
 Read the [JavaScript API Reference](../javascript-api-reference/) for the configuration accepted by each component.
 
-## Passing configuration using the initAll function
+### Configure all components using the initAll function
 
 You can pass configuration for components when initialising GOV.UK Frontend using the `initAll` function. You can do this by including key-value pairs of camel-cased component names and configuration objects. This is the same method you would use to pass them when creating an instance of the component. For example:
 
@@ -81,7 +82,7 @@ initAll({
 
 Read the [JavaScript API Reference](../javascript-api-reference/) for the configuration accepted by `initAll`.
 
-## Passing configuration using data attributes in HTML
+## Adding HTML data attributes
 
 If you're using HTML, you can pass configuration by adding data attributes to the component's outermost element (the element that has the `data-module` attribute). This is how our Nunjucks macros forward the configuration to the JavaScript components in the browser. Data attributes use kebab-case.
 
