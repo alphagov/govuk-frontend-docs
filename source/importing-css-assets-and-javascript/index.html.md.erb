@@ -160,11 +160,21 @@ You can also use your own function to generate paths, for example if you're usin
 
 ## JavaScript
 
-Before you import JavaScript from GOV.UK Frontend, you'll need to add the following to the top of the `<body class="govuk-template__body">` section of your page template (if you're not [using our Nunjucks macros](/use-nunjucks/)):
+GOV.UK Frontend JavaScript must be run with `<script type="module">`.
+
+This protects older browsers, including all versions of Internet Explorer, from running modern JavaScript that it does not support. Read about our [browser support](../browser-support/) for more information.
+
+### Before you start
+
+You'll need to add the following to the top of the `<body class="govuk-template__body">` section of your page template if you're not [using our Nunjucks macros](/use-nunjucks/).
+
+This snippet adds the `.govuk-frontend-supported` class in supported browsers:
 
 ```html
 <script>document.body.className += ' js-enabled' + ('noModule' in HTMLScriptElement.prototype ? ' govuk-frontend-supported' : '');</script>
 ```
+
+You should check [if our snippet is blocked by a Content Security Policy](#if-our-inline-javascript-snippet-is-blocked-by-a-content-security-policy).
 
 To import the JavaScript from GOV.UK Frontend, you can either:
 
@@ -182,7 +192,10 @@ Then import the JavaScript file before the closing `</body>` tag of your HTML pa
 
 ```html
 <body class="govuk-template__body">
+  <script>document.body.className += ' js-enabled' + ('noModule' in HTMLScriptElement.prototype ? ' govuk-frontend-supported' : '');</script>
+
   <!-- // ... -->
+
   <script type="module" src="<YOUR-JAVASCRIPTS-FOLDER>/govuk-frontend.min.js"></script>
   <script type="module">
     import { initAll } from '<YOUR-JAVASCRIPTS-FOLDER>/govuk-frontend.min.js'
@@ -191,31 +204,7 @@ Then import the JavaScript file before the closing `</body>` tag of your HTML pa
 </body>
 ```
 
-Errors from components will be logged in the browser's console.
-
-For example, when:
-
-* GOV.UK Frontend is not supported in the current browser
-* Component templates have missing changes from our release notes
-* Component JavaScript configuration does not match our documentation
-
-You should check your application works without errors or some components will not work correctly.
-
-#### Select and initialise an individual component
-
-You can select and initialise a specific component by using its `data-module` attribute. For example, use `govuk-radios` to initialise the first radio component on a page:
-
-```html
-  <script type="module">
-    import { Radios } from '<YOUR-JAVASCRIPTS-FOLDER>/govuk-frontend.min.js'
-    const $radio = document.querySelector('[data-module="govuk-radios"]')
-    if ($radio) {
-      new Radios($radio)
-    }
-  </script>
-```
-
-When initialised individually, errors are thrown rather than logged. You must check your application works without errors or some components will not work correctly.
+Read about how we log [JavaScript errors in the browser console](../configure-components/#javascript-errors-in-the-browser-console) to check GOV.UK Frontend has been set up correctly.
 
 ### Import JavaScript using a bundler
 
@@ -225,9 +214,7 @@ If you decide to import using a bundler, we recommend you use `import` to only i
 import { SkipLink, Radios } from 'govuk-frontend'
 
 const $skipLink = document.querySelector('[data-module="govuk-skip-link"]')
-if ($skipLink) {
-  new SkipLink($skipLink)
-}
+new SkipLink($skipLink)
 
 const $radios = document.querySelectorAll('[data-module="govuk-radios]')
 $radios.forEach(($radio) => {
@@ -253,25 +240,9 @@ initAll()
 
 We encourage the use of ECMAScript (ES) modules. For projects that cannot use them and require UMD or `window` globals, our package contains `.bundle.js` files.
 
-### Select and initialise part of a page
+### If our inline JavaScript snippet is blocked by a Content Security Policy
 
-If you update a page with new markup, for example a modal dialogue box, you can run `initAll` with a `scope` parameter to initialise the components on part of a page.
-
-For example:
-
-```html
-<script type="module">
-  import { initAll } from '<YOUR-JAVASCRIPTS-FOLDER>/govuk-frontend.min.js'
-  const $modal = document.querySelector('.modal')
-  initAll({
-    scope: $modal
-  })
-</script>
-```
-
-### If your JavaScript is not working properly
-
-If your site has a Content Security Policy (CSP), the CSP may block the inline JavaScript in the page template. You may see a warning like the following in your browser's developer tools:
+If your site has a Content Security Policy (CSP), the CSP may block the inline JavaScript in the page template. You may see a warning like the following in your browser console:
 
 ```
 Refused to execute inline script because it violates the following Content Security Policy directive: "default-src 'self'".
