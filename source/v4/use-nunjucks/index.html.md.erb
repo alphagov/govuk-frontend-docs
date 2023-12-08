@@ -1,5 +1,5 @@
 ---
-title: Use Nunjucks
+title: Use Nunjucks (v4.x)
 weight: 45
 ---
 
@@ -24,15 +24,15 @@ You must first:
 
 ## Set up Nunjucks and use the page template
 
-1. Add `node_modules/govuk-frontend/dist` to your list of Nunjucks paths, so Nunjucks knows where to find the GOV.UK Frontend template and components.
+1. Add `node_modules/govuk-frontend/` to your list of Nunjucks paths, so Nunjucks knows where to find the GOV.UK Frontend template and components.
 
     For example:
 
     ```javascript
-    nunjucks.configure([
-      "node_modules/govuk-frontend/dist",
-      "YOUR-VIEWS-FOLDER"
-    ]);
+        nunjucks.configure([
+          "node_modules/govuk-frontend/",
+          "YOUR-VIEWS-FOLDER"
+        ])
     ```
 
 2. Use the GOV.UK Frontend template by adding the following at the top of your view file:
@@ -49,22 +49,22 @@ Find out how to [change how the page template works](https://design-system.servi
 
 ## Adding a component
 
-Go to [any component page](https://design-system.service.gov.uk/components/) on the Design System website, then copy the Nunjucks macro code from the **Nunjucks** tab of any example.
+Go to any component page on the Design System website, then copy the Nunjucks macro code from the **Nunjucks** tab of any example.
 
 For example, to add the breadcrumbs component to your page, copy the code from the **Nunjucks** tab in the first example on the [breadcrumbs component page](https://design-system.service.gov.uk/components/breadcrumbs/).
 
-## Configuring a component
+## Changing a component
 
-You can use options to configure how a component looks or behaves.
+You can use options to change how a component looks or behaves.
 
-For example, use the `text` option to configure the text on a [button](https://design-system.service.gov.uk/components/button/):
+For example, use the `text` option to change the text on a [button](https://design-system.service.gov.uk/components/button/):
 
 ```javascript
 {{ govukButton({
-  text: "Example button text"
+    text: "Example button text"
 }) }}
 ```
 
-To see the options for a component, go to [any component page](https://design-system.service.gov.uk/components/) on the Design System website, select the **Nunjucks** tab of an example, then select **Nunjucks macro options**.
+To see the options for a component, select the **Nunjucks** tab of the component example on any Design System website page, then select **Nunjucks macro options**.
 
 You must sanitise any HTML you pass in to Nunjucks macros you’re using in your live application to protect your website against cross-site scripting (XSS) attacks. You can read more about [XSS](https://developer.mozilla.org/en-US/docs/Web/Security/Types_of_attacks#Cross-site_scripting_XSS) on the MDN website.

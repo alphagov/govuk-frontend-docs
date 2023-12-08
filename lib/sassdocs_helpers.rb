@@ -3,15 +3,11 @@ require "json"
 module SassdocsHelpers
   ORDER = %w[settings tools helpers].freeze
 
-  SPECIAL_CASES = {
-    "internet-explorer-8" => "Internet Explorer 8",
-  }.freeze
-
   def format_sassdoc_data(data)
-    raise "No data in data/sassdocs.json, run `npm install` to generate." unless data.respond_to?(:sassdoc)
+    raise "No data in data/sassdocs.json, run `npm install` to generate." if data.nil?
 
     # Remove private API entries
-    public_entries = data.sassdoc.select { |item| item.access == "public" }
+    public_entries = data.select { |item| item.access == "public" }
     # Remove vendored files, for example SassMQ
     public_entries = public_entries.reject { |item| item.file.path.start_with?("vendor") }
     # Group the items by their 'group', for example 'Settings' or 'Helpers'
@@ -23,8 +19,8 @@ module SassdocsHelpers
 
   def mixin_trailing_code(code)
     # Some mixins can have content passed inside.
-    # For example the `govuk-if-ie8` function:
-    # @include govuk-if-ie8 {
+    # For example the `govuk-media-query` function:
+    # @include govuk-media-query($from: tablet) {
     #  //..
     # }
     accepts_content = code.include?("@content")
@@ -112,16 +108,18 @@ module SassdocsHelpers
       "General"
     elsif heading.include?("/")
       slug = heading.split("/").last
-
-      SPECIAL_CASES[slug] || slug.gsub("-", " ").capitalize
+      slug.gsub("-", " ").capitalize
     else
       "General #{heading}"
     end
   end
 
   def github_url(item)
+    # Maintain backwards compatibility with GOV.UK Frontend v4
+    github_package_path = govuk_frontend_version.start_with?("4") ? "/src" : "/packages/govuk-frontend/src"
+
     # Construct GitHub link
-    "https://github.com/alphagov/govuk-frontend/tree/v#{govuk_frontend_version}/src/govuk/#{item.file.path}#L#{item.context.line.start}-L#{item.context.line.end}"
+    "https://github.com/alphagov/govuk-frontend/tree/v#{govuk_frontend_version}#{github_package_path}/govuk/#{item.file.path}#L#{item.context.line.start}-L#{item.context.line.end}"
   end
 
   def govuk_frontend_version

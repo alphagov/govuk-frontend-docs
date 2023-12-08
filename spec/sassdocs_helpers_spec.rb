@@ -10,8 +10,11 @@ def dothash(hash)
 end
 
 RSpec.describe SassdocsHelpers do
+  let(:package_version) { "5.0.0" }
+  let(:package_content) { sprintf('{ "packages": { "node_modules/govuk-frontend": { "version": "%s" } } }', package_version) }
+
   before(:each) do
-    allow(File).to receive(:read).and_return('{ "packages": { "node_modules/govuk-frontend": { "version": "1.0.0" } } }')
+    allow(File).to receive(:read).and_return(package_content)
     # Include mixin into a test class to allow us to mock File
     # TODO Move constant definition
     # rubocop:disable Lint/ConstantDefinitionInBlock
@@ -25,29 +28,27 @@ RSpec.describe SassdocsHelpers do
   describe "#format_sassdoc_data" do
     it "raises an error if there is no data" do
       expect {
-        fixture = dothash({})
+        fixture = dothash(nil)
         @helper.format_sassdoc_data(fixture)
       }.to raise_error("No data in data/sassdocs.json, run `npm install` to generate.")
     end
     it "removes private entries" do
-      fixture = dothash({
-        sassdoc: [
-          {
-            access: "public",
-            group: %w[public],
-            file: {
-              path: "public.scss",
-            },
+      fixture = dothash([
+        {
+          access: "public",
+          group: %w[public],
+          file: {
+            path: "public.scss",
           },
-          {
-            access: "private",
-            group: %w[private],
-            file: {
-              path: "private.scss",
-            },
+        },
+        {
+          access: "private",
+          group: %w[private],
+          file: {
+            path: "private.scss",
           },
-        ],
-      })
+        },
+      ])
       groups = @helper.format_sassdoc_data(fixture)
       first_group = groups.first
       group_heading = first_group.first
@@ -55,24 +56,22 @@ RSpec.describe SassdocsHelpers do
       expect(group_heading).to eq("public")
     end
     it "removes vendored entries" do
-      fixture = dothash({
-        sassdoc: [
-          {
-            access: "public",
-            group: %w[public],
-            file: {
-              path: "public.scss",
-            },
+      fixture = dothash([
+        {
+          access: "public",
+          group: %w[public],
+          file: {
+            path: "public.scss",
           },
-          {
-            access: "public",
-            group: %w[vendored],
-            file: {
-              path: "vendored.scss",
-            },
+        },
+        {
+          access: "public",
+          group: %w[vendored],
+          file: {
+            path: "vendored.scss",
           },
-        ],
-      })
+        },
+      ])
       groups = @helper.format_sassdoc_data(fixture)
       first_group = groups.first
       group_heading = first_group.first
@@ -80,38 +79,36 @@ RSpec.describe SassdocsHelpers do
       expect(group_heading).to eq("public")
     end
     it "groups entries sorted into groups" do
-      fixture = dothash({
-        sassdoc: [
-          {
-            access: "public",
-            group: %w[helpers/colour],
-            file: {
-              path: "first.scss",
-            },
+      fixture = dothash([
+        {
+          access: "public",
+          group: %w[helpers/colour],
+          file: {
+            path: "first.scss",
           },
-          {
-            access: "public",
-            group: %w[helpers],
-            file: {
-              path: "second.scss",
-            },
+        },
+        {
+          access: "public",
+          group: %w[helpers],
+          file: {
+            path: "second.scss",
           },
-          {
-            access: "public",
-            group: %w[tools/foo],
-            file: {
-              path: "third.scss",
-            },
+        },
+        {
+          access: "public",
+          group: %w[tools/foo],
+          file: {
+            path: "third.scss",
           },
-          {
-            access: "public",
-            group: %w[helpers/colour],
-            file: {
-              path: "fourth.scss",
-            },
+        },
+        {
+          access: "public",
+          group: %w[helpers/colour],
+          file: {
+            path: "fourth.scss",
           },
-        ],
-      })
+        },
+      ])
       groups = @helper.format_sassdoc_data(fixture)
 
       expect(groups).to eq([
@@ -119,19 +116,19 @@ RSpec.describe SassdocsHelpers do
          [
            ["tools/foo",
             [
-              fixture.sassdoc[2],
+              fixture[2],
             ]],
          ]],
         ["helpers",
          [
            ["helpers/colour",
             [
-              fixture.sassdoc[0],
-              fixture.sassdoc[3],
+              fixture[0],
+              fixture[3],
             ]],
            ["helpers",
             [
-              fixture.sassdoc[1],
+              fixture[1],
             ]],
          ]],
       ])
@@ -323,8 +320,8 @@ RSpec.describe SassdocsHelpers do
     end
   end
   describe "#github_url" do
-    it "returns a url" do
-      fixture = dothash({
+    let(:fixture) do
+      dothash({
         context: {
           line: {
             start: 9,
@@ -335,16 +332,27 @@ RSpec.describe SassdocsHelpers do
           path: "helpers/_clearfix.scss",
         },
       })
-      url = @helper.github_url(fixture)
+    end
 
-      expect(url).to eq("https://github.com/alphagov/govuk-frontend/tree/v1.0.0/src/govuk/helpers/_clearfix.scss#L9-L15")
+    it "returns a url" do
+      url = @helper.github_url(fixture)
+      expect(url).to eq("https://github.com/alphagov/govuk-frontend/tree/v5.0.0/packages/govuk-frontend/src/govuk/helpers/_clearfix.scss#L9-L15")
+    end
+
+    describe "v4.x backwards compatibility" do
+      let(:package_version) { "4.0.0" }
+
+      it "returns a url" do
+        url = @helper.github_url(fixture)
+        expect(url).to eq("https://github.com/alphagov/govuk-frontend/tree/v4.0.0/src/govuk/helpers/_clearfix.scss#L9-L15")
+      end
     end
   end
   describe "#govuk_frontend_version" do
     it "returns version" do
       version = @helper.govuk_frontend_version
 
-      expect(version).to eq("1.0.0")
+      expect(version).to eq("5.0.0")
     end
   end
 end
