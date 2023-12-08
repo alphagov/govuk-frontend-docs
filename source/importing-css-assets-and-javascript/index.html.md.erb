@@ -208,15 +208,27 @@ Read about how we log [JavaScript errors in the browser console](../configure-co
 
 ### Import JavaScript using a bundler
 
-If you decide to import using a bundler like [Rollup](https://rollupjs.org/) or [webpack](https://webpack.js.org/), we recommend you use `import` to only import the JavaScript for components you're using in your service.
+If you decide to import using a bundler like [Rollup](https://rollupjs.org/) or [webpack](https://webpack.js.org/), the bundled JavaScript files must be added using `<script type="module">` in your HTML:
+
+```html
+<script type="module" src="<YOUR-JAVASCRIPTS-FOLDER>/app-bundle.min.js"></script>
+```
 
 #### Import individual components
+
+We recommend you only `import` the JavaScript for components you're using in your service.
 
 ```javascript
 import { SkipLink, Radios } from 'govuk-frontend'
 
 const $skipLink = document.querySelector('[data-module="govuk-skip-link"]')
 new SkipLink($skipLink)
+```
+
+When using a component more than once, the same `import` can be initialised again:
+
+```javascript
+import { Radios } from 'govuk-frontend'
 
 const $radios = document.querySelectorAll('[data-module="govuk-radios]')
 $radios.forEach(($radio) => {
