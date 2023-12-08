@@ -103,7 +103,10 @@ If you update a page with new markup, for example a modal dialogue box, you can 
 import { initAll } from 'govuk-frontend'
 
 const $element = document.querySelector('.app-modal')
-initAll({ scope: $element })
+
+if ($element) {
+  initAll({ scope: $element })
+}
 ```
 
 Read the [JavaScript API Reference](../javascript-api-reference/) for the configuration accepted by `initAll`.
