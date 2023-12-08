@@ -214,9 +214,13 @@ If you decide to import using a bundler like [Rollup](https://rollupjs.org/) or 
 <script type="module" src="<YOUR-JAVASCRIPTS-FOLDER>/app-bundle.min.js"></script>
 ```
 
+We encourage the use of ECMAScript (ES) modules, but you should check your bundler does not unnecessarily downgrade modern JavaScript for unsupported browsers.
+
+If your service cannot use ES modules, read about [alternative module formats](#import-javascript-using-alternative-module-formats) below.
+
 #### Import individual components
 
-We recommend you only `import` the JavaScript for components you're using in your service.
+If you want to improve how quickly your service’s pages load in browsers, you can import only the JavaScript components you need.
 
 ```javascript
 import { SkipLink, Radios } from 'govuk-frontend'
@@ -245,16 +249,30 @@ import { initAll } from 'govuk-frontend'
 initAll()
 ```
 
-If you're using a bundler that uses CommonJS like [Browserify](http://browserify.org/), you should use `require`:
+### Import JavaScript using alternative module formats
+
+#### Universal Module Definition (UMD)
+
+For projects that cannot import ECMAScript (ES) modules, we also publish pre-built Universal Module Definition (UMD) bundles to support the following formats:
+
+* Asynchronous Module Definition (AMD)
+* Browser `window.GOVUKFrontend` global
+* CommonJS
+
+Bundlers like [Browserify](http://browserify.org/) can use `require()` to import UMD bundles:
 
 ```javascript
-const { initAll } = require('govuk-frontend')
-initAll()
+const { Accordion } = require('govuk-frontend')
 ```
 
-### UMD and `window` globals support
+Sprockets (Ruby library) can use `require` directives to import UMD bundles:
 
-We encourage the use of ECMAScript (ES) modules. For projects that cannot use them and require UMD or `window` globals, our package contains `.bundle.js` files.
+```javascript
+// = require govuk-frontend/dist/govuk/components/accordion/accordion.bundle.js
+const { Accordion } = window.GOVUKFrontend;
+```
+
+**Note:** Using pre-built bundles instead of ECMAScript (ES) modules will output considerably larger JavaScript files. You can read more about [tree shaking](https://developer.mozilla.org/en-US/docs/Glossary/Tree_shaking) on the MDN website.
 
 ### If our inline JavaScript snippet is blocked by a Content Security Policy
 
