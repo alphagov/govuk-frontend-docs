@@ -174,6 +174,8 @@ This snippet adds the `.govuk-frontend-supported` class in supported browsers:
 <script>document.body.className += ' js-enabled' + ('noModule' in HTMLScriptElement.prototype ? ' govuk-frontend-supported' : '');</script>
 ```
 
+You should check [if our snippet is blocked by a Content Security Policy](#if-our-inline-javascript-snippet-is-blocked-by-a-content-security-policy).
+
 To import the JavaScript from GOV.UK Frontend, you can either:
 
 - add GOV.UK Frontend's JavaScript file to your HTML
@@ -238,7 +240,7 @@ initAll()
 
 We encourage the use of ECMAScript (ES) modules. For projects that cannot use them and require UMD or `window` globals, our package contains `.bundle.js` files.
 
-### If your JavaScript is not working properly
+### If our inline JavaScript snippet is blocked by a Content Security Policy
 
 If your site has a Content Security Policy (CSP), the CSP may block the inline JavaScript in the page template. You may see a warning like the following in your browser console:
 
