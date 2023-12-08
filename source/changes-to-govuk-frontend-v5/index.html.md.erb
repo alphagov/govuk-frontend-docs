@@ -5,55 +5,78 @@ weight: 5
 
 # Changes to GOV.UK Frontend v5.0.0
 
-What you need to know about the changes to v5.0.0.
+The main purposes of v5 are to update how we do graded browser support, remove legacy frameworks, improve performance and make it easier for services to make future changes that will meet the latest accessibility rules.
+
+It's important to note this release stops Internet Explorer 11 from running GOV.UK Frontend JavaScript and removes support completely for Internet Explorer 8 to 10.
+
+For Internet Explorer 11, your service will not stop working, but components will look and behave differently without JavaScript. Read more about [how we provide support for different browsers](https://github.com/alphagov/govuk-frontend/blob/main/docs/contributing/browser-support.md).
+
+Service teams should [use a progressive enhancement approach](https://www.gov.uk/service-manual/technology/using-progressive-enhancement) to make sure users can still access any content and complete their tasks.
 
 ## Migrating from v4 to v5
 
-Follow the guidance about [staying up to date with GOV.UK Frontend](/staying-up-to-date/).
+Follow the guidance about [staying up to date with GOV.UK Frontend](https://frontend.design-system.service.gov.uk/staying-up-to-date/).
 
-When making the decision to migrate, consider your service’s current requirements. If you currently need to continue CSS support for legacy browsers like IE8, IE9, IE10, or need JavaScript support for IE11, you should not migrate to V5 at this time.
+When making the decision to migrate, consider your service's requirements. For example, if you currently need to continue CSS support for legacy browsers like Internet Explorer 8, 9 or 10, or need JavaScript support for Internet Explorer 11, you should not migrate to v5 at this time.
 
-You should also consider whether you will need to include extra time in your plan to split any of the service or 3rd party code. For example, in analytics some code might need to remain in `<script>` tags alongside GOV.UK Frontend running in `<script type="module">`.
+You should also consider whether you will need to plan for extra time to split any of the service or 3rd party code. For example, in analytics some code might need to remain in `<script>` tags alongside GOV.UK Frontend running in `<script type="module">`.
+
+If you need it, we have a checklist for the changes you might need to make for v5, which you can [view](https://docs.google.com/spreadsheets/d/1Qt-9kLcB_ONp4WOTI61i69P3q7Ymw0ziA5YNUqNkImE/edit) or [copy (needs a Google account)](https://docs.google.com/spreadsheets/d/1Qt-9kLcB_ONp4WOTI61i69P3q7Ymw0ziA5YNUqNkImE/copy).
+
+If you still need to provide support for older versions of Internet Explorer, you should stay on the latest [GOV.UK Frontend v4 release](https://github.com/alphagov/govuk-frontend/tags).
+
+We're supporting GOV.UK Frontend v4 until 08 December 2024. We will conduct a review before this date to decide if we need to extend our support.
+
+## Benefits of updating to v5
+
+By updating to v5 you'll:
+
+- find it easier to make future changes to comply with WCAG 2.2 accessibility requirements
+- have the option to use the new task list component
+- import less code to your project as our JavaScript code is 25% smaller and our CSS is 5% smaller
+- only run JavaScript in browsers where GOV.UK Frontend is supported which reduces the load in older browsers
+- find it easier to migrate to the new crown logo when it's available
+- see new error messages that explain when our components fail to initialise
 
 ## Main changes to v5
 
-Read the details about the changes to v5 in [the release notes](https://github.com/alphagov/govuk-frontend/releases/tag/v5.0.0-beta.0).
+This release stops Internet Explorer 11 from running GOV.UK Frontend JavaScript and removes support completely for Internet Explorer 8 to 10. Read the details about the changes to v5 in [the release notes](https://github.com/alphagov/govuk-frontend/releases/v5.0.0).
 
 The new features include:
 
-- a new task list component
-- changes to the tag component
+- a new 'Task list' component
+- changes to the 'Tag' component
 - added focus styles for links with non-text content
-- the new link styles introduced in v3.12.0 are now enabled by default
-- customise button colours for dark backgrounds
-- precompiled CSS and JavaScript are now also available on [npmjs.com](https://www.npmjs.com/package/govuk-frontend)
+- enabling link styles introduced in v3.12.0 by default
+- customisable button colours for dark backgrounds
+- precompiled CSS and JavaScript available on [NPMJS.com](https://www.npmjs.com/package/govuk-frontend)
 
-There are actions you must make when migrating to v5.0.0. These consist of items to update, check or remove.
+There are actions you must make to migrate to v5.0.0. These are items you need to update, check or remove.
 
-Items you need to update:
+You'll need to update some items, which include:
 
-- the HTML for warning text if you’re not using Nunjucks - we've removed the `.govuk-warning-text__assistive` class and its styles from GOV.UK Frontend
+- the HTML for warning text if you're not using Nunjucks - we've removed the `.govuk-warning-text__assistive` class and its styles from GOV.UK Frontend
 - package file paths - we've moved our package files into a directory called `dist` and have provided instructions for Node.js, bundlers, direct JavaScript includes, Sass imports and Nunjucks search paths
 
-Check whether these items still work as expected. They include your:
+You'll need to check some items still work as expected, which include:
 
-- browser console - check for errors as the components now throw initialisation errors
+- browser console - check for errors as the components show the newly-added initialisation error messages
 - Details component - this no longer uses JavaScript, and is no longer polyfilled in older browsers
 - Disabled buttons - the `disabled` attribute created using our Nunjucks macros no longer includes a value
 - mobile menu button in the Header component - we've removed some styles from the `.govuk-header__menu-button` class
 - Selects - The `govukSelect` macro will no longer include an empty value attribute for options that do not have a value set
 - inverse buttons - these components now use the `$govuk-brand-colour` setting
-- JavaScript polyfills, or code that relied on polyfills, for Internet Explorer (8-11) - we're no longer using polyfills for these browsers as JavaScript will not be loaded when its included using `<script type="module">`
+- JavaScript polyfills, or code that relied on polyfills, for Internet Explorer (8 to11) - we're no longer using polyfills for these browsers as JavaScript will not be loaded when its included using `<script type="module">`
 
-These are items you need to remove. These include:
+You'll need to remove items, which include:
 
 - the `.init()` function from individually instantiated components - components are now initialised automatically
 - Internet Explorer 8 stylesheets, settings and mixins - we no longer support Internet Explorer 8 (IE8) in GOV.UK Frontend or provide dedicated stylesheets for the browser
 - the fallback GOV.UK crown logo from your HTML - Frontend no longer supports IE8 so the fallback version is not needed
-- some font family Sass variables - we’ve removed `$govuk-font-family-gds-transport`, `$govuk-font-family-nta`, `$govuk-font-family-nta-tabular`
-- deprecated `.govuk-button--disabled` class
+- some font family Sass variables - we've removed `$govuk-font-family-gds-transport`, `$govuk-font-family-nta`, `$govuk-font-family-nta-tabular`
+- the deprecated `.govuk-button--disabled` class
 - deprecated `.govuk-!-margin-static` and `.govuk-!-padding-static` classes
-- deprecated `.govuk-header__link--service-name` class
-- deprecated `.govuk-header__navigation--no-service-name` class
+- the deprecated `.govuk-header__link--service-name` class
+- the deprecated `.govuk-header__navigation--no-service-name` class
 
-There are also some changes that are recommendations only and some fixes.
+There's also some changes that are recommendations only and some fixes.
