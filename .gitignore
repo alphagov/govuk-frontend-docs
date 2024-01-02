@@ -8,7 +8,7 @@
 /.bundle
 
 # Ignore the build directory
-/deploy/public
+/build
 
 # Ignore cache
 /.sass-cache

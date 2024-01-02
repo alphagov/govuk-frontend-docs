@@ -7,7 +7,7 @@
     "build:sassdoc": "sassdoc --parse node_modules/govuk-frontend/dist/govuk/ > data/sassdoc.json",
     "build:sassdocv4": "sassdoc --parse node_modules/govuk-frontend-v4/govuk/ > data/sassdoc-v4.json",
     "lint": "standard",
-    "check-links": "hyperlink --canonicalroot https://frontend.design-system.service.gov.uk --internal --recursive deploy/public/index.html --skip 'property=\"og:image\"' | tee check-links.log | tap-mocha-reporter min"
+    "check-links": "hyperlink --canonicalroot https://frontend.design-system.service.gov.uk --internal --recursive build/index.html --skip 'property=\"og:image\"' | tee check-links.log | tap-mocha-reporter min"
   },
   "devDependencies": {
     "govuk-frontend": "^5.0.0",
