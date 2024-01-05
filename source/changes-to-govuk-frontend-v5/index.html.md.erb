@@ -80,3 +80,14 @@ You'll need to remove items, which include:
 - the deprecated `.govuk-header__navigation--no-service-name` class
 
 There's also some changes that are recommendations only and some fixes.
+
+## Accessibility changes to v5
+
+This release includes code changes to help meet various accessibility guidelines in WCAG 2.2.
+
+The main accessibility changes are:
+
+- the focus indicator for [summary list row actions](https://design-system.service.gov.uk/components/summary-list/#adding-actions-to-each-row) will no longer be overlapped by a vertical separator when there's a series of row actions for one list item ([govuk-frontend #3862](https://github.com/alphagov/govuk-frontend/issues/3841))
+- the accessible name for the [header menu](https://design-system.service.gov.uk/components/header/#header-with-service-name-and-navigation) has been changed from "show or hide menu" to "menu", to remove duplicate announcements ([govuk-frontend #3696](https://github.com/alphagov/govuk-frontend/issues/3696))
+- [smaller checkboxes](https://design-system.service.gov.uk/components/checkboxes/#smaller-checkboxes) and [smaller radios](https://design-system.service.gov.uk/components/radios/#smaller-radios) now have a hover state for contrast modes like Windows High Contrast Mode ([govuk-frontend #3695](https://github.com/alphagov/govuk-frontend/issues/3695))
+- [pagination links](https://design-system.service.gov.uk/components/pagination/) for "Next" and "Previous" now have expanded accessible names of "Next page" and "Previous page" ([govuk-frontend #3679](https://github.com/alphagov/govuk-frontend/issues/3679))
