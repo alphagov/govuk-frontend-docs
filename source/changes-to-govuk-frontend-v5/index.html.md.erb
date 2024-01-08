@@ -68,7 +68,7 @@ You'll need to check some items still work as expected, which include:
 - inverse buttons - these components now use the `$govuk-brand-colour` setting
 - JavaScript polyfills, or code that relied on polyfills, for Internet Explorer (8 to11) - we're no longer using polyfills for these browsers as JavaScript will not be loaded when its included using `<script type="module">`
 
-You'll need to remove items, which include:
+You'll need to remove the following items:
 
 - the `.init()` function from individually instantiated components - components are now initialised automatically
 - Internet Explorer 8 stylesheets, settings and mixins - we no longer support Internet Explorer 8 (IE8) in GOV.UK Frontend or provide dedicated stylesheets for the browser
