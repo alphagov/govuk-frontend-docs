@@ -18,3 +18,15 @@
   from = "/configure-components-with-javascript/"
   to = "/configure-components/"
   status = 301
+
+# Asset filenames with fingerprint hashes (which at the minute is only the font
+# from GOV.UK Frontend) are given an 'infinite' max-age and treated as
+# immutable.
+#
+# Historically, an 'infinite' max-age is the 32-bit maximum 2,147,483,648.
+# https://datatracker.ietf.org/doc/html/rfc9111#section-1.2.2
+
+[[headers]]
+  for = "/assets/govuk/assets/fonts/*"
+  [headers.values]
+    Cache-Control = "public,max-age=2147483648,immutable"
