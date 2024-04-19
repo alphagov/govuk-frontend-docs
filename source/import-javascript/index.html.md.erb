@@ -1,0 +1,167 @@
+---
+title: Import JavaScript
+weight: 72
+---
+
+# JavaScript
+
+GOV.UK Frontend JavaScript must be run with `<script type="module">`.
+
+This protects older browsers, including all versions of Internet Explorer, from running modern JavaScript that it does not support. Read about our [browser support](../browser-support/) for more information.
+
+## Before you start
+
+You'll need to add the following to the top of the `<body class="govuk-template__body">` section of your page template if you're not [using our Nunjucks macros](/use-nunjucks/).
+
+This snippet adds the `.govuk-frontend-supported` class in supported browsers:
+
+```html
+<script>document.body.className += ' js-enabled' + ('noModule' in HTMLScriptElement.prototype ? ' govuk-frontend-supported' : '');</script>
+```
+
+You should check [if our snippet is blocked by a Content Security Policy](#if-our-inline-javascript-snippet-is-blocked-by-a-content-security-policy).
+
+Next, to import the JavaScript from GOV.UK Frontend, you can either:
+
+- add the JavaScript file to your HTML
+- import the JavaScript into your own JavaScript file using a bundler
+
+## Add the JavaScript file to your HTML
+
+If you decide to add the JavaScript to your HTML, you can do one of the following:
+
+- set up your routing so requests for the JavaScript file are served from `node_modules/govuk-frontend/dist/govuk/govuk-frontend.min.js`
+- copy the `node_modules/govuk-frontend/dist/govuk/govuk-frontend.min.js` file into your application
+
+Then import the JavaScript file before the closing `</body>` tag of your HTML page or page template, and run the `initAll` function to initialise all the components.
+
+```html
+<body class="govuk-template__body">
+  <script>document.body.className += ' js-enabled' + ('noModule' in HTMLScriptElement.prototype ? ' govuk-frontend-supported' : '');</script>
+
+  <!-- // ... -->
+
+  <script type="module" src="<YOUR-JAVASCRIPTS-FOLDER>/govuk-frontend.min.js"></script>
+  <script type="module">
+    import { initAll } from '<YOUR-JAVASCRIPTS-FOLDER>/govuk-frontend.min.js'
+    initAll()
+  </script>
+</body>
+```
+
+Read about how we log [JavaScript errors in the browser console](../configure-components/#javascript-errors-in-the-browser-console) to check GOV.UK Frontend has been set up correctly.
+
+## Import JavaScript using a bundler
+
+If you decide to import using a bundler like [Rollup](https://rollupjs.org/) or [webpack](https://webpack.js.org/), the bundled JavaScript files must be added using `<script type="module">` in your HTML:
+
+```html
+<script type="module" src="<YOUR-JAVASCRIPTS-FOLDER>/app-bundle.min.js"></script>
+```
+
+We encourage the use of ECMAScript (ES) modules, but you should check your bundler does not unnecessarily downgrade modern JavaScript for unsupported browsers.
+
+If your service cannot use ES modules, read about [alternative module formats](#import-javascript-using-alternative-module-formats) below.
+
+### Import individual components
+
+If you want to improve how quickly your service’s pages load in browsers, you can import only the JavaScript components you need.
+
+```javascript
+import { SkipLink, Radios } from 'govuk-frontend'
+
+const $skipLink = document.querySelector('[data-module="govuk-skip-link"]')
+new SkipLink($skipLink)
+```
+
+When using a component more than once, the same `import` can be initialised again:
+
+```javascript
+import { Radios } from 'govuk-frontend'
+
+const $radios = document.querySelectorAll('[data-module="govuk-radios"]')
+$radios.forEach(($radio) => {
+  new Radios($radio)
+})
+```
+
+### Import and initialise all components using the initAll function
+
+If you need to import all of GOV.UK Frontend's components, then run the `initAll` function to initialise them:
+
+```javascript
+import { initAll } from 'govuk-frontend'
+initAll()
+```
+
+## Import JavaScript using alternative module formats
+
+### Universal Module Definition (UMD)
+
+For projects that cannot import ECMAScript (ES) modules, we also publish pre-built Universal Module Definition (UMD) bundles to support the following formats:
+
+* Asynchronous Module Definition (AMD)
+* Browser `window.GOVUKFrontend` global
+* CommonJS
+
+Bundlers like [Browserify](http://browserify.org/) can use `require()` to import UMD bundles:
+
+```javascript
+const { Accordion } = require('govuk-frontend')
+```
+
+Rails Assets Pipeline or Sprockets can use `require` directives to import UMD bundles:
+
+```javascript
+// = require govuk/components/accordion/accordion.bundle.js
+const { Accordion } = window.GOVUKFrontend;
+```
+
+**Note:** Using pre-built bundles instead of ECMAScript (ES) modules will output considerably larger JavaScript files. You can read more about [tree shaking](https://developer.mozilla.org/en-US/docs/Glossary/Tree_shaking) on the MDN website.
+
+## If our inline JavaScript snippet is blocked by a Content Security Policy
+
+If your site has a Content Security Policy (CSP), the CSP may block the inline JavaScript in the page template. You may see a warning like the following in your browser console:
+
+```
+Refused to execute inline script because it violates the following Content Security Policy directive: "default-src 'self'".
+```
+
+To unblock inline JavaScript, do one of the following:
+
+- include a hash (recommended)
+- use a nonce
+
+Make sure you [understand the security implications of using either option](https://www.w3.org/TR/CSP/#security-considerations), as wrong implementation could affect your service’s security. If you're not sure what to do, talk to a security expert.
+
+### Use a hash to unblock inline JavaScript
+
+You can unblock inline JavaScript by including the following hash in your CSP:
+<%#
+  This hash should match the one in `govuk-frontend` tests:
+  https://github.com/alphagov/govuk-frontend/blob/main/packages/govuk-frontend/src/govuk/template.test.js
+%>
+
+```
+sha256-GUQ5ad8JK5KmEWmROf3LZd9ge94daqNvd8xy9YS1iDw=
+```
+
+You do not need to make any changes to the HTML.
+
+[Learn more about Content Security Policy on the MDN Web Docs website](https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP).
+
+### Use a `nonce` attribute to unblock inline JavaScript
+
+If you're unable to use the hash in your CSP, you can also use a `nonce` on inline JavaScript.
+
+However, you should provide a nonce that hostile actors cannot guess. Otherwise, they could easily find a way around your CSP.
+
+You should use a value which is:
+
+- unique for each HTTP response
+- generated using a cryptographically-secure random generator
+- at least 32 characters for hex, or 24 characters for base64
+
+Make sure your script tags do not have any untrusted or unescaped variables.
+
+If you're using the Nunjucks page template, you can add the `nonce` attribute by setting the `cspNonce` variable.
