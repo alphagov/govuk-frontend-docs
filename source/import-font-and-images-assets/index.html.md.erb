@@ -1,18 +1,16 @@
 ---
-title: Import CSS, assets and JavaScript
+title: Import font and images assets
 weight: 71
 ---
 
 # Import font and image assets
-
-## Font and image assets
 
 To use the font and image assets from GOV.UK Frontend, you can either:
 
 - serve the assets from the GOV.UK Frontend assets folder - recommended
 - copy the font and image files into your application
 
-### Serve the assets from the GOV.UK Frontend assets folder - recommended
+## Serve the assets from the GOV.UK Frontend assets folder - recommended
 
 Set up your routing so requests for files in `<YOUR-SITE-URL>/assets` are served from `/node_modules/govuk-frontend/dist/govuk/assets`.
 
@@ -23,7 +21,7 @@ const path = require('path');
 app.use('/assets', express.static(path.join(__dirname, '/node_modules/govuk-frontend/dist/govuk/assets')))
 ```
 
-### Copy the font and image files into your application
+## Copy the font and image files into your application
 
 If you decide to copy the assets instead, copy the:
 
@@ -33,7 +31,7 @@ If you decide to copy the assets instead, copy the:
 
 You should use an automated task or your build pipeline to copy the files, so your project folder stays up to date when we update GOV.UK Frontend.
 
-#### If you have your own folder structure
+### If you have your own folder structure
 
 If you use a different folder structure than `<YOUR-APP>/assets/images` and `<YOUR-APP>/assets/fonts`, you can set Sass variables so that Sass builds the CSS to point to your folders.
 
