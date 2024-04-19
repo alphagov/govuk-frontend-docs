@@ -1,18 +1,16 @@
 ---
-title: Import CSS, assets and JavaScript
+title: Import CSS
 weight: 70
 ---
 
-# Import CSS, assets and JavaScript
-
-## CSS
+# Import CSS
 
 To import the CSS from GOV.UK Frontend, you can either:
 
 - add GOV.UK Frontend's CSS file to your HTML
 - import the CSS into your own Sass file
 
-### Add the CSS file to your HTML
+## Add the CSS file to your HTML
 
 If you decide to add the CSS to your HTML, you can do one of the following:
 
@@ -29,7 +27,7 @@ Then link the CSS file inside the `<head>` tag of your HTML page or page templat
 </head>
 ```
 
-### Import using Sass
+## Import using Sass
 
 To import all the Sass rules from GOV.UK Frontend, add the following to your Sass file:
 
@@ -37,7 +35,7 @@ To import all the Sass rules from GOV.UK Frontend, add the following to your Sas
 @import "node_modules/govuk-frontend/dist/govuk/all";
 ```
 
-### Import specific parts using Sass
+## Import specific parts using Sass
 
 If you want to improve how quickly your service's pages load in browsers, you can import only the Sass rules you need.
 
@@ -64,7 +62,7 @@ You can remove lines that import parts of the CSS you do not need.
 
 You do not need `/index` at the end of your component imports if you’re using Dart Sass, LibSass 3.6.0 or higher, or Ruby Sass 3.6.0 or higher.
 
-### Import an individual component’s CSS using a single Sass import
+## Import an individual component’s CSS using a single Sass import
 
 You can also import a component and all its dependencies without importing `node_modules/govuk-frontend/dist/govuk/base` first.
 
@@ -74,7 +72,7 @@ To import the button component for example, add the following to your Sass file:
 @import "node_modules/govuk-frontend/dist/govuk/components/button/button";
 ```
 
-### Simplify Sass import paths
+## Simplify Sass import paths
 
 If you want to make Sass import paths shorter, add `node_modules/govuk-frontend/dist` to either your:
 
@@ -87,11 +85,11 @@ You can then import without using `node_modules/govuk-frontend/dist/` in your im
 @import "govuk/components/button/button";
 ```
 
-### Override with your own CSS
+## Override with your own CSS
 
 If you want to override GOV.UK Frontend's styles with your own styles, `@import` GOV.UK Frontend's styles before your own Sass rules.
 
-### Silence deprecation warnings from dependencies in Dart Sass
+## Silence deprecation warnings from dependencies in Dart Sass
 
 If you're using Dart Sass 1.33.0 or greater, you may see deprecation warnings when compiling your Sass. For example:
 
@@ -105,218 +103,3 @@ We're currently unable to fix these deprecation warnings without breaking suppor
 - using the JavaScript API, [include `quietDeps: true`](https://sass-lang.com/documentation/js-api#quietdeps) in the `options` object
 
 You'll still see deprecation warnings if you're using `/` for division in your own Sass code.
-
-## Font and image assets
-
-To use the font and image assets from GOV.UK Frontend, you can either:
-
-- serve the assets from the GOV.UK Frontend assets folder - recommended
-- copy the font and image files into your application
-
-### Serve the assets from the GOV.UK Frontend assets folder - recommended
-
-Set up your routing so requests for files in `<YOUR-SITE-URL>/assets` are served from `/node_modules/govuk-frontend/dist/govuk/assets`.
-
-For example if you're using [express.js](https://expressjs.com/), add the following to your `app.js` file:
-
-```javascript
-const path = require('path');
-app.use('/assets', express.static(path.join(__dirname, '/node_modules/govuk-frontend/dist/govuk/assets')))
-```
-
-### Copy the font and image files into your application
-
-If you decide to copy the assets instead, copy the:
-
-- `/node_modules/govuk-frontend/dist/govuk/assets/images` folder to `<YOUR-APP>/assets/images`
-- `/node_modules/govuk-frontend/dist/govuk/assets/fonts` folder to `<YOUR-APP>/assets/fonts`
-- `/node_modules/govuk-frontend/dist/govuk/assets/manifest.json` file to `<YOUR-APP>/assets`
-
-You should use an automated task or your build pipeline to copy the files, so your project folder stays up to date when we update GOV.UK Frontend.
-
-#### If you have your own folder structure
-
-If you use a different folder structure than `<YOUR-APP>/assets/images` and `<YOUR-APP>/assets/fonts`, you can set Sass variables so that Sass builds the CSS to point to your folders.
-
-Set one of the following before the `@import` line in your Sass file:
-
-- `$govuk-assets-path`
-- `$govuk-images-path` and `$govuk-fonts-path`
-
-Set the `$govuk-assets-path` variable if your `font` and `image` folders have the same parent folder. For example:
-
-```scss
-$govuk-assets-path: "/<YOUR-ASSETS-FOLDER>/";
-```
-
-Set the `$govuk-images-path` and `$govuk-fonts-path` variables if your `font` and `image` folders have different parent folders. For example:
-
-```scss
-$govuk-images-path: "/<YOUR-IMAGES-FOLDER>/";
-$govuk-fonts-path: "/<YOUR-FONTS-FOLDER>/";
-```
-
-You can also use your own function to generate paths, for example if you're using `asset-pipeline` in [sass-rails](https://github.com/rails/sass-rails). Set the `$govuk-image-url-function` and `$govuk-font-url-function` variables to the name of your function.
-
-## JavaScript
-
-GOV.UK Frontend JavaScript must be run with `<script type="module">`.
-
-This protects older browsers, including all versions of Internet Explorer, from running modern JavaScript that it does not support. Read about our [browser support](../browser-support/) for more information.
-
-### Before you start
-
-You'll need to add the following to the top of the `<body class="govuk-template__body">` section of your page template if you're not [using our Nunjucks macros](/use-nunjucks/).
-
-This snippet adds the `.govuk-frontend-supported` class in supported browsers:
-
-```html
-<script>document.body.className += ' js-enabled' + ('noModule' in HTMLScriptElement.prototype ? ' govuk-frontend-supported' : '');</script>
-```
-
-You should check [if our snippet is blocked by a Content Security Policy](#if-our-inline-javascript-snippet-is-blocked-by-a-content-security-policy).
-
-Next, to import the JavaScript from GOV.UK Frontend, you can either:
-
-- add the JavaScript file to your HTML
-- import the JavaScript into your own JavaScript file using a bundler
-
-### Add the JavaScript file to your HTML
-
-If you decide to add the JavaScript to your HTML, you can do one of the following:
-
-- set up your routing so requests for the JavaScript file are served from `node_modules/govuk-frontend/dist/govuk/govuk-frontend.min.js`
-- copy the `node_modules/govuk-frontend/dist/govuk/govuk-frontend.min.js` file into your application
-
-Then import the JavaScript file before the closing `</body>` tag of your HTML page or page template, and run the `initAll` function to initialise all the components.
-
-```html
-<body class="govuk-template__body">
-  <script>document.body.className += ' js-enabled' + ('noModule' in HTMLScriptElement.prototype ? ' govuk-frontend-supported' : '');</script>
-
-  <!-- // ... -->
-
-  <script type="module" src="<YOUR-JAVASCRIPTS-FOLDER>/govuk-frontend.min.js"></script>
-  <script type="module">
-    import { initAll } from '<YOUR-JAVASCRIPTS-FOLDER>/govuk-frontend.min.js'
-    initAll()
-  </script>
-</body>
-```
-
-Read about how we log [JavaScript errors in the browser console](../configure-components/#javascript-errors-in-the-browser-console) to check GOV.UK Frontend has been set up correctly.
-
-### Import JavaScript using a bundler
-
-If you decide to import using a bundler like [Rollup](https://rollupjs.org/) or [webpack](https://webpack.js.org/), the bundled JavaScript files must be added using `<script type="module">` in your HTML:
-
-```html
-<script type="module" src="<YOUR-JAVASCRIPTS-FOLDER>/app-bundle.min.js"></script>
-```
-
-We encourage the use of ECMAScript (ES) modules, but you should check your bundler does not unnecessarily downgrade modern JavaScript for unsupported browsers.
-
-If your service cannot use ES modules, read about [alternative module formats](#import-javascript-using-alternative-module-formats) below.
-
-#### Import individual components
-
-If you want to improve how quickly your service’s pages load in browsers, you can import only the JavaScript components you need.
-
-```javascript
-import { SkipLink, Radios } from 'govuk-frontend'
-
-const $skipLink = document.querySelector('[data-module="govuk-skip-link"]')
-new SkipLink($skipLink)
-```
-
-When using a component more than once, the same `import` can be initialised again:
-
-```javascript
-import { Radios } from 'govuk-frontend'
-
-const $radios = document.querySelectorAll('[data-module="govuk-radios"]')
-$radios.forEach(($radio) => {
-  new Radios($radio)
-})
-```
-
-#### Import and initialise all components using the initAll function
-
-If you need to import all of GOV.UK Frontend's components, then run the `initAll` function to initialise them:
-
-```javascript
-import { initAll } from 'govuk-frontend'
-initAll()
-```
-
-### Import JavaScript using alternative module formats
-
-#### Universal Module Definition (UMD)
-
-For projects that cannot import ECMAScript (ES) modules, we also publish pre-built Universal Module Definition (UMD) bundles to support the following formats:
-
-* Asynchronous Module Definition (AMD)
-* Browser `window.GOVUKFrontend` global
-* CommonJS
-
-Bundlers like [Browserify](http://browserify.org/) can use `require()` to import UMD bundles:
-
-```javascript
-const { Accordion } = require('govuk-frontend')
-```
-
-Rails Assets Pipeline or Sprockets can use `require` directives to import UMD bundles:
-
-```javascript
-// = require govuk/components/accordion/accordion.bundle.js
-const { Accordion } = window.GOVUKFrontend;
-```
-
-**Note:** Using pre-built bundles instead of ECMAScript (ES) modules will output considerably larger JavaScript files. You can read more about [tree shaking](https://developer.mozilla.org/en-US/docs/Glossary/Tree_shaking) on the MDN website.
-
-### If our inline JavaScript snippet is blocked by a Content Security Policy
-
-If your site has a Content Security Policy (CSP), the CSP may block the inline JavaScript in the page template. You may see a warning like the following in your browser console:
-
-```
-Refused to execute inline script because it violates the following Content Security Policy directive: "default-src 'self'".
-```
-
-To unblock inline JavaScript, do one of the following:
-
-- include a hash (recommended)
-- use a nonce
-
-Make sure you [understand the security implications of using either option](https://www.w3.org/TR/CSP/#security-considerations), as wrong implementation could affect your service’s security. If you're not sure what to do, talk to a security expert.
-
-#### Use a hash to unblock inline JavaScript
-
-You can unblock inline JavaScript by including the following hash in your CSP:
-<%#
-  This hash should match the one in `govuk-frontend` tests:
-  https://github.com/alphagov/govuk-frontend/blob/main/packages/govuk-frontend/src/govuk/template.test.js
-%>
-
-```
-sha256-GUQ5ad8JK5KmEWmROf3LZd9ge94daqNvd8xy9YS1iDw=
-```
-
-You do not need to make any changes to the HTML.
-
-[Learn more about Content Security Policy on the MDN Web Docs website](https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP).
-
-#### Use a `nonce` attribute to unblock inline JavaScript
-
-If you're unable to use the hash in your CSP, you can also use a `nonce` on inline JavaScript.
-
-However, you should provide a nonce that hostile actors cannot guess. Otherwise, they could easily find a way around your CSP.
-
-You should use a value which is:
-
-- unique for each HTTP response
-- generated using a cryptographically-secure random generator
-- at least 32 characters for hex, or 24 characters for base64
-
-Make sure your script tags do not have any untrusted or unescaped variables.
-
-If you're using the Nunjucks page template, you can add the `nonce` attribute by setting the `cspNonce` variable.
