@@ -19,7 +19,7 @@ This snippet adds the `.govuk-frontend-supported` class in supported browsers:
 <script>document.body.className += ' js-enabled' + ('noModule' in HTMLScriptElement.prototype ? ' govuk-frontend-supported' : '');</script>
 ```
 
-You should check [if our snippet is blocked by a Content Security Policy](../import-javascript/#if-our-inline-javascript-snippet-is-blocked-by-a-content-security-policy/).
+You should check [if our snippet is blocked by a Content Security Policy](#if-our-inline-javascript-snippet-is-blocked-by-a-content-security-policy).
 
 Next, to import the JavaScript from GOV.UK Frontend, you can either:
 
@@ -61,7 +61,7 @@ If you decide to import using a bundler like [Rollup](https://rollupjs.org/) or 
 
 We encourage the use of ECMAScript (ES) modules, but you should check your bundler does not unnecessarily downgrade modern JavaScript for unsupported browsers.
 
-If your service cannot use ES modules, read about [alternative module formats](../import-javascript/#import-javascript-using-alternative-module-formats/) below.
+If your service cannot use ES modules, read about [alternative module formats](#import-javascript-using-alternative-module-formats) below.
 
 ### Import individual components
 
