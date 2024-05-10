@@ -130,7 +130,10 @@ With data attributes
 With JavaScript
 
 ```js
-new CharacterCount($element, {
+import { CharacterCount, createAll } from 'govuk-frontend'
+
+// The same config will be used for all CharacterCount on the page
+createAll(CharacterCount, {
   i18n: {
     charactersUnderLimit: {
       other: '%{count} characters to go',
