@@ -65,23 +65,30 @@ If your service cannot use ES modules, read about [alternative module formats](#
 
 ### Import individual components
 
-If you want to improve how quickly your service’s pages load in browsers, you can import only the JavaScript components you need.
+To improve how quickly your service’s pages load in browsers, import only the JavaScript components you need. You can also [configure each component](../configure-components/#passing-javascript-configuration) when instantiating them.
 
 ```javascript
-import { SkipLink, Radios } from 'govuk-frontend'
+import { SkipLink, CharacterCount, createAll } from 'govuk-frontend'
 
-const $skipLink = document.querySelector('[data-module="govuk-skip-link"]')
-new SkipLink($skipLink)
+createAll(SkipLink)
+// You can provide a config for components that use them
+createAll(CharacterCount, { maxLength: 500 })
 ```
 
-When using a component more than once, the same `import` can be initialised again:
+The `createAll` function will log any errors thrown during components instantiation to the console. If you need to catch these errors, you can instantiate the components manually. You must check your application works without errors or some components will not work correctly.
 
 ```javascript
-import { Radios } from 'govuk-frontend'
+import { SkipLink, CharacterCount } from 'govuk-frontend'
 
-const $radios = document.querySelectorAll('[data-module="govuk-radios"]')
-$radios.forEach(($radio) => {
-  new Radios($radio)
+const $skipLinks = document.querySelectorAll('[data-module="govuk-skip-link"]')
+$skipLinks.forEach(($skipLink) => {
+  new SkipLink($skipLink)
+})
+
+const $characterCounts = document.querySelectorAll('[data-module="govuk-character-count"]')
+$characterCounts.forEach(($characterCount) => {
+  // You can provide a config for components that use them
+  new CharacterCount($characterCount, {maxLength: 500})
 })
 ```
 
