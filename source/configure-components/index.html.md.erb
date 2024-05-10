@@ -13,7 +13,7 @@ You can configure a component by:
 - [passing JavaScript configuration](#passing-javascript-configuration)
 - [adding HTML data attributes](#adding-html-data-attributes)
 
-Configuration passed via data attributes in the HTML or via Nunjucks macro options will take precedence over any JavaScript configuration.
+Configuration passed through data attributes in the HTML or Nunjucks macro options will take precedence over any JavaScript configuration.
 
 To learn more about how configuration is passed from Nunjucks macros to HTML data attributes, see advanced examples in [the localisation options](../localise-govuk-frontend/).
 
@@ -72,22 +72,6 @@ initAll({
   }
 })
 ```
-
-#### Initialise only part of a page
-
-If you update a page with new markup, for example a modal dialogue box, you can run `initAll` with a `scope` parameter to initialise the components on part of a page:
-
-```javascript
-import { initAll } from 'govuk-frontend'
-
-const $element = document.querySelector('.app-modal')
-
-if ($element) {
-  initAll({ scope: $element })
-}
-```
-
-Read the [JavaScript API Reference](../javascript-api-reference/) for the list of components in the `initAll` configuration.
 
 ### JavaScript errors in the browser console
 

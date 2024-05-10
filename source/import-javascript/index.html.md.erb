@@ -101,6 +101,40 @@ import { initAll } from 'govuk-frontend'
 initAll()
 ```
 
+## Initialise only part of a page
+
+If you update a page with new markup, for example a modal dialogue box, you can 
+initialise components on that part of the page only.
+
+### Initialise individual components on part of a page
+
+Pass the scope into `createAll`'s third argument to initialise individual components:
+
+```javascript
+import { SkipLink, CharacterCount, createAll } from 'govuk-frontend'
+
+const $element = document.querySelector('.app-modal')
+
+// Use `undefined` as second arguments for components 
+// that don't need a config
+createAll(SkipLink, undefined, $element)
+createAll(CharacterCount, { maxLength: 500 }, $element)
+```
+
+### Initialise all components on part of a page
+
+Run `initAll` with a `scope` parameter to initialise the components on part of a page:
+
+```javascript
+import { initAll } from 'govuk-frontend'
+
+const $element = document.querySelector('.app-modal')
+
+if ($element) {
+  initAll({ scope: $element })
+}
+```
+
 ## Import JavaScript using alternative module formats
 
 ### Universal Module Definition (UMD)
