@@ -40,13 +40,15 @@ To import all the Sass rules from GOV.UK Frontend, add the following to your Sas
 If you want to improve how quickly your service's pages load in browsers, you can import only the Sass rules you need.
 
 1. Import `node_modules/govuk-frontend/dist/govuk/base` in your Sass file.
-2. Import the parts of the CSS you need.
+2. Import only the Sass you need based on the components and other classes your service is using.
 
-The biggest optimisations you can make are to include just the components and overrides that you are using.
+The biggest optimisations come from excluding any components or overrides you're not using.
+
+You must import the layers in the order listed in the example below.
 
 ```scss
 // 'Base' includes everything from settings, tools and helpers. Nothing
-// in the base outputs any actual CSS.
+// in the base outputs any CSS.
 
 @import "node_modules/govuk-frontend/dist/govuk/base";
 
@@ -55,7 +57,7 @@ The biggest optimisations you can make are to include just the components and ov
 
 @import "node_modules/govuk-frontend/dist/govuk/core/index";
 
-// Objects include things like the page template, grid, form groups.
+// Objects include things like the page template, grid and form groups.
 // Approximately 5% of the CSS output if you include everything.
 
 @import "node_modules/govuk-frontend/dist/govuk/objects/index";
@@ -68,17 +70,23 @@ The biggest optimisations you can make are to include just the components and ov
 @import "node_modules/govuk-frontend/dist/govuk/components/<%= component %>/index";
 <% end %>
 
+/*
+// Alternatively, you can import all components:
+@import "node_modules/govuk-frontend/dist/govuk/components/index";
+*/
+
 // Utilities, for example govuk-clearfix or govuk-visually-hidden.
 // Approximately 1% of the CSS output if you include everything.
 
 @import "node_modules/govuk-frontend/dist/govuk/utilities/index";
 
-// Overrides, used to tweak things like the amount of spacing on an
+// Overrides, used to adjust things like the amount of spacing on an
 // element. Override classes always include `-!-` in the class name.
 // Approximately 15% of the CSS output if you include everything.
 
 @import "node_modules/govuk-frontend/dist/govuk/overrides/index";
 
+/*
 // Alternatively, you can import the specific groups of overrides
 // you need for your project:
 <% examples = {
@@ -89,10 +97,11 @@ The biggest optimisations you can make are to include just the components and ov
   'width' => %w(govuk-!-width-two-thirds)
 } %>
 <% overrides.each do |override| %>
-//
-// <%= override.titleize %><% if examples.key?(override) %>, for example <%= examples[override].join(', ') %><% end %>
-// @import "node_modules/govuk-frontend/dist/govuk/overrides/<%= override %>";
+
+// <%= override.sub('-', ' ').humanize %> overrides<% if examples.key?(override) %> - for example <%= examples[override].join(', ') %><% end %>
+@import "node_modules/govuk-frontend/dist/govuk/overrides/<%= override %>";
 <% end %>
+*/
 ```
 
 You can remove lines that import parts of the CSS you do not need.
