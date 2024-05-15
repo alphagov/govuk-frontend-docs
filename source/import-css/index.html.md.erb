@@ -64,41 +64,9 @@ The biggest optimisations you can make are to include just the components and ov
 // are using in your project. Approximately 70% of the CSS output if
 // you include everything.
 
-@import "node_modules/govuk-frontend/dist/govuk/components/accordion/index";
-@import "node_modules/govuk-frontend/dist/govuk/components/back-link/index";
-@import "node_modules/govuk-frontend/dist/govuk/components/breadcrumbs/index";
-@import "node_modules/govuk-frontend/dist/govuk/components/button/index";
-@import "node_modules/govuk-frontend/dist/govuk/components/character-count/index";
-@import "node_modules/govuk-frontend/dist/govuk/components/checkboxes/index";
-@import "node_modules/govuk-frontend/dist/govuk/components/cookie-banner/index";
-@import "node_modules/govuk-frontend/dist/govuk/components/date-input/index";
-@import "node_modules/govuk-frontend/dist/govuk/components/details/index";
-@import "node_modules/govuk-frontend/dist/govuk/components/error-message/index";
-@import "node_modules/govuk-frontend/dist/govuk/components/error-summary/index";
-@import "node_modules/govuk-frontend/dist/govuk/components/exit-this-page/index";
-@import "node_modules/govuk-frontend/dist/govuk/components/fieldset/index";
-@import "node_modules/govuk-frontend/dist/govuk/components/file-upload/index";
-@import "node_modules/govuk-frontend/dist/govuk/components/footer/index";
-@import "node_modules/govuk-frontend/dist/govuk/components/header/index";
-@import "node_modules/govuk-frontend/dist/govuk/components/hint/index";
-@import "node_modules/govuk-frontend/dist/govuk/components/input/index";
-@import "node_modules/govuk-frontend/dist/govuk/components/inset-text/index";
-@import "node_modules/govuk-frontend/dist/govuk/components/label/index";
-@import "node_modules/govuk-frontend/dist/govuk/components/notification-banner/index";
-@import "node_modules/govuk-frontend/dist/govuk/components/pagination/index";
-@import "node_modules/govuk-frontend/dist/govuk/components/panel/index";
-@import "node_modules/govuk-frontend/dist/govuk/components/password-input/index";
-@import "node_modules/govuk-frontend/dist/govuk/components/phase-banner/index";
-@import "node_modules/govuk-frontend/dist/govuk/components/radios/index";
-@import "node_modules/govuk-frontend/dist/govuk/components/select/index";
-@import "node_modules/govuk-frontend/dist/govuk/components/skip-link/index";
-@import "node_modules/govuk-frontend/dist/govuk/components/summary-list/index";
-@import "node_modules/govuk-frontend/dist/govuk/components/table/index";
-@import "node_modules/govuk-frontend/dist/govuk/components/tabs/index";
-@import "node_modules/govuk-frontend/dist/govuk/components/tag/index";
-@import "node_modules/govuk-frontend/dist/govuk/components/task-list/index";
-@import "node_modules/govuk-frontend/dist/govuk/components/textarea/index";
-@import "node_modules/govuk-frontend/dist/govuk/components/warning-text/index";
+<% components.each do |component| %>
+@import "node_modules/govuk-frontend/dist/govuk/components/<%= component %>/index";
+<% end %>
 
 // Utilities, for example govuk-clearfix or govuk-visually-hidden.
 // Approximately 1% of the CSS output if you include everything.
@@ -113,21 +81,18 @@ The biggest optimisations you can make are to include just the components and ov
 
 // Alternatively, you can import the specific groups of overrides
 // you need for your project:
+<% examples = {
+  'display' => %w(govuk-!-display-inline),
+  'spacing' => %w(govuk-!-margin-4 govuk-!-static-padding-4),
+  'text-align' => %w(govuk-!-text-align-left),
+  'typography' => %w(govuk-!-font-size-19 govuk-!-font-weight-bold),
+  'width' => %w(govuk-!-width-two-thirds)
+} %>
+<% overrides.each do |override| %>
 //
-// Display, for example govuk-!-display-inline
-// @import "node_modules/govuk-frontend/dist/govuk/overrides/display";
-//
-// Spacing, for example govuk-!-margin-4, govuk-!-static-padding-4
-// @import "node_modules/govuk-frontend/dist/govuk/overrides/spacing";
-//
-// Text alignment, for example govuk-!-text-align-left
-// @import "node_modules/govuk-frontend/dist/govuk/overrides/text-align";
-//
-// Typography, for example govuk-!-font-size-19, govuk-!-font-weight-bold
-// @import "node_modules/govuk-frontend/dist/govuk/overrides/typography";
-//
-// Width, for example govuk-!-width-two-thirds
-// @import "node_modules/govuk-frontend/dist/govuk/overrides/width";
+// <%= override.titleize %><% if examples.key?(override) %>, for example <%= examples[override].join(', ') %><% end %>
+// @import "node_modules/govuk-frontend/dist/govuk/overrides/<%= override %>";
+<% end %>
 ```
 
 You can remove lines that import parts of the CSS you do not need.
