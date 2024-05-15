@@ -42,18 +42,92 @@ If you want to improve how quickly your service's pages load in browsers, you ca
 1. Import `node_modules/govuk-frontend/dist/govuk/base` in your Sass file.
 2. Import the parts of the CSS you need.
 
-For example, add the following to your Sass file to import the CSS you need for a basic GOV.UK page.
+The biggest optimisations you can make are to include just the components and overrides that you are using.
 
 ```scss
+// 'Base' includes everything from settings, tools and helpers. Nothing
+// in the base outputs any actual CSS.
+
 @import "node_modules/govuk-frontend/dist/govuk/base";
 
+// Basic content styles for typography, links etc. Approximately 10% of
+// the CSS output if you include everything.
+
 @import "node_modules/govuk-frontend/dist/govuk/core/index";
+
+// Objects include things like the page template, grid, form groups.
+// Approximately 5% of the CSS output if you include everything.
+
 @import "node_modules/govuk-frontend/dist/govuk/objects/index";
+
+// The components themselves - try to only include the components you
+// are using in your project. Approximately 70% of the CSS output if
+// you include everything.
+
+@import "node_modules/govuk-frontend/dist/govuk/components/accordion/index";
+@import "node_modules/govuk-frontend/dist/govuk/components/back-link/index";
+@import "node_modules/govuk-frontend/dist/govuk/components/breadcrumbs/index";
+@import "node_modules/govuk-frontend/dist/govuk/components/button/index";
+@import "node_modules/govuk-frontend/dist/govuk/components/character-count/index";
+@import "node_modules/govuk-frontend/dist/govuk/components/checkboxes/index";
+@import "node_modules/govuk-frontend/dist/govuk/components/cookie-banner/index";
+@import "node_modules/govuk-frontend/dist/govuk/components/date-input/index";
+@import "node_modules/govuk-frontend/dist/govuk/components/details/index";
+@import "node_modules/govuk-frontend/dist/govuk/components/error-message/index";
+@import "node_modules/govuk-frontend/dist/govuk/components/error-summary/index";
+@import "node_modules/govuk-frontend/dist/govuk/components/exit-this-page/index";
+@import "node_modules/govuk-frontend/dist/govuk/components/fieldset/index";
+@import "node_modules/govuk-frontend/dist/govuk/components/file-upload/index";
 @import "node_modules/govuk-frontend/dist/govuk/components/footer/index";
 @import "node_modules/govuk-frontend/dist/govuk/components/header/index";
+@import "node_modules/govuk-frontend/dist/govuk/components/hint/index";
+@import "node_modules/govuk-frontend/dist/govuk/components/input/index";
+@import "node_modules/govuk-frontend/dist/govuk/components/inset-text/index";
+@import "node_modules/govuk-frontend/dist/govuk/components/label/index";
+@import "node_modules/govuk-frontend/dist/govuk/components/notification-banner/index";
+@import "node_modules/govuk-frontend/dist/govuk/components/pagination/index";
+@import "node_modules/govuk-frontend/dist/govuk/components/panel/index";
+@import "node_modules/govuk-frontend/dist/govuk/components/password-input/index";
+@import "node_modules/govuk-frontend/dist/govuk/components/phase-banner/index";
+@import "node_modules/govuk-frontend/dist/govuk/components/radios/index";
+@import "node_modules/govuk-frontend/dist/govuk/components/select/index";
 @import "node_modules/govuk-frontend/dist/govuk/components/skip-link/index";
+@import "node_modules/govuk-frontend/dist/govuk/components/summary-list/index";
+@import "node_modules/govuk-frontend/dist/govuk/components/table/index";
+@import "node_modules/govuk-frontend/dist/govuk/components/tabs/index";
+@import "node_modules/govuk-frontend/dist/govuk/components/tag/index";
+@import "node_modules/govuk-frontend/dist/govuk/components/task-list/index";
+@import "node_modules/govuk-frontend/dist/govuk/components/textarea/index";
+@import "node_modules/govuk-frontend/dist/govuk/components/warning-text/index";
+
+// Utilities, for example govuk-clearfix or govuk-visually-hidden.
+// Approximately 1% of the CSS output if you include everything.
+
 @import "node_modules/govuk-frontend/dist/govuk/utilities/index";
+
+// Overrides, used to tweak things like the amount of spacing on an
+// element. Override classes always include `-!-` in the class name.
+// Approximately 15% of the CSS output if you include everything.
+
 @import "node_modules/govuk-frontend/dist/govuk/overrides/index";
+
+// Alternatively, you can import the specific groups of overrides
+// you need for your project:
+//
+// Display, for example govuk-!-display-inline
+// @import "node_modules/govuk-frontend/dist/govuk/overrides/display";
+//
+// Spacing, for example govuk-!-margin-4, govuk-!-static-padding-4
+// @import "node_modules/govuk-frontend/dist/govuk/overrides/spacing";
+//
+// Text alignment, for example govuk-!-text-align-left
+// @import "node_modules/govuk-frontend/dist/govuk/overrides/text-align";
+//
+// Typography, for example govuk-!-font-size-19, govuk-!-font-weight-bold
+// @import "node_modules/govuk-frontend/dist/govuk/overrides/typography";
+//
+// Width, for example govuk-!-width-two-thirds
+// @import "node_modules/govuk-frontend/dist/govuk/overrides/width";
 ```
 
 You can remove lines that import parts of the CSS you do not need.
