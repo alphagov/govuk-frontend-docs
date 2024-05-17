@@ -1,5 +1,6 @@
 require "govuk_tech_docs"
 require "lib/header_menu_fix_extension"
+require "lib/package_contents"
 require "lib/sassdocs_helpers"
 require "lib/table_of_contents_helpers"
 
@@ -22,6 +23,7 @@ sprockets.prepend_path File.join(__dir__, "./node_modules/govuk-frontend/")
 config[:tech_docs][:prevent_indexing] = (ENV["GITHUB_REF"] != "refs/heads/main")
 
 helpers do
+  include PackageContents
   include SassdocsHelpers
   include TableOfContentsHelpers
 
