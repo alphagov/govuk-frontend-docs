@@ -47,20 +47,20 @@ For example, add the following to your Sass file to import the CSS you need for 
 ```scss
 @import "node_modules/govuk-frontend/dist/govuk/base";
 
-@import "node_modules/govuk-frontend/dist/govuk/core/all";
-@import "node_modules/govuk-frontend/dist/govuk/objects/all";
+@import "node_modules/govuk-frontend/dist/govuk/core/index";
+@import "node_modules/govuk-frontend/dist/govuk/objects/index";
 @import "node_modules/govuk-frontend/dist/govuk/components/footer/index";
 @import "node_modules/govuk-frontend/dist/govuk/components/header/index";
 @import "node_modules/govuk-frontend/dist/govuk/components/skip-link/index";
-@import "node_modules/govuk-frontend/dist/govuk/utilities/all";
-@import "node_modules/govuk-frontend/dist/govuk/overrides/all";
+@import "node_modules/govuk-frontend/dist/govuk/utilities/index";
+@import "node_modules/govuk-frontend/dist/govuk/overrides/index";
 ```
 
 You can remove lines that import parts of the CSS you do not need.
 
 [Read more about the different parts of GOV.UK Frontend’s CSS](https://github.com/alphagov/govuk-frontend/tree/main/packages/govuk-frontend/src).
 
-You do not need `/index` at the end of your component imports if you’re using Dart Sass, LibSass 3.6.0 or higher, or Ruby Sass 3.6.0 or higher.
+You do not need `/index` at the end of your imports if you’re using Dart Sass, LibSass 3.6.0 or higher, or Ruby Sass 3.6.0 or higher.
 
 ## Import an individual component’s CSS using a single Sass import
 
