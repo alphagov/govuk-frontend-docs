@@ -65,23 +65,30 @@ If your service cannot use ES modules, read about [alternative module formats](#
 
 ### Import individual components
 
-If you want to improve how quickly your service’s pages load in browsers, you can import only the JavaScript components you need.
+To improve how quickly your service’s pages load in browsers, import only the JavaScript components you need. You can also [configure each component](../configure-components/#passing-javascript-configuration) when instantiating them.
 
 ```javascript
-import { SkipLink, Radios } from 'govuk-frontend'
+import { SkipLink, CharacterCount, createAll } from 'govuk-frontend'
 
-const $skipLink = document.querySelector('[data-module="govuk-skip-link"]')
-new SkipLink($skipLink)
+createAll(SkipLink)
+// You can provide a config for components that use them
+createAll(CharacterCount, { maxLength: 500 })
 ```
 
-When using a component more than once, the same `import` can be initialised again:
+The `createAll` function will log any errors thrown during components instantiation to the console. If you need to catch these errors, you can instantiate the components manually. You must check your application works without errors or some components will not work correctly.
 
 ```javascript
-import { Radios } from 'govuk-frontend'
+import { SkipLink, CharacterCount } from 'govuk-frontend'
 
-const $radios = document.querySelectorAll('[data-module="govuk-radios"]')
-$radios.forEach(($radio) => {
-  new Radios($radio)
+const $skipLinks = document.querySelectorAll('[data-module="govuk-skip-link"]')
+$skipLinks.forEach(($skipLink) => {
+  new SkipLink($skipLink)
+})
+
+const $characterCounts = document.querySelectorAll('[data-module="govuk-character-count"]')
+$characterCounts.forEach(($characterCount) => {
+  // You can provide a config for components that use them
+  new CharacterCount($characterCount, {maxLength: 500})
 })
 ```
 
@@ -92,6 +99,40 @@ If you need to import all of GOV.UK Frontend's components, then run the `initAll
 ```javascript
 import { initAll } from 'govuk-frontend'
 initAll()
+```
+
+## Initialise only part of a page
+
+If you update a page with new markup, for example a modal dialogue box, you can 
+initialise components on that part of the page only.
+
+### Initialise individual components on part of a page
+
+Pass the scope into `createAll`'s third argument to initialise individual components:
+
+```javascript
+import { SkipLink, CharacterCount, createAll } from 'govuk-frontend'
+
+const $element = document.querySelector('.app-modal')
+
+// Use `undefined` as second arguments for components 
+// that don't need a config
+createAll(SkipLink, undefined, $element)
+createAll(CharacterCount, { maxLength: 500 }, $element)
+```
+
+### Initialise all components on part of a page
+
+Run `initAll` with a `scope` parameter to initialise the components on part of a page:
+
+```javascript
+import { initAll } from 'govuk-frontend'
+
+const $element = document.querySelector('.app-modal')
+
+if ($element) {
+  initAll({ scope: $element })
+}
 ```
 
 ## Import JavaScript using alternative module formats

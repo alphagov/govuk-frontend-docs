@@ -13,6 +13,10 @@ You can configure a component by:
 - [passing JavaScript configuration](#passing-javascript-configuration)
 - [adding HTML data attributes](#adding-html-data-attributes)
 
+Configuration passed through data attributes in the HTML or Nunjucks macro options will take precedence over any JavaScript configuration.
+
+To learn more about how configuration is passed from Nunjucks macros to HTML data attributes, see advanced examples in [the localisation options](../localise-govuk-frontend/).
+
 ## Setting Nunjucks macro options
 
 If you're using the Nunjucks macros, you can read about [configuring a component](../use-nunjucks/#configuring-a-component) or find all of the configuration options published on the [GOV.UK Design System website](https://design-system.service.gov.uk/).
@@ -23,44 +27,18 @@ Read the [JavaScript API Reference](../javascript-api-reference/) for the list o
 
 The examples below follow our recommended [Import JavaScript using a bundler](../import-javascript/#import-javascript-using-a-bundler) approach and demonstrate how to:
 
-- [configure individual component instances](#configure-individual-component-instances)
-- [configure all components using the initAll function](#configure-all-components-using-the-initall-function)
+- [configure instances of specific components using the `createAll` function](#configure-instances-of-specific-components-using-the-createall-function)
+- [configure all components using the `initAll` function](#configure-all-components-using-the-initall-function)
 - [check for JavaScript errors in the browser console](#javascript-errors-in-the-browser-console)
 
-### Configure individual component instances
+### Configure instances of specific components using the `createAll` function
 
-Component constructors accept two arguments:
-
-1. The HTML element that represents the component.
-2. An optional configuration object.
-
-Although JavaScript configuration objects are optional, configuration can still be provided or overridden by [HTML data attributes](#adding-html-data-attributes).
-
-To learn more about how configuration is passed from Nunjucks macros to HTML data attributes, see advanced examples in [the localisation options](../localise-govuk-frontend/).
-
-#### Without configuration object
-
-You can select and initialise a component using its `data-module` attribute. For example, use `govuk-character-count` to initialise the first character count component on a page:
+You can pass a configuration object into `createAll`'s second argument when creating an instance of a component in JavaScript:
 
 ```javascript
-import { CharacterCount } from 'govuk-frontend'
+import { CharacterCount, createAll } from 'govuk-frontend'
 
-const $element = document.querySelector('[data-module="govuk-character-count"]')
-new CharacterCount($element)
-```
-
-When initialised individually, errors are thrown rather than logged. You must check your application works without errors or some components will not work correctly.
-
-#### With configuration object
-
-You can pass a configuration object into the constructor's second argument when creating an instance of a component in JavaScript:
-
-```javascript
-import { CharacterCount } from 'govuk-frontend'
-
-const $element = document.querySelector('[data-module="govuk-character-count"]')
-
-new CharacterCount($element, {
+createAll(CharacterCount, {
   maxlength: 500,
   i18n: {
     charactersAtLimit: 'No characters left',
@@ -94,22 +72,6 @@ initAll({
   }
 })
 ```
-
-#### Initialise only part of a page
-
-If you update a page with new markup, for example a modal dialogue box, you can run `initAll` with a `scope` parameter to initialise the components on part of a page:
-
-```javascript
-import { initAll } from 'govuk-frontend'
-
-const $element = document.querySelector('.app-modal')
-
-if ($element) {
-  initAll({ scope: $element })
-}
-```
-
-Read the [JavaScript API Reference](../javascript-api-reference/) for the list of components in the `initAll` configuration.
 
 ### JavaScript errors in the browser console
 
