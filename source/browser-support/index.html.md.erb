@@ -41,17 +41,16 @@ Grade C covers browsers not in Grade A or B which support `<script type="module"
 - Chrome 61 and later
 - Edge 16-18
 - Edge 79 and later
-- Safari 11 (mac)
+- Safari 11 and later
 - Firefox 60 and later
 - Opera 48 and later
-- Safari 10.3 and later (iOS)
 - Samsung Internet 8.2 and later
-
-Safari 10.1 also supports `<script type="module">` but will 'exit early' as it does not support `HTMLScriptElement.prototype.noModule` which is how we test support for `<script type="module">` from within our JavaScript.
 
 These browsers should be able to parse GOV.UK Frontend's JavaScript without error.
 
 However, we might disable or reduce features on an individual basis in browsers where the underlying features are not available. We'll make exceptions if users need the feature to complete their task.
+
+Safari 10.1 (macOS) and Safari 10.3 (iOS) support `<script type="module">` but will 'exit early' as they does not support `HTMLScriptElement.prototype.noModule`, which is how we test support for `<script type="module">` from within our JavaScript. JavaScript modules will not run in these versions of Safari.
 
 For grade C browsers we:
 
