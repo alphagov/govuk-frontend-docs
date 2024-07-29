@@ -1,0 +1,27 @@
+{
+  "entryPoints": ["./node_modules/govuk-frontend/dist/govuk/all.mjs"],
+  "include": ["./node_modules/govuk-frontend/dist/govuk/**/*.mjs"],
+  "exclude": ["./**/*.test.*"],
+  "compilerOptions": {
+    "allowJs": true,
+    "checkJs": true,
+    "esModuleInterop": true,
+    "lib": ["ESNext", "DOM"],
+    "module": "ESNext",
+    "moduleResolution": "Node",
+    "noEmit": true,
+    "noImplicitThis": true,
+    "resolveJsonModule": true,
+    "strict": true,
+    "strictBindCallApply": true,
+    "strictFunctionTypes": true,
+    "target": "ES2015",
+    "types": ["express", "node", "nunjucks", "slug", "typed-query-selector"],
+    "paths": {
+      "govuk-frontend": ["./node_modules/govuk-frontend/dist/govuk/all.mjs"]
+    }
+  },
+  "typeAcquisition": {
+    "enable": false
+  }
+}
