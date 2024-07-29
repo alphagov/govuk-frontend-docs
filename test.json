@@ -1,0 +1,171 @@
+{
+	"id": 0,
+	"name": "govuk-frontend-docs",
+	"variant": "project",
+	"kind": 1,
+	"flags": {},
+	"packageName": "govuk-frontend-docs",
+	"readme": [
+		{
+			"kind": "text",
+			"text": "# GOV.UK Frontend Documentation\n\nThis project uses the [Tech Docs Template][template], which is a [Middleman template][mmt] that you can use to build technical documentation using a GOV.UK style.\n\nYou’re welcome to use the template even if your service isn’t considered part of GOV.UK, but your site or service must not:\n\n- identify itself as being part of GOV.UK\n- use the crown or GOV.UK logotype in the header\n- use the GDS Transport typeface\n- suggest that it’s an official UK government website if it’s not\n\n👉 To find out more about setting up and managing content for a website using this template, see the [Tech Docs Template documentation][tdt-docs].\n\n## Before you start\n\nTo run this project you need:\n\n- [Ruby][install-ruby]\n- [Middleman][install-middleman]\n- [Node.js](https://nodejs.org/en/)\n\n## Making changes\n\nTo make changes to the documentation for the Tech Docs Template website, edit files in the "
+		},
+		{
+			"kind": "code",
+			"text": "`source`"
+		},
+		{
+			"kind": "text",
+			"text": " folder of this repository.\n\nYou can add content by editing the "
+		},
+		{
+			"kind": "code",
+			"text": "`.html.md.erb`"
+		},
+		{
+			"kind": "text",
+			"text": " files. These files support content in:\n\n- Markdown\n- HTML\n- Ruby\n\n👉 Learn more about [configuring your website][configure].\n\n## Installing dependencies\n\n- run "
+		},
+		{
+			"kind": "code",
+			"text": "`bundle install`"
+		},
+		{
+			"kind": "text",
+			"text": " for Ruby dependencies\n- run "
+		},
+		{
+			"kind": "code",
+			"text": "`npm install`"
+		},
+		{
+			"kind": "text",
+			"text": " for JavaScript dependencies\n\n## Preview your changes locally\n\nTo preview your new website locally, navigate to your project folder and run:\n\n"
+		},
+		{
+			"kind": "code",
+			"text": "```sh\nbundle exec middleman server\n```"
+		},
+		{
+			"kind": "text",
+			"text": "\n\n👉 See the generated website on "
+		},
+		{
+			"kind": "code",
+			"text": "`http://localhost:4567`"
+		},
+		{
+			"kind": "text",
+			"text": " in your browser. Any content changes you make to your website will be updated in real time.\n\nTo shut down the Middleman instance running on your machine, use "
+		},
+		{
+			"kind": "code",
+			"text": "`ctrl+C`"
+		},
+		{
+			"kind": "text",
+			"text": ".\n\nIf you make changes to the "
+		},
+		{
+			"kind": "code",
+			"text": "`config/tech-docs.yml`"
+		},
+		{
+			"kind": "text",
+			"text": " configuration file, you need to restart Middleman to see the changes.\n\n## Build\n\nTo build the HTML pages from content in your "
+		},
+		{
+			"kind": "code",
+			"text": "`source`"
+		},
+		{
+			"kind": "text",
+			"text": " folder, run:\n\n"
+		},
+		{
+			"kind": "code",
+			"text": "```\nbundle exec middleman build\n```"
+		},
+		{
+			"kind": "text",
+			"text": "\n\nEvery time you run this command, the "
+		},
+		{
+			"kind": "code",
+			"text": "`build`"
+		},
+		{
+			"kind": "text",
+			"text": " folder gets generated from scratch. This means any changes to the "
+		},
+		{
+			"kind": "code",
+			"text": "`build`"
+		},
+		{
+			"kind": "text",
+			"text": " folder that are not part of the build command will get overwritten.\n\n## Troubleshooting\n\nRun "
+		},
+		{
+			"kind": "code",
+			"text": "`bundle update`"
+		},
+		{
+			"kind": "text",
+			"text": " to make sure you're using the most recent Ruby gem versions.\n\nRun "
+		},
+		{
+			"kind": "code",
+			"text": "`bundle exec middleman build --verbose`"
+		},
+		{
+			"kind": "text",
+			"text": " to get detailed error messages to help with finding the problem.\n\n### OpenSSL issues on newer versions of MacOS\nBecause of some quirks with OpenSSL on newer versions of MacOS, you might run into an error with "
+		},
+		{
+			"kind": "code",
+			"text": "`eventmachine`"
+		},
+		{
+			"kind": "text",
+			"text": " while running "
+		},
+		{
+			"kind": "code",
+			"text": "`bundle install`"
+		},
+		{
+			"kind": "text",
+			"text": ".\n\nTo fix this, run:\n\n"
+		},
+		{
+			"kind": "code",
+			"text": "```\nbrew install openssl\nbundle config build.eventmachine --with-cppflags=-I$(brew --prefix openssl)/include\nbundle install\n```"
+		},
+		{
+			"kind": "text",
+			"text": "\n\n## Testing\n\nTo run the linter and Ruby tests, run "
+		},
+		{
+			"kind": "code",
+			"text": "`bundle exec rake`"
+		},
+		{
+			"kind": "text",
+			"text": ".\n\nTo check for broken links in the guidance, run "
+		},
+		{
+			"kind": "code",
+			"text": "`npm run check-links`"
+		},
+		{
+			"kind": "text",
+			"text": ".\n\n## Licence\n\nUnless stated otherwise, the codebase is released under [the MIT License][mit].\nThis covers both the codebase and any sample code in the documentation.\n\nThe documentation is [© Crown copyright][copyright] and available under the terms of the [Open Government 3.0][ogl] licence.\n\n[mit]: LICENCE\n[copyright]: http://www.nationalarchives.gov.uk/information-management/re-using-public-sector-information/uk-government-licensing-framework/crown-copyright/\n[ogl]: http://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/\n[mmt]: https://middlemanapp.com/advanced/project_templates/\n[tdt-docs]: https://tdt-documentation.london.cloudapps.digital\n[configure]: https://tdt-documentation.london.cloudapps.digital/configure_project/\n[install-ruby]: https://tdt-documentation.london.cloudapps.digital/create_project/get_started/#install-ruby\n[install-middleman]: https://tdt-documentation.london.cloudapps.digital/create_project/get_started/#install-middleman\n[gem]: https://github.com/alphagov/tech-docs-gem\n[template]: https://github.com/alphagov/tech-docs-template"
+		}
+	],
+	"symbolIdMap": {},
+	"files": {
+		"entries": {},
+		"reflections": {}
+	}
+}
