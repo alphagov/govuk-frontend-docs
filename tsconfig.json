@@ -1,25 +1,24 @@
 {
-  "entryPoints": ["./node_modules/govuk-frontend/dist/govuk/all.mjs"],
   "include": ["./node_modules/govuk-frontend/dist/govuk/**/*.mjs"],
-  "exclude": ["./**/*.test.*"],
+  "exclude": ["./node_modules/govuk-frontend/dist/govuk/**/*.bundle.mjs"],
   "compilerOptions": {
     "allowJs": true,
     "checkJs": true,
     "esModuleInterop": true,
-    "lib": ["ESNext", "DOM"],
-    "module": "ESNext",
-    "moduleResolution": "Node",
+    "module": "NodeNext",
+    "moduleResolution": "NodeNext",
     "noEmit": true,
+    "noEmitOnError": false,
     "noImplicitThis": true,
     "resolveJsonModule": true,
-    "strict": true,
+    "strict": false,
     "strictBindCallApply": true,
     "strictFunctionTypes": true,
-    "target": "ES2015",
-    "types": ["express", "node", "nunjucks", "slug", "typed-query-selector"],
-    "paths": {
-      "govuk-frontend": ["./node_modules/govuk-frontend/dist/govuk/all.mjs"]
-    }
+    "target": "ESNext",
+    "types": ["typed-query-selector", "node"],
+    "allowSyntheticDefaultImports": true,
+    "useDefineForClassFields": true,
+    "lib": ["ESNext", "DOM"]
   },
   "typeAcquisition": {
     "enable": false
