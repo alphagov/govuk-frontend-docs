@@ -16,6 +16,15 @@ module TableOfContentsHelpers
     super(resources, *args)
   end
 
+  def list_items_from_headings(html, url: "", max_level: nil)
+
+    if ('/sass-api-reference/' === url)
+      max_level = 3
+    end
+
+    super(html, url:, max_level: max_level)
+  end
+
   ##
   # Temporarily excludes the children of the given page
   # from being rendered by `render_page_tree` while it runs
