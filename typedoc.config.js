@@ -28,4 +28,18 @@ module.exports = {
   // 'external'. As it's what we're documenting, we'll instead treat anything
   // that's not in the govuk-frontend package 'external'
   externalPattern: ['!**/node_modules/govuk-frontend/**'],
+
+  plugin: [
+    // Use typedoc-plugin-missing-exports to ensure that internal symbols which
+    // are not exported are included in the documentation (like the `I18n` class
+    // or the components' config types)
+    'typedoc-plugin-missing-exports'
+  ],
+  // By default, missing-exports will regroup all symbols under an `<internal>`
+  // module whose naming is a bit poor. Instead, we let the symbols be displayed
+  // alongside the others
+  placeInternalsInOwningModule: true,
+  // The missing-exports plugin will include built-in symbols, like the DOM API.
+  // We don't want those in our documentation, so we need to exclude them
+  excludeExternals: true
 }
