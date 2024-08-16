@@ -1,7 +1,4 @@
-// const { join, relative } = require('path')
-
-// const workspacePath = slash(relative(paths.root, basePath))
-// const { HEROKU_APP, HEROKU_BRANCH = 'main' } = process.env
+const typedoc = require('typedoc')
 
 /**
  * @type {import('typedoc').TypeDocOptions}
@@ -41,5 +38,13 @@ module.exports = {
   placeInternalsInOwningModule: true,
   // The missing-exports plugin will include built-in symbols, like the DOM API.
   // We don't want those in our documentation, so we need to exclude them
-  excludeExternals: true
+  excludeExternals: true,
+
+  // Make TypeDoc aware of tags we use but it does not parse by default
+  // so it doesn't warn unnecessarily
+  modifierTags: [
+    ...typedoc.Configuration.OptionDefaults.modifierTags,
+    '@preserve',
+    '@constant'
+  ]
 }
