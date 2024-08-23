@@ -5,6 +5,15 @@ updates:
   # Update npm packages
   - package-ecosystem: npm
     directory: /
+      open-pull-requests-limit: 10
+
+    # Group packages into shared PR
+    groups:
+      # First in list so Dependabot looks at updating those first
+      design-system:
+        patterns:
+          - 'govuk-frontend'
+          - 'accessible-autocomplete'
     reviewers:
       - alphagov/design-system-developers
     schedule:
