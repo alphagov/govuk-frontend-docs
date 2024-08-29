@@ -5,7 +5,7 @@ updates:
   # Update npm packages
   - package-ecosystem: npm
     directory: /
-      open-pull-requests-limit: 10
+    open-pull-requests-limit: 10
 
     # Group packages into shared PR
     groups:
