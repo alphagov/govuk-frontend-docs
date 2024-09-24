@@ -14,7 +14,7 @@
     "govuk-frontend-v4": "npm:govuk-frontend@^4.7.0",
     "hyperlink": "^5.0.4",
     "sassdoc": "^2.7.4",
-    "standard": "^17.1.0",
+    "standard": "^17.1.2",
     "tap-mocha-reporter": "^5.0.4"
   },
   "engines": {
