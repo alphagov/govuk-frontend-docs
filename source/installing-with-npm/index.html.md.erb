@@ -108,9 +108,9 @@ In your live application, we recommend [using an automated task or your build pi
 
 4. Run your application and check it works the same way as the Design System accordion example, by selecting the buttons and checking the accordion shows and hides sections.
 
-In your live application:
+In your live application, we recommend:
 
-- use `initAll` to initialise all components that use GOV.UK Frontend's JavaScript, or some components will not work correctly for disabled users who use assistive technologies
-- we recommend [using an automated task or your build pipeline](../import-javascript/) instead of copying the files manually
+- [using an automated task or your build pipeline](../import-javascript/) instead of copying the files manually
+- importing only the components your application uses and [using `createAll` to initialise](../import-javascript/#import-individual-components) all their instances on the page. Make sure you import all the components used throughout your application or some components will not work correctly for disabled users who use assistive technologies.
 
 Once your testing is complete you can use the full code for page layouts and other components from the [Design System website](https://design-system.service.gov.uk/).
