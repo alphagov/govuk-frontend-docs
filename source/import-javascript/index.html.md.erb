@@ -26,6 +26,8 @@ Next, to import the JavaScript from GOV.UK Frontend, you can either:
 - add the JavaScript file to your HTML
 - import the JavaScript into your own JavaScript file using a bundler
 
+Once imported, you can check if GOV.UK Frontend is supported using [the `isSupported` function](../building-your-own-javascript-components/#checking-for-gov-uk-frontend-support-with-issupported).
+
 ## Add the JavaScript file to your HTML
 
 If you decide to add the JavaScript to your HTML, you can do one of the following:
@@ -75,22 +77,50 @@ createAll(SkipLink)
 createAll(CharacterCount, { maxLength: 500 })
 ```
 
-The `createAll` function will log any errors thrown during components instantiation to the console. If you need to catch these errors, you can instantiate the components manually. You must check your application works without errors or some components will not work correctly.
+#### Handling errors during instantiation
+
+The `createAll` function will log any errors thrown during components instantiation to the console. If you need to catch these errors, you can use [its `onError` option](../building-your-own-javascript-components/#handling-initialisation-errors).
+
+
+```javascript
+import { SkipLink, CharacterCount, createAll } from 'govuk-frontend'
+
+createAll(SkipLink, function(error) {
+  // Handle the error here, for example send it to an error monitoring service
+})
+// You can provide a config for components that use them
+createAll(CharacterCount, { maxLength: 500 }, function(error) {
+  // Handle the error here, for example send it to an error monitoring service
+})
+```
+
+You can also instantiate components manually.
 
 ```javascript
 import { SkipLink, CharacterCount } from 'govuk-frontend'
 
 const $skipLinks = document.querySelectorAll('[data-module="govuk-skip-link"]')
 $skipLinks.forEach(($skipLink) => {
-  new SkipLink($skipLink)
+  try {
+    new SkipLink($skipLink)
+  } catch (error) {
+    // Handle the error here, for example send it to an error monitoring service
+  }
 })
 
 const $characterCounts = document.querySelectorAll('[data-module="govuk-character-count"]')
 $characterCounts.forEach(($characterCount) => {
-  // You can provide a config for components that use them
-  new CharacterCount($characterCount, {maxLength: 500})
+  
+  try {
+    // You can provide a config for components that use them
+    new CharacterCount($characterCount, {maxLength: 500})
+  } catch (error) {
+    // Handle the error here, for example send it to an error monitoring service
+  }
 })
 ```
+
+You must check that your application works without errors, or some components will not work correctly.
 
 ### Import and initialise all components using the initAll function
 
