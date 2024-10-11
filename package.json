@@ -10,7 +10,7 @@
     "check-links": "hyperlink --canonicalroot https://frontend.design-system.service.gov.uk --internal --recursive build/index.html --skip 'property=\"og:image\"' | tee check-links.log | tap-mocha-reporter min"
   },
   "devDependencies": {
-    "govuk-frontend": "^5.7.0",
+    "govuk-frontend": "^5.7.1",
     "govuk-frontend-v4": "npm:govuk-frontend@^4.7.0",
     "hyperlink": "^5.0.4",
     "sassdoc": "^2.7.4",
