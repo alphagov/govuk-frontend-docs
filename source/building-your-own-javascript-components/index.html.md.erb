@@ -217,8 +217,8 @@ import {ProjectComponent} from './project-component.js'
 const $element = document.querySelector('.app-dialog')
 
 createAll(ProjectComponent, {SOME_CONFIGURATION}, $element)
-// If the component does not need any configuration, pass `null` for the configuration
-createAll(ProjectComponent, null, $element)
+// If the component does not need any configuration, pass `undefined` for the configuration
+createAll(ProjectComponent, undefined, $element)
 ```
 
 ### Handling initialisation errors
@@ -245,8 +245,8 @@ function notifyErrorMonitoringService(error, { Component, element, config }) {
 }
 
 createAll(ProjectComponent, {SOME_CONFIGURATION}, notifyErrorMonitoringService)
-// If you don’t need any configuration, pass `null` for the configuration
-createAll(ProjectComponent, null, notifyErrorMonitoringService)
+// If you don’t need any configuration, pass `undefined` for the configuration
+createAll(ProjectComponent, undefined, notifyErrorMonitoringService)
 ```
 
 If you need to [initialise only on part of the page](#initialise-only-on-part-of-a-page) and respond to errors, you can pass an object in that third argument with the following properties:
@@ -268,8 +268,8 @@ createAll(ProjectComponent, {SOME_CONFIGURATION}, {
   scope: $element,
   onError: notifyErrorMonitoringService
 })
-// If you don’t need any configuration, pass `null` for the configuration
-createAll(ProjectComponent, null, {
+// If you don’t need any configuration, pass `undefined` for the configuration
+createAll(ProjectComponent, undefined, {
   scope: $element,
   onError: notifyErrorMonitoringService
 })
