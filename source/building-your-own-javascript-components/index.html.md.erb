@@ -25,13 +25,13 @@ The `Component` class implements these behaviours in an extensible way, so you c
 
 ### Defining static properties on components
 
-Some of the `Component`’s features are supported by static properties on the component that inherit from it. However, native static properties are not a JavaScript syntax supported by all [browsers that support `<script type=”module”>`](../import-javascript/#import-javascript).
+Some of the `Component`’s features are supported by static properties on the component that inherit from it. However, native static properties are not a JavaScript syntax supported by all [browsers that support `<script type="module">`](../import-javascript/#import-javascript).
 
-If your project’s tools are able to convert the syntax to code supported by browsers that support `<script type=”module”>`, you can write these properties as native static ones in your component’s class:
+If your project’s tools are able to convert the syntax to code supported by browsers that support `<script type="module">`, you can write these properties as native static ones in your component’s class:
 
 ```js
 class MyComponent extends Component{
-  static property = “value”
+  static property = 'value'
 }
 ```
 
@@ -39,7 +39,7 @@ Otherwise, you can add these properties to your component’s class after its de
 
 ```js
 class MyComponent extends Component {}
-MyComponent.property = “value”
+MyComponent.property = 'value'
 ```
 
 ### Defining the `moduleName` property
@@ -48,7 +48,7 @@ Components extending the `Component` class need to define a `moduleName` [static
 
 ```js
 class MyComponent extends Component{
-  static moduleName = “app-my-component”
+  static moduleName = 'app-my-component'
 }
 ```
 
@@ -63,13 +63,13 @@ When your component is initialised, it'll need to perform some tasks, such as ad
 
 ```js
 class MyComponent extends Component {
-  static moduleName = ‘app-my-component’
+  static moduleName = 'app-my-component'
 
   constructor($root) {
     super($root)
 
     // Run component specific initialisation here for example
-    this.$root.addEventListener(‘click’, this.handleClick.bind(this))
+    this.$root.addEventListener('click', this.handleClick.bind(this))
   }
 
   handleClick(event) {
@@ -84,17 +84,17 @@ Within the component’s methods and its constructor, you can access the root el
 
 ```js
 class MyComponent extends Component {
-  static moduleName = ‘app-my-component’
+  static moduleName = 'app-my-component'
 
   constructor($root) {
     super($root)
 
     // Run component specific initialisation here, for example:
-    this.$root.addEventListener(‘click’, this.handleClick.bind(this))
+    this.$root.addEventListener('click', this.handleClick.bind(this))
   }
 
   handleClick(event) {
-    this.$root.classList.add(‘app-my-component--clicked’)
+    this.$root.classList.add('app-my-component--clicked')
   }
 }
 ```
@@ -108,7 +108,7 @@ The `Component` class will verify that the root element is of the right type (by
  * @extends Component<HTMLAnchorElement> 
  */
 class LinkEnhancement extends Component {
-  static moduleName = ‘app-link-enhancement’
+  static moduleName = 'app-link-enhancement'
 
   // This will make sure that the component can only be initialised
   // on HTMLAnchorElement
@@ -127,13 +127,13 @@ class LinkEnhancement extends Component {
 
 As `govuk-frontend` does not provide type definitions in its package, TypeScript might show the following error message: 
 
-<q>Property ‘$root’ does not exist on type &lt;NAME_OF_YOUR_CLASS&gt;.</q>
+<q>Property '$root' does not exist on type &lt;NAME_OF_YOUR_CLASS&gt;.</q>
 
-You can work around this issue by defining the ‘$root’ property in your component class yourself.
+You can work around this issue by defining the `$root` property in your component class yourself.
 
 ```js
 class MyComponent extends Component {
-  static moduleName = ‘app-my-component’
+  static moduleName = 'app-my-component'
 
   // Defining the property here makes TypeScript aware of its existence
   // saving from using `@ts-expect-error` each time you'd access `this.$root`
@@ -148,11 +148,11 @@ class MyComponent extends Component {
     super($root)
 
     // Run component specific initialisation here, for example:
-    this.$root.addEventListener(‘click’, this.handleClick.bind(this))
+    this.$root.addEventListener('click', this.handleClick.bind(this))
   }
 
   handleClick(event) {
-    this.$root.classList.add(‘app-my-component--clicked’)
+    this.$root.classList.add('app-my-component--clicked')
   }
 }
 ```
@@ -168,7 +168,7 @@ You can redefine the static `checkSupport` method so the component throws an err
 
 ```js
 class MyComponent extends Component {
-  static moduleName = ‘app-my-component’
+  static moduleName = 'app-my-component'
 
   static checkSupport() {
     // Run the same checks as the `Component` class
@@ -176,7 +176,7 @@ class MyComponent extends Component {
 
     // Check for support of the native clipboard API
     if (!navigator.clipboard) {
-      throw new Error(‘Clipboard API not supported’)	
+      throw new Error('Clipboard API not supported')	
     }
   }
 }
@@ -186,13 +186,13 @@ class MyComponent extends Component {
 Use the `createAll` function to initialise your components [the same way GOV.UK Frontend components are initialised](../import-javascript/#import-individual-components). The function will look up all the HTML elements on which a given component should be initialised and initialise a component for each of them.
 
 ```js
-import {createAll} from ‘govuk-frontend’
-import {ProjectComponent, OtherProjectComponent} from ‘./project-components.js’
+import {createAll} from 'govuk-frontend'
+import {ProjectComponent, OtherProjectComponent} from './project-components.js'
 
 createAll(ProjectComponent)
 // You can provide a config for components that use them
 createAll(OtherProjectComponent, {
-  anOption: ‘itsValue’
+  anOption: 'itsValue'
 })
 ```
 
@@ -211,10 +211,10 @@ To avoid reimplementing features shared across components, we recommend that you
 By default, `createAll` looks through the whole page for elements to initialise the components on. If you update a page with new markup, like a modal dialog box, you can initialise components on that part of the page only.
 
 ```js
-import {createAll} from ‘govuk-frontend’
-import {ProjectComponent} from ‘./project-component.js’
+import {createAll} from 'govuk-frontend'
+import {ProjectComponent} from './project-component.js'
 
-const $element = document.querySelector(‘.app-dialog’)
+const $element = document.querySelector('.app-dialog')
 
 createAll(ProjectComponent, {SOME_CONFIGURATION}, $element)
 // If the component does not need any configuration, pass `null` for the configuration
@@ -237,8 +237,8 @@ The context object will contain the following properties:
 - `config`: The configuration used for initialisation
 
 ```js
-import {createAll} from ‘govuk-frontend’
-import {ProjectComponent} from ‘./project-component.js’
+import {createAll} from 'govuk-frontend'
+import {ProjectComponent} from './project-component.js'
 
 function notifyErrorMonitoringService(error, { Component, element, config }) {
   // Send relevant details to an error monitoring service
@@ -255,10 +255,10 @@ If you need to [initialise only on part of the page](#initialise-only-on-part-of
 - `onError`: The callback for responding to errors
 
 ```js
-import {createAll} from ‘govuk-frontend’
-import {ProjectComponent} from ‘./project-component.js’
+import {createAll} from 'govuk-frontend'
+import {ProjectComponent} from './project-component.js'
 
-const $element = document.querySelector(‘.app-dialog’)
+const $element = document.querySelector('.app-dialog')
 
 function notifyErrorMonitoringService(error, { Component, element, config }) {
   // Do something with initialisation error, like sending relevant details to an error monitoring service
@@ -282,7 +282,7 @@ GOV.UK Frontend components and components that inherit from [our `Component` cla
 Use the `isSupported()` function to check whether GOV.UK Frontend is supported in the browser your code is running in.
 
 ```js
-import {isSupported} from ‘govuk-frontend’
+import {isSupported} from 'govuk-frontend'
 
 if (isSupported()) {
   // Do things if GOV.UK Frontend is supported
