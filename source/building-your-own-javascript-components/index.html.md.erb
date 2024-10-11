@@ -30,7 +30,7 @@ Some of the `Component`’s features are supported by static properties on the c
 If your project’s tools are able to convert the syntax to code supported by browsers that support `<script type="module">`, you can write these properties as native static ones in your component’s class:
 
 ```js
-class MyComponent extends Component{
+class MyComponent extends Component {
   static property = 'value'
 }
 ```
@@ -47,7 +47,7 @@ MyComponent.property = 'value'
 Components extending the `Component` class need to define a `moduleName` [static property](#defining-static-properties-on-components):
 
 ```js
-class MyComponent extends Component{
+class MyComponent extends Component {
   static moduleName = 'app-my-component'
 }
 ```
@@ -186,8 +186,8 @@ class MyComponent extends Component {
 Use the `createAll` function to initialise your components [the same way GOV.UK Frontend components are initialised](../import-javascript/#import-individual-components). The function will look up all the HTML elements on which a given component should be initialised and initialise a component for each of them.
 
 ```js
-import {createAll} from 'govuk-frontend'
-import {ProjectComponent, OtherProjectComponent} from './project-components.js'
+import { createAll } from 'govuk-frontend'
+import { ProjectComponent, OtherProjectComponent } from './project-components.js'
 
 createAll(ProjectComponent)
 // You can provide a config for components that use them
@@ -211,8 +211,8 @@ To avoid reimplementing features shared across components, we recommend that you
 By default, `createAll` looks through the whole page for elements to initialise the components on. If you update a page with new markup, like a modal dialog box, you can initialise components on that part of the page only.
 
 ```js
-import {createAll} from 'govuk-frontend'
-import {ProjectComponent} from './project-component.js'
+import { createAll } from 'govuk-frontend'
+import { ProjectComponent } from './project-component.js'
 
 const $element = document.querySelector('.app-dialog')
 
@@ -237,8 +237,8 @@ The context object will contain the following properties:
 - `config`: The configuration used for initialisation
 
 ```js
-import {createAll} from 'govuk-frontend'
-import {ProjectComponent} from './project-component.js'
+import { createAll } from 'govuk-frontend'
+import { ProjectComponent } from './project-component.js'
 
 function notifyErrorMonitoringService(error, { Component, element, config }) {
   // Send relevant details to an error monitoring service
@@ -255,8 +255,8 @@ If you need to [initialise only on part of the page](#initialise-only-on-part-of
 - `onError`: The callback for responding to errors
 
 ```js
-import {createAll} from 'govuk-frontend'
-import {ProjectComponent} from './project-component.js'
+import { createAll } from 'govuk-frontend'
+import { ProjectComponent } from './project-component.js'
 
 const $element = document.querySelector('.app-dialog')
 
@@ -282,7 +282,7 @@ GOV.UK Frontend components and components that inherit from [our `Component` cla
 Use the `isSupported()` function to check whether GOV.UK Frontend is supported in the browser your code is running in.
 
 ```js
-import {isSupported} from 'govuk-frontend'
+import { isSupported } from 'govuk-frontend'
 
 if (isSupported()) {
   // Do things if GOV.UK Frontend is supported
