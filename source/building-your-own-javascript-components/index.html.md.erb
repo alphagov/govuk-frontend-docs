@@ -30,7 +30,7 @@ Some of the `Component`’s features are supported by static properties on the c
 If your project’s tools are able to convert the syntax to code supported by browsers that support `<script type=”module”>`, you can write these properties as native static ones in your component’s class:
 
 ```js
-class MyComponent extend Component{
+class MyComponent extends Component{
   static property = “value”
 }
 ```
@@ -47,7 +47,7 @@ MyComponent.property = “value”
 Components extending the `Component` class need to define a `moduleName` [static property](#defining-static-properties-on-components):
 
 ```js
-class MyComponent extend Component{
+class MyComponent extends Component{
   static moduleName = “app-my-component”
 }
 ```
