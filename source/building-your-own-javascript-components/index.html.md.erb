@@ -129,32 +129,10 @@ As `govuk-frontend` does not provide type definitions in its package, TypeScript
 
 <q>Property '$root' does not exist on type &lt;NAME_OF_YOUR_CLASS&gt;.</q>
 
-You can work around this issue by defining the `$root` property in your component class yourself.
+You can work around this issue by adding the following [shorthand ambient module declaration](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-2-0.html#shorthand-ambient-module-declarations) in a `.d.ts` file in your project (for example, `govuk-frontend.d.ts`) and making sure its path is included in your `tsconfig.json` or `jsconfig.json` file.
 
-```js
-class MyComponent extends Component {
-  static moduleName = 'app-my-component'
-
-  // Defining the property here makes TypeScript aware of its existence
-  // saving from using `@ts-expect-error` each time you'd access `this.$root`
-  get $root() {
-    // Unfortunately, govuk-frontend does not provide type definitions
-    // so TypeScript does not know of `this._$root`
-    // @ts-expect-error
-    return this._$root;
-  }
-
-  constructor($root) {
-    super($root)
-
-    // Run component specific initialisation here, for example:
-    this.$root.addEventListener('click', this.handleClick.bind(this))
-  }
-
-  handleClick(event) {
-    this.$root.classList.add('app-my-component--clicked')
-  }
-}
+```ts
+declare module 'govuk-frontend';
 ```
 
 If you’re interested in better TypeScript support for GOV.UK Frontend, let us know on the GitHub issue for [exporting type declarations](https://github.com/alphagov/govuk-frontend/issues/2835). 
