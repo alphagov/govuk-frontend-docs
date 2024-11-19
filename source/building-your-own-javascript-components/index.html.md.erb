@@ -253,6 +253,189 @@ createAll(ProjectComponent, undefined, {
 })
 ```
 
+## Building configurable components
+The component you’re building may need some configuration to get the information it needs to:
+
+- work correctly
+- adapt its behaviour
+- customise the messages JavaScript will show to users
+
+Components that need configuration can extend the `ConfigurableComponent` class. This class accepts configuration from the following sources:
+
+- defaults defined as a `defaults` [static property](#defining-static-properties-on-components) on the component’s class
+- configuration passed as second argument to the component’s constructor or [`createAll`](#using-createall-with-your-components)
+- data attributes on the root element of the component
+
+These are the same sources as those used by GOV.UK Frontend components. Configuration options from these sources are merged into a single configuration object by the `ConfigurableComponent` class. Note that:
+
+- configuration options passed to the constructor will override any defaults
+- data attribute values have highest precedence and will override any configuration set elsewhere
+
+Your component will then be able to:
+
+- [access the merged configuration](#accessing-the-component-s-configuration) using `this.config`
+- use [the`Component` class](#using-the-component-class) features
+
+### Setting a default configuration for your component
+
+The `defaults` static property stores an object that associates option names and their default values. Default values can be any [JavaScript data type](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures).
+
+These values can be JavaScript objects, nested as deeply as necessary. We recommend including options for which the default value is `false`, `null` or `undefined`. Including these options clarifies what the component expects and provides this information to TypeScript, if you use it.
+
+```js
+import { ConfigurableComponent } from 'govuk-frontend'
+
+class MyComponent extends ConfigurableComponent {
+  /* … */
+
+  static defaults = {
+    anOption: 1,
+    anOptionWithNesting: {
+      aNestedOption: 'itsValue',
+      anotherLevel: {
+        aDeeplyNestedOption: true
+      }
+    }
+  }
+
+  /* … */
+}
+```
+
+To avoid unexpected changes to the component’s default configuration, we recommend you treat the `defaults` property as read-only in your code and use [`createAll`](#using-createall-with-your-components) to configure multiple components simultaneously.
+
+### Receiving configuration during initialisation
+
+During initialisation, configurable components can receive an object as a second argument to define specific configuration options, either when using `createAll` or instantiating the components manually. This object should only define the options that need to differ from the defaults.
+
+Use `super` to forward the argument received in the component’s constructor to the constructor of `ConfigurableComponent`, along with the root element. After you’ve done that, you can run the [initialisation tasks specific to your component](#customising-initialisation-of-components):
+
+```js
+import { ConfigurableComponent } from 'govuk-frontend'
+
+class MyComponent extends ConfigurableComponent {
+  /* … */
+
+  static defaults = {
+    anOption: 1,
+    anOptionWithNesting: {
+      aNestedOption: 'itsValue',
+      anotherLevel: {
+        aDeeplyNestedOption: true
+      }
+    }
+  }
+
+  constructor(root, config) {
+    super(root, config)
+
+    // Run custom initialisation code here
+  }
+
+  /* … */
+}
+
+createAll(MyComponent, {
+   // This will only override the value for `anOptionWithNesting.aNestedOption`
+   // both `anOption` and `anOptionWithNesting.anotherLevel.aDeeplyNestedOption`
+   // will keep the values defined in the component’s `defaults`
+   anOptionWithNesting: {
+  	aNestedOption: 'aNewValue'
+   }
+})
+```
+
+### Receiving configuration from data attributes
+
+#### Naming convention for data attributes
+
+To compute the name of the attribute from the name of the option in the component’s `defaults`, you need to convert the `camelCase` name to a dash (`-`) separated name, following the [steps used by the `dataset` DOM API](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/dataset#camelcase). For example: `anOption` becomes `data-an-option`.
+
+For nested configuration options, use dots (`.`) to separate the names of each level of nesting. For example, to set `aDeeplyNestedOption` in the component from the previous example (which sits within `anotherLevel` inside `anOptionWithNesting`), the attribute name would be  `data-an-option-with-nesting.another-level.a-deeply-nested-option`.
+
+#### Configuring which data attributes are used as configuration
+
+The root element of the component may have many data attributes. Some of these attributes are configuration options for the component, but others may be used for different purposes, such as features from third-party JavaScript libraries.
+
+Your component needs to define a `schema` [static property](#defining-static-properties-on-components) to pick which attributes of the root element to use for the component’s configuration.
+This property should provide an object that defines the type of the configuration options in its `properties` key. 
+
+You need to include each first-level option of the configuration that can be configured through a data attribute on the root element in that schema. The key will be the same name as the one set in [the `defaults` property](#setting-a-default-configuration-for-your-component). The value will be an object with the shape `{type: ‘NAME_OF_THE_TYPE’}`, with `NAME_OF_THE_TYPE` being one of: `number`, `string`, `boolean`, or `object`. Options in nested objects will have their type inferred from the value of the attribute.
+
+We recommend you treat the `schema` property as read-only in your code.
+
+```js
+import { ConfigurableComponent } from 'govuk-frontend'
+
+class MyComponent extends ConfigurableComponent {
+  /* … */
+
+  static defaults = {
+    anOption: 1,
+    aNumberOption: 1,
+    aBooleanOption: false,
+    anOptionWithNesting: {
+      aNestedOption: 'itsValue',
+      anotherLevel: {
+        aDeeplyNestedOption: true
+      }
+    }
+  }
+
+  static schema = {
+    properties: {
+      // As `anOption` is left out of this object
+      // it won’t be able to be overridden by `data-an-option`
+      aNumberOption: {type: 'number'},
+      aBooleanOption: {type: 'boolean'}
+      // For nested objects, only the type of the root needs to be defined
+      anOptionWithNesting: {type: 'object'}
+    }
+  }
+
+  constructor(root, config) {
+    super(root, config)
+
+    // Run custom initialisation code here
+  }
+
+  /* … */
+}
+```
+
+### Accessing the component’s configuration
+
+ You can access the component’s configuration within the component’s methods and its constructor, using `this.config`.
+
+```js
+import { ConfigurableComponent } from 'govuk-frontend'
+
+class MyComponent extends ConfigurableComponent {
+  static moduleName = 'app-my-component'
+
+  static defaults = {
+    // Default values go here
+  }
+
+  constructor(root, config) {
+    super(root, config)
+
+    // Add a class based on the `variant` configuration option
+    this.$root.classList.add(`app-my-component–${this.config.variant}`)
+
+    this.$root.addEventListener('click', this.handleClick.bind(this))
+  }
+
+  handleClick() {
+    if (this.config.variant == 'aSpecificVariant') {
+      // Do something specific for the variant defined as a configuration option
+    } else {
+      // …
+    }
+  }
+}
+```
+
 ## Checking for GOV.UK Frontend support with `isSupported()`
 
 GOV.UK Frontend components and components that inherit from [our `Component` class](#using-the-component-class) will automatically check if GOV.UK Frontend is supported during their initialisation. However, you may want to separately check for support, to avoid unnecessarily running code if GOV.UK Frontend is not supported.
