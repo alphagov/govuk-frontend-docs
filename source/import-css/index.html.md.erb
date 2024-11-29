@@ -32,8 +32,10 @@ Then link the CSS file inside the `<head>` tag of your HTML page or page templat
 To import all the Sass rules from GOV.UK Frontend, add the following to your Sass file:
 
 ```scss
-@import "node_modules/govuk-frontend/dist/govuk/all";
+@import "node_modules/govuk-frontend/dist/govuk/index";
 ```
+
+You do not need `/index` at the end of your import if you’re using Dart Sass, LibSass 3.6.0 or higher, or Ruby Sass 3.6.0 or higher.
 
 ## Import specific parts using Sass
 
