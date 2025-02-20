@@ -5,7 +5,7 @@ updates:
   # Update npm packages
   - package-ecosystem: npm
     directory: /
-    open-pull-requests-limit: 10
+    open-pull-requests-limit: 15
 
     # Group packages into shared PR
     groups:
@@ -18,7 +18,7 @@ updates:
       - alphagov/design-system-developers
     schedule:
       # Defaults to weekly on Monday
-      interval: weekly
+      interval: monthly
       time: "10:30"
       # Setting a timezone so we let dependabot worry about BST
       timezone: "Europe/London"
@@ -34,7 +34,7 @@ updates:
       - alphagov/design-system-developers
     schedule:
       # Defaults to weekly on Monday
-      interval: weekly
+      interval: monthly
       time: "10:30"
       # Setting a timezone so we let dependabot worry about BST
       timezone: "Europe/London"
@@ -50,7 +50,7 @@ updates:
       - alphagov/design-system-developers
     schedule:
       # Defaults to weekly on Monday
-      interval: weekly
+      interval: monthly
       time: "10:30"
       # Setting a timezone so we let dependabot worry about BST
       timezone: "Europe/London"
