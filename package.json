@@ -11,7 +11,7 @@
   },
   "devDependencies": {
     "govuk-frontend": "^5.9.0",
-    "govuk-frontend-v4": "npm:govuk-frontend@^4.7.0",
+    "govuk-frontend-v4": "npm:govuk-frontend@^4.9.0",
     "hyperlink": "^5.0.4",
     "sassdoc": "^2.7.4",
     "standard": "^17.1.2",
