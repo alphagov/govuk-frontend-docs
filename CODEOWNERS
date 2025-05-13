@@ -1,2 +1,12 @@
 # CI/CD (which has access to secrets and to production)
 .github/workflows/  @alphagov/design-system-developers
+
+# Track changes to package.json or package-lock.json
+/package*.json  @alphagov/design-system-developers
+
+# Track changes to Gemfiles
+/Gemfile  @alphagov/design-system-developers
+/Gemfile.lock  @alphagov/design-system-developers
+
+# Protect the CODEOWNERS file itself against malicious changes
+CODEOWNERS  @alphagov/design-system-developers
