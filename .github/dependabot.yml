@@ -1,7 +1,6 @@
 version: 2
 
 updates:
-
   # Update npm packages
   - package-ecosystem: npm
     directory: /
@@ -12,10 +11,8 @@ updates:
       # First in list so Dependabot looks at updating those first
       design-system:
         patterns:
-          - 'govuk-frontend'
-          - 'accessible-autocomplete'
-    reviewers:
-      - alphagov/design-system-developers
+          - "govuk-frontend"
+          - "accessible-autocomplete"
     schedule:
       # Defaults to weekly on Monday
       interval: monthly
@@ -30,8 +27,6 @@ updates:
   # Update Ruby gems
   - package-ecosystem: bundler
     directory: /
-    reviewers:
-      - alphagov/design-system-developers
     schedule:
       # Defaults to weekly on Monday
       interval: monthly
@@ -46,8 +41,6 @@ updates:
   # Update GitHub Actions
   - package-ecosystem: github-actions
     directory: /
-    reviewers:
-      - alphagov/design-system-developers
     schedule:
       # Defaults to weekly on Monday
       interval: monthly
