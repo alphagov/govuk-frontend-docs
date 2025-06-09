@@ -1,3 +1,30 @@
+GIT
+  remote: https://github.com/alphagov/tech-docs-gem.git
+  revision: 5e3b8cf93f9065064bc882880e2f58a4921717db
+  branch: apply-brand-refresh
+  specs:
+    govuk_tech_docs (4.4.0)
+      autoprefixer-rails (~> 10.2)
+      base64
+      bigdecimal
+      chronic (~> 0.10.2)
+      concurrent-ruby (= 1.3.4)
+      csv
+      haml (~> 6.0)
+      middleman (= 4.5.1)
+      middleman-autoprefixer (~> 2.10)
+      middleman-compass (~> 4.0)
+      middleman-livereload
+      middleman-search-gds
+      middleman-sprockets (~> 4.0.0)
+      middleman-syntax (~> 3.4)
+      mutex_m
+      nokogiri
+      openapi3_parser (~> 0.9.0)
+      redcarpet (~> 3.6)
+      sassc-embedded (~> 1.78.0)
+      terser (~> 1.2.3)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -9,18 +36,18 @@ GEM
     addressable (2.8.7)
       public_suffix (>= 2.0.2, < 7.0)
     ast (2.4.2)
-    autoprefixer-rails (10.4.19.0)
+    autoprefixer-rails (10.4.21.0)
       execjs (~> 2)
-    backports (3.25.0)
-    base64 (0.2.0)
-    bigdecimal (3.1.8)
+    backports (3.25.1)
+    base64 (0.3.0)
+    bigdecimal (3.2.2)
     chronic (0.10.2)
     chunky_png (1.4.0)
     coffee-script (2.4.1)
       coffee-script-source
       execjs
     coffee-script-source (1.12.2)
-    commonmarker (0.23.10)
+    commonmarker (0.23.11)
     compass (1.0.3)
       chunky_png (~> 1.2)
       compass-core (~> 1.0.2)
@@ -35,9 +62,9 @@ GEM
       sass (>= 3.2, < 3.5)
     concurrent-ruby (1.3.4)
     contracts (0.16.1)
-    csv (3.3.0)
+    csv (3.3.5)
     diff-lcs (1.5.1)
-    dotenv (3.1.4)
+    dotenv (3.1.8)
     em-websocket (0.5.3)
       eventmachine (>= 0.12.9)
       http_parser.rb (~> 0)
@@ -45,31 +72,15 @@ GEM
     eventmachine (1.2.7)
     execjs (2.10.0)
     fast_blank (1.0.1)
-    fastimage (2.3.1)
-    ffi (1.17.0-x86_64-linux-gnu)
-    google-protobuf (4.28.3-x86_64-linux)
+    fastimage (2.4.0)
+    ffi (1.17.2-arm64-darwin)
+    ffi (1.17.2-x86_64-linux-gnu)
+    google-protobuf (4.31.1-arm64-darwin)
       bigdecimal
       rake (>= 13)
-    govuk_tech_docs (4.1.0)
-      autoprefixer-rails (~> 10.2)
-      base64
+    google-protobuf (4.31.1-x86_64-linux-gnu)
       bigdecimal
-      chronic (~> 0.10.2)
-      csv
-      haml (~> 6.0)
-      middleman (~> 4.0)
-      middleman-autoprefixer (~> 2.10)
-      middleman-compass (~> 4.0)
-      middleman-livereload
-      middleman-search-gds
-      middleman-sprockets (~> 4.0.0)
-      middleman-syntax (~> 3.4)
-      mutex_m
-      nokogiri
-      openapi3_parser (~> 0.9.0)
-      redcarpet (~> 3.6)
-      sassc-embedded (~> 1.78.0)
-      terser (~> 1.2.3)
+      rake (>= 13)
     haml (6.3.0)
       temple (>= 0.8.2)
       thor
@@ -81,12 +92,13 @@ GEM
     i18n (1.6.0)
       concurrent-ruby (~> 1.0)
     json (2.10.1)
-    kramdown (2.4.0)
-      rexml
+    kramdown (2.5.1)
+      rexml (>= 3.3.9)
     language_server-protocol (3.17.0.3)
     listen (3.9.0)
       rb-fsevent (~> 0.10, >= 0.10.3)
       rb-inotify (~> 0.9, >= 0.9.10)
+    logger (1.7.0)
     memoist (0.16.2)
     middleman (4.5.1)
       coffee-script (~> 2.2)
@@ -138,13 +150,15 @@ GEM
     middleman-sprockets (4.0.0)
       middleman-core (~> 4.0)
       sprockets (>= 3.0)
-    middleman-syntax (3.4.0)
+    middleman-syntax (3.5.0)
       middleman-core (>= 3.2)
       rouge (~> 3.2)
     minitest (5.25.1)
     multi_json (1.15.0)
-    mutex_m (0.2.0)
-    nokogiri (1.18.3-x86_64-linux-gnu)
+    mutex_m (0.3.0)
+    nokogiri (1.18.8-arm64-darwin)
+      racc (~> 1.4)
+    nokogiri (1.18.8-x86_64-linux-gnu)
       racc (~> 1.4)
     openapi3_parser (0.9.2)
       commonmarker (~> 0.17)
@@ -159,7 +173,7 @@ GEM
       ast (~> 2.4.1)
       racc
     parslet (2.0.0)
-    public_suffix (6.0.1)
+    public_suffix (6.0.2)
     racc (1.8.1)
     rack (2.2.11)
     rack-livereload (0.3.17)
@@ -169,7 +183,7 @@ GEM
     rb-fsevent (0.11.2)
     rb-inotify (0.11.1)
       ffi (~> 1.0)
-    redcarpet (3.6.0)
+    redcarpet (3.6.1)
     regexp_parser (2.9.2)
     rexml (3.3.9)
     rouge (3.30.0)
@@ -219,19 +233,20 @@ GEM
       rubocop (~> 1.61)
     ruby-progressbar (1.13.0)
     sass (3.4.25)
-    sass-embedded (1.80.4)
-      google-protobuf (~> 4.28)
+    sass-embedded (1.89.1)
+      google-protobuf (~> 4.31)
       rake (>= 13)
     sassc (2.4.0)
       ffi (~> 1.9)
     sassc-embedded (1.78.0)
       sass-embedded (~> 1.78)
     servolux (0.13.0)
-    sprockets (4.2.1)
+    sprockets (4.2.2)
       concurrent-ruby (~> 1.0)
+      logger
       rack (>= 2.2.4, < 4)
     temple (0.10.3)
-    terser (1.2.4)
+    terser (1.2.5)
       execjs (>= 0.3.0, < 3)
     thor (1.2.2)
     tilt (2.0.11)
@@ -242,13 +257,14 @@ GEM
     uglifier (3.2.0)
       execjs (>= 0.3.0, < 3)
     unicode-display_width (2.5.0)
-    webrick (1.8.2)
+    webrick (1.9.1)
 
 PLATFORMS
+  arm64-darwin-23
   x86_64-linux
 
 DEPENDENCIES
-  govuk_tech_docs
+  govuk_tech_docs!
   json
   ostruct
   rake (~> 13.2)

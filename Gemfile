@@ -9,7 +9,7 @@ gem "wdm", "~> 0.1.0", platforms: %i[mswin mingw]
 gem "tzinfo-data", platforms: %i[mswin mingw jruby]
 
 # Include the tech docs gem
-gem "govuk_tech_docs"
+gem "govuk_tech_docs", github: 'alphagov/tech-docs-gem', branch: 'apply-brand-refresh'
 
 # Development
 gem "json"
