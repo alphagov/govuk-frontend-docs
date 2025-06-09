@@ -17,6 +17,7 @@ gem "tzinfo-data", platforms: %i[mswin mingw jruby]
 
 # Include the tech docs gem
 gem "govuk_tech_docs", github: 'alphagov/tech-docs-gem', branch: 'apply-brand-refresh'
+gem "middleman-cli"
 
 # Development
 gem "json"

@@ -266,6 +266,7 @@ PLATFORMS
 DEPENDENCIES
   govuk_tech_docs!
   json
+  middleman-cli
   ostruct
   rake (~> 13.2)
   rspec (~> 3.13.0)
