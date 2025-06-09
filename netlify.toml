@@ -3,6 +3,7 @@
 
 [build]
   publish = "build"
+  command = "INSTALL_GEMS=true bundle install && bundle exec middleman build"
 
 [[redirects]]
   from = "/.well-known/security.txt"
