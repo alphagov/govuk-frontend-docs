@@ -12,6 +12,7 @@ gem "tzinfo-data", platforms: %i[mswin mingw jruby]
 gem "logger"
 
 # Include the tech docs gem
+gem "concurrent-ruby", "1.3.4"
 gem "govuk_tech_docs"
 
 # Development
