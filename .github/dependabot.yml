@@ -14,10 +14,8 @@ updates:
           - "govuk-frontend"
           - "accessible-autocomplete"
     schedule:
-      # Defaults to weekly on Monday
       interval: monthly
       time: "10:30"
-      # Setting a timezone so we let dependabot worry about BST
       timezone: "Europe/London"
     versioning-strategy: increase
 
@@ -28,10 +26,8 @@ updates:
   - package-ecosystem: bundler
     directory: /
     schedule:
-      # Defaults to weekly on Monday
       interval: monthly
       time: "10:30"
-      # Setting a timezone so we let dependabot worry about BST
       timezone: "Europe/London"
     versioning-strategy: increase
 
@@ -42,8 +38,6 @@ updates:
   - package-ecosystem: github-actions
     directory: /
     schedule:
-      # Defaults to weekly on Monday
       interval: monthly
       time: "10:30"
-      # Setting a timezone so we let dependabot worry about BST
       timezone: "Europe/London"
