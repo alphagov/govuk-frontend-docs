@@ -1,0 +1,708 @@
+---
+title: Migration reference
+weight: 91
+---
+# Migration reference
+
+This is part of [migrating from our old frameworks to GOV.UK Frontend](../migrating-from-legacy-products/).
+
+The tables below show the old and new names for components, classes and mixins, to help you find what you need.
+
+## Nunjucks
+
+Where possible we have kept the new page template the same as GOV.UK Template.
+
+The main change is changing variables from [snake_case](https://en.wikipedia.org/wiki/Snake_case) to [camelCase](https://en.wikipedia.org/wiki/Camel_case).
+
+<table>
+  <thead>
+    <tr>
+      <th class="govuk-!-width-one-third" scope="col">GOV.UK Template</th>
+      <th scope="col">GOV.UK Frontend</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>:top_of_page</code></td>
+      <td>Deprecated: putting content above the <code>&lt;!DOCTYPE html&gt;</code> will result in broken pages for users of older Internet Explorer versions.</td>
+    </tr>
+    <tr>
+      <td><code>:html_lang</code></td>
+      <td><code>htmlLang</code></td>
+    </tr>
+    <tr>
+      <td><code>:page_title</code></td>
+      <td><code>pageTitle</code></td>
+    </tr>
+    <tr>
+      <td><code>:asset_path</code></td>
+      <td><code>assetPath</code></td>
+    </tr>
+    <tr>
+      <td><code>:head</code></td>
+      <td><code>head</code></td>
+    </tr>
+    <tr>
+      <td><code>:body_classes</code></td>
+      <td><code>bodyClasses</code></td>
+    </tr>
+    <tr>
+      <td><code>:body_start</code></td>
+      <td><code>bodyStart</code></td>
+    </tr>
+    <tr>
+      <td><code>:skip_link_message</code></td>
+      <td>
+        <p>
+          <a href="https://design-system.service.gov.uk/styles/page-template/#changing-template-content">Override the skip link block in the page template</a>, passing your own skip link which can include custom <code>text</code>.
+        </p>
+      </td>
+    </tr>
+    <tr>
+      <td><code>:cookie_message</code></td>
+      <td>
+        See the <a href="https://design-system.service.gov.uk/components/cookie-banner/">cookie banner component</a> for more details.
+      </td>
+    </tr>
+    <tr>
+      <td><code>header_class</code></td>
+      <td>
+          <a href="https://design-system.service.gov.uk/styles/page-template/#changing-template-content">Override the header block in the page template</a>, passing your own header which can include custom <code>classes</code>.
+      </td>
+    </tr>
+    <tr>
+      <td><code>homepage_url</code></td>
+      <td>
+          <a href="https://design-system.service.gov.uk/styles/page-template/#changing-template-content">Override the header block in the page template</a>, passing your own header which can include a custom <code>homepageUrl</code>.
+      </td>
+    </tr>
+    <tr>
+      <td><code>global_header_text</code></td>
+      <td>
+        No equivalent. <a href="https://github.com/alphagov/govuk-frontend/issues/new/choose">Raise an issue</a> if you need this.
+      </td>
+    </tr>
+    <tr>
+      <td><code>inside_header</code></td>
+      <td>
+          <a href="https://design-system.service.gov.uk/styles/page-template/#changing-template-content">Override the header block in the page template</a>, passing your own header which can include a custom <code>serviceName</code>.
+      </td>
+    </tr>
+    <tr>
+      <td><code>proposition_header</code></td>
+      <td>
+          <a href="https://design-system.service.gov.uk/styles/page-template/#changing-template-content">Override the header block in the page template</a>, passing your own header which can include a custom <code>navigation</code>.
+      </td>
+    </tr>
+    <tr>
+      <td><code>:after_header</code></td>
+      <td><code>beforeContent</code></td>
+    </tr>
+    <tr>
+      <td><code>:content</code></td>
+      <td>
+        <p>
+          <code>main</code>
+        </p>
+        <p>
+          Setting <code>content</code> in the new template will put it inside a  <code>&lt;main&gt;</code> element.
+        </p>
+        <p>
+          In the old GOV.UK Template there was no default <code>&lt;main&gt;</code> element.
+        </p>
+        <p>
+          You can restructure your content so that it does not use a <code>&lt;main&gt;</code> element, or override the <code>main</code> block.
+        </p>
+      </td>
+    </tr>
+    <tr>
+      <td><code>:footer_top</code></td>
+      <td>
+          <a href="https://design-system.service.gov.uk/styles/page-template/#changing-template-content">Override the footer block in the page template</a>, passing your own footer which can include a custom <code>navigation</code>.
+      </td>
+    </tr>
+    <tr>
+      <td><code>:footer_support_links</code></td>
+      <td>
+          <a href="https://design-system.service.gov.uk/styles/page-template/#changing-template-content">Override the footer block in the page template</a>, passing your own footer which can include custom <code>meta</code> links.
+      </td>
+    </tr>
+    <tr>
+      <td><code>:licence_message</code></td>
+      <td>
+        No equivalent. <a href="https://github.com/alphagov/govuk-frontend/issues/new/choose">Raise an issue</a> if you need this.
+      </td>
+    </tr>
+    <tr>
+      <td><code>:body_end</code></td>
+      <td><code>bodyEnd</code></td>
+    </tr>
+
+  </tbody>
+</table>
+
+## Component names
+
+<table>
+  <thead>
+    <tr>
+      <th class="govuk-!-width-one-third" scope="col">GOV.UK Elements</th>
+      <th scope="col">GOV.UK Frontend</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>link-back</code></td>
+      <td><a href="https://design-system.service.gov.uk/components/back-link/">Back link component</a></td>
+    </tr>
+    <tr>
+      <td>Button</td>
+      <td><a href="https://design-system.service.gov.uk/components/button/">Button component</a></td>
+    </tr>
+    <tr>
+      <td>Checkboxes</td>
+      <td><a href="https://design-system.service.gov.uk/components/checkboxes/">Checkboxes component</a></td>
+    </tr>
+    <tr>
+      <td>Date pattern</td>
+      <td><a href="https://design-system.service.gov.uk/components/date-input/">Date input component</a></td>
+    </tr>
+    <tr>
+      <td>Hidden text (Progressive disclosure)</td>
+      <td><a href="https://design-system.service.gov.uk/components/details/">Details component</a></td>
+    </tr>
+    <tr>
+      <td>Errors and validation</td>
+      <td><a href="https://design-system.service.gov.uk/components/error-message/">Error message component</a><br><a href="https://design-system.service.gov.uk/components/error-summary/">Error summary component</a></td>
+    </tr>
+    <tr>
+      <td><code>&lt;fieldset&gt;</code></td>
+      <td><a href="https://design-system.service.gov.uk/components/fieldset/">Fieldset component</a></td>
+    </tr>
+    <tr>
+      <td>File upload</td>
+      <td><a href="https://design-system.service.gov.uk/components/file-upload/">File upload component</a></td>
+    </tr>
+    <tr>
+      <td>Alpha and beta banners</td>
+      <td><a href="https://design-system.service.gov.uk/components/phase-banner/">Phase banner component</a></td>
+    </tr>
+    <tr>
+      <td>Radio buttons</td>
+      <td><a href="https://design-system.service.gov.uk/components/radios/">Radios component</a></td>
+    </tr>
+    <tr>
+      <td>Select boxes</td>
+      <td><a href="https://design-system.service.gov.uk/components/select/">Select component</a></td>
+    </tr>
+    <tr>
+      <td>Phase tag</td>
+      <td><a href="https://design-system.service.gov.uk/components/tag/">Tag component</a></td>
+    </tr>
+    <tr>
+      <td>Form fields</td>
+      <td><a href="https://design-system.service.gov.uk/components/text-input/">Text input component</a></td>
+    </tr>
+    <tr>
+      <td><code>&lt;textarea&gt;</code></td>
+      <td><a href="https://design-system.service.gov.uk/components/textarea/">Textarea component</a></td>
+    </tr>
+    <tr>
+      <td>Warning text (previously Legal text)</td>
+      <td><a href="https://design-system.service.gov.uk/components/text-input/">Warning text component</a></td>
+    </tr>
+    <tr>
+      <td>govuk-box-highlight</td>
+      <td><a href="https://design-system.service.gov.uk/components/panel/">Panel component</a></td>
+    </tr>
+    <tr>
+      <td>Inset text</td>
+      <td><a href="https://design-system.service.gov.uk/components/inset-text/">Inset text component</a></td>
+    </tr>
+    <tr>
+      <td>panel (object)<br>
+        panel-border-wide<br>panel-border-narrow</td>
+      <td>Deprecated: this style is now contained within each component that needs it </td>
+    </tr>
+  </tbody>
+</table>
+
+## Class names
+
+GOV.UK Frontend uses ["Block, Element, Modifier" (BEM)](http://getbem.com/) and [Inverted Triangle CSS (ITCSS)](https://www.creativebloq.com/web-design/manage-large-scale-web-projects-new-css-architecture-itcss-41514731) to structure CSS and define class names. This means all of the existing class names have changed.
+
+### Typography class names
+
+<table>
+  <thead>
+    <tr>
+      <th class="govuk-!-width-one-third" scope="col">GOV.UK Elements</th>
+      <th scope="col">GOV.UK Frontend</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>heading-xlarge</code></td>
+      <td><code>govuk-heading-xl</code></td>
+    </tr>
+    <tr>
+      <td><code>heading-large</code></td>
+      <td><code>govuk-heading-l</code></td>
+    </tr>
+    <tr>
+      <td><code>heading-medium</code></td>
+      <td><code>govuk-heading-m</code></td>
+    </tr>
+    <tr>
+      <td><code>heading-small</code></td>
+      <td><code>govuk-heading-s</code></td>
+    </tr>
+    <tr>
+      <td><code>lede</code></td>
+      <td><code>govuk-body-l</code></td>
+    </tr>
+    <tr>
+      <td><code>&lt;p&gt;<br>body-text</code></td>
+      <td><code>govuk-body</code></td>
+    </tr>
+    <tr>
+      <td><code>font-xsmall</code></td>
+      <td><code>govuk-body-s</code></td>
+    </tr>
+    <tr>
+      <td><code>&lt;a&gt;</code></td>
+      <td><code>govuk-link</code></td>
+    </tr>
+    <tr>
+      <td><code>&lt;hr&gt;</code></td>
+      <td><code>govuk-section-break</code><br><code>govuk-section-break--visible</code><br><code>govuk-section-break--xl</code><br><code>govuk-section-break--l</code><br><code>govuk-section-break--m</code></td>
+    </tr>
+  </tbody>
+</table>
+
+### Lists
+
+<table>
+  <thead>
+    <tr>
+      <th class="govuk-!-width-one-third" scope="col">GOV.UK Elements</th>
+      <th scope="col">GOV.UK Frontend</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>list</code></td>
+      <td><code>govuk-list</code></td>
+    </tr>
+    <tr>
+      <td><code>list</code><br><code>list-bullet</code></td>
+      <td><code>govuk-list</code><br><code>govuk-list--bullet</code></td>
+    </tr>
+    <tr>
+      <td><code>list</code><br><code>list-number</code></td>
+      <td><code>govuk-list</code><br><code>govuk-list--number</code></td>
+    </tr>
+  </tbody>
+</table>
+
+### Layout and grid system class names
+
+<table>
+  <thead>
+    <tr>
+      <th class="govuk-!-width-one-third" scope="col">GOV.UK Elements</th>
+      <th scope="col">GOV.UK Frontend</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>grid-row</code></td>
+      <td><code>govuk-grid-row</code></td>
+    </tr>
+    <tr>
+      <td><code>column-full</code></td>
+      <td><code>govuk-grid-column-full</code></td>
+    </tr>
+    <tr>
+      <td><code>column-one-half</code></td>
+      <td><code>govuk-grid-column-one-half</code></td>
+    </tr>
+    <tr>
+      <td><code>column-one-third</code></td>
+      <td><code>govuk-grid-column-one-third</code></td>
+    </tr>
+    <tr>
+      <td><code>column-two-thirds</code></td>
+      <td><code>govuk-grid-column-two-thirds</code></td>
+    </tr>
+    <tr>
+      <td><code>column-one-quarter</code></td>
+      <td><code>govuk-grid-column-one-quarter</code></td>
+    </tr>
+    <tr>
+      <td><code>#content</code></td>
+      <td><a href="https://design-system.service.gov.uk/styles/layout/#setting-up-page-wrappers">Page wrappers</a></td>
+    </tr>
+
+  </tbody>
+</table>
+
+### Form related class names
+
+<table>
+  <thead>
+    <tr>
+      <th class="govuk-!-width-one-third" scope="col">GOV.UK Elements</th>
+      <th scope="col">GOV.UK Frontend</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>form-group</code></td>
+      <td><code>govuk-form-group</code></td>
+    </tr>
+    <tr>
+      <td><code>form-hint</code></td>
+      <td>Specific to component, for example<br><code>govuk-label__hint</code></td>
+    </tr>
+    <tr>
+      <td><code>form-label</code></td>
+      <td>Specific to component, for example<br><code>govuk-label</code><br><code>govuk-radios__label</code></td>
+    </tr>
+    <tr>
+      <td><code>form-label-bold</code></td>
+      <td><code>govuk-label--s</code></td>
+    </tr>
+    <tr>
+      <td><code>form-control</code><br><code>form-control-3-4</code><br><code>form-control-2-3</code><br><code>form-control-1-2</code><br><code>form-control-1-3</code><br><code>form-control-1-4</code><br><code>form-control-1-8</code></td>
+      <td><a href="https://design-system.service.gov.uk/styles/layout/#width-override-classes">Width override classes</a></td>
+    </tr>
+    <tr>
+      <td><code>form-section</code></td>
+      <td>Deprecated: not required with new spacing implementation</td>
+    </tr>
+    <tr>
+      <td><code>form-group-related</code></td>
+      <td>Deprecated: not required with new spacing implementation</td>
+    </tr>
+    <tr>
+      <td><code>form-group-compound</code></td>
+      <td>Deprecated: not required with new spacing implementation</td>
+    </tr>
+  </tbody>
+</table>
+
+### Helper class names
+
+<table>
+  <thead>
+    <tr>
+      <th class="govuk-!-width-one-third" scope="col">GOV.UK Elements</th>
+      <th scope="col">GOV.UK Frontend</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>visually-hidden</code>, <code>visuallyhidden</code></td>
+      <td><code>govuk-visually-hidden</code><br><code>govuk-visually-hidden-focusable</code></td>
+    </tr>
+
+  </tbody>
+</table>
+
+### Override class names
+
+<table>
+  <thead>
+    <tr>
+      <th class="govuk-!-width-one-third" scope="col">GOV.UK Elements</th>
+      <th scope="col">GOV.UK Frontend</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>font-xxlarge</code></td>
+      <td><code>govuk-!-font-size-80</code></td>
+    </tr>
+    <tr>
+      <td><code>font-xlarge</code></td>
+      <td><code>govuk-!-font-size-48</code></td>
+    </tr>
+    <tr>
+      <td><code>font-large</code></td>
+      <td><code>govuk-!-font-size-36</code></td>
+    </tr>
+    <tr>
+      <td><code>font-medium</code></td>
+      <td><code>govuk-!-font-size-24</code></td>
+    </tr>
+    <tr>
+      <td><code>font-small</code></td>
+      <td><code>govuk-!-font-size-19</code></td>
+    </tr>
+    <tr>
+      <td><code>font-xsmall</code></td>
+      <td><code>govuk-!-font-size-16</code></td>
+    </tr>
+    <tr>
+      <td><code>bold-xxlarge</code></td>
+      <td><code>govuk-!-font-size-80</code><br><code>govuk-!-font-weight-bold</code></td>
+    </tr>
+    <tr>
+      <td><code>bold-xlarge</code></td>
+      <td><code>govuk-!-font-size-48</code><br><code>govuk-!-font-weight-bold</code></td>
+    </tr>
+    <tr>
+      <td><code>bold-large</code></td>
+      <td><code>govuk-!-font-size-36</code><br><code>govuk-!-font-weight-bold</code></td>
+    </tr>
+    <tr>
+      <td><code>bold-medium</code></td>
+      <td><code>govuk-!-font-size-24</code><br><code>govuk-!-font-weight-bold</code></td>
+    </tr>
+    <tr>
+      <td><code>bold-small</code></td>
+      <td><code>govuk-!-font-size-19</code><br><code>govuk-!-font-weight-bold</code></td>
+    </tr>
+    <tr>
+      <td><code>bold-xsmall</code></td>
+      <td><code>govuk-!-font-size-16</code><br><code>govuk-!-font-weight-bold</code></td>
+    </tr>
+    <tr>
+      <td><code>bold</code></td>
+      <td><code>govuk-!-font-weight-bold</code></td>
+    </tr>
+  </tbody>
+</table>
+
+## Mixins and variables
+
+### Typography
+
+<table>
+  <thead>
+    <tr>
+      <th class="govuk-!-width-one-third" scope="col">GOV.UK Frontend Toolkit</th>
+      <th scope="col">GOV.UK Frontend</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>@include core-80</code></td>
+      <td><code>@include govuk-font(80)</code></td>
+    </tr>
+    <tr>
+      <td><code>@include core-48</code></td>
+      <td><code>@include govuk-font(48)</code></td>
+    </tr>
+    <tr>
+      <td><code>@include core-36</code></td>
+      <td><code>@include govuk-font(36)</code></td>
+    </tr>
+    <tr>
+      <td><code>@include core-27</code></td>
+      <td><code>@include govuk-font(27)</code></td>
+    </tr>
+    <tr>
+      <td><code>@include core-24</code></td>
+      <td><code>@include govuk-font(24)</code></td>
+    </tr>
+    <tr>
+      <td><code>@include core-19</code></td>
+      <td><code>@include govuk-font(19)</code></td>
+    </tr>
+    <tr>
+      <td><code>@include core-16</code></td>
+      <td><code>@include govuk-font(16)</code></td>
+    </tr>
+    <tr>
+      <td><code>@include core-14</code></td>
+      <td><code>@include govuk-font(14)</code></td>
+    </tr>
+    <tr>
+      <td><code>@include bold-80</code></td>
+      <td><code>@include govuk-font(80, $weight: bold)</code></td>
+    </tr>
+    <tr>
+      <td><code>@include bold-48</code></td>
+      <td><code>@include govuk-font(48, $weight: bold)</code></td>
+    </tr>
+    <tr>
+      <td><code>@include bold-36</code></td>
+      <td><code>@include govuk-font(36, $weight: bold)</code></td>
+    </tr>
+    <tr>
+      <td><code>@include bold-27</code></td>
+      <td><code>@include govuk-font(27, $weight: bold)</code></td>
+    </tr>
+    <tr>
+      <td><code>@include bold-24</code></td>
+      <td><code>@include govuk-font(24, $weight: bold)</code></td>
+    </tr>
+    <tr>
+      <td><code>@include bold-19</code></td>
+      <td><code>@include govuk-font(19, $weight: bold)</code></td>
+    </tr>
+    <tr>
+      <td><code>@include bold-16</code></td>
+      <td><code>@include govuk-font(16, $weight: bold)</code></td>
+    </tr>
+    <tr>
+      <td><code>@include bold-14</code></td>
+      <td><code>@include govuk-font(14, $weight: bold)</code></td>
+    </tr>
+    <tr>
+      <td><code>@include heading-80</code></td>
+      <td>Deprecated: 80px headings are not used, <code>@include govuk-font(80, $weight: bold)</code> should be used instead</td>
+    </tr>
+    <tr>
+      <td><code>@include heading-48</code></td>
+      <td><code>@extend %govuk-heading-xl</code></td>
+    </tr>
+    <tr>
+      <td><code>@include heading-36</code></td>
+      <td><code>@extend %govuk-heading-l</code></td>
+    </tr>
+    <tr>
+      <td><code>@include heading-27</code></td>
+      <td>Deprecated: 27px headings are not used, <code>@include govuk-font(27, $weight: bold)</code> should be used instead</td>
+    </tr>
+    <tr>
+      <td><code>@include heading-24</code></td>
+      <td><code>@extend %govuk-heading-m</code></td>
+    </tr>
+    <tr>
+      <td><code>@include copy-19</code></td>
+      <td><code>@extend %govuk-body-m</code></td>
+    </tr>
+    <tr>
+      <td><code>@include copy-14</code></td>
+      <td><code>@extend %govuk-body-xs</code></td>
+    </tr>
+  </tbody>
+</table>
+
+### Layout
+
+<table>
+  <thead>
+    <tr>
+      <th class="govuk-!-width-one-third" scope="col">GOV.UK Frontend Toolkit</th>
+      <th scope="col">GOV.UK Frontend</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>@extend site-width-container</code></td>
+      <td><code>@include govuk-width-container</code></td>
+    </tr>
+    <tr>
+      <td><code>@include grid-column( 1/4 )</code></td>
+      <td>Deprecated: you cannot apply grid properties to other elements using GOV.UK Frontend</td>
+    </tr>
+    <tr>
+      <td><code>@include grid-column( 1/2 )</code></td>
+      <td>Deprecated: you cannot apply grid properties to other elements using GOV.UK Frontend</td>
+    </tr>
+    <tr>
+      <td><code>@include grid-column( 1/3 )</code></td>
+      <td>Deprecated: you cannot apply grid properties to other elements using GOV.UK Frontend</td>
+    </tr>
+    <tr>
+      <td><code>@include grid-column( 2/3 )</code></td>
+      <td>Deprecated: you cannot apply grid properties to other elements using GOV.UK Frontend</td>
+    </tr>
+    <tr>
+      <td><code> @include grid-column( 1/3, $full-width: desktop );</code></td>
+      <td>Deprecated: you cannot apply grid properties to other elements using GOV.UK Frontend</td>
+    </tr>
+    <tr>
+      <td><code>$gutter</code></td>
+      <td><code>$govuk-gutter</code>, only use for the gaps in between grid columns, otherwise use the <a href="https://design-system.service.gov.uk/styles/spacing/#applying-spacing-in-your-own-css">spacing scale</a>.</td>
+    </tr>
+    <tr>
+      <td><code>$gutter-half</code></td>
+      <td><code>$govuk-gutter-half</code>, only use for the gaps in between grid columns, otherwise use the <a href="https://design-system.service.gov.uk/styles/spacing/#applying-spacing-in-your-own-css">spacing scale</a>.</td>
+    </tr>
+  </tbody>
+</table>
+
+### Media queries
+
+<table>
+  <thead>
+    <tr>
+      <th class="govuk-!-width-one-third" scope="col">GOV.UK Frontend Toolkit</th>
+      <th scope="col">GOV.UK Frontend</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>@include media(desktop)</code></td>
+      <td><code>@include govuk-media-query($from: desktop)</code><br><code>@include govuk-media-query($until: desktop)</code></td>
+    </tr>
+    <tr>
+      <td><code>@include media(tablet)</code></td>
+      <td><code>@include govuk-media-query($from: tablet)</code><br><code>@include govuk-media-query($until: tablet)</code></td>
+    </tr>
+    <tr>
+      <td><code>@include media(mobile)</code></td>
+      <td><code>@include govuk-media-query($from: mobile)</code><br><code>@include govuk-media-query($until: mobile)</code></td>
+    </tr>
+  </tbody>
+</table>
+
+### Images
+
+<table>
+  <thead>
+    <tr>
+      <th class="govuk-!-width-one-third" scope="col">GOV.UK Frontend Toolkit</th>
+      <th scope="col">GOV.UK Frontend</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>@include device-pixel-ratio($ratio: 2)</code></td>
+      <td><code>@include govuk-device-pixel-ratio($ratio: 2)</code></td>
+    </tr>
+  </tbody>
+</table>
+
+### Shims
+
+<table>
+  <thead>
+    <tr>
+      <th class="govuk-!-width-one-third" scope="col">GOV.UK Frontend Toolkit</th>
+      <th scope="col">GOV.UK Frontend</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>@include inline-block</code></td>
+      <td>Deprecated: inline-block is now the default for any components</td>
+    </tr>
+    <tr>
+      <td><code>@extend %contain-floats</code></td>
+      <td><code>@include govuk-clearfix</code></td>
+    </tr>
+  </tbody>
+</table>
+
+### Internet Explorer
+
+<table>
+  <thead>
+    <tr>
+      <th class="govuk-!-width-one-third" scope="col">GOV.UK Frontend Toolkit</th>
+      <th scope="col">GOV.UK Frontend</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>@include ie(8)</code></td>
+      <td><code>@include govuk-if-ie8</code></td>
+    </tr>
+  </tbody>
+</table>
