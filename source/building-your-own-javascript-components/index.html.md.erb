@@ -203,9 +203,9 @@ createAll(ProjectComponent, undefined, $element)
 
 ### Handling initialisation errors
 
-By default, `createAll` catches errors thrown by components during their initialisation and logs them in the console. This makes sure components further down the page still get initialised after an error. You may still want to respond to errors as the components initialise, such as by notifying an error monitoring service, without [manually initialising each component](../import-javascript/#import-individual-components). 
+By default, both `createAll` and `initAll` catch errors thrown by components during their initialisation and log them in the console. This makes sure components further down the page still get initialised after an error. You may still want to respond to errors as the components initialise, such as by notifying an error monitoring service, without [manually initialising each component](../import-javascript/#import-individual-components). 
 
-You can use a function as a third argument to respond to errors being thrown while components are being initialised. If a component throws an error, the function will be called and will receive:
+To respond to errors being thrown while components are being initialised you can use a function as the third argument to `createAll` or the `{ onError }` option for `initAll`. If a component throws an error, the function will be called and will receive:
 
 - the error that was thrown
 - an object with some more context
