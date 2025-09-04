@@ -73,6 +73,7 @@ To improve how quickly your service’s pages load in browsers, import only the 
 import { SkipLink, CharacterCount, createAll } from 'govuk-frontend'
 
 createAll(SkipLink)
+
 // You can provide a config for components that use them
 createAll(CharacterCount, { maxLength: 500 })
 ```
@@ -88,6 +89,7 @@ import { SkipLink, CharacterCount, createAll } from 'govuk-frontend'
 createAll(SkipLink, (error) => {
   // Handle the error here, for example send it to an error monitoring service
 })
+
 // You can provide a config for components that use them
 createAll(CharacterCount, { maxLength: 500 }, (error) => {
   // Handle the error here, for example send it to an error monitoring service
@@ -110,7 +112,6 @@ $skipLinks.forEach(($skipLink) => {
 
 const $characterCounts = document.querySelectorAll('[data-module="govuk-character-count"]')
 $characterCounts.forEach(($characterCount) => {
-  
   try {
     // You can provide a config for components that use them
     new CharacterCount($characterCount, { maxLength: 500 })
