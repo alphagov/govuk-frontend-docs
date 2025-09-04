@@ -218,7 +218,7 @@ The context object will contain the following properties:
 import { createAll } from 'govuk-frontend'
 import { ProjectComponent } from './project-component.js'
 
-function notifyErrorMonitoringService(error, { Component, element, config }) {
+function notifyErrorMonitoringService(error, { component, element, config }) {
   // Send relevant details to an error monitoring service
 }
 
@@ -238,7 +238,7 @@ import { ProjectComponent } from './project-component.js'
 
 const $element = document.querySelector('.app-dialog')
 
-function notifyErrorMonitoringService(error, { Component, element, config }) {
+function notifyErrorMonitoringService(error, { component, element, config }) {
   // Do something with initialisation error, like sending relevant details to an error monitoring service
 }
 
