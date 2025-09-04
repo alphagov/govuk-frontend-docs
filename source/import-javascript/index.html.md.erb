@@ -82,6 +82,7 @@ createAll(CharacterCount, { maxLength: 500 })
 
 The `createAll` and `initAll` functions will log any errors thrown during components instantiation to the console. If you need to handle these errors, you can use [their `{ onError }` option](../building-your-own-javascript-components/#handling-initialisation-errors).
 
+Handling errors from `createAll`:
 
 ```javascript
 import { SkipLink, CharacterCount, createAll } from 'govuk-frontend'
@@ -96,7 +97,20 @@ createAll(CharacterCount, { maxLength: 500 }, (error, context) => {
 })
 ```
 
-You can also initialise components manually.
+Handling errors from `initAll`:
+
+```javascript
+import { initAll } from 'govuk-frontend'
+
+initAll({
+  characterCount: { maxLength: 500 },
+  onError(error, context) {
+    // Handle the error here, for example send it to an error monitoring service
+  }
+})
+```
+
+You can also handle errors for manually initialised components:
 
 ```javascript
 import { SkipLink, CharacterCount } from 'govuk-frontend'
