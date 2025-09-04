@@ -86,12 +86,12 @@ The `createAll` function will log any errors thrown during components instantiat
 ```javascript
 import { SkipLink, CharacterCount, createAll } from 'govuk-frontend'
 
-createAll(SkipLink, (error) => {
+createAll(SkipLink, (error, context) => {
   // Handle the error here, for example send it to an error monitoring service
 })
 
 // You can provide a config for components that use them
-createAll(CharacterCount, { maxLength: 500 }, (error) => {
+createAll(CharacterCount, { maxLength: 500 }, (error, context) => {
   // Handle the error here, for example send it to an error monitoring service
 })
 ```
