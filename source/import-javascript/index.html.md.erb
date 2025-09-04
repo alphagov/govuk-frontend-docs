@@ -80,7 +80,7 @@ createAll(CharacterCount, { maxLength: 500 })
 
 #### Handling errors during instantiation
 
-The `createAll` function will log any errors thrown during components instantiation to the console. If you need to catch these errors, you can use [its `onError` option](../building-your-own-javascript-components/#handling-initialisation-errors).
+The `createAll` function will log any errors thrown during components instantiation to the console. If you need to catch these errors, you can use [its `{ onError }` option](../building-your-own-javascript-components/#handling-initialisation-errors).
 
 
 ```javascript
@@ -154,7 +154,7 @@ createAll(CharacterCount, { maxLength: 500 }, $element)
 
 ### Initialise all components on part of a page
 
-Run `initAll` with a `scope` parameter to initialise the components on part of a page:
+Run `initAll` with a `{ scope }` option to initialise the components on part of a page:
 
 ```javascript
 import { initAll } from 'govuk-frontend'
