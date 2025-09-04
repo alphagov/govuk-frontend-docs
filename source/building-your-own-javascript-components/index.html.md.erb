@@ -224,7 +224,11 @@ function notifyErrorMonitoringService(error, { component, element, config }) {
   // Send relevant details to an error monitoring service
 }
 
-createAll(ProjectComponent, {SOME_CONFIGURATION}, notifyErrorMonitoringService)
+createAll(
+  ProjectComponent,
+  { SOME_CONFIGURATION },
+  notifyErrorMonitoringService
+)
 
 // If you don’t need any configuration, pass `undefined` for the configuration
 createAll(ProjectComponent, undefined, notifyErrorMonitoringService)
