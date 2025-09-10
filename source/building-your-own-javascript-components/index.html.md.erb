@@ -168,6 +168,7 @@ import { createAll } from 'govuk-frontend'
 import { ProjectComponent, OtherProjectComponent } from './project-components.js'
 
 createAll(ProjectComponent)
+
 // You can provide a config for components that use them
 createAll(OtherProjectComponent, {
   anOption: 'itsValue'
@@ -195,15 +196,16 @@ import { ProjectComponent } from './project-component.js'
 const $element = document.querySelector('.app-dialog')
 
 createAll(ProjectComponent, {SOME_CONFIGURATION}, $element)
+
 // If the component does not need any configuration, pass `undefined` for the configuration
 createAll(ProjectComponent, undefined, $element)
 ```
 
 ### Handling initialisation errors
 
-By default, `createAll` catches errors thrown by components during their initialisation and logs them in the console. This makes sure components further down the page still get initialised after an error. You may still want to respond to errors as the components initialise, such as by notifying an error monitoring service, without [manually initialising each component](../import-javascript/#import-individual-components). 
+By default, both `createAll` and `initAll` catch errors thrown by components during their initialisation and log them in the console. This makes sure components further down the page still get initialised after an error. You may still want to respond to errors as the components initialise, such as by notifying an error monitoring service, without [manually initialising each component](../import-javascript/#import-individual-components). 
 
-You can use a function as a third argument to respond to errors being thrown while components are being initialised. If a component throws an error, the function will be called and will receive:
+To respond to errors being thrown while components are being initialised you can use a function as the third argument to `createAll` or the `{ onError }` option for `initAll`. If a component throws an error, the function will be called and will receive:
 
 - the error that was thrown
 - an object with some more context
@@ -218,11 +220,16 @@ The context object will contain the following properties:
 import { createAll } from 'govuk-frontend'
 import { ProjectComponent } from './project-component.js'
 
-function notifyErrorMonitoringService(error, { Component, element, config }) {
+function notifyErrorMonitoringService(error, { component, element, config }) {
   // Send relevant details to an error monitoring service
 }
 
-createAll(ProjectComponent, {SOME_CONFIGURATION}, notifyErrorMonitoringService)
+createAll(
+  ProjectComponent,
+  { SOME_CONFIGURATION },
+  notifyErrorMonitoringService
+)
+
 // If you don’t need any configuration, pass `undefined` for the configuration
 createAll(ProjectComponent, undefined, notifyErrorMonitoringService)
 ```
@@ -238,7 +245,7 @@ import { ProjectComponent } from './project-component.js'
 
 const $element = document.querySelector('.app-dialog')
 
-function notifyErrorMonitoringService(error, { Component, element, config }) {
+function notifyErrorMonitoringService(error, { component, element, config }) {
   // Do something with initialisation error, like sending relevant details to an error monitoring service
 }
 
@@ -246,6 +253,7 @@ createAll(ProjectComponent, {SOME_CONFIGURATION}, {
   scope: $element,
   onError: notifyErrorMonitoringService
 })
+
 // If you don’t need any configuration, pass `undefined` for the configuration
 createAll(ProjectComponent, undefined, {
   scope: $element,
@@ -386,10 +394,10 @@ class MyComponent extends ConfigurableComponent {
     properties: {
       // As `anOption` is left out of this object
       // it won’t be able to be overridden by `data-an-option`
-      aNumberOption: {type: 'number'},
-      aBooleanOption: {type: 'boolean'}
+      aNumberOption: { type: 'number' },
+      aBooleanOption: { type: 'boolean' },
       // For nested objects, only the type of the root needs to be defined
-      anOptionWithNesting: {type: 'object'}
+      anOptionWithNesting: { type: 'object' }
     }
   }
 
