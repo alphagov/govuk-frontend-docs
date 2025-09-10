@@ -106,6 +106,12 @@ Default:
 'Show this section'
 ```
 
+### rememberExpanded
+
+Type: boolean
+
+Whether the expanded and collpased state of each section is remembered and restored when navigating
+
 ## Button
 
 ### preventDoubleClick
@@ -356,6 +362,98 @@ Default:
 
 ```javascript
 'Exit this page expired.'
+```
+
+## FileUpload
+
+### i18n
+
+Type: object
+
+Messages used by the component for screen reader announcements relating to choosing
+and dropping files.
+
+All of these strings should be short and in plain text.
+
+#### Properties
+
+##### chooseFilesButton
+
+Type: string
+
+The text of the button that opens the file picker.
+
+Default:
+
+```javascript
+  'Choose file'
+```
+
+##### dropInstruction
+
+Type: string
+
+The text informing users they can drop files.
+
+Default:
+
+```javascript
+  'or drop file'
+```
+
+##### noFileChosen
+
+Type: string
+
+The text to display when no file has been chosen by the user.
+
+Default:
+
+```javascript
+  'No file chosen'
+```
+
+##### multipleFilesChosen
+
+Type: object
+
+The text displayed when multiple files have been chosen by the user.
+
+Default:
+
+```javascript
+  {
+    // the 'one' string isn't used as the component displays the filename
+    // instead, however it's here for coverage's sake
+    one: '%{count} file chosen',
+    other: '%{count} files chosen'
+  },
+```
+
+##### enteredDropZone
+
+Type: string
+
+The text announced by assistive technology when the user drags files and enters
+the drop zone 
+
+Default:
+
+```javascript
+  'Entered drop zone'
+```
+
+##### leftDropZone
+
+Type: string
+
+The text announced by assistive technology when user drags files and leaves the
+drop zone without dropping 
+
+Default:
+
+```javascript
+  'Left drop zone'
 ```
 
 ## NotificationBanner
