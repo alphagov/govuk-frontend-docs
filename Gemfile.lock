@@ -1,19 +1,27 @@
 GEM
   remote: https://rubygems.org/
   specs:
-    activesupport (7.0.8.7)
+    activesupport (7.0.10)
+      base64
+      benchmark (>= 0.3)
+      bigdecimal
       concurrent-ruby (~> 1.0, >= 1.0.2)
+      drb
       i18n (>= 1.6, < 2)
+      logger (>= 1.4.2)
       minitest (>= 5.1)
+      mutex_m
+      securerandom (>= 0.3)
       tzinfo (~> 2.0)
-    addressable (2.8.7)
-      public_suffix (>= 2.0.2, < 7.0)
+    addressable (2.8.8)
+      public_suffix (>= 2.0.2, < 8.0)
     ast (2.4.3)
     autoprefixer-rails (10.4.21.0)
       execjs (~> 2)
-    backports (3.25.2)
+    backports (3.25.3)
     base64 (0.3.0)
-    bigdecimal (3.2.3)
+    benchmark (0.5.0)
+    bigdecimal (3.3.1)
     chronic (0.10.2)
     chunky_png (1.4.0)
     coffee-script (2.4.1)
@@ -37,7 +45,8 @@ GEM
     contracts (0.16.1)
     csv (3.3.5)
     diff-lcs (1.6.2)
-    dotenv (3.1.8)
+    dotenv (3.2.0)
+    drb (2.2.3)
     em-websocket (0.5.3)
       eventmachine (>= 0.12.9)
       http_parser.rb (~> 0)
@@ -48,13 +57,13 @@ GEM
     fastimage (2.4.0)
     ffi (1.17.2-arm64-darwin)
     ffi (1.17.2-x86_64-linux-gnu)
-    google-protobuf (4.32.1-arm64-darwin)
+    google-protobuf (4.33.2-arm64-darwin)
       bigdecimal
       rake (>= 13)
-    google-protobuf (4.32.1-x86_64-linux-gnu)
+    google-protobuf (4.33.2-x86_64-linux-gnu)
       bigdecimal
       rake (>= 13)
-    govuk_tech_docs (5.1.1)
+    govuk_tech_docs (5.2.0)
       autoprefixer-rails (~> 10.2)
       base64
       bigdecimal
@@ -75,7 +84,7 @@ GEM
       redcarpet (~> 3.6)
       sassc-embedded (~> 1.78.0)
       terser (~> 1.2.3)
-    haml (6.3.0)
+    haml (6.4.0)
       temple (>= 0.8.2)
       thor
       tilt
@@ -148,8 +157,8 @@ GEM
     middleman-syntax (3.6.1)
       middleman-core (>= 3.2)
       rouge (~> 3.2)
-    minitest (5.25.5)
-    multi_json (1.17.0)
+    minitest (5.27.0)
+    multi_json (1.18.0)
     mutex_m (0.3.0)
     nokogiri (1.18.10-arm64-darwin)
       racc (~> 1.4)
@@ -171,7 +180,7 @@ GEM
     prism (1.5.1)
     public_suffix (6.0.2)
     racc (1.8.1)
-    rack (2.2.20)
+    rack (2.2.21)
     rack-livereload (0.3.17)
       rack
     rainbow (3.1.1)
@@ -234,13 +243,14 @@ GEM
       rubocop (~> 1.72, >= 1.72.1)
     ruby-progressbar (1.13.0)
     sass (3.4.25)
-    sass-embedded (1.93.2)
+    sass-embedded (1.97.0)
       google-protobuf (~> 4.31)
       rake (>= 13)
     sassc (2.4.0)
       ffi (~> 1.9)
     sassc-embedded (1.78.0)
       sass-embedded (~> 1.78)
+    securerandom (0.4.1)
     servolux (0.13.0)
     sprockets (4.2.2)
       concurrent-ruby (~> 1.0)
@@ -260,7 +270,7 @@ GEM
     unicode-display_width (3.2.0)
       unicode-emoji (~> 4.1)
     unicode-emoji (4.1.0)
-    webrick (1.9.1)
+    webrick (1.9.2)
 
 PLATFORMS
   arm64-darwin-21
