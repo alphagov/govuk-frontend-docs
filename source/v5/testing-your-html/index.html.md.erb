@@ -1,0 +1,56 @@
+---
+title: Test if your HTML matches GOV.UK Frontend
+weight: 61
+---
+
+# Test if your HTML matches GOV.UK Frontend
+
+You can use our test fixtures to check you're outputting the same HTML that GOV.UK Frontend uses, when you:
+
+- create your own component macros (also called ‘partials’ or ‘templates’)
+- [update GOV.UK Frontend](../staying-up-to-date/)
+
+## Using the HTML test files
+
+If you [installed GOV.UK Frontend with Node.js package manager (npm)](../installing-with-npm), you can find the `fixtures.json` file for each component in the `node_modules/govuk-frontend/dist/govuk/components/COMPONENT-NAME/` folder, where `COMPONENT-NAME` is the name of the component.
+
+For example, you can find the `fixtures.json` file for the button component in the `node_modules/govuk-frontend/dist/govuk/components/button/` folder:
+
+```js
+{
+  "component": "button",
+  "fixtures": [
+    {
+      "name": "default",
+      "options": {
+        "text": "Save and continue"
+      },
+      "html": "<button class=\"govuk-button\" data-module=\"govuk-button\">\n  Save and continue\n</button>",
+      "hidden": false
+    },
+    {
+      "name": "secondary button",
+      "options": {
+        "text": "Find address",
+        "classes": "govuk-button--secondary"
+      },
+      "html": "<button class=\"govuk-button govuk-button--secondary\" data-module=\"govuk-button\">\nFind address\n</button>",
+      "hidden": false
+    },
+    // ...
+  ]
+}
+```
+
+Each object in the `fixtures` list is a different example of the component, where:
+
+- `name` is the name of the example
+- `options` are the options that generate this example's `html`
+- `html` is the HTML that GOV.UK Frontend outputs with these options
+- `hidden` is `true` if the fixture does not look or behave differently to the other fixtures provided
+
+Do not include `hidden` fixtures when you use fixtures for manual or visual regression testing.
+
+For each example, pass `options` into your own macro and check the generated HTML matches `html`.
+
+If your HTML does not match exactly, you'll need to write your tests so they ignore known differences. For example your framework may add extra whitespace or attributes to your HTML.

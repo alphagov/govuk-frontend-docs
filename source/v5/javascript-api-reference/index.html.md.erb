@@ -1,0 +1,551 @@
+---
+title: JavaScript API Reference
+weight: 80
+---
+
+# JavaScript API Reference
+
+Some of our components can be passed JavaScript configuration objects. You can do it both:
+
+- [when configuring instances of specific components](../configure-components/#configure-instances-of-specific-components-using-the-createall-function)
+- [when configuring all components using the `initAll` function](../configure-components/#configure-all-components-using-the-initall-function)
+
+This page lists the options available for the following components:
+
+- [Accordion](#accordion)
+- [Button](#button)
+- [CharacterCount](#charactercount)
+- [ErrorSummary](#errorsummary)
+- [ExitThisPage](#exitthispage)
+- [FileUpload](#fileupload)
+- [NotificationBanner](#notificationbanner)
+- [PasswordInput](#passwordinput)
+
+## Accordion
+
+### i18n
+
+Type: object
+
+Messages the component uses for the labels of its buttons. This includes the
+visible text shown on screen, and text to help assistive technology users for
+the buttons toggling each section.
+
+Default: see properties
+
+#### Properties
+
+##### hideAllSections
+
+Type: string
+
+The text content for the 'Hide all sections' button, used when at least one
+section is expanded.
+
+Default:
+
+```javascript
+'Hide all sections'
+```
+
+##### hideSection
+
+Type: string
+
+The text content for the 'Hide' button, used when a section is expanded.
+
+Default:
+
+```javascript
+'Hide'
+```
+
+##### hideSectionAriaLabel
+
+Type: string
+
+The text content appended to the 'Hide' button's accessible name when a section is expanded.
+
+Default:
+
+```javascript
+'Hide this section'
+```
+
+##### showAllSections
+
+Type: string
+
+The text content for the 'Show all sections' button, used when all sections are collapsed.
+
+Default:
+
+```javascript
+'Show all sections'
+```
+
+##### showSection
+
+Type: string
+
+The text content for the 'Show' button, used when a section is collapsed.
+
+Default:
+
+```javascript
+'Show'
+```
+
+##### showSectionAriaLabel
+
+Type: string
+
+The text content appended to the 'Show' button's accessible name when a section is expanded.
+
+Default:
+
+```javascript
+'Show this section'
+```
+
+### rememberExpanded
+
+Type: boolean
+
+Whether the expanded and collapsed state of each section is remembered and restored when navigating
+
+## Button
+
+### preventDoubleClick
+
+Type: boolean
+
+Prevent accidental double clicks on submit buttons from submitting forms multiple times.
+
+Default:
+
+```javascript
+false
+```
+
+## CharacterCount
+
+### maxlength
+
+Type: number
+
+The maximum number of characters. If `maxwords` is provided, the `maxlength` option will be ignored.
+
+### maxwords
+
+Type: number
+
+The maximum number of words. If `maxwords` is provided, the `maxlength` option will be ignored.
+
+### threshold
+
+Type: number
+
+The percentage value of the limit at which point the count message is displayed. If this attribute is set, the count message will be hidden by default.
+
+Default:
+
+```javascript
+0
+```
+
+### i18n
+
+Type: object
+
+Messages shown to users as they type. It provides feedback on how many words or
+characters they have remaining or if they are over the limit. This also includes
+a message used as an accessible description for the textarea.
+
+Default: see properties
+
+#### Properties
+
+##### charactersUnderLimit
+
+Type: object
+
+Message displayed when the number of characters is under the configured maximum,
+`maxlength`. This message is displayed visually and through assistive
+technologies. The component will replace the `%{count}` placeholder with the
+number of remaining characters. This is a [pluralised list of
+messages](../localise-govuk-frontend/#understanding-pluralisation-rules).
+
+Default:
+
+```javascript
+{
+  one: 'You have %{count} character remaining',
+  other: 'You have %{count} characters remaining'
+}
+```
+
+##### charactersAtLimit
+
+Type: string
+
+Message displayed when the number of characters reaches the configured maximum,
+`maxlength`. This message is displayed visually and through assistive
+technologies.
+
+Default:
+
+```javascript
+'You have 0 characters remaining'
+```
+
+##### charactersOverLimit
+
+Type: object
+
+Message displayed when the number of characters is over the configured maximum,
+`maxlength`. This message is displayed visually and through assistive
+technologies. The component will replace the `%{count}` placeholder with the
+number of remaining characters. This is a [pluralised list of
+messages](../localise-govuk-frontend/#understanding-pluralisation-rules).
+
+Default:
+
+```javascript
+{
+  one: 'You have %{count} character too many',
+  other: 'You have %{count} characters too many'
+}
+```
+
+##### wordsUnderLimit
+
+Type: object
+
+Message displayed when the number of words is under the configured maximum,
+`maxwords`. This message is displayed visually and through assistive
+technologies. The component will replace the `%{count}` placeholder with the
+number of remaining words. This is a [pluralised list of
+messages](../localise-govuk-frontend/#understanding-pluralisation-rules).
+
+Default:
+
+```javascript
+{
+  one: 'You have %{count} word remaining',
+  other: 'You have %{count} words remaining'
+}
+```
+
+##### wordsAtLimit
+
+Type: string
+
+Message displayed when the number of words reaches the configured maximum,
+`maxwords`. This message is displayed visually and through assistive
+technologies.
+
+Default:
+
+```javascript
+'You have 0 words remaining'
+```
+
+##### wordsOverLimit
+
+Type: object
+
+Message displayed when the number of words is over the configured maximum,
+`maxwords`. This message is displayed visually and through assistive
+technologies. The component will replace the `%{count}` placeholder with the
+number of remaining words. This is a [pluralised list of
+messages](../localise-govuk-frontend/#understanding-pluralisation-rules).
+
+Default:
+
+```javascript
+{
+  one: 'You have %{count} word too many',
+  other: 'You have %{count} words too many'
+}
+```
+
+##### textareaDescription
+
+Type: object
+
+Message made available to assistive technologies, if none is already present in the HTML, to describe that the component accepts only a limited amount of content. The component will replace the `%{count}` placeholder with the value of the `maxlength` or `maxwords` option.
+
+Default:
+
+```javascript
+{
+  other: ''
+}
+```
+
+## ErrorSummary
+
+### disableAutoFocus
+
+If set to `true` the error summary will not be focussed when the page loads.
+
+Type: boolean
+
+Default
+
+```javascript
+false
+```
+
+## ExitThisPage
+
+### i18n
+
+Type: object
+
+Messages the component uses for screen reader announcements relating to the
+keyboard shortcut functionality, informing assistive technology users of the
+current state of the shortcut.
+
+All of these strings should be short and in plain text.
+
+Default: see properties
+
+#### Properties
+
+##### activated
+
+Type: string
+
+Text to announce when the Exit This Page keyboard shortcut has been activated
+and the user is being directed away from the current page.
+
+Default:
+
+```javascript
+'Loading.'
+```
+
+##### pressOneMoreTime
+
+Type: string
+
+Text to announce when the user has pressed the activation key (Shift) twice, and
+must press it one more time to activate the functionality.
+
+Default:
+
+```javascript
+'Shift, press 1 more time to exit.'
+```
+
+##### pressTwoMoreTimes
+
+Type: string
+
+Text to announce when the user has pressed the activation key (Shift) once, and
+must press it two more times to activate the functionality.
+
+Default:
+
+```javascript
+'Shift, press 2 more times to exit.'
+```
+
+##### timedOut
+
+Type: string
+
+Text to announce if the user hasn't completed the keyboard shortcut within the
+allowed time, so that the user is aware that they must begin the sequence again.
+
+Default:
+
+```javascript
+'Exit this page expired.'
+```
+
+## FileUpload
+
+### i18n
+
+Type: object
+
+Messages the component uses for screen reader announcements relating to choosing
+and dropping files.
+
+All of these strings should be short and in plain text.
+
+#### Properties
+
+##### chooseFilesButton
+
+Type: string
+
+The text of the button that opens the file picker.
+
+Default:
+
+```javascript
+  'Choose file'
+```
+
+##### dropInstruction
+
+Type: string
+
+The text informing users they can drop files.
+
+Default:
+
+```javascript
+  'or drop file'
+```
+
+##### noFileChosen
+
+Type: string
+
+The text to display when no file has been chosen by the user.
+
+Default:
+
+```javascript
+  'No file chosen'
+```
+
+##### multipleFilesChosen
+
+Type: object
+
+The text displayed when multiple files have been chosen by the user.
+
+Default:
+
+```javascript
+  {
+    // the 'one' string isn't used as the component displays the filename
+    // instead, however it's here for coverage's sake
+    one: '%{count} file chosen',
+    other: '%{count} files chosen'
+  },
+```
+
+##### enteredDropZone
+
+Type: string
+
+The text announced by assistive technology when the user drags files and enters
+the drop zone 
+
+Default:
+
+```javascript
+  'Entered drop zone'
+```
+
+##### leftDropZone
+
+Type: string
+
+The text announced by assistive technology when user drags files and leaves the
+drop zone without dropping 
+
+Default:
+
+```javascript
+  'Left drop zone'
+```
+
+## NotificationBanner
+
+### disableAutoFocus
+
+Type: boolean
+
+If set to `true` the notification banner will not be focussed when the page loads. This only applies if the component has a `role` of `alert` – in other cases the component will not be focused on page load, regardless of this option.
+
+Default:
+
+```javascript
+false
+```
+
+## PasswordInput
+
+### i18n
+
+#### Properties
+
+##### hidePassword
+
+Type: string
+
+Visible text of the button when the password is currently visible.
+
+Default:
+
+```javascript
+  'Hide'
+```
+
+##### hidePasswordAriaLabel
+
+Type: string
+
+aria-label of the button when the password is currently visible.
+
+Default:
+
+```javascript
+  'Hide password'
+```
+
+##### passwordHiddenAnnouncement
+
+Type: string
+
+Screen reader announcement to make when the password has just been hidden.
+
+Default:
+
+```javascript
+  'Your password is hidden'
+```
+
+##### passwordShownAnnouncement
+
+Type: string
+
+Screen reader announcement to make when the password has just become visible.
+
+Default:
+
+```javascript
+  'Your password is visible'
+```
+
+##### showPassword
+
+Type: string
+
+Visible text of the button when the password is currently hidden.
+
+Default:
+
+```javascript
+  'Show'
+```
+
+##### showPasswordAriaLabel
+
+Type: string
+
+aria-label of the button when the password is currently hidden.
+
+Default:
+
+```javascript
+  'Show password'
+```

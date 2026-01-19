@@ -1,0 +1,67 @@
+---
+title: Browser support
+weight: 70
+---
+
+# Browser support
+
+To make sure the public can successfully access and use government services, regardless of the browser they're using, the Design System team has divided browsers into 4 grades. Each grade shows the level of support we will provide.
+
+From GOV.UK Frontend v5.0.0 onwards, Internet Explorer 11 will no longer run GOV.UK Frontend JavaScript and support is completely removed for Internet Explorer 8 to 10. Our CSS are still compatible with Internet Explorer 11.
+
+You can see more information about [how we provide support for different browsers](https://github.com/alphagov/govuk-frontend/blob/main/docs/contributing/browser-support.md) in our GitHub documentation.
+
+## Grade A
+
+Grade A browsers include the most recent stable versions of Chrome, Firefox, Edge, Samsung Internet and Safari.
+
+These browsers should be able to parse GOV.UK Frontend's JavaScript without error. We aim to provide the same overall experience in Grade A and B browsers.
+
+When supporting these browsers we'll:
+
+- use Grade A browsers for any manual testing carried out during the development process
+- use our automated test suites as standard
+- treat bugs affecting Grade A browsers as high priority
+
+## Grade B
+
+Grade B browsers include all stable versions of Chrome, Firefox and Edge released in the last 6 months and the last 4 releases of Safari which are not supported in Grade A.
+
+These browsers should be able to parse GOV.UK Frontend's JavaScript without error. We aim to provide the same overall experience in Grade A and B browsers.
+
+When supporting these browsers we'll:
+
+- use our automated test suites as standard
+- treat bugs affecting Grade B browsers as low priority unless we find evidence they prevent a user from being able to complete their task
+
+## Grade C
+
+Grade C covers browsers not in Grade A or B which support `<script type="module">`. These are:
+
+- Chrome 61 and later
+- Edge 16-18
+- Edge 79 and later
+- Safari 11 and later
+- Firefox 60 and later
+- Opera 48 and later
+- Samsung Internet 8.2 and later
+
+These browsers should be able to parse GOV.UK Frontend's JavaScript without error.
+
+However, we might disable or reduce features on an individual basis in browsers where the underlying features are not available. We'll make exceptions if users need the feature to complete their task.
+
+Safari 10.1 (macOS) and Safari 10.3 (iOS) support `<script type="module">` but will 'exit early' as they does not support `HTMLScriptElement.prototype.noModule`, which is how we test support for `<script type="module">` from within our JavaScript. JavaScript modules will not run in these versions of Safari.
+
+For grade C browsers we:
+
+- might remove support for individual features in these browsers at any time without considering them a breaking change
+- will not regularly test in these browsers
+- will not fix bugs affecting these browsers unless they prevent a user from being able to complete their task, or we can fix the bug by disabling a feature
+
+## Grade X
+
+Grade X includes all browsers that do not support `<script type="module">`, including all versions of Internet Explorer.
+
+These browsers should not download or attempt to parse GOV.UK Frontend's JavaScript.
+
+We will not regularly test in these browsers. We will not fix bugs affecting these browsers.
