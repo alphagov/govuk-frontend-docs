@@ -38,5 +38,6 @@ show_contribution_banner: true
 github_repo: alphagov/govuk-frontend-docs
 
 header_links:
-  v5.x (Latest): /
+  v6.x (Latest): /
+  v5.x: /v5/
   v4.x: /v4/

@@ -1,0 +1,57 @@
+---
+title: Import font and images assets
+weight: 32
+---
+
+# Import font and images assets
+
+To use the font and image assets from GOV.UK Frontend, you can either:
+
+- serve the assets from the GOV.UK Frontend assets folder - recommended
+- copy the font and image files into your application
+
+## Serve the assets from the GOV.UK Frontend assets folder - recommended
+
+Set up your routing so requests for files in `<YOUR-SITE-URL>/assets` are served from `/node_modules/govuk-frontend/dist/govuk/assets`.
+
+For example if you're using [express.js](https://expressjs.com/), add the following to your `app.js` file:
+
+```javascript
+const path = require('path');
+app.use('/assets', express.static(path.join(__dirname, '/node_modules/govuk-frontend/dist/govuk/assets')))
+```
+
+## Copy the font and image files into your application
+
+If you decide to copy the assets instead, copy the:
+
+- `/node_modules/govuk-frontend/dist/govuk/assets/images` folder to `<YOUR-APP>/assets/images`
+- `/node_modules/govuk-frontend/dist/govuk/assets/fonts` folder to `<YOUR-APP>/assets/fonts`
+- `/node_modules/govuk-frontend/dist/govuk/assets/manifest.json` file to `<YOUR-APP>/assets`
+- `/node_modules/govuk-frontend/dist/govuk/assets/rebrand folder` to `<YOUR-APP>/assets/rebrand`
+
+You should use an automated task or your build pipeline to copy the files, so your project folder stays up to date when we update GOV.UK Frontend.
+
+### If you have your own folder structure
+
+If you use a different folder structure than `<YOUR-APP>/assets/images`, `<YOUR-APP>/assets/fonts` and `<YOUR-APP>/assets/rebrand`, you can set Sass variables so that Sass builds the CSS to point to your folders.
+
+Set one of the following before the `@import` line in your Sass file:
+
+- `$govuk-assets-path`
+- `$govuk-images-path` and `$govuk-fonts-path`
+
+Set the `$govuk-assets-path` variable if your `font` and `image` folders have the same parent folder. For example:
+
+```scss
+$govuk-assets-path: "/<YOUR-ASSETS-FOLDER>/";
+```
+
+Set the `$govuk-images-path` and `$govuk-fonts-path` variables if your `font` and `image` folders have different parent folders. For example:
+
+```scss
+$govuk-images-path: "/<YOUR-IMAGES-FOLDER>/";
+$govuk-fonts-path: "/<YOUR-FONTS-FOLDER>/";
+```
+
+You can also use your own function to generate paths, for example if you're using `asset-pipeline` in [sass-rails](https://github.com/rails/sass-rails). Set the `$govuk-image-url-function` and `$govuk-font-url-function` variables to the name of your function.
