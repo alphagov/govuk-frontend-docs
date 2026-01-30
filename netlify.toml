@@ -30,3 +30,8 @@
   for = "/assets/govuk/assets/fonts/*"
   [headers.values]
     Cache-Control = "public,max-age=2147483648,immutable"
+
+[[redirects]]
+  from = "/changes-to-govuk-frontend-v5/"
+  to = "/v5/changes-to-govuk-frontend-v5/"
+  status = 301
