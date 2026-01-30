@@ -32,5 +32,6 @@ helpers do
   end
 end
 
+page "v5/*", layout: :v5, data: { parent: "/v5/" }
 page "v4/*", layout: :v4, data: { parent: "/v4/" }
 page "*", data: { parent: "/" }
