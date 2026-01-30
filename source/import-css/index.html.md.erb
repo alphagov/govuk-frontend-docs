@@ -32,10 +32,8 @@ Then link the CSS file inside the `<head>` tag of your HTML page or page templat
 To import all the Sass rules from GOV.UK Frontend, add the following to your Sass file:
 
 ```scss
-@import "node_modules/govuk-frontend/dist/govuk/index";
+@import "node_modules/govuk-frontend/dist/govuk";
 ```
-
-You do not need `/index` at the end of your import if you’re using Dart Sass, LibSass 3.6.0 or higher, or Ruby Sass 3.6.0 or higher.
 
 ## Import specific parts using Sass
 
@@ -110,8 +108,6 @@ You can remove lines that import parts of the CSS you do not need.
 
 [Read more about the different parts of GOV.UK Frontend’s CSS](https://github.com/alphagov/govuk-frontend/tree/main/packages/govuk-frontend/src).
 
-You do not need `/index` at the end of your imports if you’re using Dart Sass, LibSass 3.6.0 or higher, or Ruby Sass 3.6.0 or higher.
-
 ## Import an individual component’s CSS using a single Sass import
 
 You can also import a component and all its dependencies without importing `node_modules/govuk-frontend/dist/govuk/base` first.
@@ -147,7 +143,7 @@ If you're using Dart Sass 1.33.0 or greater, you may see deprecation warnings wh
 DEPRECATION WARNING: Using / for division is deprecated and will be removed in Dart Sass 2.0.0.
 ```
 
-We're currently unable to fix these deprecation warnings without breaking support for LibSass. However, you can silence the warnings caused by GOV.UK Frontend and other dependencies. Make sure you're using Dart Sass 1.49.10 or greater, and then if you're:
+You can silence the warnings caused by GOV.UK Frontend and other dependencies. If you're:
 
 - calling the Sass compiler from the command line, [pass the `--quiet-deps` flag](https://sass-lang.com/documentation/cli/dart-sass#quiet-deps)
 - using the JavaScript API, [include `quietDeps: true`](https://sass-lang.com/documentation/js-api#quietdeps) in the `options` object
