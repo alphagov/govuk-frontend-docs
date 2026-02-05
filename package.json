@@ -3,6 +3,7 @@
   "name": "govuk-frontend-docs",
   "version": "1.0.0",
   "scripts": {
+    "start": "bundle exec middleman server",
     "postinstall": "npm run build:sassdoc && npm run build:sassdocv4",
     "build:sassdoc": "sassdoc --no-update-notifier --parse node_modules/govuk-frontend/dist/govuk/ > data/sassdoc.json",
     "build:sassdocv4": "sassdoc --no-update-notifier --parse node_modules/govuk-frontend-v4/govuk/ > data/sassdoc-v4.json",
