@@ -17,11 +17,13 @@ weight: 10
     npm init
     ```
 
-3. Install [Dart Sass](https://www.npmjs.com/package/sass) - version 1.79.0 or higher.
+3. Install [Dart Sass](https://www.npmjs.com/package/sass) - version 1.0.0 or higher.
 
-    You might see deprecation warnings when compiling your Sass. If required, you can [silence deprecation warnings caused by dependencies](../import-css/#silence-deprecation-warnings-from-dependencies-in-dart-sass).
+    If you're using Dart Sass 1.33.0 or greater, you might see deprecation warnings when compiling your Sass. If required, you can [silence deprecation warnings caused by dependencies](../import-css/#silence-deprecation-warnings-from-dependencies-in-dart-sass).
 
-    Do not use either LibSass or Ruby Sass as they are no longer supported by the Sass developers or GOV.UK Frontend. Projects using these compilers should [migrate to Dart Sass](https://sass-lang.com/blog/libsass-is-deprecated#how-do-i-migrate) as soon as possible.
+    Do not use either LibSass or Ruby Sass for new projects as they are deprecated in GOV.UK Frontend.
+
+    Although GOV.UK Frontend currently supports LibSass (version 3.3.0 and above) and Ruby Sass (version 3.4.0 and above), we will remove support in future. If you're using either of these Sass compilers, you should [migrate to Dart Sass](https://sass-lang.com/blog/libsass-is-deprecated#how-do-i-migrate) as soon as you reasonably can.
 
 You can also [install Nunjucks v3.0.0 or later](https://www.npmjs.com/package/nunjucks) if you want to [use GOV.UK Frontend's Nunjucks macros](../use-nunjucks/).
 
@@ -66,6 +68,8 @@ There are also different ways you can [import GOV.UK Frontend's CSS](../import-c
 ```scss
 @import "node_modules/govuk-frontend/dist/govuk/index";
 ```
+
+You do not need `/index` at the end of your import if you’re using Dart Sass, LibSass 3.6.0 or higher, or Ruby Sass 3.6.0 or higher.
 
 ### Get the font and images working
 
