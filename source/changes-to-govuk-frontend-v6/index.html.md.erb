@@ -1,0 +1,60 @@
+---
+title: Changes to GOV.UK Frontend v6.0.0
+weight: 95
+---
+
+# Changes to GOV.UK Frontend v6.0.0
+
+The main purpose of v6 include changes to:
+- improve our Sass architecture
+- use an updated type scale to improve accessibility for small screens
+- update colours to use the web palette in the GOV.UK brand guidelines
+- improve the page template layout
+
+We’ve also removed a number of deprecated APIs, Sass variables and component options.
+
+## Migrating from v5 to v6
+
+Follow the guidance about [staying up to date with GOV.UK Frontend](https://frontend.design-system.service.gov.uk/staying-up-to-date/).
+
+When making the decision to migrate, consider your service's requirements and your ability to update Sass tooling and templates. In particular, you must update to [Dart Sass v1.79.0 or newer](https://sass-lang.com/dart-sass/) before upgrading to v6.
+
+## Benefits of updating to v6
+
+By updating to v6 you'll:
+
+- stay aligned with the GOV.UK look and feel: we've updated GOV.UK Frontend to use the web colour palette from the GOV.UK Brand Guidelines
+- benefit from a more consistent colour system that's used in certain components
+- get the latest accessibility improvements, based on ongoing testing and feedback from services across government
+- benefit from a smaller CSS payload
+- customise the page template further than before
+
+## Updating to v6
+
+Read the [GOV.UK Frontend v6.0.0 release notes](https://github.com/alphagov/govuk-frontend/releases/v6.0.0).
+
+There are actions you must make to migrate to v6.0.0. These are items you need to update, check or remove.
+
+You'll need to update some items, which include:
+
+- update your Sass compiler to [Dart Sass v1.79.0 or newer](https://sass-lang.com/dart-sass/)
+- update colour usage to the GOV.UK web palette and use the `govuk-colour` function instead of the `$govuk-colours` map
+- update any uses of functional colour variables to use the new `govuk-functional-colour` Sass function
+- replace `govuk-tint` and `govuk-shade` with the new palette tints and shades
+- replace `govuk-tag--light-blue` and update `govuk-tag--turquoise` to `govuk-tag--teal` and `govuk-tag--pink` to `govuk-tag--magenta`
+
+You'll need to check some items still work as expected, which include:
+
+- your service’s custom colours for contrast and legibility with the new web palette
+- any custom components that reference functional colours or CSS custom properties
+- any custom header or footer content if you now include Service navigation or Phase banner components within the `<header>` element
+- testing the new type scale in your service to see if you need to make any adjustments, such as spacing or positioning values
+
+You'll need to remove the following items:
+
+- the `$govuk-colours` variable
+- the `govuk-responsive-typography` Sass mixin and any calls to `govuk-font-size` or `govuk-font` with `$size: 14`
+- `govuk-body-xs` and `govuk-!-font-size-14` classes
+- references to the `$govuk-new-typography-scale`, `$govuk-show-breakpoints` and `$govuk-new-organisation-colours` feature flags
+- the `$legacy` parameter for `govuk-colour`
+- service name and navigation items in the GOV.UK header component (use the Service navigation component instead)
