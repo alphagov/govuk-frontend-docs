@@ -5,9 +5,13 @@ weight: 95
 
 # Changes to GOV.UK Frontend v6.0.0
 
-The main purposes of v6 are to update the colour palette to align with the GOV.UK Brand Guidelines, improve flexibility for template layout, and improve our Sass architecture for future improvements.
+The main purpose of v6 include changes to:
+- improve our Sass architecture
+- use an updated type scale to improve accessibility for small screens
+- update colours to use the web palette in the GOV.UK brand guidelines
+- improve the page template layout
 
-This release includes breaking changes to Sass support and removes a number of deprecated APIs, Sass variables and component options.
+We’ve also removed a number of deprecated APIs, Sass variables and component options.
 
 ## Migrating from v5 to v6
 
@@ -20,14 +24,14 @@ When making the decision to migrate, consider your service's requirements and yo
 By updating to v6 you'll:
 
 - stay aligned with the GOV.UK look and feel: we've updated GOV.UK Frontend to use the web colour palette from the GOV.UK Brand Guidelines
-- access updates to the way the web colour palette is used in certain components
+- benefit from a more consistent colour system that's used in certain components
 - get the latest accessibility improvements, based on ongoing testing and feedback from services across government
 - benefit from a smaller CSS payload
-- be able to heavily customise your Page template
+- customise the page template further than before
 
-## Main changes to v6
+## Updating to v6
 
-This release updates the GOV.UK brand colours and typography, removes deprecated Sass and component APIs, and refactors the Page template nunjucks blocks to allow more flexible placement of components on the page. Read the details about the changes to v6 in [the release notes](https://github.com/alphagov/govuk-frontend/releases/v6.0.0).
+Read the [GOV.UK Frontend v6.0.0 release notes](https://github.com/alphagov/govuk-frontend/releases/v6.0.0).
 
 There are actions you must make to migrate to v6.0.0. These are items you need to update, check or remove.
 
@@ -44,6 +48,7 @@ You'll need to check some items still work as expected, which include:
 - your service’s custom colours for contrast and legibility with the new web palette
 - any custom components that reference functional colours or CSS custom properties
 - any custom header or footer content if you now include Service navigation or Phase banner components within the `<header>` element
+- testing the new type scale in your service to see if you need to make any adjustments, such as spacing or positioning values
 
 You'll need to remove the following items:
 
