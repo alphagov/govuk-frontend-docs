@@ -55,36 +55,36 @@ You must import the layers in the order listed in the example below.
 // Basic content styles for typography, links etc. Approximately 10% of
 // the CSS output if you include everything.
 
-@import "node_modules/govuk-frontend/dist/govuk/core/index";
+@import "node_modules/govuk-frontend/dist/govuk/core";
 
 // Objects include things like the page template, grid and form groups.
 // Approximately 5% of the CSS output if you include everything.
 
-@import "node_modules/govuk-frontend/dist/govuk/objects/index";
+@import "node_modules/govuk-frontend/dist/govuk/objects";
 
 // The components themselves - try to only include the components you
 // are using in your project. Approximately 70% of the CSS output if
 // you include everything.
 
 <% components.each do |component| %>
-@import "node_modules/govuk-frontend/dist/govuk/components/<%= component %>/index";
+@import "node_modules/govuk-frontend/dist/govuk/components/<%= component %>";
 <% end %>
 
 /*
 // Alternatively, you can import all components:
-@import "node_modules/govuk-frontend/dist/govuk/components/index";
+@import "node_modules/govuk-frontend/dist/govuk/components";
 */
 
 // Utilities, for example govuk-clearfix or govuk-visually-hidden.
 // Approximately 1% of the CSS output if you include everything.
 
-@import "node_modules/govuk-frontend/dist/govuk/utilities/index";
+@import "node_modules/govuk-frontend/dist/govuk/utilities";
 
 // Overrides, used to adjust things like the amount of spacing on an
 // element. Override classes always include `-!-` in the class name.
 // Approximately 15% of the CSS output if you include everything.
 
-@import "node_modules/govuk-frontend/dist/govuk/overrides/index";
+@import "node_modules/govuk-frontend/dist/govuk/overrides";
 
 /*
 // Alternatively, you can import the specific groups of overrides
