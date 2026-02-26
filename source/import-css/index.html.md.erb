@@ -112,11 +112,12 @@ You can remove lines that import parts of the CSS you do not need.
 
 You can also import a component and all its dependencies without importing `node_modules/govuk-frontend/dist/govuk/base` first.
 
-To import the button component for example, add the following to your Sass file:
+For example, to import the button component, add the following to your Sass file:
 
 ```scss
-@import "node_modules/govuk-frontend/dist/govuk/components/button/button";
+@import "node_modules/govuk-frontend/dist/govuk/components/button";
 ```
+We're deprecating using `_<COMPONENT_NAME>.scss` files (like `node_modules/govuk-frontend/dist/govuk/components/button/button`) and will remove them in the next major release of GOV.UK Frontend.
 
 ## Simplify Sass import paths
 
