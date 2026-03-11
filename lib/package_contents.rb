@@ -1,8 +1,9 @@
 module PackageContents
   def components
     extract_from "components/_index.scss" do |line|
-      # Match anything found between `@import "` and `/index";`
-      line[/(?<=@import ")[a-z-]*(?=\/index";)/]
+      # Match sass index file patterns: folder, folder/index, folder/_index,
+      # folder/index.scss, folder/_index.scss
+      line[/^\s*@import\s+["']([a-z-]+)(?:\/(?:_?index)(?:\.scss)?)?["']\s*;/, 1]
     end
   end
 

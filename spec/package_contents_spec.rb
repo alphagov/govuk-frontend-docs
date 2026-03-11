@@ -14,15 +14,21 @@ RSpec.describe PackageContents do
       allow(File).to receive(:readlines).and_return <<~FILE.split("\n")
         @import "../base";
 
-        @import "first-component/index";
+        @import "first-component";
         @import "second-component/index";
-        @import "third-component/index";
+        @import "third-component/_index";
+        @import "fourth-component/index.scss";
+        @import 'fifth-component/_index.scss';
+        // @import "false-component/index";
+        @import "";
       FILE
 
       expect(@helper.components).to eq(%w[
         first-component
         second-component
         third-component
+        fourth-component
+        fifth-component
       ])
     end
 
