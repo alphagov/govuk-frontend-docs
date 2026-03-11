@@ -1,8 +1,16 @@
 module PackageContents
-  # Match sass index file patterns: folder, folder/index,
-  # folder/_index, folder/index.scss, folder/_index.scss
-  SASS_IMPORT_PATTERN =
-    /^\s*@import\s+["']([a-z-]+)(?:\/(?:_?index)(?:\.scss)?)?["']\s*;/
+  SASS_IMPORT_PATTERN = %r{
+    ^\s*                       # leading whitespace
+    @(?:import|use)\s+         # @import or @use
+    ["']                       # opening quote
+      ([a-z-]+)                # capture the name
+      (?:/(?:_?index)          # optional /index or /_index
+        (?:\.scss)?            # optional .scss extension
+      )?
+    ["']                       # closing quote
+    (?:\s+with\s+\(.*?\))?    # optional 'with ()' config
+    \s*;                       # trailing whitespace and ;
+  }x
 
   def components
     extract_from "components/_index.scss" do |line|
