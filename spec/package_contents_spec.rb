@@ -49,12 +49,22 @@ RSpec.describe PackageContents do
         @import "one";
         @import "two";
         @import "th-ree";
+        @import "four/index";
+        @import "five/_index";
+        @import "six/index.scss";
+        @import "seven/_index.scss";
+        @import 'eight/index';
       FILE
 
       expect(@helper.overrides).to eq(%w[
         one
         two
         th-ree
+        four
+        five
+        six
+        seven
+        eight
       ])
     end
 

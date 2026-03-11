@@ -1,16 +1,18 @@
 module PackageContents
+  # Match sass index file patterns: folder, folder/index,
+  # folder/_index, folder/index.scss, folder/_index.scss
+  SASS_IMPORT_PATTERN =
+    /^\s*@import\s+["']([a-z-]+)(?:\/(?:_?index)(?:\.scss)?)?["']\s*;/
+
   def components
     extract_from "components/_index.scss" do |line|
-      # Match sass index file patterns: folder, folder/index, folder/_index,
-      # folder/index.scss, folder/_index.scss
-      line[/^\s*@import\s+["']([a-z-]+)(?:\/(?:_?index)(?:\.scss)?)?["']\s*;/, 1]
+      line[SASS_IMPORT_PATTERN, 1]
     end
   end
 
   def overrides
     extract_from "overrides/_index.scss" do |line|
-      # Match anything found between `@import "` and `";`
-      line[/(?<=@import ")[a-z-]*(?=";)/]
+      line[SASS_IMPORT_PATTERN, 1]
     end
   end
 
