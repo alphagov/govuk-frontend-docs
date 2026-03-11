@@ -9,7 +9,7 @@ RSpec.describe PackageContents do
     @helper = Test.new
   end
 
-  shared_examples "a sass index parser" do |method, file|
+  shared_examples "a sass import extractor" do |method, file|
     it "extracts names via @import" do
       allow(File).to receive(:readlines).and_return <<~FILE.split("\n")
         @import "../base";
@@ -66,10 +66,10 @@ RSpec.describe PackageContents do
   end
 
   describe "#components" do
-    it_behaves_like "a sass index parser", :components, "components/_index.scss"
+    it_behaves_like "a sass import extractor", :components, "components/_index.scss"
   end
 
   describe "#overrides" do
-    it_behaves_like "a sass index parser", :overrides, "overrides/_index.scss"
+    it_behaves_like "a sass import extractor", :overrides, "overrides/_index.scss"
   end
 end
