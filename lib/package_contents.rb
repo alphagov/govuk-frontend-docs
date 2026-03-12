@@ -8,8 +8,6 @@ module PackageContents
         (?:\.scss)?            # optional .scss extension
       )?
     ["']                       # closing quote
-    (?:\s+with\s+\(.*?\))?    # optional 'with ()' config
-    \s*;                       # trailing whitespace and ;
   }x
 
   def components
