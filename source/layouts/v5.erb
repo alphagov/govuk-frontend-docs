@@ -17,7 +17,7 @@ wrap_layout :core do
 
     with_page_in_navigation(v5_index) do
       without_child_pages_for(v5_index) do
-        render_page_tree(resources, current_page, config, html)
+        render_page_tree(resources, current_page, config, html, include_child_resources: false)
       end
     end
   end
