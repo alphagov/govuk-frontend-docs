@@ -1,0 +1,4 @@
+{
+  "exclude": ["**/*.import.scss"],
+  "no-update-notifier": true
+}
