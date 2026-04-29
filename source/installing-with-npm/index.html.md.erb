@@ -19,7 +19,7 @@ weight: 10
 
 3. Install [Dart Sass](https://www.npmjs.com/package/sass) - version 1.79.0 or higher.
 
-    You might see deprecation warnings when compiling your Sass. If required, you can [silence deprecation warnings caused by dependencies](../import-css/#silence-deprecation-warnings-from-dependencies-in-dart-sass).
+    You might see deprecation warnings when compiling your Sass. If required, you can [silence deprecation warnings caused by dependencies](../include-css/#silence-deprecation-warnings-from-dependencies-in-dart-sass).
 
     Do not use either LibSass or Ruby Sass as they are no longer supported by the Sass developers or GOV.UK Frontend. Projects using these compilers should [migrate to Dart Sass](https://sass-lang.com/blog/libsass-is-deprecated#how-do-i-migrate) as soon as possible.
 
@@ -61,7 +61,7 @@ Paste the HTML into a page or template in your application.
 
 The accordion will use a generic font until you get the font and images working, and will not be interactive until you get the JavaScript working.
 
-There are also different ways you can [import GOV.UK Frontend's CSS](../import-css/), including into your project's main Sass file:
+There are also different ways you can [import GOV.UK Frontend's CSS](../include-css/), including into your project's main Sass file:
 
 ```scss
 @import "node_modules/govuk-frontend/dist/govuk";
