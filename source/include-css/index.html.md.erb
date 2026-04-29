@@ -5,19 +5,19 @@ weight: 30
 
 # Import CSS
 
-To import the CSS from GOV.UK Frontend, you can either:
+To include the CSS from GOV.UK Frontend, you should either:
 
 - add GOV.UK Frontend's CSS file to your HTML
-- import the CSS into your own Sass file
+- include GOV.UK Frontend in your Sass build
 
 ## Add the CSS file to your HTML
 
-If you decide to add the CSS to your HTML, you can do one of the following:
+If you decide to add the CSS to your HTML, you should either:
 
 - set up your routing so requests for the CSS file are served from `node_modules/govuk-frontend/dist/govuk/govuk-frontend.min.css`
 - copy the `node_modules/govuk-frontend/dist/govuk/govuk-frontend.min.css` file into your application
 
-Then link the CSS file inside the `<head>` tag of your HTML page or page template.
+Then link to `govuk-frontend.min.css` inside the `<head>` tag of your HTML page or page template.
 
 ```html
 <head>
@@ -27,126 +27,190 @@ Then link the CSS file inside the `<head>` tag of your HTML page or page templat
 </head>
 ```
 
-## Import using Sass
+## Include GOV.UK Frontend styles in your Sass build
 
-To import all the Sass rules from GOV.UK Frontend, add the following to your Sass file:
+We plan to deprecate using `@import` to include GOV.UK Frontend in a future v6.x release. You’ll no longer be able to include GOV.UK Frontend with `@import` from the next major release, v7.0.0. See the [GOV.UK Frontend v5.x documentation](/v5/import-css/) if you need to include GOV.UK Frontend with `@import` before the next major release.
+
+To include all the styles from GOV.UK Frontend in your compiled stylesheet, add the following to a Sass file:
+
 
 ```scss
-@import "node_modules/govuk-frontend/dist/govuk";
+@use "node_modules/govuk-frontend/dist/govuk" as *;
 ```
 
-## Import specific parts using Sass
-
-If you want to improve how quickly your service's pages load in browsers, you can import only the Sass rules you need.
-
-1. Import `node_modules/govuk-frontend/dist/govuk/base` in your Sass file.
-2. Import only the Sass you need based on the components and other classes your service is using.
-
-The biggest optimisations come from excluding any components or overrides you're not using.
-
-You must import the layers in the order listed in the example below.
+This lets you access [GOV.UK Frontend’s Sass API](/sass-api-reference/) (variables, functions and mixins) in that Sass file. Each file using GOV.UK Frontend’s Sass API needs its own `@use` statement.
 
 ```scss
-// 'Base' includes everything from settings, tools and helpers. Nothing
-// in the base outputs any CSS.
+@use "node_modules/govuk-frontend/dist/govuk" as *;
 
-@import "node_modules/govuk-frontend/dist/govuk/base";
+@media govuk-from-breakpoint(tablet) {
+  // Styles for tablet and wider screens
+}
+```
+
+If you want to extend or modify GOV.UK Frontend’s styles with your own styles, follow the same principles as for [extending and modifying components](https://design-system.service.gov.uk/get-started/extending-and-modifying-components/). You can add your own Sass rules after including GOV.UK Frontend with `@use`.
+
+## Shorten Sass URLs
+
+If you’re using a bundler such as Webpack or Vite, it may already locate GOV.UK Frontend inside `node_modules` if the included URL starts with `govuk-frontend`. Check your bundler’s documentation to confirm.
+
+### Use `pkg:` URLs to shorten Sass URLs
+
+If you’re not using a bundler, we recommend using [`pkg:` URLs](https://sass-lang.com/blog/announcing-pkg-importers/) to let Sass find GOV.UK Frontend in your project’s `node_modules` directory. 
+
+If you’re calling the Sass compiler from the command line, pass the [`--pkg-importer=node`](https://sass-lang.com/documentation/cli/dart-sass/#pkg-importer-node) option.
+
+If you’re using the Sass JavaScript API, add the [Sass `NodePackageImporter`](https://sass-lang.com/documentation/js-api/classes/nodepackageimporter/#md:writing-sass-packages) to the [list of `importers`](https://sass-lang.com/documentation/js-api/interfaces/options/#importers) in the `options` object.
+
+Then include GOV.UK Frontend using the `pkg:govuk-frontend` URL:
+
+```scss
+@use "pkg:govuk-frontend" as *;
+```
+
+If you cannot use `pkg:` URLs, you can also [configure your Sass load paths or Ruby assets paths](/v5/import-css/#simplify-sass-import-paths) to make Sass import paths shorter.
+
+## Configure GOV.UK Frontend
+
+To configure any of [GOV.UK Frontend’s settings](/sass-api-reference/#settings) when including it, add a `with` clause listing each setting you want to modify to your `@use` rule:
+
+```scss
+@use "node_modules/govuk-frontend/dist/govuk" as * with (
+  $govuk-assets-path: "/path/to/assets/"
+);
+```
+
+## Include specific parts of GOV.UK Frontend using Sass
+
+If you want to improve how quickly your service’s pages load in browsers, you can include only the Sass rules you need from GOV.UK Frontend.
+
+Most of the CSS output comes from components, so you can make your pages load faster by excluding any components or overrides you do not use.
+
+```scss
+// Base provides GOV.UK Frontend's Sass API, allowing you to configure GOV.UK Frontend.
+// You can skip `@use`ing Base if:
+// - you do not need to configure GOV.UK Frontend
+// - the code in this file does not use GOV.UK Frontend's Sass API
+
+@use "node_modules/govuk-frontend/dist/govuk/base" as * with (
+$govuk-assets-path: "/path/to/assets/"
+);
 
 // Basic content styles for typography, links etc. Approximately 10% of
 // the CSS output if you include everything.
 
-@import "node_modules/govuk-frontend/dist/govuk/core";
+@use "node_modules/govuk-frontend/dist/govuk/core";
 
 // Objects include things like the page template, grid and form groups.
 // Approximately 5% of the CSS output if you include everything.
 
-@import "node_modules/govuk-frontend/dist/govuk/objects";
+@use "node_modules/govuk-frontend/dist/govuk/objects";
 
 // The components themselves - try to only include the components you
 // are using in your project. Approximately 70% of the CSS output if
 // you include everything.
 
-<% components.each do |component| %>
-@import "node_modules/govuk-frontend/dist/govuk/components/<%= component %>";
-<% end %>
+@use "node_modules/govuk-frontend/dist/govuk/accordion";
+@use "node_modules/govuk-frontend/dist/govuk/components/back-link";
+@use "node_modules/govuk-frontend/dist/govuk/components/breadcrumbs";
+@use "node_modules/govuk-frontend/dist/govuk/components/button";
+@use "node_modules/govuk-frontend/dist/govuk/components/character-count";
+@use "node_modules/govuk-frontend/dist/govuk/components/checkboxes";
+@use "node_modules/govuk-frontend/dist/govuk/components/cookie-banner";
+@use "node_modules/govuk-frontend/dist/govuk/components/date-input";
+@use "node_modules/govuk-frontend/dist/govuk/components/details";
+@use "node_modules/govuk-frontend/dist/govuk/components/error-message";
+@use "node_modules/govuk-frontend/dist/govuk/components/error-summary";
+@use "node_modules/govuk-frontend/dist/govuk/components/exit-this-page";
+@use "node_modules/govuk-frontend/dist/govuk/components/fieldset";
+@use "node_modules/govuk-frontend/dist/govuk/components/file-upload";
+@use "node_modules/govuk-frontend/dist/govuk/components/footer";
+@use "node_modules/govuk-frontend/dist/govuk/components/header";
+@use "node_modules/govuk-frontend/dist/govuk/components/hint";
+@use "node_modules/govuk-frontend/dist/govuk/components/input";
+@use "node_modules/govuk-frontend/dist/govuk/components/inset-text";
+@use "node_modules/govuk-frontend/dist/govuk/components/label";
+@use "node_modules/govuk-frontend/dist/govuk/components/notification-banner";
+@use "node_modules/govuk-frontend/dist/govuk/components/pagination";
+@use "node_modules/govuk-frontend/dist/govuk/components/panel";
+@use "node_modules/govuk-frontend/dist/govuk/components/password-input";
+@use "node_modules/govuk-frontend/dist/govuk/components/phase-banner";
+@use "node_modules/govuk-frontend/dist/govuk/components/radios";
+@use "node_modules/govuk-frontend/dist/govuk/components/select";
+@use "node_modules/govuk-frontend/dist/govuk/components/service-navigation";
+@use "node_modules/govuk-frontend/dist/govuk/components/skip-link";
+@use "node_modules/govuk-frontend/dist/govuk/components/summary-list";
+@use "node_modules/govuk-frontend/dist/govuk/components/table";
+@use "node_modules/govuk-frontend/dist/govuk/components/tabs";
+@use "node_modules/govuk-frontend/dist/govuk/components/tag";
+@use "node_modules/govuk-frontend/dist/govuk/components/task-list";
+@use "node_modules/govuk-frontend/dist/govuk/components/textarea";
+@use "node_modules/govuk-frontend/dist/govuk/components/warning-text";
 
 /*
 // Alternatively, you can import all components:
-@import "node_modules/govuk-frontend/dist/govuk/components";
+@use "node_modules/govuk-frontend/dist/govuk/components";
 */
 
 // Utilities, for example govuk-clearfix or govuk-visually-hidden.
 // Approximately 1% of the CSS output if you include everything.
 
-@import "node_modules/govuk-frontend/dist/govuk/utilities";
+@use "node_modules/govuk-frontend/dist/govuk/utilities";
 
 // Overrides, used to adjust things like the amount of spacing on an
 // element. Override classes always include `-!-` in the class name.
 // Approximately 15% of the CSS output if you include everything.
 
-@import "node_modules/govuk-frontend/dist/govuk/overrides";
+@use "node_modules/govuk-frontend/dist/govuk/overrides";
 
 /*
 // Alternatively, you can import the specific groups of overrides
 // you need for your project:
-<% examples = {
-  'display' => %w(govuk-!-display-inline),
-  'spacing' => %w(govuk-!-margin-4 govuk-!-static-padding-4),
-  'text-align' => %w(govuk-!-text-align-left),
-  'typography' => %w(govuk-!-font-size-19 govuk-!-font-weight-bold),
-  'width' => %w(govuk-!-width-two-thirds)
-} %>
-<% overrides.each do |override| %>
 
-// <%= override.sub('-', ' ').humanize %> overrides<% if examples.key?(override) %> - for example <%= examples[override].join(', ') %><% end %>
-@import "node_modules/govuk-frontend/dist/govuk/overrides/<%= override %>";
-<% end %>
+// Display overrides - for example govuk-!-display-inline
+@use "node_modules/govuk-frontend/dist/govuk/overrides/display";
+
+// Spacing overrides - for example govuk-!-margin-4, govuk-!-static-padding-4
+@use "node_modules/govuk-frontend/dist/govuk/overrides/spacing";
+
+// Text align overrides - for example govuk-!-text-align-left
+@use "node_modules/govuk-frontend/dist/govuk/overrides/text-align";
+
+// Typography overrides - for example govuk-!-font-size-19, govuk-!-font-weight-bold
+@use "node_modules/govuk-frontend/dist/govuk/overrides/typography";
+
+// Width overrides - for example govuk-!-width-two-thirds
+@use "node_modules/govuk-frontend/dist/govuk/overrides/width";
 */
+
 ```
 
-You can remove lines that import parts of the CSS you do not need.
+You can remove lines that include parts of the CSS you do not need.
 
-[Read more about the different parts of GOV.UK Frontend’s CSS](https://github.com/alphagov/govuk-frontend/tree/main/packages/govuk-frontend/src).
+Read more about the [different parts of GOV.UK Frontend’s CSS](https://github.com/alphagov/govuk-frontend/tree/main/packages/govuk-frontend/src).
 
-## Import an individual component’s CSS using a single Sass import
+Previously, you could use `_<COMPONENT_NAME>.scss` files (such as `node_modules/govuk-frontend/dist/govuk/components/button/button`), but these are now deprecated, and we’ll remove them in the next major release of GOV.UK Frontend, v7.0.0.
 
-You can also import a component and all its dependencies without importing `node_modules/govuk-frontend/dist/govuk/base` first.
+## Use GOV.UK Frontend’s Sass API
 
-For example, to import the button component, add the following to your Sass file:
+If you need to build your own CSS, you can use GOV.UK Frontend’s Sass API to make your styles consistent with GOV.UK Frontend’s CSS and avoid re-implementing features used to create GOV.UK Frontend’s CSS.
+
+The variables, functions and mixins will be available in the file that [includes GOV.UK Frontend](#include-gov-uk-frontend-styles-in-your-sass-build). In other files, you’ll need to add the following at the top of the file:
 
 ```scss
-@import "node_modules/govuk-frontend/dist/govuk/components/button";
-```
-We're deprecating using `_<COMPONENT_NAME>.scss` files (like `node_modules/govuk-frontend/dist/govuk/components/button/button`) and will remove them in the next major release of GOV.UK Frontend.
+@use "node_modules/govuk-frontend/dist/govuk/base" as *;
 
-## Simplify Sass import paths
-
-If you want to make Sass import paths shorter, add `node_modules/govuk-frontend/dist` to either your:
-
-- [Sass load paths](https://sass-lang.com/documentation/at-rules/import#finding-the-file)
-- [assets paths](http://guides.rubyonrails.org/asset_pipeline.html#search-paths) if you use Ruby in your project
-
-You can then import without using `node_modules/govuk-frontend/dist/` in your import path. For example:
-
-```scss
-@import "govuk/components/button/button";
+// Use variable, functions and mixins from GOV.UK Frontend
 ```
 
-## Override with your own CSS
-
-If you want to override GOV.UK Frontend's styles with your own styles, `@import` GOV.UK Frontend's styles before your own Sass rules.
+You can find the list of the variables, functions and mixins available in the [GOV.UK Frontend Sass API reference](/sass-api-reference/).
 
 ## Silence deprecation warnings from dependencies in Dart Sass
 
-If you're using Dart Sass 1.33.0 or greater, you may see deprecation warnings when compiling your Sass. For example:
+When compiling, Sass may warn you about deprecations from its upcoming [breaking changes](https://sass-lang.com/documentation/breaking-changes/). You can silence any warnings caused by GOV.UK Frontend and other dependencies. 
 
-```
-DEPRECATION WARNING: Using / for division is deprecated and will be removed in Dart Sass 2.0.0.
-```
+If you’re calling the Sass compiler from the command line, pass the [`--quiet-deps` flag](https://sass-lang.com/documentation/cli/dart-sass/#quiet-deps).
 
-You can silence the warnings caused by GOV.UK Frontend and other dependencies. If you're:
+If you’re using the Sass JavaScript API, include [`quietDeps: true`](https://sass-lang.com/documentation/js-api/interfaces/options/#quietDeps) in the `options` object.
 
-- calling the Sass compiler from the command line, [pass the `--quiet-deps` flag](https://sass-lang.com/documentation/cli/dart-sass#quiet-deps)
-- using the JavaScript API, [include `quietDeps: true`](https://sass-lang.com/documentation/js-api#quietdeps) in the `options` object
-
-You'll still see deprecation warnings if you're using `/` for division in your own Sass code.
+You’ll still see deprecation warnings caused by your own Sass code.
