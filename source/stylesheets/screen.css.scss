@@ -4,12 +4,3 @@
 .technical-documentation .table-container td > code {
   white-space: nowrap;
 }
-
-// Temporarily override syntax highlighting to fix poor contrast for comments.
-.highlight .c,
-.highlight .cm,
-.highlight .cp,
-.highlight .c1,
-.highlight .cs { /* Comment.Special */
-  color: govuk-functional-colour(secondary-text);
-}
