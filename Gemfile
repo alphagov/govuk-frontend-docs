@@ -12,7 +12,7 @@ gem "tzinfo-data", platforms: %i[mswin mingw jruby]
 gem "logger"
 
 # Include the tech docs gem
-gem "govuk_tech_docs", "~> 6.1.0"
+gem "govuk_tech_docs", "~> 6.2.1"
 
 # Development
 gem "json"
