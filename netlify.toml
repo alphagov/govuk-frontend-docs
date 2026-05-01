@@ -19,6 +19,11 @@
   to = "/configure-components/"
   status = 301
 
+[[redirects]]
+  from = "/import-css/"
+  to = "/include-css/"
+  status = 301
+
 # Asset filenames with fingerprint hashes (which at the minute is only the font
 # from GOV.UK Frontend) are given an 'infinite' max-age and treated as
 # immutable.
