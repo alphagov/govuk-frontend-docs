@@ -56,7 +56,7 @@ If you’re using a bundler such as Webpack or Vite, it may already locate GOV.U
 
 ### Use `pkg:` URLs to shorten Sass URLs
 
-If you’re not using a bundler, we recommend using [`pkg:` URLs](https://sass-lang.com/blog/announcing-pkg-importers/) to let Sass find GOV.UK Frontend in your project’s `node_modules` directory. 
+If you’re not using a bundler and include GOV.UK Frontend with `@use`, we recommend using [`pkg:` URLs](https://sass-lang.com/blog/announcing-pkg-importers/) to let Sass find GOV.UK Frontend in your project’s `node_modules` directory. 
 
 If you’re calling the Sass compiler from the command line, pass the [`--pkg-importer=node`](https://sass-lang.com/documentation/cli/dart-sass/#pkg-importer-node) option.
 
@@ -67,6 +67,17 @@ Then include GOV.UK Frontend using the `pkg:govuk-frontend` URL:
 ```scss
 @use "pkg:govuk-frontend" as *;
 ```
+
+<div class="govuk-inset-text">
+  <p>If you’re using <code>@import</code> with <code>pkg:</code> URLs there’s a known issue with how <a href="https://github.com/sass/sass/issues/4224">Sass loads <code>pkg:</code> URLs with <code>@import</code></a>.</p>
+  <p>We recommend you either:</p>
+
+  <ul>
+    <li>only use <code>pkg:</code> URLs with <code>@use</code></li>
+    <li>make sure to include <code>index.import</code> in the URLs  you import (for example: <code>@import "pkg:govuk-frontend/index.import"</code>)</li>
+  </ul>
+  <p>You should migrate any existing uses of <code>@import</code> with <code>pkg:</code> in your service.</p>
+</div>
 
 If you cannot use `pkg:` URLs, you can also [configure your Sass load paths or Ruby assets paths](/v5/import-css/#simplify-sass-import-paths) to make Sass import paths shorter.
 
