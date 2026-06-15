@@ -1,0 +1,149 @@
+---
+title: Using GOV.UK Frontend without GOV.UK branding
+weight: 99
+---
+
+# Using GOV.UK Frontend without GOV.UK branding
+
+## Introduction
+
+This guidance is aimed at services that are: 
+
+using GOV.UK patterns and frontend code
+not part of the GOV.UK website
+
+You must be using [GOV.UK Frontend v6.3.0](https://github.com/alphagov/govuk-frontend/releases/tag/v6.3.0) or later to follow the steps in this guidance. If you’re using an earlier version of GOV.UK Frontend than v6.0.0, see the [v6.0.0 release notes](https://github.com/alphagov/govuk-frontend/releases/tag/v6.0.0) for information on how to upgrade to that major version. 
+
+Read more on upgrading your version of GOV.UK Frontend in our guidance on [staying up to date with changes](../staying-up-to-date/).
+
+To use GOV.UK Frontend without GOV.UK branding, you’ll need to:
+
+- use the Generic header component
+- update your Sass to remove branded elements
+- use your own image assets
+- update your template `theme-color` value
+
+## Using the Generic header component
+
+You can use the [Generic header component](https://design-system.service.gov.uk/components/generic-header/) to create a header for your service without the GOV.UK branding. 
+
+You may want to customise the header to match the branding of your service or organisation. You can customise the Generic header in various ways, including:
+
+- changing the spacing around the logo
+- adding a bottom border with your brand colour
+- changing the header colour
+
+For example, you may want to change the spacing around your logo to position it within the header. To do this, create a new CSS class in your service’s CSS to add to your Generic header component:
+
+```css
+.app-generic-header--custom-spacing {
+  /* My custom spacing rules */
+}
+```
+
+You can also include this new class using GOV.UK Frontend’s Nunjucks macros:
+
+```nunjucks
+{{ govukGenericHeader({
+  classes: “app-generic-header--custom-spacing”
+}) }}
+```
+
+Read our guidance on [extending and modifying components in production](https://design-system.service.gov.uk/get-started/extending-and-modifying-components/) for details on how to customise your header.
+
+## Updating your Sass to remove branded elements
+
+You can change your service’s font and brand colours using GOV.UK Frontend’s Sass API.
+
+To do this, change the following Sass variables:
+
+- [`$govuk-font-family`](https://frontend.design-system.service.gov.uk/sass-api-reference/#govuk-font-family)
+- [`$govuk-functional-colours`](https://frontend.design-system.service.gov.uk/sass-api-reference/#govuk-functional-colours) 
+
+You can use [Sass’s `@use… with` syntax](https://sass-lang.com/documentation/at-rules/use/#configuration) when including GOV.UK Frontend in your Sass:
+
+```scss
+@use "pkg:govuk-frontend" as * with (
+  $govuk-font-family: (“Helvetica Heue”, Helvetica, Arial, sans-serif),
+  $govuk-functional-colours: (
+    brand: [your new brand colour]
+  )
+);
+```
+
+We recommend redefining these variables in a single `with` statement so you only have to include GOV.UK Frontend once in your Sass.
+
+### Choosing a font
+
+If your service [must use an alternative to the GDS Transport font](https://design-system.service.gov.uk/styles/typeface/), we recommend redefining `$govuk-font-family` to the following font stack:
+
+```
+“Helvetica Neue”, Helvetica, Arial, sans-serif
+```
+
+If your service uses a specific font in its branding, use that instead.
+
+### Applying your brand colour
+
+Changing GOV.UK Frontend’s functional brand colour will affect some visual elements, such as the colour of the border in the GOV.UK footer component.
+
+You can redefine `$govuk-functional-colours` and change your brand colour using the [`$govuk-functional-colours` redefinition syntax](https://frontend.design-system.service.gov.uk/sass-api-reference/#example-redefining-functional-colours-by-setting-them-before-import). For example, to change your service’s brand colour to green (`#388E3C`), include the following inside your GOV.UK Frontend `@use … with` statement:
+
+```scss
+$govuk-functional-colours: (
+  brand: #388E3C
+)
+```
+ 
+You can either use colours from our [web palette](https://design-system.service.gov.uk/styles/colour/#govuk-web-palette) or use your own colours. 
+## Using your own image assets
+
+When you’re not using GOV.UK branding, you must replace the following [assets from GOV.UK Frontend](https://frontend.design-system.service.gov.uk/import-font-and-images-assets/) with your own branded assets:
+
+- [favicons](#favicons)
+- [mobile homepage icons](#mobile-homepage-icons)
+- [sharing image](#sharing-image)
+
+To replace these assets with your own assets, you can either include your own assets in an `assets/images` folder in your service or [specify your own asset path](https://frontend.design-system.service.gov.uk/import-font-and-images-assets/#if-you-have-your-own-folder-structure), which GOV.UK Frontend will automatically use.
+
+<%=warning_text('The filenames for your image assets must be identical to the filenames for the image assets in GOV.UK Frontend, otherwise your service may break.') %>
+
+### Favicons
+
+A favicon is the icon that represents your website in browser tabs and bookmarks.
+
+GOV.UK Frontend expects both `favicon.ico` and `favicon.svg` files so your service will work in different browsers.
+
+### Mobile homepage icons
+
+Mobile homepage icons appear for users who add your service or web pages in your service to their mobile desktop homepage as shortcuts. GOV.UK Frontend expects several images to account for use by different devices:
+
+- `govuk-icon-180.png`
+- `govuk-icon-192.png`
+- `govuk-icon-512.png`
+- `govuk-icon-mask.svg`
+
+GOV.UK Frontend also expects the `govuk-` prefix in the file names.
+
+### Sharing image
+
+GOV.UK Frontend expects a `govuk-opengraph-image.png` file. This is used when sharing your service or a web page in your service externally, for example on social media or messaging services.
+
+## Updating your template `theme-color` value
+
+The GOV.UK Frontend template uses the [`theme-color` meta attribute value](https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/meta/name/theme-color), which sets the toolbar colour on some devices.
+
+If you’re using the GOV.UK Frontend Nunjucks [page template](https://design-system.service.gov.uk/styles/page-template/), set the `themeColor` template variable so it does not use the GOV.UK brand blue: 
+
+```nunjucks
+{# import GOV.UK Frontend template #}
+{% extends "govuk/template.njk" %}
+
+{% set themeColor = “#388E3C” %}
+```
+
+If you’re using HTML, look for a `<meta>` element in your `<head>` section with the name `theme-color` and set the `content` attribute to your new brand colour:
+
+```html
+<meta name="theme-color" content="#388E3C">
+```
