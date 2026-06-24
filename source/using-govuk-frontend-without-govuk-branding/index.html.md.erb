@@ -45,7 +45,7 @@ You can also include this new class using GOV.UK Frontend’s Nunjucks macros:
 
 ```nunjucks
 {{ govukGenericHeader({
-  classes: “app-generic-header--custom-spacing”
+  classes: "app-generic-header--custom-spacing"
 }) }}
 ```
 
@@ -64,7 +64,7 @@ You can use [Sass’s `@use… with` syntax](https://sass-lang.com/documentation
 
 ```scss
 @use "pkg:govuk-frontend" as * with (
-  $govuk-font-family: (“Helvetica Neue”, Helvetica, Arial, sans-serif),
+  $govuk-font-family: ("Helvetica Neue", Helvetica, Arial, sans-serif),
   $govuk-functional-colours: (
     brand: [your new brand colour]
   )
@@ -78,7 +78,7 @@ We recommend redefining these variables in a single `with` statement so you only
 If your service [must use an alternative to the GDS Transport font](https://design-system.service.gov.uk/styles/typeface/), we recommend redefining `$govuk-font-family` to the following font stack:
 
 ```
-“Helvetica Neue”, Helvetica, Arial, sans-serif
+"Helvetica Neue", Helvetica, Arial, sans-serif
 ```
 
 If your service uses a specific font in its branding, use that instead.
@@ -139,7 +139,7 @@ If you’re using the GOV.UK Frontend Nunjucks [page template](https://design-sy
 {# import GOV.UK Frontend template #}
 {% extends "govuk/template.njk" %}
 
-{% set themeColor = “#388E3C” %}
+{% set themeColor = "#388E3C" %}
 ```
 
 If you’re using HTML, look for a `<meta>` element in your `<head>` section with the name `theme-color` and set the `content` attribute to your new brand colour:
