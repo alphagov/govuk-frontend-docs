@@ -12,7 +12,7 @@ header_links:
 footer_links:
   Accessibility: https://design-system.service.gov.uk/accessibility/
   GOV.UK Design System: https://design-system.service.gov.uk/
-  GOV.UK Prototype Kit: https://govuk-prototype-kit.herokuapp.com/
+  GOV.UK Prototype Kit: https://prototype-kit.service.gov.uk
 
 # Enables search functionality. This indexes pages only and is not recommended for single-page sites.
 enable_search: true
