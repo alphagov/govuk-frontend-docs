@@ -10,11 +10,9 @@ def dothash(hash)
 end
 
 RSpec.describe SassdocsHelpers do
-  let(:package_version) { "5.0.0" }
-  let(:package_content) { sprintf('{ "packages": { "node_modules/govuk-frontend": { "version": "%s" } } }', package_version) }
-
   before(:each) do
-    allow(File).to receive(:read).and_return(package_content)
+    allow_any_instance_of(GitHubUrlHelpers).to receive(:github_file_url)
+
     # Include mixin into a test class to allow us to mock File
     # TODO Move constant definition
     # rubocop:disable Lint/ConstantDefinitionInBlock
@@ -319,7 +317,7 @@ RSpec.describe SassdocsHelpers do
       expect(heading).to eq("Settings / Colours")
     end
   end
-  describe "#github_url" do
+  describe "#sass_source_url" do
     let(:fixture) do
       dothash({
         context: {
@@ -334,25 +332,22 @@ RSpec.describe SassdocsHelpers do
       })
     end
 
-    it "returns a url" do
-      url = @helper.github_url(fixture)
-      expect(url).to eq("https://github.com/alphagov/govuk-frontend/tree/v5.0.0/packages/govuk-frontend/src/govuk/helpers/_clearfix.scss#L9-L15")
+    it "calls github_file_url with the file path and line numbers" do
+      expect_any_instance_of(GitHubUrlHelpers).to receive(:github_file_url)
+        .with("helpers/_clearfix.scss#L9-L15", :latest)
+        .and_return("stubbed-url")
+
+      url = @helper.sass_source_url(fixture)
+
+      expect(url).to eq("stubbed-url")
     end
 
-    describe "v4.x backwards compatibility" do
-      let(:package_version) { "4.0.0" }
+    it "passes the version through to GitHubUrlHelpers#github_file_url" do
+      expect_any_instance_of(GitHubUrlHelpers).to receive(:github_file_url)
+        .with("helpers/_clearfix.scss#L9-L15", :v4)
+        .and_return("stubbed-url")
 
-      it "returns a url" do
-        url = @helper.github_url(fixture)
-        expect(url).to eq("https://github.com/alphagov/govuk-frontend/tree/v4.0.0/src/govuk/helpers/_clearfix.scss#L9-L15")
-      end
-    end
-  end
-  describe "#govuk_frontend_version" do
-    it "returns version" do
-      version = @helper.govuk_frontend_version
-
-      expect(version).to eq("5.0.0")
+      @helper.sass_source_url(fixture, :v4)
     end
   end
 end

@@ -1,4 +1,4 @@
-require "json"
+require_relative "github_url_helpers"
 
 module SassdocsHelpers
   ORDER = %w[settings tools helpers].freeze
@@ -114,23 +114,10 @@ module SassdocsHelpers
     end
   end
 
-  def github_url(item)
-    # Maintain backwards compatibility with GOV.UK Frontend v4
-    github_package_path = govuk_frontend_version.start_with?("4") ? "/src" : "/packages/govuk-frontend/src"
-
-    # Construct GitHub link
-    "https://github.com/alphagov/govuk-frontend/tree/v#{govuk_frontend_version}#{github_package_path}/govuk/#{item.file.path}#L#{item.context.line.start}-L#{item.context.line.end}"
-  end
-
-  def govuk_frontend_version
-    # Since this accesses the file system,
-    # store an instance variable so we only need to do this once.
-    return @govuk_frontend_version unless @govuk_frontend_version.nil?
-
-    # Get the current version of GOV.UK Frontend from the package.
-    package_lock_file = File.read("./package-lock.json")
-    package_lock = JSON.parse(package_lock_file)
-    @govuk_frontend_version = package_lock["packages"]["node_modules/govuk-frontend"]["version"]
-    @govuk_frontend_version
+  def sass_source_url(item, version = :latest)
+    Class.new.extend(GitHubUrlHelpers).github_file_url(
+      "#{item.file.path}#L#{item.context.line.start}-L#{item.context.line.end}",
+      version,
+    )
   end
 end
