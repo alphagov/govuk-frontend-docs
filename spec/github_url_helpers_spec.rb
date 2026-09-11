@@ -41,37 +41,37 @@ RSpec.describe GitHubUrlHelpers do
     end
   end
 
-  describe :github_file_url do
+  describe :github_source_code_url do
     it "returns a url" do
-      url = @helper.github_file_url("foo")
+      url = @helper.github_source_code_url("foo")
       expect(url).to eq("https://github.com/alphagov/govuk-frontend/blob/v10.10.10/packages/govuk-frontend/src/govuk/foo")
     end
 
     it "uses the appropriate version" do
-      url = @helper.github_file_url("foo", :v5)
+      url = @helper.github_source_code_url("foo", :v5)
       expect(url).to eq("https://github.com/alphagov/govuk-frontend/blob/v5.5.5/packages/govuk-frontend/src/govuk/foo")
     end
 
     it "adapts the path for v4 links" do
-      url = @helper.github_file_url("foo", :v4)
+      url = @helper.github_source_code_url("foo", :v4)
       expect(url).to eq("https://github.com/alphagov/govuk-frontend/blob/v4.4.4/src/govuk/foo")
     end
   end
 
-  describe :github_directory_url do
+  describe :github_package_root do
     it "returns a url" do
-      url = @helper.github_directory_url("foo")
-      expect(url).to eq("https://github.com/alphagov/govuk-frontend/tree/v10.10.10/packages/govuk-frontend/src/govuk/foo")
+      url = @helper.github_package_root
+      expect(url).to eq("https://github.com/alphagov/govuk-frontend/tree/v10.10.10/packages/govuk-frontend/src/govuk")
     end
 
     it "uses the appropriate version" do
-      url = @helper.github_directory_url("foo", :v5)
-      expect(url).to eq("https://github.com/alphagov/govuk-frontend/tree/v5.5.5/packages/govuk-frontend/src/govuk/foo")
+      url = @helper.github_package_root(:v5)
+      expect(url).to eq("https://github.com/alphagov/govuk-frontend/tree/v5.5.5/packages/govuk-frontend/src/govuk")
     end
 
     it "adapts the path for v4 links" do
-      url = @helper.github_directory_url("foo", :v4)
-      expect(url).to eq("https://github.com/alphagov/govuk-frontend/tree/v4.4.4/src/govuk/foo")
+      url = @helper.github_package_root(:v4)
+      expect(url).to eq("https://github.com/alphagov/govuk-frontend/tree/v4.4.4/src/govuk")
     end
   end
 end

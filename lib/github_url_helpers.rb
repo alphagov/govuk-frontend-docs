@@ -3,24 +3,23 @@ require "json"
 module GitHubUrlHelpers
   REPO_ROOT = "https://github.com/alphagov/govuk-frontend".freeze
 
-  def github_file_url(path, version = :latest)
-    version_tag = govuk_frontend_version(version)
-
-    # Maintain backwards compatibility with GOV.UK Frontend v4
-    github_package_path = version == :v4 ? "/src" : "/packages/govuk-frontend/src"
-
-    # Construct GitHub link
-    "#{REPO_ROOT}/blob/v#{version_tag}#{github_package_path}/govuk/#{path}"
+  def github_source_code_url(path, version = :latest)
+    github_url "blob/v%{version}%{package_path}/govuk/#{path}", version
   end
 
-  def github_directory_url(path, version = :latest)
-    version_tag = govuk_frontend_version(version)
+  def github_package_root(version = :latest)
+    github_url "tree/v%{version}%{package_path}/govuk", version
+  end
 
-    # Maintain backwards compatibility with GOV.UK Frontend v4
-    github_package_path = version == :v4 ? "/src" : "/packages/govuk-frontend/src"
+  def github_file_url(path, version = :latest)
+    github_url "tree/v%{version}/#{path}", version
+  end
 
-    # Construct GitHub link
-    "#{REPO_ROOT}/tree/v#{version_tag}#{github_package_path}/govuk/#{path}"
+  def github_url(template, version = :latest)
+    sprintf "#{REPO_ROOT}/#{template}", {
+      version: govuk_frontend_version(version),
+      package_path: version == :v4 ? "/src" : "/packages/govuk-frontend/src",
+    }
   end
 
   def govuk_frontend_version(version = :latest)

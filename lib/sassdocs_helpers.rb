@@ -115,7 +115,7 @@ module SassdocsHelpers
   end
 
   def sass_source_url(item, version = :latest)
-    Class.new.extend(GitHubUrlHelpers).github_file_url(
+    Class.new.extend(GitHubUrlHelpers).github_source_code_url(
       "#{item.file.path}#L#{item.context.line.start}-L#{item.context.line.end}",
       version,
     )
