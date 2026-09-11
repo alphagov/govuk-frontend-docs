@@ -11,7 +11,7 @@ end
 
 RSpec.describe SassdocsHelpers do
   before(:each) do
-    allow_any_instance_of(GitHubUrlHelpers).to receive(:github_file_url)
+    allow_any_instance_of(GitHubUrlHelpers).to receive(:github_source_code_url)
 
     # Include mixin into a test class to allow us to mock File
     # TODO Move constant definition
@@ -332,8 +332,8 @@ RSpec.describe SassdocsHelpers do
       })
     end
 
-    it "calls github_file_url with the file path and line numbers" do
-      expect_any_instance_of(GitHubUrlHelpers).to receive(:github_file_url)
+    it "calls github_source_code_url with the file path and line numbers" do
+      expect_any_instance_of(GitHubUrlHelpers).to receive(:github_source_code_url)
         .with("helpers/_clearfix.scss#L9-L15", :latest)
         .and_return("stubbed-url")
 
@@ -342,8 +342,8 @@ RSpec.describe SassdocsHelpers do
       expect(url).to eq("stubbed-url")
     end
 
-    it "passes the version through to GitHubUrlHelpers#github_file_url" do
-      expect_any_instance_of(GitHubUrlHelpers).to receive(:github_file_url)
+    it "passes the version through to GitHubUrlHelpers#github_source_code_url" do
+      expect_any_instance_of(GitHubUrlHelpers).to receive(:github_source_code_url)
         .with("helpers/_clearfix.scss#L9-L15", :v4)
         .and_return("stubbed-url")
 
