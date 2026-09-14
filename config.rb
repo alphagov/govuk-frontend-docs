@@ -2,6 +2,7 @@ require "govuk_tech_docs"
 require "lib/header_menu_fix_extension"
 require "lib/package_contents"
 require "lib/sassdocs_helpers"
+require "lib/github_url_helpers"
 require "lib/table_of_contents_helpers"
 
 # Patch the GovukTechDocs cleanly
@@ -26,6 +27,7 @@ helpers do
   include PackageContents
   include SassdocsHelpers
   include TableOfContentsHelpers
+  include GitHubUrlHelpers
 
   def markdown(content = nil)
     concat Tilt["markdown"].new(context: @app) { content }.render
