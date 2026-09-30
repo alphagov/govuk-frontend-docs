@@ -4,15 +4,15 @@ module GitHubUrlHelpers
   REPO_ROOT = "https://github.com/alphagov/govuk-frontend".freeze
 
   def github_source_code_url(path, version = :latest)
-    github_url "blob/v%{version}%{package_path}/govuk/#{path}", version
+    github_url "blob/%{version}%{package_path}/govuk/#{path}", version
   end
 
   def github_package_root(version = :latest)
-    github_url "tree/v%{version}%{package_path}/govuk", version
+    github_url "tree/%{version}%{package_path}/govuk", version
   end
 
   def github_file_url(path, version = :latest)
-    github_url "tree/v%{version}/#{path}", version
+    github_url "tree/%{version}/#{path}", version
   end
 
   def github_url(template, version = :latest)
@@ -37,13 +37,13 @@ module GitHubUrlHelpers
   def installed_govuk_frontend_versions
     # Creates a map of installed versions, with the major versions as keys and
     # the full version as the value.
-    # e.g. { :v4 => "4.4.4", :v5 => "5.5.5", :v6 => "6.6.6" }
+    # e.g. { :v4 => "v4.4.4", :v5 => "v5.5.5", :v6 => "v6.6.6" }
     @installed_govuk_frontend_versions ||= begin
       package_lock_file = File.read("./package-lock.json")
       JSON.parse(package_lock_file)["packages"]
         .select { |path| path.include?("govuk-frontend") }
         .values
-        .map { |package| ["v#{package['version'].split('.').first}".to_sym, package["version"]] }
+        .map { |package| ["v#{package['version'].split('.').first}".to_sym, "v#{package['version']}"] }
         .to_h
     end
   end

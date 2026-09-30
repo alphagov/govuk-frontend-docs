@@ -28,16 +28,16 @@ RSpec.describe GitHubUrlHelpers do
   describe "#installed_versions" do
     it "returns a hash of installed versions" do
       expect(@helper.installed_govuk_frontend_versions).to eq({
-        v5: "5.5.5",
-        v4: "4.4.4",
-        v10: "10.10.10",
+        v5: "v5.5.5",
+        v4: "v4.4.4",
+        v10: "v10.10.10",
       })
     end
   end
 
   describe "#govuk_frontend_version" do
     it "returns the latest version by default" do
-      expect(@helper.govuk_frontend_version).to eq "10.10.10"
+      expect(@helper.govuk_frontend_version).to eq "v10.10.10"
     end
   end
 
