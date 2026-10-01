@@ -13,7 +13,7 @@
     "check-links:external": "linkinator build --allow-insecure-certs --recurse"
   },
   "devDependencies": {
-    "govuk-frontend": "^6.5.0",
+    "govuk-frontend": "^6.5.1",
     "govuk-frontend-v4": "npm:govuk-frontend@^4.10.1",
     "govuk-frontend-v5": "npm:govuk-frontend@^5.14.0",
     "linkinator": "^8.1.0",
