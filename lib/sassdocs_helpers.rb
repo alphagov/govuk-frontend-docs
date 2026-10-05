@@ -1,6 +1,8 @@
 require_relative "github_url_helpers"
 
 module SassdocsHelpers
+  include GitHubUrlHelpers
+
   ORDER = %w[settings tools helpers].freeze
 
   def format_sassdoc_data(data)
@@ -115,7 +117,7 @@ module SassdocsHelpers
   end
 
   def sass_source_url(item, version = :latest)
-    Class.new.extend(GitHubUrlHelpers).github_source_code_url(
+    github_source_code_url(
       "#{item.file.path}#L#{item.context.line.start}-L#{item.context.line.end}",
       version,
     )
