@@ -134,13 +134,19 @@ false
 
 Type: number
 
-The maximum number of characters. If `maxwords` is provided, the `maxlength` option will be ignored.
+The maximum number of characters (or words if `countType` is set to `"words"`).
 
 ### maxwords
 
 Type: number
 
-The maximum number of words. If `maxwords` is provided, the `maxlength` option will be ignored.
+Deprecated. Use `maxlength` and `countType: "words"` instead.
+
+### countType
+
+Type: string
+
+The count type (`"characters"`, `"length"` or `"words"`) used to count the text.
 
 ### threshold
 
