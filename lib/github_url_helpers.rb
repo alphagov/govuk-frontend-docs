@@ -1,50 +1,41 @@
-require "json"
+require_relative('govuk_frontend_version')
 
 module GitHubUrlHelpers
-  REPO_ROOT = "https://github.com/alphagov/govuk-frontend".freeze
-
   def github_source_code_url(path, version = :latest)
-    github_url "blob/%{version}%{package_path}/govuk/#{path}", version
+    GitHubUrl.new("/govuk/#{path}", version, root: :package, type: :blob).to_s
   end
 
   def github_package_root(version = :latest)
-    github_url "tree/%{version}%{package_path}/govuk", version
+    GitHubUrl.new("/govuk", version, root: :package).to_s
   end
 
   def github_file_url(path, version = :latest)
-    github_url "tree/%{version}/#{path}", version
+    GitHubUrl.new(path, version).to_s
   end
 
-  def github_url(template, version = :latest)
-    sprintf "#{REPO_ROOT}/#{template}", {
-      version: govuk_frontend_version(version),
-      package_path: version == :v4 ? "/src" : "/packages/govuk-frontend/src",
-    }
-  end
+  class GitHubUrl
+    # Encapsulates the build of a GitHub URL
+    extend GOVUKFrontendVersion
 
-  def govuk_frontend_version(version = :latest)
-    version = latest_installed_govuk_frontend_version if version == :latest
+    REPO_ROOT = "https://github.com/alphagov/govuk-frontend".freeze
 
-    installed_govuk_frontend_versions[version]
-  end
-
-  def latest_installed_govuk_frontend_version
-    installed_govuk_frontend_versions.keys.max_by do |v|
-      v.to_s[/\d+/].to_i
+    def initialize(path, version, root: :repository, type: :tree)
+      @path = path
+      @version = version
+      @root = root
+      @type = type
     end
-  end
 
-  def installed_govuk_frontend_versions
-    # Creates a map of installed versions, with the major versions as keys and
-    # the full version as the value.
-    # e.g. { :v4 => "v4.4.4", :v5 => "v5.5.5", :v6 => "v6.6.6" }
-    @installed_govuk_frontend_versions ||= begin
-      package_lock_file = File.read("./package-lock.json")
-      JSON.parse(package_lock_file)["packages"]
-        .select { |path| path.include?("govuk-frontend") }
-        .values
-        .map { |package| ["v#{package['version'].split('.').first}".to_sym, "v#{package['version']}"] }
-        .to_h
+    def to_s
+      url = "#{REPO_ROOT}/#{@type}"
+
+      url += "/#{self.class.package_version(@version)}"
+
+      if @root === :package
+        url += self.class.package_path(@version)
+      end
+
+      url += @path
     end
   end
 end
