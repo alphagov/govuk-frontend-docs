@@ -4,3 +4,10 @@
 .technical-documentation .table-container td > code {
   white-space: nowrap;
 }
+
+// Remove grey background when a piece of code is inside a link
+// as the background interrupts the underline
+.technical-documentation a code {
+  padding: initial;
+  background: initial;
+}
