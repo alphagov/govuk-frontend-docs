@@ -13,7 +13,7 @@ This page explains how to migrate to GOV.UK Frontend if you’re using any of th
 
 We’re no longer updating these old frameworks, and they do not meet the modern accessibility standards. 
 
-<%= warning_text("GOV.UK Frontend versions 5 and later are not compatible with these old frameworks. Remain on version 4 until you have finished migrating to GOV.UK Frontend and uninstalled the old frameworks.") %>
+<%=govukWarningText({ html: "GOV.UK Frontend versions 5 and later are not compatible with these old frameworks. Remain on version 4 until you have finished migrating to GOV.UK Frontend and uninstalled the old frameworks."}) %>
 
 After you include GOV.UK Frontend in your project, your service should look and behave the same as before. This means you can migrate one component at a time in your live service.
 
