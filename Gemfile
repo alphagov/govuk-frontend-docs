@@ -3,10 +3,10 @@
 source "https://rubygems.org"
 
 # For faster file watcher updates on Windows:
-gem "wdm", "~> 0.1.0", platforms: %i[mswin mingw]
+gem "wdm", "~> 0.1.0", platforms: %i[windows]
 
 # Windows does not come with time zone data
-gem "tzinfo-data", platforms: %i[mswin mingw jruby]
+gem "tzinfo-data", platforms: %i[windows jruby]
 
 # 'logger' needs to be loaded before 'govuk_tech_docs' to fix a missing dependency
 gem "logger"
