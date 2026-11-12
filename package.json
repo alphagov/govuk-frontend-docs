@@ -5,9 +5,9 @@
   "scripts": {
     "start": "bundle exec middleman server",
     "postinstall": "npm run build:sassdoc && npm run build:sassdocv5 && npm run build:sassdocv4",
-    "build:sassdoc": "sassdoc -c sassdoc.config.json --parse node_modules/govuk-frontend/dist/govuk/ > data/sassdoc.json",
-    "build:sassdocv5": "sassdoc -c sassdoc.config.json --parse node_modules/govuk-frontend-v5/dist/govuk/ > data/sassdoc-v5.json",
-    "build:sassdocv4": "sassdoc -c sassdoc.config.json --parse node_modules/govuk-frontend-v4/govuk/ > data/sassdoc-v4.json",
+    "build:sassdoc": "sassdoc -c sassdoc.config.json --parse node_modules/govuk-frontend/dist/govuk/ | jq 'walk(if type == \"object\" and has(\"default\") then .sassdoc_default = .default | del(.default) else . end)' > data/sassdoc.json",
+    "build:sassdocv5": "sassdoc -c sassdoc.config.json --parse node_modules/govuk-frontend-v5/dist/govuk/ | jq 'walk(if type == \"object\" and has(\"default\") then .sassdoc_default = .default | del(.default) else . end)' > data/sassdoc-v5.json",
+    "build:sassdocv4": "sassdoc -c sassdoc.config.json --parse node_modules/govuk-frontend-v4/govuk/ | jq 'walk(if type == \"object\" and has(\"default\") then .sassdoc_default = .default | del(.default) else . end)' > data/sassdoc-v4.json",
     "lint": "standard",
     "check-links": "linkinator build --skip '^https?://(?!127.0.0.1|localhost)' --recurse  --redirects \"error\" --check-fragments",
     "check-links:external": "linkinator build --allow-insecure-certs --recurse"
