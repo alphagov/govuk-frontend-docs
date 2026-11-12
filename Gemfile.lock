@@ -90,7 +90,7 @@ GEM
     google-protobuf (4.35.1-x86_64-linux-musl)
       bigdecimal
       rake (~> 13.3)
-    govuk_tech_docs (6.3.0)
+    govuk_tech_docs (6.6.0.1)
       autoprefixer-rails
       chronic
       concurrent-ruby
@@ -347,7 +347,7 @@ PLATFORMS
   x86_64-linux-musl
 
 DEPENDENCIES
-  govuk_tech_docs (~> 6.3.0)
+  govuk_tech_docs (~> 6.6.0)
   json
   logger
   ostruct
