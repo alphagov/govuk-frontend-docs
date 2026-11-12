@@ -14,6 +14,9 @@ GovukTechDocs.configure(self)
 ::Middleman::Extensions.register(:header_menu_fix, HeaderMenuFixExtension)
 activate :header_menu_fix
 
+# Disable warnings related to default properties in hashes as Sassdocs uses it intentionally.
+Middleman::Util::EnhancedHash.disable_warnings(:default)
+
 # Load our own version of GOV.UK Frontend before the one registered by the
 # tech_docs_gem otherwise we may be using styles and scripts
 # from an outdated version the time for the tech_docs_gem to catch up

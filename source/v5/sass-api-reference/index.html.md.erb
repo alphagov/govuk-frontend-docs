@@ -35,9 +35,10 @@ weight: 90
 ##### Usage
 
 <% if item.deprecated %>
-  <% partial(:warning_text) do %>
-    <%= markdown("Deprecated: " +item.deprecated) %>
-  <% end %>
+    <% warningTextHtml = capture do -%>
+        <%= markdown("Deprecated: " +item.deprecated) %>
+    <%- end %>
+    <%= govukWarningText({ html: warningTextHtml }) %>
 <% end %>
 
 <% if item.context.type == 'mixin' %>
