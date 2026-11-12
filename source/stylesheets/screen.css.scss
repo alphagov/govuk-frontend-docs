@@ -11,3 +11,14 @@
   padding: initial;
   background: initial;
 }
+
+// When markdown is rendered inside the Warning text component, ensure any wrapper elements e.g. paragraphs
+// Do not contribute unwanted spacing.
+.govuk-warning-text {
+  .govuk-warning-text__text > p:first-of-type {
+    margin-top: 0;
+  }
+  .govuk-warning-text__text > :last-child {
+    margin-bottom: 0;
+  }
+}
