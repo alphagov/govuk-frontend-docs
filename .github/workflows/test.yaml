@@ -21,7 +21,6 @@ jobs:
       - uses: ruby/setup-ruby@v1
         with:
           bundler-cache: true
-          ruby-version: '3.4.9'
 
       - name: Install dependencies
         run: npm install
