@@ -106,7 +106,7 @@ When you’re not using GOV.UK branding, you must replace the following [assets 
 
 To replace these assets with your own assets, you can either include your own assets in an `assets/images` folder in your service or [specify your own asset path](https://frontend.design-system.service.gov.uk/import-font-and-images-assets/#if-you-have-your-own-folder-structure), which GOV.UK Frontend will automatically use.
 
-<%=warning_text('The filenames for your image assets must be identical to the filenames for the image assets in GOV.UK Frontend, otherwise your service may break.') %>
+<%= govukWarningText({ html: 'The filenames for your image assets must be identical to the filenames for the image assets in GOV.UK Frontend, otherwise your service may break.' }) %>
 
 ### Favicons
 
