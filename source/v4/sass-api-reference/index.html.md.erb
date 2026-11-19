@@ -66,7 +66,7 @@ $<%= item.context.name %>: <%= item.context.value %>;
 <% end %>
 
 <a href="<%= sass_source_url(item, :v4) %>">
-    View source code for <%= item.file.name %> on GitHub
+    View source code for `<%= item_heading(item) %>` in `<%= item.file.name %>` on GitHub
 </a>
 
 <div class="govuk-!-margin-bottom-9"></div>
